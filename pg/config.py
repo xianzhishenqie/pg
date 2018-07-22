@@ -4,6 +4,7 @@ DEBUG = True
 
 PG_APPS = [
     'base',
+    'pg_auth',
     'album',
 ]
 

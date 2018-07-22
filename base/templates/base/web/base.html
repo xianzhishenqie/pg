@@ -8,14 +8,15 @@
 <head>
     {% get_current_language as LANGUAGE_CODE %}
     <meta charset="utf-8">
+
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}一号相簿{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
-    <script type="text/javascript" src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base/common/lib/vue/vue.js' %}"></script>
+    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
+
     <style type="text/css">
         [v-cloak] {
             display: none;
@@ -27,7 +28,11 @@
 <body>
 {% block container %}
 {% endblock %}
+    <script type="text/javascript" src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/common/lib/vue/vue.js' %}"></script>
+    <script type="text/javascript" src="{% static 'base/common/lib/bootstrap/js/bootstrap.js' %}"></script>
 {% block bottom_js %}
+
 {% endblock %}
 </body>
 </html>
