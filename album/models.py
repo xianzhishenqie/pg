@@ -33,13 +33,17 @@ class Picture(models.Model):
     seq = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='album', default='')
 
+    class Meta:
+        ordering = ('seq',)
+
 
 class Album(models.Model):
+    name = models.CharField(max_length=100, default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     pictures = models.ManyToManyField(Picture)
     template = models.ForeignKey(Template, on_delete=models.SET_NULL, null=True, default=None)
-    music = models.ForeignKey(Template, on_delete=models.SET_NULL, null=True, default=None)
+    music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True, default=None)
 
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
