@@ -6,3 +6,9 @@
 
 {% block container %}
 {% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+    window.location.href = '{{ code_url | safe }}';
+</script>
+{% endblock %}

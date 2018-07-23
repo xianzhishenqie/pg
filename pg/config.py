@@ -2,9 +2,13 @@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+SERVER = 'http://192.168.1.107:8000'
+
+
 PG_APPS = [
     'base',
     'pg_auth',
+    'we',
     'album',
 ]
 

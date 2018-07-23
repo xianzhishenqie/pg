@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
-from common_framework.utils.rest.request import RequestData
-from common_framework.utils.x_logger import get_x_logger
-
-logger = get_x_logger(__name__)
+from base.utils.rest.request import RequestData
 
 
 class RequestDataMixin(object):
