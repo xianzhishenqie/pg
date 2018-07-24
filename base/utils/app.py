@@ -61,8 +61,9 @@ def get_pg_urls(collect_app_urls=True):
             if collect_app_urls:
                 app_urlpatterns = get_app_urls(app_name)
                 if app_urlpatterns:
+                    path_name = settings.PG_APP_PATH[app_name]
                     patterns.append(
-                        path(_get_sub_path(app_name), include((app_urlpatterns, app_name), namespace=app_name))
+                        path(_get_sub_path(path_name), include((app_urlpatterns, app_name), namespace=app_name))
                     )
 
     return patterns

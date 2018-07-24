@@ -18,9 +18,8 @@ render = get_app_render(__package__)
 @permission_classes([AllowAny])
 @request_data
 def index(request):
+    context = {}
     redirect_uri = '{server}{url}'.format(server=settings.SERVER, url=reverse('we:code'))
-    context = {
-        'code_url': we_setting.SILENT_CODE_URL.format(redirect_uri=urllib.request.quote(redirect_uri))
-    }
+    context['code_url'] = we_setting.SILENT_CODE_URL.format(redirect_uri=urllib.request.quote(redirect_uri))
 
     return render(request, 'index.html', context)

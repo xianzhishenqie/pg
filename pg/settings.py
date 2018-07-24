@@ -162,8 +162,9 @@ REST_FRAMEWORK = {
     ],
 
     'DEFAULT_RENDERER_CLASSES': (
-        'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.StaticHTMLRenderer',
+        # 'rest_framework.renderers.JSONRenderer',
+        # 'rest_framework.renderers.BrowsableAPIRenderer',
     ),
 
     # Input and output formats (关闭时区设置以下)
@@ -182,3 +183,5 @@ SUB_MODULES = [
     ('cms', 'admin'),
     ('web', ''),
 ]
+
+ENCODING = 'utf-8'

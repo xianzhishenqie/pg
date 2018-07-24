@@ -11,3 +11,4 @@ from rest_framework.decorators import api_view, permission_classes
 @permission_classes((permissions.AllowAny,))
 def media(request, path):
     return serve(request, path, document_root=settings.MEDIA_ROOT)
+

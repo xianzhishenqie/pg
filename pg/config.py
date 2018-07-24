@@ -2,15 +2,25 @@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-SERVER = 'http://192.168.1.107:8000'
+SERVER = 'http://www.shixiaobo.com'
 
 
-PG_APPS = [
-    'base',
+PG_APP_PATHS = [
+    ('base', ''),
     'pg_auth',
     'we',
-    'album',
+    ('album', ''),
 ]
+
+PG_APPS = []
+PG_APP_PATH = {}
+for app_path in PG_APP_PATHS:
+    if isinstance(app_path, tuple):
+        PG_APPS.append(app_path[0])
+        PG_APP_PATH[app_path[0]] = app_path[1]
+    else:
+        PG_APPS.append(app_path)
+        PG_APP_PATH[app_path] = app_path
 
 
 # Database
