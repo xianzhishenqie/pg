@@ -1,12 +1,15 @@
 
 import datetime
 
+from django.db import transaction
 from django.utils import timezone
 
 from base.utils.http import HttpClient
 
+from pg_auth.models import User
+
 from we import setting
-from we.models import WeAppInfo
+from we.models import WeAppInfo, WeUser
 
 
 def get_access_token():
@@ -39,3 +42,13 @@ def pull_access_token():
     http = HttpClient()
     ret = http.jget(setting.APP_ACCESS_TOKEN_URL)
     return ret
+
+
+def sync_openid(openid):
+    if not openid:
+        return None
+
+    if not WeUser.objects.filter(openid=openid).exists():
+        with transaction.atomic():
+            user = User.objects.create(username=openid)
+            WeUser.objects.create(user=user, openid=openid)
