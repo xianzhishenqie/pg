@@ -1,13 +1,16 @@
-{% extends 'base/web/base.html' %}
+{% extends './base.html' %}
 
 {% block title %}
 {% endblock %}
 
-{% block container %}
+{% block local_css %}
 {% endblock %}
 
-{% block bottom_js %}
+{% block container %}
+    test
+{% endblock %}
+
+{% block local_js %}
 <script type="text/javascript">
-    {#window.location.href = '{{ code_url | safe }}';#}
 </script>
 {% endblock %}

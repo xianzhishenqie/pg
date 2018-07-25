@@ -179,7 +179,7 @@ REST_FRAMEWORK = {
 }
 
 SUB_MODULES = [
-    ('common', 'common'),
+    ('common', ''),
     ('cms', 'admin'),
     ('web', ''),
 ]

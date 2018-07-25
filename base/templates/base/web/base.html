@@ -1,6 +1,5 @@
-{% load staticfiles %}
 {% load i18n %}
-
+{% load staticfiles %}
 {% load static_v %}
 
 <!DOCTYPE html>
@@ -12,27 +11,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{% block title %}一号相簿{% endblock %}</title>
+    <title>{% block title %}PG{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
+    {% block top_css %}
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
-
+    {% endblock %}
     <style type="text/css">
         [v-cloak] {
             display: none;
         }
     </style>
-    {% block other_css_js %}
+    {% block local_css %}
     {% endblock %}
 </head>
 <body>
-{% block container %}
-{% endblock %}
+<div id="pg">
+    {% block container %}
+    {% endblock %}
+</div>
+{% block bottom_js %}
     <script type="text/javascript" src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/common/lib/vue/vue.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/common/lib/bootstrap/js/bootstrap.js' %}"></script>
-{% block bottom_js %}
-
+{% endblock %}
+{% block local_js %}
 {% endblock %}
 </body>
 </html>

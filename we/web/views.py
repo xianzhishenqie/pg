@@ -38,9 +38,16 @@ def we_code(request):
     code = request.query_data.get('code')
 
     http = HttpClient()
-    res = http.mget(setting.ACCESS_TOKEN_URL.format(code=code))
-    ret = http.result(res, json=True)
-
+    ret = http.jget(setting.ACCESS_TOKEN_URL.format(code=code))
     access_token = ret['access_token']
 
     return Response(ret)
+
+
+@api_view(['GET'])
+@request_data
+def we_event(request):
+    code = request.query_data.get('code')
+
+
+    return Response({})

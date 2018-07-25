@@ -50,3 +50,12 @@ class HttpClient(Session):
             return response.json()
         if binary:
             return response.content
+
+    def jget(self, url, **kwargs):
+        return self.result(self.mget(url, **kwargs), json=True)
+
+    def jpost(self, url, **kwargs):
+        return self.result(self.mpost(url, **kwargs), json=True)
+
+    def jdelete(self, url, **kwargs):
+        return self.result(self.mdelete(url, **kwargs), json=True)

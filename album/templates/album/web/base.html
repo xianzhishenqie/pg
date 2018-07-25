@@ -1,0 +1,17 @@
+{% extends 'base/web/base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load static_v %}
+
+
+{% block top_css %}
+    {{ block.super }}
+    <link type="text/css" rel="stylesheet" href="{% static 'we/common/lib/weui/css/weui.css' %}">
+{% endblock %}
+
+
+{% block bottom_js %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'we/common/lib/weui/js/weui.js' %}"></script>
+{% endblock %}
