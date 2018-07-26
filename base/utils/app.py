@@ -6,6 +6,7 @@ from importlib import import_module
 from django.conf import settings
 from django.urls import include, path, re_path
 
+from base.utils.rest.routers import api_path
 
 
 def get_app_name(module_name):
@@ -36,7 +37,9 @@ def get_app_urls(app_name):
         )
         urls_path = os.path.join(settings.BASE_DIR, urls_name.replace('.', '/') + '.py')
         if os.path.exists(urls_path):
-            import_module(urls_name)
+            url_module = import_module(urls_name)
+            if hasattr(url_module, 'viewsets'):
+                url_module.urlpatterns += api_path(url_module.viewsets, app_name)
             patterns.append(
                 path(_get_sub_path(path_name), include((urls_name, app_name), namespace=sub_module_name))
             )

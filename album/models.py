@@ -39,6 +39,7 @@ class Picture(models.Model):
 
 class Album(models.Model):
     name = models.CharField(max_length=100, default='')
+    desc = models.TextField(default='')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     pictures = models.ManyToManyField(Picture)

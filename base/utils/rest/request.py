@@ -21,7 +21,7 @@ class RequestData(object):
     def __init__(self, request, is_query=False, data_filter_class=DataFilter):
         self.request = request
         if is_query:
-            self.data = request.query_params if hasattr(request, 'query_params') else request.GET
+            self.data = request.query_params if hasattr(request, 'query_params') else getattr(request, 'GET', {})
         else:
             self.data = request.data if hasattr(request, 'data') else request.POST
         self.data_filter = data_filter_class(self.data)
