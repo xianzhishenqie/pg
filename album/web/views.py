@@ -6,11 +6,14 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.reverse import reverse
 
+from base.utils import views as default_views
 from base.utils.render import get_app_render
 from base.utils.rest.decorators import request_data
 
 from we import setting as we_setting
 from we.utils.decorators import auto_login
+
+from album.utils import common
 
 
 render = get_app_render(__package__)
@@ -33,7 +36,15 @@ def index(request):
 @request_data
 @auto_login
 def album_page(request, pk):
+    if pk == 0:
+        try:
+            album = common.get_or_create_default_album(request.user)
+        except Exception as e:
+            return default_views.Http404Page()
+        pk = album.pk
+
     context = {
         'pk': pk,
     }
+
     return render(request, 'album.html', context)

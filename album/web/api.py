@@ -27,13 +27,7 @@ class AlbumViewSet(common_mixins.RequestDataMixin,
 
     def get_queryset(self):
         queryset = self.queryset
-
-        user = self.query_data.get('user')
-        if user is not None:
-            queryset = queryset.filter(user__username=user)
-        else:
-            raise exceptions.PermissionDenied()
-
+        queryset = queryset.filter(user=self.request.user)
         return queryset
 
     def perform_destroy(self, instance):
@@ -42,20 +36,29 @@ class AlbumViewSet(common_mixins.RequestDataMixin,
             picture.delete()
         instance.delete()
 
-    @action(['POST'], detail=True)
+    @action(['POST', 'DELETE'], detail=True)
     @api_request_data
     def picture(self, request, pk=None):
-        if pk == 0:
-            instance = album_models.Album.objects.create(
-                user=request.user,
-            )
-        else:
+        if request.method == 'POST':
             instance = self.get_object()
 
-        picture_data = get_sub_model_data(request.data, 'picture')
-        picture_serializer = mserializers.PictureSerializers(picture_data)
-        picture_serializer.is_valid(raise_exception=True)
-        with transaction.atomic():
-            picture_serializer.save()
-            instance.pictures.add(picture_serializer.instance)
-        return Response(picture_serializer.data)
+            picture_data = get_sub_model_data(request.data, ['picture'])
+            picture_serializer = mserializers.PictureSerializers(data=picture_data)
+            picture_serializer.is_valid(raise_exception=True)
+            with transaction.atomic():
+                if not instance.pk:
+                    instance.save()
+                picture_serializer.save()
+                instance.pictures.add(picture_serializer.instance)
+            return Response(picture_serializer.data)
+        elif request.method == 'DELETE':
+            instance = self.get_object()
+            picture_data = get_sub_model_data(request.data, ['picture'])
+            picture_id = picture_data.get('id')
+            if picture_id:
+                instance.pictures.filter(pk=picture_id).delete()
+            else:
+                raise exceptions.NotFound()
+
+            return Response(status=status.HTTP_204_NO_CONTENT)
+

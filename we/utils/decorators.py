@@ -12,11 +12,11 @@ def auto_login(func):
     @functools.wraps(func)
     def decorator(request, *args, **kwargs):
         if not request.user.is_authenticated:
-            openid = request.GET.get('user')
-            if not openid:
+            openid_key = request.GET.get('key')
+            if not openid_key:
                 return default_views.Http403Page(request)
 
-            we_user = we_models.WeUser.objects.filter(openid=openid).first()
+            we_user = we_models.WeUser.objects.filter(openid_key=openid_key).first()
             if not we_user:
                 return default_views.Http403Page(request)
 

@@ -8,95 +8,187 @@
 {% endblock %}
 
 {% block local_css %}
+    <style>
+        ul {
+            margin-bottom: auto;
+        }
+
+    </style>
 {% endblock %}
 
 {% block container %}
-    <p class="weui-cells__title">图片上传</p>
-    <div class="weui-cells weui-cells_form" id="uploaderCustom">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <div class="weui-uploader">
-                    <div class="weui-uploader__hd"><p class="weui-uploader__title">图片上传</p></div>
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files" id="uploaderCustomFiles"></ul>
-                        <div class="weui-uploader__input-box"><input id="uploaderCustomInput"
-                                                                     class="weui-uploader__input" type="file"
-                                                                     accept="image/*" multiple=""></div>
+    {% block verbatim %}
+    <div id="album" v-cloak>
+        <p class="weui-cells__title">图片上传</p>
+        <div class="weui-cells weui-cells_form" id="uploaderCustom">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd"><p class="weui-uploader__title">图片上传</p></div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderCustomFiles">
+                                <li class="weui-uploader__file"
+                                    :data-seq="picture.seq"
+                                    :style="'background-image: url(' + picture.image + ');'"
+                                    @click="deletePicture(picture)"
+                                    v-for="picture in album.picture_list"></li>
+
+                            </ul>
+                            <div class="weui-uploader__input-box"><input id="uploaderCustomInput"
+                                                                         class="weui-uploader__input" type="file"
+                                                                         accept="image/*" multiple=""></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
+    {% endblock %}
 {% endblock %}
 
 
 
 {% block bottom_js %}
     {{ block.super }}
-    <script type="text/javascript" src="{% static 'base/common/lib/image-compressor/image-compressor.js' %}"></script>
 {% endblock %}
 {% block local_js %}
 <script type="text/javascript">
-var imageCompressor = new ImageCompressor();
+    var context = {
+        pk: {{ pk }},
+        albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
+        albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
+    }
+</script>
+<script type="text/javascript">
+var vue = new Vue({
+    el: '#album',
+    data: {
+        album: {
+            name: '',
+            desc: '',
+            picture_list: [],
+        },
 
-weui.uploader('#uploaderCustom', {
-   url: '{% url "album:web:api:album-picture" 0 %}',
-   auto: true,
-   type: 'file',
-   fileVal: 'image',
-   compress: {
-       width: 1600,
-       height: 1600,
-       quality: .8
-   },
-   onBeforeQueued: function(files) {
-       // `this` 是轮询到的文件, `files` 是所有文件
+        pictureSeq: 0,
+    },
+    methods: {
+        getAlbum: function () {
+            http.get(context.albumDetailApiUrl, {}, function(res){
+                vue.album = res;
+                vue.getPictureSeq();
+            });
+        },
+        getPictureSeq: function () {
+            $.each(this.album.picture_list, function (i, picture) {
+                if (vue.pictureSeq < picture.seq) {
+                    vue.pictureSeq = picture.seq;
+                }
+            });
+        },
+        deletePicture: function (picture) {
+            weui.actionSheet([
+                {
+                    label: '删除相片',
+                    onClick: function () {
+                        http.delete(context.albumPictureApiUrl, {
+                            picture__id: picture.id,
+                        }, function () {
+                            var pictureList = vue.album.picture_list;
+                            pictureList.splice(pictureList.indexOf(picture), 1);
+                        })
+                    }
+                }
+            ], [
+                {
+                    label: '取消',
+                    onClick: function () {
+                        console.log('取消');
+                    }
+                }
+            ], {
+                className: 'custom-classname',
+                onClose: function(){
+                    console.log('关闭');
+                }
+            });
+        },
+    },
+    mounted: function () {
+        this.getAlbum();
 
-       if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
-           weui.alert('请上传图片');
-           return false; // 阻止文件添加
-       }
-       if (this.size > 10 * 1024 * 1024) {
-           weui.alert('请上传不超过10M的图片');
-           return false;
-       }
-       if (files.length > 9) { // 防止一下子选择过多文件
-           weui.alert('每次最多只能上传9张图片，请重新选择');
-           return false;
-       }
+        weui.uploader('#uploaderCustom', {
+            url: context.albumPictureApiUrl,
+            auto: true,
+            type: 'file',
+            fileVal: 'picture__image',
+            compress: {
+                width: 1600,
+                height: 1600,
+                quality: .8
+            },
+            onBeforeQueued: function(files) {
+                // `this` 是轮询到的文件, `files` 是所有文件
 
-       // return true; // 阻止默认行为，不插入预览图的框架
-   },
-   onQueued: function(){
-       console.log(this);
+                if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
+                    weui.alert('请上传图片');
+                    return false; // 阻止文件添加
+                }
+                if (this.size > 10 * 1024 * 1024) {
+                    weui.alert('请上传不超过10M的图片');
+                    return false;
+                }
+                if (files.length > 9) { // 防止一下子选择过多文件
+                    weui.alert('每次最多只能上传9张图片，请重新选择');
+                    return false;
+                }
 
-       // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
-       // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
+                // return true; // 阻止默认行为，不插入预览图的框架
+            },
+            onQueued: function(){
+                console.log(this);
 
-       // this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
-       // this.stop(); // 中断上传
+                // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
+                // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
 
-       // return true; // 阻止默认行为，不显示预览图的图像
-   },
-   onBeforeSend: function(data, headers){
-       console.log(this, data, headers);
-       // $.extend(data, { test: 1 }); // 可以扩展此对象来控制上传参数
-       // $.extend(headers, { Origin: 'http://127.0.0.1' }); // 可以扩展此对象来控制上传头部
+                // this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
+                // this.stop(); // 中断上传
 
-       // return false; // 阻止文件上传
-   },
-   onProgress: function(procent){
-       console.log(this, procent);
-       // return true; // 阻止默认行为，不使用默认的进度显示
-   },
-   onSuccess: function (ret) {
-       console.log(this, ret);
-       // return true; // 阻止默认行为，不使用默认的成功态
-   },
-   onError: function(err){
-       console.log(this, err);
-       // return true; // 阻止默认行为，不使用默认的失败态
-   }
+                // return true; // 阻止默认行为，不显示预览图的图像
+            },
+            onBeforeSend: function(data, headers){
+                console.log(this, data, headers);
+                $.extend(data, {picture__seq: vue.pictureSeq + this.id}); // 可以扩展此对象来控制上传参数
+                $.extend(headers, {'X-CSRFToken': csrftoken}); // 可以扩展此对象来控制上传头部
+                // return false; // 阻止文件上传
+            },
+            onProgress: function(procent){
+                console.log(this, procent);
+                // return true; // 阻止默认行为，不使用默认的进度显示
+            },
+            onSuccess: function (ret) {
+                console.log(this, ret);
+                $('#uploaderCustomFiles li[data-id=' + this.id + ']').remove();
+                vue.album.picture_list.push(ret);
+                vue.album.picture_list.sort(function (a, b) {
+                    if (a.seq < b.seq) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
+                });
+                // return true; // 阻止默认行为，不使用默认的成功态
+            },
+            onError: function(err){
+                console.log(this, err);
+                // return true; // 阻止默认行为，不使用默认的失败态
+            }
+        });
+    }
+
 });
+
+
+
 </script>
 {% endblock %}

@@ -6,6 +6,8 @@ from django import template
 from django.conf import settings
 from django.templatetags.static import StaticNode
 
+from base.utils.text import md5
+
 register = template.Library()
 
 
@@ -32,6 +34,6 @@ def get_url_with_version(url):
         file_path = os.path.join(vdir, url.lstrip('/'))
         if os.path.exists(file_path):
             modified_time = os.path.getmtime(file_path)
-            modified_time = hashlib.md5(str(modified_time).encode('utf-8')).hexdigest()
+            modified_time = md5(str(modified_time))
             return '%s?%s' % (url, modified_time)
     return url
