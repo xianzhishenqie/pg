@@ -5,6 +5,20 @@ from album import models as album_models
 
 
 
+class MusicTagSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = album_models.MusicTag
+        fields = ('id', 'name')
+
+
+class MusicSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = album_models.Music
+        fields = ('id', 'name', 'author', 'file', )
+
+
 
 class PictureSerializers(serializers.ModelSerializer):
 

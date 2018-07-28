@@ -22,9 +22,14 @@ class Music(models.Model):
     name = models.CharField(max_length=100, default='')
     author = models.CharField(max_length=100, default='')
     file = models.FileField(upload_to='music', default='')
+    url = models.URLField()
+
+    lyric_file = models.FileField(upload_to='lyric', default='')
+    lyric_url = models.URLField()
 
     tags = models.ManyToManyField(MusicTag)
 
+    create_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     create_time = models.DateTimeField(default=timezone.now)
     update_time = models.DateTimeField(default=timezone.now)
 

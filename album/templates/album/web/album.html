@@ -9,28 +9,30 @@
 
 {% block local_css %}
     <style>
-        ul {
+        ul, p, label{
             margin-bottom: auto;
         }
+    </style>
+    <style>
 
     </style>
 {% endblock %}
 
 {% block container %}
-    {% block verbatim %}
+    {% verbatim %}
     <div id="album" v-cloak>
-        <p class="weui-cells__title">图片上传</p>
+        <p class="weui-cells__title">照片上传</p>
         <div class="weui-cells weui-cells_form" id="uploaderCustom">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <div class="weui-uploader">
-                        <div class="weui-uploader__hd"><p class="weui-uploader__title">图片上传</p></div>
+                        <div class="weui-uploader__hd d-none"><p class="weui-uploader__title">照片上传</p></div>
                         <div class="weui-uploader__bd">
                             <ul class="weui-uploader__files" id="uploaderCustomFiles">
                                 <li class="weui-uploader__file"
                                     :data-seq="picture.seq"
                                     :style="'background-image: url(' + picture.image + ');'"
-                                    @click="deletePicture(picture)"
+                                    @click="displayPicture(picture)"
                                     v-for="picture in album.picture_list"></li>
 
                             </ul>
@@ -43,8 +45,84 @@
             </div>
         </div>
 
+
+        <div class="weui-panel">
+            <div class="weui-panel__hd">相册模板</div>
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <div class="weui-cells">
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>文字标题</p>
+                            </div>
+                            <span class="weui-cell__ft"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-panel">
+            <div class="weui-panel__hd">相册音乐</div>
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_small-appmsg">
+                    <div class="weui-cells">
+                        <a class="weui-cell weui-cell_access" href="javascript:;">
+                            <div class="weui-cell__hd"><img src="" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                            <div class="weui-cell__bd weui-cell_primary">
+                                <p>文字标题</p>
+                            </div>
+                            <span class="weui-cell__ft"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    {% endblock %}
+
+    <div id="musicSelect" v-cloak>
+        <div class="weui-navbar" style="position: initial;">
+            <div class="weui-navbar__item"
+                 :class="{'weui-bar__item_on': musicTag.active}"
+                 :data-id="musicTag.id"
+                 @click="tagMusicTag(musicTag)"
+                 v-for="musicTag in musicTags">
+                {{ musicTag.name }}
+            </div>
+        </div>
+        <div class="weui-search-bar" id="searchBar">
+            <div class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
+                           @change="getMusics"
+                           v-model="search">
+                    <a href="javascript:" class="weui-icon-clear" @click="clearSearch"></a>
+                </div>
+                <label class="weui-search-bar__label">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </div>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" @click="clearSearch">取消</a>
+        </div>
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_small-appmsg">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_access" href="javascript:;" v-for="music, i in musics">
+                        <div class="weui-cell__hd"><i class="fa fa-music" style="width:20px;margin-right:5px;display:block"></i></div>
+                        <div class="weui-cell__bd weui-cell_primary">
+                            <p>{{ music.name }}</p>
+                        </div>
+                        <span class="fa fa-play-circle-o"
+                              :class="{'fa-pause-circle-o': music.active}"
+                              @click="playMusic(i, music)"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endverbatim %}
 {% endblock %}
 
 
@@ -58,10 +136,12 @@
         pk: {{ pk }},
         albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
         albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
+        musicTagApiUrl: '{% url "album:web:api:music-tag-list" %}',
+        musicApiUrl: '{% url "album:web:api:music-list" %}',
     }
 </script>
 <script type="text/javascript">
-var vue = new Vue({
+var aVue = new Vue({
     el: '#album',
     data: {
         album: {
@@ -74,23 +154,25 @@ var vue = new Vue({
     },
     methods: {
         getAlbum: function () {
+            var vue = this;
             http.get(context.albumDetailApiUrl, {}, function(res){
                 vue.album = res;
                 vue.getPictureSeq();
             });
         },
         getPictureSeq: function () {
-            $.each(this.album.picture_list, function (i, picture) {
+            var vue = this;
+            $.each(vue.album.picture_list, function (i, picture) {
                 if (vue.pictureSeq < picture.seq) {
                     vue.pictureSeq = picture.seq;
                 }
             });
         },
-        deletePicture: function (picture) {
-            weui.actionSheet([
-                {
-                    label: '删除相片',
-                    onClick: function () {
+        displayPicture: function (picture) {
+            var vue = this;
+            var gallery = weui.gallery(picture.image, {
+                onDelete: function(){
+                    if(confirm('确定删除该图片？')){
                         http.delete(context.albumPictureApiUrl, {
                             picture__id: picture.id,
                         }, function () {
@@ -98,24 +180,15 @@ var vue = new Vue({
                             pictureList.splice(pictureList.indexOf(picture), 1);
                         })
                     }
-                }
-            ], [
-                {
-                    label: '取消',
-                    onClick: function () {
-                        console.log('取消');
-                    }
-                }
-            ], {
-                className: 'custom-classname',
-                onClose: function(){
-                    console.log('关闭');
+                    gallery.hide();
                 }
             });
         },
     },
     mounted: function () {
-        this.getAlbum();
+        var vue = this;
+
+        vue.getAlbum();
 
         weui.uploader('#uploaderCustom', {
             url: context.albumPictureApiUrl,
@@ -187,8 +260,85 @@ var vue = new Vue({
     }
 
 });
+</script>
 
+<script type="text/javascript">
+var mVue = new Vue({
+    el: '#musicSelect',
+    data: {
+        musicTags: [],
+        musics: [],
 
+        allMuiscTag: {
+            id: '',
+            name: '全部',
+            active: true,
+        },
+        musicTag: null,
+        search: '',
+        music: null,
+    },
+    methods: {
+        getMusicTags: function () {
+            var vue = this;
+            http.get(context.musicTagApiUrl, {}, function (res) {
+                vue.allMuiscTag.active = true;
+                vue.musicTags = [vue.allMuiscTag].concat(res);
+                vue.getMusics();
+            });
+        },
+        tagMusicTag: function(musicTag) {
+            var vue = this;
+            if (musicTag.active) {
+                return;
+            }
 
+            if (vue.musicTag) {
+                Vue.set(vue.musicTag, 'active', false);
+            }
+            Vue.set(musicTag, 'active', true);
+            vue.musicTag = musicTag;
+            vue.getMusics();
+        },
+        getMusics: function () {
+            var vue = this;
+            http.get(context.musicApiUrl, {
+                tag: vue.musicTag.id,
+                search: vue.search,
+            }, function (res) {
+                vue.musics = res;
+                $.each(vue.musics, function (i, music) {
+                    if (vue.music && vue.music.id == music.id) {
+                        music.active = true;
+                    }
+                });
+            });
+        },
+        clearSearch: function () {
+            this.search = '';
+        },
+        playMusic: function (i, music) {
+            var vue = this;
+            if (music.active) {
+                Vue.set(music, 'active', false)
+                return;
+            }
+
+            if (vue.music) {
+                Vue.set(vue.music, 'active', false);
+            }
+            Vue.set(music, 'active', true);
+            Vue.set(vue.musics, i, music);
+            vue.music = music;
+        }
+    },
+    mounted: function () {
+        weui.searchBar('#searchBar');
+
+        var vue = this;
+        vue.musicTag = vue.allMuiscTag;
+        vue.getMusicTags();
+    }
+});
 </script>
 {% endblock %}

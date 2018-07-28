@@ -6,6 +6,8 @@ from . import views
 
 
 viewsets = (
+    api.MusicTagViewSet,
+    api.MusicViewSet,
     api.AlbumViewSet,
 )
 

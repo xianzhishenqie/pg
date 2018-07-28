@@ -14,9 +14,40 @@ from album import models as album_models
 from . import serializers as mserializers
 
 
-class AlbumViewSet(common_mixins.RequestDataMixin,
-                   viewsets.ModelViewSet):
+class MusicTagViewSet(common_mixins.PGMixin,
+                      viewsets.ReadOnlyModelViewSet):
+    queryset = album_models.MusicTag.objects.all()
+    serializer_class = mserializers.MusicTagSerializers
+    permission_classes = (permissions.IsAuthenticated,)
 
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('name',)
+    ordering_fields = ('id',)
+    ordering = ('id',)
+
+
+class MusicViewSet(common_mixins.PGMixin,
+                   viewsets.ReadOnlyModelViewSet):
+    queryset = album_models.Music.objects.all()
+    serializer_class = mserializers.MusicSerializers
+    permission_classes = (permissions.IsAuthenticated,)
+
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('name', 'author')
+
+    def get_queryset(self):
+        queryset = self.queryset
+
+        tag = self.query_data.get('tag', int)
+        if tag:
+            queryset = queryset.filter(tags=tag)
+
+        return queryset
+
+
+
+class AlbumViewSet(common_mixins.PGMixin,
+                   viewsets.ModelViewSet):
     queryset = album_models.Album.objects.all()
     serializer_class = mserializers.AlbumSerializers
     permission_classes = (permissions.IsAuthenticated,)
