@@ -133,7 +133,7 @@
         <div class="weui-cells mt-0">
             <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
             <span class="weui-cell weui-cell_access" v-for="music, i in musics">
-                <div class="weui-cell__hd" @click="selectMusic(music)"><i class="fa fa-music text-success" style="width:20px;margin-right:5px;display:block"></i></div>
+                <div class="weui-cell__hd" @click="selectMusic(music)"><i class="fa fa-music text-success" style="width:20px;height:20px;border-radius:50%;margin-right:5px;display:block"></i></div>
                 <div class="weui-cell__bd weui-cell_primary" @click="selectMusic(music)">
                     <p>{{ music.name }}</p>
                 </div>
@@ -520,7 +520,7 @@ var tVue = new Vue({
 
             aVue.album.template_data = template;
             http.patch(context.albumDetailApiUrl, {template: template.id}, function () {
-
+                aVue.getAlbum();
             })
         },
     },

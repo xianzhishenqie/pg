@@ -63,6 +63,13 @@ class AlbumSerializers(serializers.ModelSerializer):
         else:
             return None
 
+    def update(self, instance, validated_data):
+        if not validated_data.get('music') and validated_data.get('template'):
+            template = validated_data.get('template')
+            validated_data['music'] = template.default_music
+
+        return super(AlbumSerializers, self).update(instance, validated_data)
+
     class Meta:
         model = album_models.Album
         fields = ('id', 'name', 'user', 'music', 'template', 'picture_list', 'music_data', 'template_data')

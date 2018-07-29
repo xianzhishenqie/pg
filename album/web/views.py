@@ -48,3 +48,12 @@ def album_page(request, pk):
     }
 
     return render(request, 'album.html', context)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+@request_data
+@auto_login
+def album_list_page(request):
+    context = {}
+    return render(request, 'album_list.html', context)

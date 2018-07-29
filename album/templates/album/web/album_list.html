@@ -1,0 +1,118 @@
+{% extends './base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load static_v %}
+
+{% block title %}
+    我的相册
+{% endblock %}
+
+{% block local_css %}
+    <style>
+        ul, p, label{
+            margin-bottom: auto;
+        }
+        #album:before{
+            content: ' ';
+            display: table;
+        }
+        .stack-panel{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            left: 0;
+            top: 0;
+        }
+        .stack-panel-1{
+            z-index: 1;
+        }
+        .stack-panel-2{
+            z-index: 2;
+        }
+        .stack-panel-3{
+            z-index: 3;
+        }
+    </style>
+    <style>
+        .right-panel-selector{
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 100%;
+            transition: left 0.2s;
+            display: none;
+        }
+        #musicSelect .weui-cells {
+            overflow: auto;
+        }
+        #musicSelect .weui-cells:before {
+            border-top: none;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+    {% verbatim %}
+    <div id="albumList" v-cloak>
+        <div class="weui-cells mt-0">
+            <span class="weui-cell weui-cell_access" @click="editTemplate(album)" v-for="album, i in albums">
+                <div class="weui-cell__hd"><img :src="albumCover(album)" alt="" style="width:50px;height:50px;border-radius:50%;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>{{ album.name || '我的相册' }}</p>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </span>
+        </div>
+    </div>
+    {% endverbatim %}
+{% endblock %}
+
+
+
+{% block bottom_js %}
+    {{ block.super }}
+{% endblock %}
+{% block local_js %}
+<script type="text/javascript">
+    var context = {
+        albumListApiUrl: '{% url "album:web:api:album-list" %}',
+        albumPageUrl: '{% url "album:web:album" 0 %}',
+    }
+</script>
+<script type="text/javascript">
+var aVue = new Vue({
+    el: '#albumList',
+    data: {
+        albums: [],
+    },
+    methods: {
+        getAlbums: function () {
+            var vue = this;
+            http.get(context.albumListApiUrl, {}, function(res){
+                vue.albums = res;
+            });
+        },
+        albumCover: function (album) {
+            if (album.picture_list.length > 0) {
+                return album.picture_list[0].image;
+            } else if (album.template_data) {
+                return album.template_data.cover_url || album.template_data.cover;
+            } else {
+                return '';
+            }
+        },
+        editTemplate: function (album) {
+            window.location.href = context.albumPageUrl.replace('0', album.id) + window.location.search;
+        }
+    },
+    mounted: function () {
+        var vue = this;
+
+        vue.getAlbums();
+    }
+
+});
+</script>
+{% endblock %}
