@@ -423,6 +423,24 @@ var codeUtil = (function(baseModules){
 }());
 
 
+var docUtil = (function(baseModules){
+    var mod = initFromBaseModules(baseModules);
+
+    var initialTitle = $('title').text();
+
+    mod.setTitle = function (title) {
+        $('title').text(title);
+    };
+
+    mod.revertTitle = function () {
+        $('title').text(initialTitle);
+    };
+
+
+    return mod;
+}());
+
+
 var strUtil = (function(baseModules){
     var mod = initFromBaseModules(baseModules);
 

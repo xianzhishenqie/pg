@@ -1,5 +1,6 @@
 
 from django.db import transaction
+from django.db.models import Count
 
 from rest_framework import exceptions, filters, permissions, status, viewsets
 from rest_framework.decorators import action
@@ -14,7 +15,56 @@ from album import models as album_models
 from . import serializers as mserializers
 
 
-class MusicTagViewSet(common_mixins.PGMixin,
+
+class TemplateTagViewSet(common_mixins.CacheModelMixin,
+                         common_mixins.PGMixin,
+                         viewsets.ReadOnlyModelViewSet):
+    queryset = album_models.TemplateTag.objects.all()
+    serializer_class = mserializers.TemplateTagSerializers
+    permission_classes = (permissions.IsAuthenticated,)
+
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('name',)
+    ordering_fields = ('id',)
+    ordering = ('id',)
+
+    page_cache_age = None
+    unlimit_pagination = True
+
+
+class TemplateViewSet(common_mixins.CacheModelMixin,
+                      common_mixins.PGMixin,
+                      viewsets.ReadOnlyModelViewSet):
+    queryset = album_models.Template.objects.all()
+    serializer_class = mserializers.TemplateSerializers
+    permission_classes = (permissions.IsAuthenticated,)
+
+    filter_backends = (filters.SearchFilter, filters.OrderingFilter)
+    search_fields = ('name',)
+
+    ordering_fields = ('create_time',)
+    ordering = ('-create_time',)
+
+    page_cache_age = None
+    unlimit_pagination = True
+
+    def get_queryset(self):
+        queryset = self.queryset
+
+        tag = self.query_data.get('tag', int)
+        if tag:
+            if tag == -1:
+                queryset = queryset.annotate(album_count=Count('album')).order_by('-album_count')
+            elif tag == -2:
+                pass
+            else:
+                queryset = queryset.filter(tags=tag)
+
+        return queryset
+
+
+class MusicTagViewSet(common_mixins.CacheModelMixin,
+                      common_mixins.PGMixin,
                       viewsets.ReadOnlyModelViewSet):
     queryset = album_models.MusicTag.objects.all()
     serializer_class = mserializers.MusicTagSerializers
@@ -25,8 +75,12 @@ class MusicTagViewSet(common_mixins.PGMixin,
     ordering_fields = ('id',)
     ordering = ('id',)
 
+    page_cache_age = None
+    unlimit_pagination = True
 
-class MusicViewSet(common_mixins.PGMixin,
+
+class MusicViewSet(common_mixins.CacheModelMixin,
+                   common_mixins.PGMixin,
                    viewsets.ReadOnlyModelViewSet):
     queryset = album_models.Music.objects.all()
     serializer_class = mserializers.MusicSerializers
@@ -34,6 +88,9 @@ class MusicViewSet(common_mixins.PGMixin,
 
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('name', 'author')
+
+    page_cache_age = None
+    unlimit_pagination = True
 
     def get_queryset(self):
         queryset = self.queryset
@@ -43,7 +100,6 @@ class MusicViewSet(common_mixins.PGMixin,
             queryset = queryset.filter(tags=tag)
 
         return queryset
-
 
 
 class AlbumViewSet(common_mixins.PGMixin,

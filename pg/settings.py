@@ -122,6 +122,15 @@ MEDIA_URL = '/media/'
 AUTH_USER_MODEL = 'pg_auth.User'
 
 
+DEFAULT_CACHE_AGE = 300
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

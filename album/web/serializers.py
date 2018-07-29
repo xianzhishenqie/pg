@@ -5,6 +5,20 @@ from album import models as album_models
 
 
 
+class TemplateTagSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = album_models.TemplateTag
+        fields = ('id', 'name')
+
+
+class TemplateSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = album_models.Template
+        fields = ('id', 'name', 'cover', 'cover_url')
+
+
 class MusicTagSerializers(serializers.ModelSerializer):
 
     class Meta:
@@ -16,7 +30,7 @@ class MusicSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = album_models.Music
-        fields = ('id', 'name', 'author', 'file', )
+        fields = ('id', 'name', 'author', 'file', 'url')
 
 
 
@@ -30,10 +44,26 @@ class PictureSerializers(serializers.ModelSerializer):
 class AlbumSerializers(serializers.ModelSerializer):
     picture_list = serializers.SerializerMethodField()
 
+    music_data = serializers.SerializerMethodField()
+
+    template_data = serializers.SerializerMethodField()
+
     def get_picture_list(self, obj):
         return PictureSerializers(obj.pictures.all(), many=True).data
 
+    def get_music_data(self, obj):
+        if obj.music:
+            return MusicSerializers(obj.music).data
+        else:
+            return None
+
+    def get_template_data(self, obj):
+        if obj.template:
+            return TemplateSerializers(obj.template).data
+        else:
+            return None
+
     class Meta:
         model = album_models.Album
-        fields = ('id', 'name', 'user', 'picture_list')
+        fields = ('id', 'name', 'user', 'music', 'template', 'picture_list', 'music_data', 'template_data')
         read_only_fields = ('type', 'name', 'user')

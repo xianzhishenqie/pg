@@ -5,6 +5,7 @@
 {% load static_v %}
 
 {% block title %}
+    编辑相册
 {% endblock %}
 
 {% block local_css %}
@@ -12,15 +13,49 @@
         ul, p, label{
             margin-bottom: auto;
         }
+        #album:before{
+            content: ' ';
+            display: table;
+        }
+        .stack-panel{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            left: 0;
+            top: 0;
+        }
+        .stack-panel-1{
+            z-index: 1;
+        }
+        .stack-panel-2{
+            z-index: 2;
+        }
+        .stack-panel-3{
+            z-index: 3;
+        }
     </style>
     <style>
-
+        .right-panel-selector{
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 100%;
+            transition: left 0.2s;
+            display: none;
+        }
+        #musicSelect .weui-cells {
+            overflow: auto;
+        }
+        #musicSelect .weui-cells:before {
+            border-top: none;
+        }
     </style>
 {% endblock %}
 
 {% block container %}
     {% verbatim %}
-    <div id="album" v-cloak>
+    <div class="stack-panel stack-panel-1" id="album" v-cloak>
         <p class="weui-cells__title">照片上传</p>
         <div class="weui-cells weui-cells_form" id="uploaderCustom">
             <div class="weui-cell">
@@ -45,44 +80,33 @@
             </div>
         </div>
 
-
-        <div class="weui-panel">
-            <div class="weui-panel__hd">相册模板</div>
-                <div class="weui-media-box weui-media-box_small-appmsg">
-                    <div class="weui-cells">
-                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                            <div class="weui-cell__hd"><img src="" alt="" style="width:20px;margin-right:5px;display:block"></div>
-                            <div class="weui-cell__bd weui-cell_primary">
-                                <p>文字标题</p>
-                            </div>
-                            <span class="weui-cell__ft"></span>
-                        </a>
-                    </div>
+        <p class="weui-cells__title">相册模板</p>
+        <div class="weui-cells">
+            <span class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd"><img :src="album.template_data ? (album.template_data.cover_url || album.template_data.cover) : ''" alt="" style="width:20px;height:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd weui-cell_primary" @click="enterSelectTemplate">
+                    <p>{{ album.template_data ? album.template_data.name : '未选择' }}</p>
                 </div>
-            </div>
+                <span class="weui-cell__ft" @click="enterSelectTemplate"></span>
+            </span>
         </div>
 
-        <div class="weui-panel">
-            <div class="weui-panel__hd">相册音乐</div>
-            <div class="weui-panel__bd">
-                <div class="weui-media-box weui-media-box_small-appmsg">
-                    <div class="weui-cells">
-                        <a class="weui-cell weui-cell_access" href="javascript:;">
-                            <div class="weui-cell__hd"><img src="" alt="" style="width:20px;margin-right:5px;display:block"></div>
-                            <div class="weui-cell__bd weui-cell_primary">
-                                <p>文字标题</p>
-                            </div>
-                            <span class="weui-cell__ft"></span>
-                        </a>
-                    </div>
+        <p class="weui-cells__title">相册音乐</p>
+        <div class="weui-cells">
+            <span class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd"><i class="fa fa-play-circle-o" style="width:20px;margin-right:5px;display:block"></i></div>
+                <div class="weui-cell__bd weui-cell_primary" @click="enterSelectMusic">
+                    <p>{{ album.music_data ? album.music_data.name : '未选择' }}</p>
                 </div>
-            </div>
+                <span class="weui-cell__ft" @click="enterSelectMusic"></span>
+            </span>
         </div>
     </div>
 
-    <div id="musicSelect" v-cloak>
+    <div class="stack-panel stack-panel-2 right-panel-selector" id="musicSelect" v-cloak>
         <div class="weui-navbar" style="position: initial;">
             <div class="weui-navbar__item"
+                 style="padding: 5px 0;"
                  :class="{'weui-bar__item_on': musicTag.active}"
                  :data-id="musicTag.id"
                  @click="tagMusicTag(musicTag)"
@@ -95,7 +119,7 @@
                 <div class="weui-search-bar__box">
                     <i class="weui-icon-search"></i>
                     <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
-                           @change="getMusics"
+                           @input="getMusics"
                            v-model="search">
                     <a href="javascript:" class="weui-icon-clear" @click="clearSearch"></a>
                 </div>
@@ -106,20 +130,39 @@
             </div>
             <a href="javascript:" class="weui-search-bar__cancel-btn" @click="clearSearch">取消</a>
         </div>
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_small-appmsg">
-                <div class="weui-cells">
-                    <a class="weui-cell weui-cell_access" href="javascript:;" v-for="music, i in musics">
-                        <div class="weui-cell__hd"><i class="fa fa-music" style="width:20px;margin-right:5px;display:block"></i></div>
-                        <div class="weui-cell__bd weui-cell_primary">
-                            <p>{{ music.name }}</p>
-                        </div>
-                        <span class="fa fa-play-circle-o"
-                              :class="{'fa-pause-circle-o': music.active}"
-                              @click="playMusic(i, music)"></span>
-                    </a>
+        <div class="weui-cells mt-0">
+            <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
+            <span class="weui-cell weui-cell_access" v-for="music, i in musics">
+                <div class="weui-cell__hd" @click="selectMusic(music)"><i class="fa fa-music text-success" style="width:20px;margin-right:5px;display:block"></i></div>
+                <div class="weui-cell__bd weui-cell_primary" @click="selectMusic(music)">
+                    <p>{{ music.name }}</p>
                 </div>
+                <span class="fa fa-play-circle-o"
+                      :class="{'fa-pause-circle-o': music.active}"
+                      @click="playMusic(i, music)"></span>
+            </span>
+        </div>
+    </div>
+
+    <div class="stack-panel stack-panel-3 right-panel-selector" id="templateSelect" v-cloak>
+        <div class="weui-navbar" style="position: initial;">
+            <div class="weui-navbar__item"
+                 style="padding: 5px 0;"
+                 :class="{'weui-bar__item_on': templateTag.active}"
+                 :data-id="templateTag.id"
+                 @click="tagTemplateTag(templateTag)"
+                 v-for="templateTag in templateTags">
+                {{ templateTag.name }}
             </div>
+        </div>
+        <div class="weui-cells mt-0">
+            <span class="weui-cell weui-cell_access" @click="selectTemplate(template)" v-for="template, i in templates">
+                <div class="weui-cell__hd"><img :src="template.cover_url || template.cover" alt="" style="width:50px;height:50px;border-radius:50%;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>{{ template.name }}</p>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </span>
         </div>
     </div>
     {% endverbatim %}
@@ -136,6 +179,8 @@
         pk: {{ pk }},
         albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
         albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
+        templateTagApiUrl: '{% url "album:web:api:template-tag-list" %}',
+        templateApiUrl: '{% url "album:web:api:template-list" %}',
         musicTagApiUrl: '{% url "album:web:api:music-tag-list" %}',
         musicApiUrl: '{% url "album:web:api:music-list" %}',
     }
@@ -148,6 +193,17 @@ var aVue = new Vue({
             name: '',
             desc: '',
             picture_list: [],
+            music_data: {
+                id: '',
+                name: '',
+                file: '',
+                url: '',
+            },
+            template_data: {
+                id: '',
+                name: '',
+                cover: '',
+            },
         },
 
         pictureSeq: 0,
@@ -183,6 +239,20 @@ var aVue = new Vue({
                     gallery.hide();
                 }
             });
+        },
+        show: function () {
+            docUtil.setTitle('编辑相册');
+            $(this.$el).show().css('left', 0);
+        },
+        hide: function () {
+            docUtil.revertTitle();
+            $(this.$el).css('left', '100%').hide();
+        },
+        enterSelectMusic: function () {
+            mVue.show();
+        },
+        enterSelectTemplate: function () {
+            tVue.show();
         },
     },
     mounted: function () {
@@ -283,7 +353,7 @@ var mVue = new Vue({
             var vue = this;
             http.get(context.musicTagApiUrl, {}, function (res) {
                 vue.allMuiscTag.active = true;
-                vue.musicTags = [vue.allMuiscTag].concat(res);
+                vue.musicTags = [vue.allMuiscTag].concat(res.rows);
                 vue.getMusics();
             });
         },
@@ -306,7 +376,7 @@ var mVue = new Vue({
                 tag: vue.musicTag.id,
                 search: vue.search,
             }, function (res) {
-                vue.musics = res;
+                vue.musics = res.rows;
                 $.each(vue.musics, function (i, music) {
                     if (vue.music && vue.music.id == music.id) {
                         music.active = true;
@@ -316,11 +386,19 @@ var mVue = new Vue({
         },
         clearSearch: function () {
             this.search = '';
+            this.getMusics();
         },
         playMusic: function (i, music) {
             var vue = this;
-            if (music.active) {
-                Vue.set(music, 'active', false)
+            if (music == vue.music) {
+                Vue.set(music, 'active', !music.active);
+
+                var audio = $(vue.$el).find('audio')[0];
+                if (music.active) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
                 return;
             }
 
@@ -329,15 +407,128 @@ var mVue = new Vue({
             }
             Vue.set(music, 'active', true);
             Vue.set(vue.musics, i, music);
-            vue.music = music;
-        }
+            Vue.set(vue, 'music', music);
+        },
+        fixListPanelHeight: function () {
+            var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').height() + $(this.$el).find('.weui-search-bar').height();
+            $(this.$el).find('.weui-cells').height(height);
+        },
+        show: function () {
+            docUtil.setTitle('选择音乐');
+            $(this.$el).show().css('left', 0);
+        },
+        hide: function () {
+            docUtil.revertTitle();
+            $(this.$el).css('left', '100%').hide();
+        },
+        selectMusic: function (music) {
+            this.hide();
+
+            aVue.album.music_data = music;
+            http.patch(context.albumDetailApiUrl, {music: music.id}, function () {
+                
+            })
+        },
     },
     mounted: function () {
         weui.searchBar('#searchBar');
 
         var vue = this;
+        vue.fixListPanelHeight();
         vue.musicTag = vue.allMuiscTag;
         vue.getMusicTags();
+    }
+});
+</script>
+
+
+<script type="text/javascript">
+var tVue = new Vue({
+    el: '#templateSelect',
+    data: {
+        templateTags: [],
+        templates: [],
+
+        hotTemplateTag: {
+            id: '-1',
+            name: '热门',
+            active: true,
+        },
+        lastTemplateTag: {
+            id: '-2',
+            name: '最新',
+            active: false,
+        },
+        templateTag: null,
+        search: '',
+        template: null,
+    },
+    methods: {
+        getTemplateTags: function () {
+            var vue = this;
+            http.get(context.templateTagApiUrl, {}, function (res) {
+                vue.hotTemplateTag.active = true;
+                vue.templateTags = [vue.hotTemplateTag, vue.lastTemplateTag].concat(res.rows);
+                vue.getTemplates();
+            });
+        },
+        tagTemplateTag: function(templateTag) {
+            var vue = this;
+            if (templateTag.active) {
+                return;
+            }
+
+            if (vue.templateTag) {
+                Vue.set(vue.templateTag, 'active', false);
+            }
+            Vue.set(templateTag, 'active', true);
+            vue.templateTag = templateTag;
+            vue.getTemplates();
+        },
+        getTemplates: function () {
+            var vue = this;
+            http.get(context.templateApiUrl, {
+                tag: vue.templateTag.id,
+                search: vue.search,
+            }, function (res) {
+                vue.templates = res.rows;
+                $.each(vue.templates, function (i, template) {
+                    if (vue.template && vue.template.id == template.id) {
+                        template.active = true;
+                    }
+                });
+            });
+        },
+        clearSearch: function () {
+            this.search = '';
+            this.getTemplates();
+        },
+        fixListPanelHeight: function () {
+            var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').height() + $(this.$el).find('.weui-search-bar').height();
+            $(this.$el).find('.weui-cells').height(height);
+        },
+        show: function () {
+            docUtil.setTitle('选择模板');
+            $(this.$el).show().css('left', 0);
+        },
+        hide: function () {
+            docUtil.revertTitle();
+            $(this.$el).css('left', '100%').hide();
+        },
+        selectTemplate: function (template) {
+            this.hide();
+
+            aVue.album.template_data = template;
+            http.patch(context.albumDetailApiUrl, {template: template.id}, function () {
+
+            })
+        },
+    },
+    mounted: function () {
+        var vue = this;
+        vue.fixListPanelHeight();
+        vue.templateTag = vue.hotTemplateTag;
+        vue.getTemplateTags();
     }
 });
 </script>

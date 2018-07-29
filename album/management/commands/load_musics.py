@@ -3,6 +3,7 @@ import json
 import logging
 
 from django.core.management import BaseCommand
+from django.db import transaction
 
 from album.models import MusicTag, Music
 
@@ -1480,32 +1481,33 @@ music_info = json.loads('''
 
 class Command(BaseCommand):
     def handle(self, *args, **options):
-        music_tags = []
-        for tag  in tag_mapping.values():
-            music_tags.append(MusicTag(
-                id=tag['id'],
-                name=tag['name'],
-            ))
-        MusicTag.objects.bulk_create(music_tags)
+        with transaction.atomic():
+            music_tags = []
+            for tag  in tag_mapping.values():
+                music_tags.append(MusicTag(
+                    id=tag['id'],
+                    name=tag['name'],
+                ))
+            MusicTag.objects.bulk_create(music_tags)
 
-        music_list = music_info['musicList']
-        music_list.reverse()
+            music_list = music_info['musicList']
+            music_list.reverse()
 
-        musics = []
-        music_mapping = {}
-        for i, music_data in enumerate(music_list):
-            music_id = i + 1
-            music = Music(
-                id=music_id,
-                name=music_data['name'],
-                url=music_data['musicUrl'],
-                lyric_url=music_data['lyricUrl'] or '',
-            )
-            musics.append(music)
-            music_mapping[music_id] = music
-        Music.objects.bulk_create(musics, 50)
+            musics = []
+            music_mapping = {}
+            for i, music_data in enumerate(music_list):
+                music_id = i + 1
+                music = Music(
+                    id=music_id,
+                    name=music_data['name'],
+                    url=music_data['musicUrl'],
+                    lyric_url=music_data['lyricUrl'] or '',
+                )
+                musics.append(music)
+                music_mapping[music_id] = music
+            Music.objects.bulk_create(musics, 50)
 
-        for i, music_data in enumerate(music_list):
-            music_id = i + 1
-            music = music_mapping[music_id]
-            music.tags.add(tag_mapping[music_data['type']]['id'])
+            for i, music_data in enumerate(music_list):
+                music_id = i + 1
+                music = music_mapping[music_id]
+                music.tags.add(tag_mapping[music_data['type']]['id'])

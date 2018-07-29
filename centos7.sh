@@ -38,6 +38,7 @@ source /etc/profile
 # 基础工具服务安装
 yum -y install vim
 yum -y install mariadb mariadb-devel mariadb-server
+yum -y install memcached
 
 cd /tmp
 wget http://nginx.org/download/nginx-1.14.0.tar.gz
