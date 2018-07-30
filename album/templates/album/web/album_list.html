@@ -78,7 +78,9 @@
 <script type="text/javascript">
     var context = {
         albumListApiUrl: '{% url "album:web:api:album-list" %}',
+        albumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
         albumPageUrl: '{% url "album:web:album" 0 %}',
+        albumDisplayPageUrl: '{% url "album:web:album_display" 0 %}',
     }
 </script>
 <script type="text/javascript">
@@ -105,6 +107,35 @@ var aVue = new Vue({
         },
         editTemplate: function (album) {
             window.location.href = context.albumPageUrl.replace('0', album.id) + window.location.search;
+        },
+        actionTemplate: function (album) {
+            var vue = this;
+            weui.actionSheet([
+                {
+                    label: '查看相册',
+                    onClick: function () {
+                        window.location.href = context.album_display.replace('0', album.id) + window.location.search;
+                    }
+                },
+                {
+                    label: '删除相册',
+                    onClick: function () {
+                        http.delete(context.albumDetailApiUrl.replace('0', album.id), {}, function () {
+                            vue.getAlbums();
+                        });
+                    }
+                }
+            ], [
+                {
+                    label: '取消',
+                    onClick: function () {
+                    }
+                }
+            ], {
+                className: 'custom-classname',
+                onClose: function(){
+                }
+            });
         }
     },
     mounted: function () {

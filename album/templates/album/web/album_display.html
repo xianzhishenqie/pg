@@ -1,0 +1,125 @@
+{% extends './base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load static_v %}
+
+{% block title %}
+    我的相册
+{% endblock %}
+
+{% block local_css %}
+    <style>
+        ul, p, label{
+            margin-bottom: auto;
+        }
+        #album:before{
+            content: ' ';
+            display: table;
+        }
+        .stack-panel{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ffffff;
+            left: 0;
+            top: 0;
+        }
+        .stack-panel-1{
+            z-index: 1;
+        }
+        .stack-panel-2{
+            z-index: 2;
+        }
+        .stack-panel-3{
+            z-index: 3;
+        }
+    </style>
+    <style>
+        .right-panel-selector{
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 100%;
+            transition: left 0.2s;
+            display: none;
+        }
+        #musicSelect .weui-cells {
+            overflow: auto;
+        }
+        #musicSelect .weui-cells:before {
+            border-top: none;
+        }
+    </style>
+{% endblock %}
+
+{% block container %}
+    {% verbatim %}
+    <div class="stack-panel stack-panel-1" id="album" v-cloak>
+        <p class="weui-cells__title">照片上传</p>
+        <div class="weui-cells weui-cells_form" id="uploaderCustom">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <div class="weui-uploader">
+                        <div class="weui-uploader__hd d-none"><p class="weui-uploader__title">照片上传</p></div>
+                        <div class="weui-uploader__bd">
+                            <ul class="weui-uploader__files" id="uploaderCustomFiles">
+                                <li class="weui-uploader__file"
+                                    :data-seq="picture.seq"
+                                    :style="'background-image: url(' + picture.image + ');'"
+                                    @click="displayPicture(picture)"
+                                    v-for="picture in album.picture_list"></li>
+
+                            </ul>
+                            <div class="weui-uploader__input-box"><input id="uploaderCustomInput"
+                                                                         class="weui-uploader__input" type="file"
+                                                                         accept="image/*" multiple=""></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p class="weui-cells__title">相册模板</p>
+        <div class="weui-cells">
+            <span class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd"><img :src="album.template_data ? (album.template_data.cover_url || album.template_data.cover) : ''" alt="" style="width:20px;height:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd weui-cell_primary" @click="enterSelectTemplate">
+                    <p>{{ album.template_data ? album.template_data.name : '未选择' }}</p>
+                </div>
+                <span class="weui-cell__ft" @click="enterSelectTemplate"></span>
+            </span>
+        </div>
+
+        <p class="weui-cells__title">相册音乐</p>
+        <div class="weui-cells">
+            <span class="weui-cell weui-cell_access">
+                <div class="weui-cell__hd"><i class="fa fa-play-circle-o" style="width:20px;margin-right:5px;display:block"></i></div>
+                <div class="weui-cell__bd weui-cell_primary" @click="enterSelectMusic">
+                    <p>{{ album.music_data ? album.music_data.name : '未选择' }}</p>
+                </div>
+                <span class="weui-cell__ft" @click="enterSelectMusic"></span>
+            </span>
+        </div>
+    </div>
+    {% endverbatim %}
+{% endblock %}
+
+
+
+{% block bottom_js %}
+    {{ block.super }}
+{% endblock %}
+{% block local_js %}
+<script type="text/javascript">
+    var context = {
+        pk: {{ pk }},
+        albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
+        albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
+        templateTagApiUrl: '{% url "album:web:api:template-tag-list" %}',
+        templateApiUrl: '{% url "album:web:api:template-list" %}',
+        musicTagApiUrl: '{% url "album:web:api:music-tag-list" %}',
+        musicApiUrl: '{% url "album:web:api:music-list" %}',
+    }
+</script>
+{% endblock %}

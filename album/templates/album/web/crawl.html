@@ -1,0 +1,42 @@
+{% extends './base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load static_v %}
+
+{% block title %}
+    开始
+{% endblock %}
+
+{% block local_css %}
+
+{% endblock %}
+
+{% block container %}
+    {% verbatim %}
+    <input type="text" id="url" style="width: 100%;">
+    <button id="crawl">start</button>
+    <div id="urls">
+
+    </div>
+    {% endverbatim %}
+{% endblock %}
+
+
+
+{% block bottom_js %}
+    {{ block.super }}
+{% endblock %}
+{% block local_js %}
+<script type="text/javascript">
+    $('#crawl').click(function () {
+        var url = $('#url').val();
+        $('#urls').html('');
+        http.post('{% url "album:web:crawl" %}', {url: url}, function(res){
+            $.each(res, function (i, u) {
+                $('#urls').append('<div>' + u + '</div>');
+            });
+        });
+    });
+</script>
+{% endblock %}

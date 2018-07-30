@@ -17,4 +17,5 @@ viewsets = (
 urlpatterns = [
     path('albums/', views.album_list_page, name='album_list'),
     path('albums/<int:pk>/', views.album_page, name='album'),
+    path('albums/<int:pk>/display/', views.album_display_page, name='album_display'),
 ]
