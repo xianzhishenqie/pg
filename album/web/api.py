@@ -35,7 +35,7 @@ class TemplateTagViewSet(common_mixins.CacheModelMixin,
 class TemplateViewSet(common_mixins.CacheModelMixin,
                       common_mixins.PGMixin,
                       viewsets.ReadOnlyModelViewSet):
-    queryset = album_models.Template.objects.all()
+    queryset = album_models.Template.objects.filter(public=True)
     serializer_class = mserializers.TemplateSerializers
     permission_classes = (permissions.IsAuthenticated,)
 

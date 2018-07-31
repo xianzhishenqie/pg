@@ -18,6 +18,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/font-awesome/css/font-awesome.css' %}">
     {% endblock %}
+    <script type="text/javascript" src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
     <style type="text/css">
         [v-cloak] {
             display: none;
@@ -30,6 +31,9 @@
             position: relative;
         }
     </style>
+    <script type="text/javascript">
+        var context = {};
+    </script>
     {% block local_css %}
     {% endblock %}
 </head>
@@ -39,7 +43,6 @@
     {% endblock %}
 </div>
 {% block bottom_js %}
-    <script type="text/javascript" src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/common/lib/popper/umd/popper.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/common/lib/bootstrap/js/bootstrap.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/common/lib/vue/vue.js' %}"></script>

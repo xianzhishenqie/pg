@@ -37,6 +37,7 @@ class Template(models.Model):
     tags = models.ManyToManyField(TemplateTag)
     default_music = models.ForeignKey(Music, on_delete=models.SET_NULL, null=True, default=None)
 
+    public = models.BooleanField(default=False)
     create_time = models.DateTimeField(default=timezone.now)
 
 
