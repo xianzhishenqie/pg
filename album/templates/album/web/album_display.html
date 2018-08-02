@@ -13,22 +13,36 @@
     {{ block.super }}
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/magic/magic.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static_v 'base/common/css/animation.css' %}">
 {% endblock %}
 
 {% block local_css %}
-    <style>
-
+    <style type="text/css">
+        .music {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            z-index: 200;
+        }
     </style>
 {% endblock %}
 
 {% block container %}
-
-{% include './album_templates/k_july.html' %}
-
+<div class="w-100 h-100" id="albumDisplay">
+    <div class="music">
+        <img class="music-icon"
+             src="{% static 'album/web/img/music.png' %}"
+             :class="{'animated infinite spin': music.active}"
+             @click="toggleMusic">
+        <audio :src="album.music_data.url || album.music_data.file" autoplay="autoplay" loop="loop" v-if="album.music_data.id"></audio>
+    </div>
+    {% include './album_templates/k_july.html' %}
+</div>
 {% endblock %}
 
 {% block bottom_js %}
     {{ block.super }}
+    <script type="text/javascript" src="{% static 'base/common/lib/anime/anime.min.js' %}"></script>
 {% endblock %}
 {% block local_js %}
 <script type="text/javascript">
@@ -38,11 +52,54 @@
     });
 </script>
 <script type="text/javascript">
-var album;
-function getAlbum () {
-    http.get(context.albumDetailApiUrl, {}, function(res){
-        album = res;
-    });
-}
+var aVue = new Vue({
+    el: '#albumDisplay .music',
+    data: {
+        music: {
+            active: true,
+        },
+        album: {
+            name: '',
+            desc: '',
+            picture_list: [],
+            music_data: {
+                id: '',
+                name: '',
+                file: '',
+                url: '',
+            },
+            template_data: {
+                id: '',
+                name: '',
+                cover: '',
+                cover_url: '',
+            },
+        },
+    },
+    methods: {
+        toggleMusic: function(){
+            this.music.active = !this.music.active;
+            var audio = $(this.$el).find('audio')[0];
+            if (this.music.active) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        },
+        getAlbum: function () {
+            var vue = this;
+            http.get(context.albumDetailApiUrl, {}, function(res){
+                vue.album = res;
+
+            });
+        },
+    },
+    mounted: function () {
+        var vue = this;
+
+        vue.getAlbum();
+    }
+
+});
 </script>
 {% endblock %}

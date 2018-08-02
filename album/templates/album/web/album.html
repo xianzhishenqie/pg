@@ -8,8 +8,14 @@
     编辑相册
 {% endblock %}
 
+{% block top_css %}
+    {{ block.super }}
+    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
+    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/magic/magic.css' %}">
+{% endblock %}
+
 {% block local_css %}
-    <style>
+    <style type="text/css">
         ul, p, label{
             margin-bottom: auto;
         }

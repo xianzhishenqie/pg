@@ -676,6 +676,38 @@ var optionRender = (function(baseModules){
 }());
 
 
+var animator = (function(baseModules){
+    var mod = initFromBaseModules(baseModules);
+
+    var animations = {
+        animation: 'animationend',
+        OAnimation: 'oAnimationEnd',
+        MozAnimation: 'mozAnimationEnd',
+        WebkitAnimation: 'webkitAnimationEnd',
+    };
+
+
+    mod.animationEnd = (function(el) {
+        for (var t in animations) {
+            if (el.style[t] !== undefined) {
+                return animations[t];
+            }
+        }
+    })(document.createElement('div'));
+
+
+    mod.animateCss = function (el, animationName, callback) {
+        $(el).addClass('animated ' + animationName).one(mod.animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+
+            if (typeof callback === 'function') callback($(this));
+        });
+    };
+
+    return mod;
+
+}());
+
 // jquery扩展功能
 (function () {
     // 封装去空格
@@ -698,4 +730,12 @@ var optionRender = (function(baseModules){
             }
         });
     };
+
+    $.fn.animateCss = function (animationName, callback) {
+        $.each(this, function(i, el){
+            animator.animateCss(el, animationName, callback)
+        });
+        return this;
+    };
 })();
+

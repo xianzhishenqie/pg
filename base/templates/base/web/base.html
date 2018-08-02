@@ -15,30 +15,29 @@
     <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
 
     {% block top_css %}
-    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/font-awesome/css/font-awesome.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
+        <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/font-awesome/css/font-awesome.css' %}">
+
+        <link type="text/css" rel="stylesheet" href="{% static_v 'base/common/css/common.css' %}">
     {% endblock %}
     <script type="text/javascript" src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
     <style type="text/css">
         [v-cloak] {
             display: none;
         }
-        html, body, #pg {
+        html, body {
             height: 100%;
             width: 100%;
         }
-        #pg {
-            position: relative;
-        }
     </style>
+    {% block local_css %}
+    {% endblock %}
     <script type="text/javascript">
         var context = {};
     </script>
-    {% block local_css %}
-    {% endblock %}
 </head>
 <body>
-<div id="pg">
+<div class="position-relative w-100 h-100" id="pg">
     {% block container %}
     {% endblock %}
 </div>
@@ -49,9 +48,9 @@
     <script type="text/javascript" src="{% static 'base/common/lib/hammer/hammer.js' %}"></script>
     <script type="text/javascript" src="{% static 'base/common/lib/vue-touch/vue-touch.js' %}"></script>
 
-    <script type="text/javascript" src="{% static 'base/common/js/ajax.csrf.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base/common/js/utils.js' %}"></script>
-    <script type="text/javascript" src="{% static 'base/common/js/constants.js' %}"></script>
+    <script type="text/javascript" src="{% static_v 'base/common/js/ajax.csrf.js' %}"></script>
+    <script type="text/javascript" src="{% static_v 'base/common/js/utils.js' %}"></script>
+    <script type="text/javascript" src="{% static_v 'base/common/js/constants.js' %}"></script>
 {% endblock %}
 {% block local_js %}
 {% endblock %}
