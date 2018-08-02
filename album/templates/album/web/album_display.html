@@ -48,7 +48,7 @@
                  @click="toggleMusic">
             <audio :src="album.music_data.url || album.music_data.file" autoplay="autoplay" loop="loop" v-if="album.music_data.id"></audio>
         </div>
-        <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
+        <v-touch class="mask w-100 h-100 position-absolute d-none" v-on:panleft="editAlbum"></v-touch>
     </div>
 
     {% include './album_templates/k_july.html' %}

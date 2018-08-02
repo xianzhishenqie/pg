@@ -6,9 +6,6 @@
     .album-template{
         overflow: hidden;
     }
-    .album-template>img, .album-template .center>img{
-        position: absolute;
-    }
 
     .lt-huaqiqiu{
         animation-name: lt-huaqiqiu;
@@ -36,22 +33,35 @@
         }
     }
 
-    .lb-huaban{
-        left: 10%;
-        bottom: -20px;
-        z-index: 51;
+    .lb-huaban1{
+        animation: huanban1 6s ease-out infinite both;
+        bottom: -20%;
+        left: 10px;
+        z-index: 53;
     }
-    .lb-huaban:nth-of-type(2){
-        left: 20%;
+    .lb-huaban2{
+        animation: huanban2 8s ease-out 2s infinite both;
+        top: 830px;
+        left: 60px;
+        z-index: 53;
     }
-    .lb-huaban:nth-of-type(3){
-        left: 30%;
+    .lb-huaban3{
+        animation: huanban3 6s ease-out 1s infinite both;
+        top: 830px;
+        left: 120px;
+        z-index: 53;
     }
-    .lb-huaban:nth-of-type(4){
-        left: 40%;
+    .lb-huaban4{
+        animation: huanban4 5s ease-out 2s infinite both;
+        top: 830px;
+        left: 190px;
+        z-index: 53;
     }
-    .lb-huaban:nth-of-type(5){
-        left: 50%;
+    .lb-huaban5{
+        animation: huanban5 8s ease-out infinite both;
+        top: 830px;
+        left: 230px;
+        z-index: 53;
     }
 
     .lt-yujianweimei{
@@ -93,20 +103,34 @@
             transform: rotate(10deg);
         }
     }
+    .lb-hudie-init{
+        animation: xiaodie_ctn 1.5s ease-out both;
+        top: 580px;
+        left: 210px;
+        width: 30px;
+        height: 30px;
+    }
     .lb-hudie{
         width: 20px;
         height: 20px;
         -webkit-perspective: 118;
         -webkit-perspective-origin-x: -51px;
         -webkit-perspective-origin-y: 15px;
+        animation: xiaodie 12s ease-out 1.5s infinite both;
     }
     .lb-hudie1{
-        -webkit-transform-origin: bottom;
         top: 4px;
+        -webkit-transform-origin: bottom;
+        -webkit-animation: xiaodie_top 0.5s linear infinite both;
+        transform-origin: bottom;
+        animation: xiaodie_top 0.5s linear infinite both;
     }
     .lb-hudie2{
-        -webkit-transform-origin: bottom;
         top: 9px;
+        -webkit-transform-origin: bottom;
+        -webkit-animation: xiaodie_btm 0.5s linear infinite both;
+        transform-origin: bottom;
+        animation: xiaodie_btm 0.5s linear infinite both;
     }
 
 
@@ -141,7 +165,7 @@
         animation: zidie2_btm 15s linear 9.5s infinite both;
     }
     .rt-xiaodie{
-        top: -80px;
+        top: -180px;
         left: 260px;
         height: 70px;
         width: 70px;
@@ -170,6 +194,22 @@
     }
 
 
+    .rt-cao1{
+        animation: cao1 5s ease-out infinite both;
+        top: 110px;
+        left: 275px;
+    }
+    .rt-cao2{
+        animation: cao2 6s ease-out infinite both;
+        top: 150px;
+        left: 300px;
+    }
+    .rt-cao3{
+        animation: cao3 8s ease-out infinite both;
+        top: 146px;
+        left: 360px;
+    }
+
 
     .rb-hua{
         right: -53px;
@@ -177,23 +217,50 @@
         z-index: 50;
     }
 
-
     .center-kuang{
         z-index: 50;
     }
     .c-xiangkuang{
         z-index: 50;
     }
+    .c-xiangkuang-bg{
+        animation: fadein 1s ease-out 0.8s both;
+    }
+    .c-title{
+        animation: fadein 1s ease-out 0.8s both;
+        width: 284px;
+        height: 263px;
+        top: 280px;
+        left: 108px;
+        opacity: 0;
+    }
+    .album-info{
+        width: 186px;
+        height: 150px;
+        top: 60px;
+        left: 45px;
+        display: table;
+    }
+    .album-info .album-name{
+        vertical-align: middle;
+        display: table-cell;
+        text-align: center;
+        font-size: 22px;
+        line-height: 33px;
+        color: #389BD0;
+    }
+    .b-bg{
+        animation: bg_btm 12s linear infinite both;
+        left: 500px;
+        top: 300px;
+    }
 </style>
 
 <div class="album-template position-relative w-100 h-100">
-    <img class="lt-huaqiqiu animated infinite" src="{% static 'album/web/img/album_template/k_july/945f98c919.jpg' %}">
+    <img class="position-absolute w-100 h-100" src="{% static 'album/web/img/album_template/k_july/9190015935.jpg' %}">
 
-    <img class="lb-huaban" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
-    <img class="lb-huaban" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
-    <img class="lb-huaban" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
-    <img class="lb-huaban" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
-    <img class="lb-huaban" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
+    <img class="lt-huaqiqiu position-absolute animated infinite" src="{% static 'album/web/img/album_template/k_july/945f98c919.jpg' %}">
+
 
     <div class="center-kuang pg-center w-80 h-80">
         <div class="center position-relative w-100 h-100">
@@ -201,14 +268,23 @@
 
             </div>
 
-            <img class="lt-yujianweimei" src="{% static 'album/web/img/album_template/k_july/b61649a8ff.jpg' %}">
+            <img class="lt-yujianweimei position-absolute" src="{% static 'album/web/img/album_template/k_july/b61649a8ff.jpg' %}">
 
-            <div class="lb-hudie position-absolute">
-                <img class="lb-hudie1 position-absolute" src="{% static 'album/web/img/album_template/k_july/767d949575.jpg' %}">
-                <img class="lb-hudie2 position-absolute" src="{% static 'album/web/img/album_template/k_july/585d2ff22f.jpg' %}">
+            <div class="lb-hudie-init position-absolute">
+                <div class="lb-hudie position-absolute">
+                    <img class="lb-hudie1 position-absolute" src="{% static 'album/web/img/album_template/k_july/767d949575.jpg' %}">
+                    <img class="lb-hudie2 position-absolute" src="{% static 'album/web/img/album_template/k_july/585d2ff22f.jpg' %}">
+                </div>
             </div>
-            <img class="lb-hua1 animated infinite" src="{% static 'album/web/img/album_template/k_july/f7c17e1f3c.jpg' %}">
-            <img class="lb-hua2 animated infinite" src="{% static 'album/web/img/album_template/k_july/9918c84c44.jpg' %}">
+            <img class="lb-hua1 position-absolute animated infinite" src="{% static 'album/web/img/album_template/k_july/f7c17e1f3c.jpg' %}">
+            <img class="lb-hua2 position-absolute animated infinite" src="{% static 'album/web/img/album_template/k_july/9918c84c44.jpg' %}">
+
+            <img class="lb-huaban1 position-absolute" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
+            <img class="lb-huaban2 position-absolute" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
+            <img class="lb-huaban3 position-absolute" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
+            <img class="lb-huaban4 position-absolute" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
+            <img class="lb-huaban5 position-absolute" src="{% static 'album/web/img/album_template/k_july/41aae2239e.jpg' %}">
+
 
             <div class="rt-dadie position-absolute">
                 <img class="rt-dadie1 position-absolute" src="{% static 'album/web/img/album_template/k_july/0971478aaf.jpg' %}">
@@ -220,128 +296,34 @@
                 <img class="rt-xiaodie2 position-absolute" src="{% static 'album/web/img/album_template/k_july/f83ca04bbd.jpg' %}">
                 <img class="rt-xiaodie3 position-absolute" src="{% static 'album/web/img/album_template/k_july/89a6089210.jpg' %}">
             </div>
-            <img class="rt-hua" src="{% static 'album/web/img/album_template/k_july/9db9e7d13f.jpg' %}">
-            <img class="rb-hua" src="{% static 'album/web/img/album_template/k_july/da4de432fa.jpg' %}">
+            <img class="rt-hua position-absolute" src="{% static 'album/web/img/album_template/k_july/9db9e7d13f.jpg' %}">
+            <img class="rb-hua position-absolute" src="{% static 'album/web/img/album_template/k_july/da4de432fa.jpg' %}">
+
+            <img class="rt-cao1 position-absolute" src="{% static 'album/web/img/album_template/k_july/391d2c3e76.jpg' %}">
+            <img class="rt-cao2 position-absolute" src="{% static 'album/web/img/album_template/k_july/5c355ee013.jpg' %}">
+            <img class="rt-cao3 position-absolute" src="{% static 'album/web/img/album_template/k_july/df7ec44b91.jpg' %}">
 
 
-            <img class="c-xiangkuang w-100 h-100"
-                 src="{% static 'album/web/img/album_template/k_july/a2b02bf539.jpg' %}">
+
+            <img class="c-xiangkuang-bg position-absolute w-100 h-100" src="{% static 'album/web/img/album_template/k_july/1ac2863aa5.jpg' %}">
+            <img class="c-xiangkuang position-absolute w-100 h-100" src="{% static 'album/web/img/album_template/k_july/a2b02bf539.jpg' %}">
+
+            <img class="c-title-hua" src="{% static 'album/web/img/album_template/k_july/787a8c3dd9.jpg' %}">
+            <div class='c-title d-none'>
+                <img class='c-title-bg position-absolute' src='{% static 'album/web/img/album_template/k_july/15c0bfa444.jpg' %}'>
+                <div class='album-info'>
+                    <div class='album-name'>我用照片制作了一个相册,打开看看！
+                    </div>
+                </div>
+            </div>
+            <img class="b-bg position-absolute" src="{% static 'album/web/img/album_template/k_july/cd32768d39.jpg' %}">
         </div>
     </div>
 </div>
 
 <script>
-    $(function () {
-        $('.lb-huaban').each(function (i, el) {
-            setHuaban(el);
-        });
-        function setHuaban(el) {
-            var tl = anime.timeline({
-                targets: el,
-                easing: 'linear',
-                loop: true,
-            });
-            tl.add({
-                bottom: '-20px',
-                rotate: () => anime.random(0, 0.3) + 'turn',
-                opacity: 1,
-                duration: 0,
-                delay: el => anime.random(0, 2000),
-            }).add({
-                bottom: () => anime.random(20, 30) + '%',
-                rotate: () => anime.random(0.3, 0.7) + 'turn',
-                opacity: 1,
-                duration: () => anime.random(3000, 4000),
-                delay: 0,
-            }).add({
-                bottom: () => anime.random(30, 50) + '%',
-                rotate: () => anime.random(0.7, 1) + 'turn',
-                opacity: 0,
-                duration: () => anime.random(2000, 3000),
-                delay: 0,
-            });
-        }
 
-        setLbHudie();
-        function setLbHudie() {
-            var t1 = anime.timeline({
-                targets: ['.lb-hudie1', '.lb-hudie2'],
-                easing: 'linear',
-                loop: true,
-            });
-
-            var iScale = {0: 0.85, 1: 1};
-            var iRotateX = {0: '-70deg', 1: '90deg'};
-            t1.add({
-                rotateX: '0deg',
-                scale: (el, i) => iScale[i],
-                duration: 0,
-            }).add({
-                rotateX: (el, i) => iRotateX[i],
-                scale: (el, i) => iScale[i],
-                duration: 200,
-            }).add({
-                rotateX: '0deg',
-                scale: (el, i) => iScale[i],
-                duration: 300,
-            });
-
-            var t2 = anime.timeline({
-                targets: '.lb-hudie',
-                easing: 'linear',
-                loop: true,
-            });
-            t2.add({
-                left: '100px',
-                bottom: '180px',
-                duration: 0,
-            }).add({
-                left: '40px',
-                bottom: '170px',
-                duration: 4000,
-            }).add({
-                left: '0px',
-                bottom: '190px',
-                duration: 4000,
-            }).add({
-                left: '50px',
-                bottom: '170px',
-                duration: 4000,
-            }).add({
-                left: '100px',
-                bottom: '180px',
-                duration: 4000,
-            });
-        }
-    });
 </script>
-<div class="d-none">
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/b61649a8ff.jpg' %}">
-
-
-
-
-
-
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/5c355ee013.jpg' %}">
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/391d2c3e76.jpg' %}">
-
-
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/cd32768d39.jpg' %}">
-
-
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/1ac2863aa5.jpg' %}">
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/787a8c3dd9.jpg' %}">
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/9190015935.jpg' %}">
-
-
-
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/15c0bfa444.jpg' %}">
-
-    <img class="animated bounce" src="{% static 'album/web/img/album_template/k_july/df7ec44b91.jpg' %}">
-
-
-</div>
 
 <style>
 
