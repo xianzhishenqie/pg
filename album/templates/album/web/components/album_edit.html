@@ -1,11 +1,12 @@
 <style type="text/css">
-    #album ul, #album p, #album label{
+    ul, p, label{
         margin-bottom: auto;
     }
     #album {
         position: absolute;
         left: 0;
         top: 0;
+        z-index: 999;
         width: 100%;
         height: 100%;
         background-color: #ffffff;
@@ -69,9 +70,13 @@
 </v-touch>
 {% endverbatim %}
 
+{% include './template_select.html' %}
+{% include './music_select.html' %}
+
 <script type="text/javascript">
     $.extend(context, {
         pk: {{ pk }},
+        canHideEditor: false,
         albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
         albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
 
@@ -91,6 +96,7 @@
             aVue.album.music_data = music;
             http.patch(context.albumDetailApiUrl, {music: music.id}, function () {});
         },
+        hideEdit: function () {}
     });
 </script>
 <script type="text/javascript">
@@ -105,6 +111,7 @@
                     music_data: null,
                     template_data: null,
                 },
+                albumShowState: '',
 
                 pictureSeq: 0,
             },
@@ -141,13 +148,22 @@
                     });
                 },
                 show: function () {
+                    this.albumShowState = JSON.stringify(this.album);
                     docUtil.setTitle('编辑相册');
                     $(this.$el).animateCss('slideInRight').show();
                 },
                 hide: function () {
+                	if (!context.canHideEditor) {
+                	    return;
+                    }
+                    var vue = this;
                     docUtil.revertTitle();
-                    $(this.$el).animateCss('slideOutRight', function ($el) {
+                    $(vue.$el).animateCss('slideOutRight', function ($el) {
                         $el.hide();
+
+                        var albumHideState = JSON.stringify(vue.album);
+                        var isChanged = albumHideState != vue.albumShowState;
+                        context.hideEdit(isChanged);
                     });
                 },
                 enterSelectMusic: function () {
@@ -230,6 +246,3 @@
         });
     });
 </script>
-
-{% include './template_select.html' %}
-{% include './music_select.html' %}

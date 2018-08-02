@@ -18,26 +18,42 @@
 
 {% block local_css %}
     <style type="text/css">
-        .music {
-            position: absolute;
+        #vueMask {
+            left: 0;
+            right: 0;
+        }
+        #albumDisplay .music {
             right: 20px;
             top: 20px;
+            z-index: 201;
+        }
+        #albumDisplay .mask {
+            left: 0;
+            right: 0;
             z-index: 200;
+        }
+        #album{
+            display: none;
         }
     </style>
 {% endblock %}
 
 {% block container %}
 <div class="w-100 h-100" id="albumDisplay">
-    <div class="music">
-        <img class="music-icon"
-             src="{% static 'album/web/img/music.png' %}"
-             :class="{'animated infinite spin': music.active}"
-             @click="toggleMusic">
-        <audio :src="album.music_data.url || album.music_data.file" autoplay="autoplay" loop="loop" v-if="album.music_data.id"></audio>
+    <div class="position-absolute w-100 h-100" id="vueMask">
+        <div class="music position-absolute">
+            <img class="music-icon"
+                 src="{% static 'album/web/img/music.png' %}"
+                 :class="{'animated infinite spin': music.active}"
+                 @click="toggleMusic">
+            <audio :src="album.music_data.url || album.music_data.file" autoplay="autoplay" loop="loop" v-if="album.music_data.id"></audio>
+        </div>
+        <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     </div>
+
     {% include './album_templates/k_july.html' %}
 </div>
+    {% include './components/album_edit.html' %}
 {% endblock %}
 
 {% block bottom_js %}
@@ -48,12 +64,18 @@
 <script type="text/javascript">
     $.extend(context, {
         pk: {{ pk }},
+        canHideEditor: true,
         albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
+        hideEdit: function (isChanged) {
+            if (isChanged) {
+                window.location.reload();
+            }
+        }
     });
 </script>
 <script type="text/javascript">
-var aVue = new Vue({
-    el: '#albumDisplay .music',
+var adVue = new Vue({
+    el: '#vueMask',
     data: {
         music: {
             active: true,
@@ -92,6 +114,9 @@ var aVue = new Vue({
                 vue.album = res;
 
             });
+        },
+        editAlbum: function () {
+            aVue.show();
         },
     },
     mounted: function () {
