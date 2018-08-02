@@ -101,7 +101,7 @@ var aVue = new Vue({
                 {
                     label: '查看相册',
                     onClick: function () {
-                        window.location.href = context.album_display.replace('0', album.id) + window.location.search;
+                        window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
                     }
                 },
                 {
