@@ -8,6 +8,7 @@
         width: 100%;
         height: 100%;
         background-color: #ffffff;
+        animation-duration: 0.5s;
         display: none;
     }
     #musicSelect .weui-cells {
@@ -19,7 +20,7 @@
 </style>
 
 {% verbatim %}
-<div id="musicSelect" v-cloak>
+<v-touch id="musicSelect" v-on:panright="hide" v-cloak>
     <div class="weui-navbar" style="position: initial;">
         <div class="weui-navbar__item"
              style="padding: 5px 0;"
@@ -48,7 +49,7 @@
     </div>
     <div class="weui-cells mt-0">
         <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
-        <span class="weui-cell weui-cell_access" v-for="music, i in musics">
+        <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
             <div class="weui-cell__hd" @click="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></div>
             <div class="weui-cell__bd weui-cell_primary" @click="selectMusic(music)">
                 <p>{{ music.name }}</p>
@@ -58,7 +59,7 @@
                   @click="playMusic(i, music)"></span>
         </span>
     </div>
-</div>
+</v-touch>
 {% endverbatim %}
 
 <script type="text/javascript">
@@ -83,6 +84,8 @@
                 musicTag: null,
                 search: '',
                 music: null,
+
+                musicId: null,
             },
             methods: {
                 getMusicTags: function () {
@@ -162,6 +165,7 @@
                 },
                 selectMusic: function (music) {
                     this.hide();
+                    this.musicId = music.id;
                     context.selectMusic(music);
                 },
             },

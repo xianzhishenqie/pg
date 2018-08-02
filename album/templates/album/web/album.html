@@ -103,12 +103,18 @@
         albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
 
         selectTemplate: function (template) {
+            if (aVue.album.template_data && template.id == aVue.album.template_data.id) {
+                return;
+            }
             aVue.album.template_data = template;
             http.patch(context.albumDetailApiUrl, {template: template.id}, function () {
                 aVue.getAlbum();
             });
         },
         selectMusic: function (music) {
+            if (aVue.album.music_data && music.id == aVue.album.music_data.id) {
+                return;
+            }
             aVue.album.music_data = music;
             http.patch(context.albumDetailApiUrl, {music: music.id}, function () {});
         },
@@ -122,18 +128,8 @@ var aVue = new Vue({
             name: '',
             desc: '',
             picture_list: [],
-            music_data: {
-                id: '',
-                name: '',
-                file: '',
-                url: '',
-            },
-            template_data: {
-                id: '',
-                name: '',
-                cover: '',
-                cover_url: '',
-            },
+            music_data: null,
+            template_data: null,
         },
 
         pictureSeq: 0,
@@ -179,9 +175,11 @@ var aVue = new Vue({
             $(this.$el).css('left', '100%').hide();
         },
         enterSelectMusic: function () {
+            mVue.musicId = this.album.music_data ? this.album.music_data.id : null;
             mVue.show();
         },
         enterSelectTemplate: function () {
+            tVue.templateId = this.album.template_data ? this.album.template_data.id : null;
             tVue.show();
         },
     },
