@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load staticfiles %}
-{% load static_v %}
+{% load pg_common %}
 
 {% block title %}
     我的相册
@@ -37,19 +37,21 @@
 {% block container %}
     {% verbatim %}
     <div id="albumList" v-cloak>
+        <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span></p>
         <div class="album-list row mx-0">
             <v-touch class="album-item col-4 pr-0"
                      v-on:press="actionTemplate(album)"
-                     v-on:tap="editTemplate(album)"
+                     v-on:tap="showTemplate(album)"
                      :key="album.id"
                      v-for="album, i in albums">
-                <div class="border p-1">
+                <div class="border p-1 position-relative">
                     <div class="album-cover position-relative w-100">
                         <img class="rounded position-absolute w-100 h-100" :src="albumCover(album)" alt="">
                     </div>
                     <div class="album-name text-truncate">
                         {{ album.name || '我的相册' }}
                     </div>
+                    <div class="pg-mask"></div>
                 </div>
             </v-touch>
         </div>
@@ -92,16 +94,16 @@ var aVue = new Vue({
                 return '';
             }
         },
-        editTemplate: function (album) {
-            window.location.href = context.albumPageUrl.replace('0', album.id) + window.location.search;
+        showTemplate: function (album) {
+            window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
         },
         actionTemplate: function (album) {
             var vue = this;
             weui.actionSheet([
                 {
-                    label: '查看相册',
+                    label: '编辑相册',
                     onClick: function () {
-                        window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
+                        window.location.href = context.albumPageUrl.replace('0', album.id) + window.location.search;
                     }
                 },
                 {

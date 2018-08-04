@@ -1,0 +1,406 @@
+<style type="text/css">
+ .jubao-item{position:relative;float:left;width:360px;height:55px;top:0;font-size:20px;line-height:55px;margin-left:20px;border-bottom:1px solid #EBEBEB}.jubao-radio{position:absolute;right:10px;width:25px;height:25px;top:20px}.jubao-detail{position:relative;float:left;width:360px;margin-left:20px}.jubao-detail textarea{width:360px;height:80px;font-size:20px;resize:none;line-height:40px;border:none;background-color:#eee;border-radius:10px;padding-left:10px}
+			</style>
+<div id="jubao-content" style="position: absolute; width: 400px; height: 540px; top: 100px; left: 50px; display: none; z-index: 15000; background-color: rgb(255, 255, 255);">
+ 	<div style="width:400px;height:45px;background-color:rgb(250,97,65);text-align:center;font-size:22px;color:#fff;line-height:45px;">举报有奖，欢迎举报投诉</div>
+ 	<div id="jubao-1" class="jubao-item" onclick="showjubaoimg(0)">色情低俗<img id="jubaoimg-0" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-2" class="jubao-item" onclick="showjubaoimg(1)">谣言<img id="jubaoimg-1" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-3" class="jubao-item" onclick="showjubaoimg(2)">诱导分享<img id="jubaoimg-2" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-4" class="jubao-item" onclick="showjubaoimg(3)">政治敏感<img id="jubaoimg-3" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-5" class="jubao-item" onclick="showjubaoimg(4)">冒用或诽谤他人<img id="jubaoimg-4" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-6" class="jubao-item" onclick="showjubaoimg(5)">相册播放有问题<img id="jubaoimg-5" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div class="jubao-detail">
+ 		<textarea id="jubao-detail" placeholder="问题描述（必填，至少5个字）" oninput="showjubaoimg2()" maxlength="100"></textarea>
+ 	</div>
+ 	<div onclick="hidejubao()" id="jubao-cancel" style="position:absolute;width:120px;height:40px;background-color:#ACABAB;left:47px;top:480px;color:white;border-radius:5px;font-size:20px;line-height:40px;text-align:center;">取消</div>
+
+	<div onclick="submitjubao()" id="jubao-submit" style="position:absolute;width:120px;height:40px;background-color:rgb(250,97,65);left:229px;top:480px;color:white;border-radius:5px;font-size:20px;line-height:40px;text-align:center;display:block">提交</div>
+ </div>
+
+<script>
+var bjubao_type = true;
+
+function showjubao ()
+	{
+
+		$('#jubao-content').css("display","block");
+	}
+
+function hidejubao ()
+	{
+		$('#jubao-content').css("display","none");
+	}
+
+function showjubaoimg (num)
+	{
+		var img = $('#jubaoimg-'+num);
+
+		if(img.css("display") == 'none')
+		{
+
+			var imgarr = document.getElementsByClassName('jubao-radio');
+			for(var i=0;i<imgarr.length;i++)
+			{
+				imgarr[i].style.display = 'none';
+			}
+			img.css("display","block");return;
+			if($("#jubao-detail").value >=5)
+			{
+				$('#jubao-submit').css("display","block");
+			}
+			bjubao_type = true;
+		}
+		else
+		{
+			img.css("display","none");
+			$('#jubao-submit').css("display","none");
+			bjubao_type = false;
+
+		}
+	}
+function nottofeedback()
+	{
+		if(bjubao_type == false)
+			alert('您已经反馈过这个相册了')
+		else
+			alert('反馈必须不少于5个字');
+	}
+
+function showjubaoimg2()
+	{
+
+		if($("#jubao-detail").val().length >= 0 && bjubao_type)
+		{
+			$('#jubao-submit').css("display","block");
+		}
+		else
+		{
+			$('#jubao-submit').css("display","none");
+		}
+	}
+
+function submitjubao ()
+	{
+
+		var img_arr = document.getElementsByClassName('jubao-radio');
+		var jubao_type = 0;
+		while(img_arr[jubao_type].style.display == 'none')
+		{
+			jubao_type++;
+		}
+		alert('反馈提交成功！');
+		$('#jubao-content').css("display","none");
+
+		var jubaourl = 'http://pt.nihao888.top/index.php?g=Wap&m=Photo&a=jubao&token=hrttor1464854411&type='+jubao_type + '&href='+encodeURIComponent(window.location.href) + '&detail=' + encodeURIComponent($("#jubao-detail").val());
+		XMLHttp.sendReq("get", jubaourl, "", function(objXMLHttp){
+		});
+	}
+
+</script>
+	<script>
+
+var _czc = _czc || [];
+
+_czc.push(["_setAccount", "1260896103"]);
+</script>
+<div style='display:none'><img src="http://c.cnzz.com/wapstat.php?siteid=1260896103&r=http%3A%2F%2Fphoto.91youxing.com%2Findex.php%3Fg%3DWap%26m%3DPhoto%26a%3Dindex%26token%3Dnbozvy1523608960%26bookname%3DoWKJOuD1sni87WtOJ5x88pLW31hgwqlcms1531403344%26n%3D0.7157294395061655%26n%3D0.3739699990921499%26n%3D0.966114960538385%26n%3D0.9129511817164953%26n%3D0.18270520762776532%26n%3D0.43540858547614136%26n%3D0.8339625991086765%26n%3D0.09052049564677%26n%3D0.1753932216342673%26n%3D0.13414050461374272%26n%3D0.06314603081158432%26n%3D0.05195402954526385%26n%3D0.00017631275396601254%26n%3D0.9145652153075416%26n%3D0.21320159773754233%26n%3D0.54620418640248%26n%3D0.030189049967986437%26n%3D0.2147025647823224%26n%3D0.392976949077392%26n%3D0.5274030492375685%26n%3D0.9802892480373284%26n%3D0.13309086533297654%26n%3D0.03310408090531225%26n%3D0.3378795853195964%26n%3D0.32197413895072735%26n%3D0.5378840369849278%26n%3D0.36704649541902223%26n%3D0.5347552903195869%26n%3D0.051975056066794645%26n%3D0.48261853933726573%26n%3D0.09716769796262259%26n%3D0.16711832717514508%26n%3D0.47705206222771124%26n%3D0.04208759850852406%26n%3D0.2587394582264839%26n%3D0.9058242191939792%26n%3D0.4108818745600795%26n%3D0.568461843886148%26n%3D0.45776191533855015%26n%3D0.6831623368270068%26n%3D0.6442575355986513%26n%3D0.7085588819822084%26n%3D0.6007631316077238%26n%3D0.05821783511529399%26n%3D0.30534489155216904%26n%3D0.5419164540000594%26n%3D0.7510821921175297%26n%3D0.5235081760509135%26n%3D0.07830223872318176%26n%3D0.35476928939398467%26n%3D0.9984545655462989%26n%3D0.35965120225953484%26n%3D0.48875062527650126%26n%3D0.19917070188436647%26n%3D0.2571052190505807%26n%3D0.5015099471022317%26n%3D0.4527496029274942%26n%3D0.49515995056863615%26n%3D0.17750318232543028%26n%3D0.22465346164070632%26n%3D0.24832194357038717%26n%3D0.8105199757733315%26n%3D0.19535073912476864%26n%3D0.18744461009324964%26n%3D0.8091892799748468%26n%3D0.18745523875171788%26n%3D0.7260796491966621%26n%3D0.39006026777555136%26n%3D0.12113539145986518%26n%3D0.8223688185200746%26n%3D0.4626279975851255%26n%3D0.9161737847002924%26n%3D0.9729243197573296&rnd=2099062137" width="0" height="0"/></div>
+<!--举报-->
+    <!--模板动画-->
+    <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/templete/jiqimao/jiqimao.css">
+<style type="text/css">
+#jiqimao{position:absolute;z-index:-1;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_jiqimao/4064374b70.jpg) 0 0/100% 100%}
+#jiqimao_elements{position:absolute;z-index:1;}
+    </style>
+ <div id="jiqimao">
+    <div id="jiqimao_elements" style="width: 375px; height: 627px; left: 0px; top: 0px;overflow:hidden;"></div>
+
+    <div id="T041_Image_Canvas" style="width: 375px; height: 627px; left: 0px; top: 0px;">
+    </div>
+        </div>
+<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+        ZMTXIFENBAO_Animation_Mgr = new
+function () {
+    function t(t) {
+        var r = $(this).data(e),
+        c = o(this),
+        l = c > -1 ? a[c] : null,
+        d = l && l.param[n],
+        p = l && l.param[i];
+        if (d && d(this, t.animationName), t.animationName == r) p && p(this);
+        else {
+            var f = l.param.animates[++a[c].frame];
+            s(this, f)
+        }
+    }
+    var e = "animation-mgr-last-animation-name",
+    n = "progress",
+    i = "end",
+    a = [],
+    o = function (t) {
+        for (var e = 0; e < a.length; ++e) if (a[e].obj == t) return e;
+        return -1
+    };
+    this.animate = function (n, i) {
+        if (i && i.animates && !(i.animates.length < 1)) {
+            $(n).data(e, i.animates[i.animates.length - 1].name);
+            var r = o(n);
+            r > -1 ? (a[r].param = i, a[r].frame = 0) : a.push({
+                obj: n,
+                frame: 0,
+                param: i
+            }),
+            s(n, i.animates[0]),
+            $listen(n, "webkitAnimationEnd", t),
+            $listen(n, "animationEnd", t)
+        }
+    };
+    var s = function (t, e) {
+        e && t && window.setTimeout(function () {
+            var n = e.name,
+            i = e.duration + "s",
+            a = e.timing,
+            o = e.count;
+            jQuery(t).css("animation-name", n).css("-webkit-animation-name", n).css("animation-duration", i).css("-webkit-animation-duration", i).css("animation-delay", "").css("-webkit-animation-delay", "0").css("animation-timing-function", a).css("-webkit-animation-timing-function", a).css("animation-iteration-count", o).css("-webkit-animation-iteration-count", o)
+        },
+        1e3 * ("undefined" != e.delay ? e.delay : 0))
+    }
+};
+        ZMTXIFENBAO_Image = new
+function () {
+    this.loadImage = function (t) {
+        var e = new Image;
+        e.onload = function () {
+            t && t.success && t.success(this)
+        },
+        e.onerror = function () {
+            t && t.fail && t.fail(this)
+        },
+        e.src = t.url
+    },
+    this.clip = function (t, e, n, i, a) {
+        var o, s, r, c;
+        i / a > e / n ? (s = n, o = Math.floor(n * (i / a))) : (o = e, s = Math.floor(e * (a / i))),
+        r = (o - e) / 2,
+        c = (s - n) / 2,
+        $(t).width(o).height(s).css("left", 0 - r + "px").css("top", 0 - c + "px"),
+        t.style.clip = "rect(" + c + "px " + Math.floor(r + e) + "px " + Math.floor(c + n) + "px " + r + "px)"
+    }
+};
+        ZMTXIFENBAO = new
+function () {
+    var e = "",
+    t = 5,
+    i = !1;
+    this.init = function () {
+        n()
+    };
+    var n = function () {
+        $("#playendtips_replay").click(function () {
+            $("#wrapper_play_end").hide(),
+            ZMTXIFENBAO_DA.click("album.view.play.endtip.replay")
+        }),
+        $("#playendtips_stop").click(function () {
+            ZMTXIFENBAO_DA.click("album.view.play.endtip.stop"),
+            window.close(),
+            wx.closeWindow()
+        })
+    }
+    this.isPlayEndTipsShowed = function () {
+        return i
+    },
+    this.setBizId = function (t) {
+        e = t
+    },
+    this.getBizId = function () {
+        return e
+    },
+    this.imgMgr = new
+    function () {
+        var e = "JIQIMAO_ImageMgr",
+        t = [],
+        i = 0;
+        this.append = function (i) {
+            i && i.url && i.url.length > 0 && t.push({
+                url: i.url
+            })
+        },
+        this.getNextImg = function () {
+            return t.length < 1 ? null : t[i++ % t.length]
+        },
+        this.isAllImgDisplayed = function () {
+            return i > t.length
+        },
+        this.getImgCount = function () {
+            return t.length
+        },
+        this.getDisplayedImgCount = function () {
+            return i
+        },
+        this.getImg = function (e) {
+            return e < t.length ? t[e] : null
+        }
+    }
+};
+        function calcImgClip(t, e, n, i) {
+            var a, o, s, r;
+            return n / i > t / e ? (o = e, a = Math.floor(e * (n / i))) : (a = t, o = Math.floor(t * (i / n))),
+            s = (a - t) / 2,
+            r = (o - e) / 2,
+            {
+                objWidth: a,
+                objHeight: o,
+                clipLeft: s,
+                clipTop: r
+            }
+        }
+        function $listen(t, e, n) {
+            t.addEventListener ? t.addEventListener(e, n, !1) : t.attachEvent && t.attachEvent(e, n)
+        }
+        function $unlisten(t, e, n) {
+            t.removeEventListener ? t.removeEventListener(e, n) : t.detachEvent && t.detachEvent(e, n)
+        }
+        function leaf(t, i, e) {
+            var a = parseInt(20 * Math.random() + 5),
+            n = a,
+            s = document.createElement("div");
+            s.innerHTML = "<img>",
+            s.className = "leaf",
+            $(s).width(a).height(n).css("left", i + "px").css("top", e + "px").css("opacity", 0).css("z-index", 3);
+            var o = "http://wangjianxun1.test.upcdn.net/img/album_template/k_jiqimao/1c2fe2aafd.jpg";
+            ZMTXIFENBAO_Image.loadImage({
+                url: o,
+                success: function (t) {
+                    var i = $(s).find("img"),
+                    e = calcImgClip(a, n, t.width, t.height);
+                    i.width(e.objWidth).height(e.objHeight).css("left", -1 * e.clipLeft + "px").css("top", -1 * e.clipTop + "px"),
+                    i.attr("src", o)
+                },
+                fail: function (t) { }
+            }),
+            s.style.webkitAnimationName = "leaf_fade, leaf_drop",
+            $(s).find("img").css("-webkit-animation-name", "leaf_rotate").css("animation-name", "leaf_rotate");
+            var r = function (t, i) {
+                return t + Math.random() * (i - t)
+            },
+            d = r(8, 12) + "s",
+            l = r(0, 20) + "s";
+            s.style.webkitAnimationDuration = d + ", " + d,
+            s.style.webkitAnimationDelay = l + ", " + l;
+            var m = r(4, 8) + "s";
+            $(s).find("img")[0].style.webkitAnimationDuration = m,
+            $(t).append(s)
+        }
+        var params = { max_width: $(window).width(), max_height: $(window).height(), canvas_id: "T041_Image_Canvas" };
+        ZMTXIFENBAO_Album_Template(params);
+        function ZMTXIFENBAO_Album_Template(t) {
+            function i() {
+                o()
+            }
+            var e = t.max_width,
+            a = t.max_height,
+            n = !1,
+            s = $("#" + t.canvas_id);
+            this.div_root = document.createElement("div"),
+            this.div_root.id = "EVA_ALBUM_T041",
+            this.div_root.style.width = e + "px",
+            this.div_root.style.height = a + "px";
+            for (var i = 0; i < mvCfg.pics.length; i++) {
+                ZMTXIFENBAO.imgMgr.append({
+                    url: mvCfg.pics[i]
+                })
+            }
+            var o = function () {
+                return 1 == n ? void console.log("warning,re init") : (n = !0, $("#jiqimao").width(e).height(a).css("left", "0").css("top", "0"), $("#jiqimao_elements").width(e).height(a).css("left", "0").css("top", "0"), $(".T041_butterfly").width(50 * e / 375).height(50 * e / 375).css("right", .16 * e + "px").css("bottom", .134 * a + "px"), $(".T041_butterfly").find("img").width(50 * e / 375).height(50 * e / 375), void $("#T041_Image_Canvas").width(e).height(a).css("left", "0").css("top", "0"))
+            };
+            o();
+            this.div_root.style.display = "block";
+            var t = window.setInterval(function () {
+                if (n === !0) {
+                    window.clearInterval(t);
+                    for (var i, s, o = 0; 30 > o; o++) i = parseInt(Math.random() * e),
+                    s = parseInt(-50 * Math.random()),
+                    leaf($("#jiqimao_elements")[0], i, s);
+                    var d = $("#T041_Image_Canvas");
+                    T041Scene.init(d[0], e, a,
+                    function () {
+                        r()
+                    }),
+                    r()
+                }
+            },
+            20)
+            var r = function () {
+                T041Scene.show(ZMTXIFENBAO.imgMgr.getNextImg().url)
+            }
+        }
+        var T041Scene = new
+        function () {
+            var t, i, e, a, n = 208,
+            s = 320,
+            o = ["kf_T041_rotateInX", "kf_T041_rotateInY"],
+            r = ["kf_T041_rotateOutX", "kf_T041_rotateOutY"],
+            d = 0;
+            this.init = function (n, s, o, r) {
+                a = n,
+                t = s,
+                i = o,
+                e = r
+            },
+            this.show = function (l) {
+                ZMTXIFENBAO_Image.loadImage({
+                    url: l,
+                    success: function (m) {
+                        m.width / m.height > 1 && m.width / m.height < 2 ? (n = .85 * t, s = 320 * m.height / m.width) : m.width / m.height <= 1 && m.width / m.height > .5 ? (s = 320, n = 320 * m.width / m.height) : m.width / m.height >= 2 ? (n = 240, s = 320) : (n = 240, s = 320);
+                        var h = document.createElement("div");
+                        if (h.className = "T041_Image_Wrapper", h.innerHTML = '<div class="T041_Image_Frame"><img class="T041_Image"></div>', $(h).width(n + 12).height(s + 12).css({
+                            left: (t - n - 12) / 2 + "px",
+                            top: (i - s - 12) / 2 + "px",
+                            opacity: 0
+                        }), $(a).append(h), $(".T041_Image_Frame").width(n).height(s).css({
+                            left: "0px",
+                            top: "0px"
+                        }), $(".T041_Image").attr("src", l), ZMTXIFENBAO_Image.clip($(".T041_Image")[0], n, s, m.width, m.height), 5 > d) var c = o[0],
+                        g = r[0];
+                        else if (9 > d && d >= 5) var c = o[1],
+                        g = r[1];
+                        d++,
+                        d >= 9 && (d = 0),
+                        ZMTXIFENBAO_Animation_Mgr.animate($(".T041_Image_Wrapper")[0], {
+                            animates: [{
+                                name: c,
+                                duration: 2.5,
+                                delay: 0,
+                                times: "liner"
+                            }],
+                            progress: function (t, i) {
+                            },
+                            end: function (t) {
+                                window.setTimeout(function () {
+                                    ZMTXIFENBAO_Animation_Mgr.animate($(".T041_Image_Wrapper")[0], {
+                                        animates: [{
+                                            name: g,
+                                            duration: 2.5,
+                                            delay: 0,
+                                            times: "liner"
+                                        }],
+                                        progress: function (t, i) {
+                                        },
+                                        end: function (t) {
+                                            $(".T041_Image_Wrapper").remove(),
+                                            e()
+                                        }
+                                    })
+                                },
+                                500)
+                            }
+                        })
+                    },
+                    fail: function (t) {
+                        e()
+                    }
+                })
+            }
+        };
+    </script>

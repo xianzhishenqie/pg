@@ -22,14 +22,15 @@
 {% verbatim %}
 <v-touch id="musicSelect" v-on:panright="hide" v-cloak>
     <div class="weui-navbar" style="position: initial;">
-        <div class="weui-navbar__item"
+        <v-touch class="weui-navbar__item"
              style="padding: 5px 0;"
              :class="{'weui-bar__item_on text-danger border-bottom border-danger': musicTag.active}"
              :data-id="musicTag.id"
-             @click="tagMusicTag(musicTag)"
+             :key="musicTag.id"
+             v-on:tap="tagMusicTag(musicTag)"
              v-for="musicTag in musicTags">
             {{ musicTag.name }}
-        </div>
+        </v-touch>
     </div>
     <div class="weui-search-bar" id="searchBar">
         <div class="weui-search-bar__form">
@@ -38,25 +39,25 @@
                 <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
                        @input="getMusics"
                        v-model="search">
-                <a href="javascript:" class="weui-icon-clear" @click="clearSearch"></a>
+                <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap="clearSearch"></v-touch>
             </div>
             <label class="weui-search-bar__label">
                 <i class="weui-icon-search"></i>
                 <span>搜索</span>
             </label>
         </div>
-        <a href="javascript:" class="weui-search-bar__cancel-btn" @click="clearSearch">取消</a>
+        <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap="clearSearch">取消</v-touch>
     </div>
     <div class="weui-cells mt-0">
         <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
         <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
-            <div class="weui-cell__hd" @click="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></div>
-            <div class="weui-cell__bd weui-cell_primary" @click="selectMusic(music)">
+            <v-touch class="weui-cell__hd" v-on:tap="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
+            <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap="selectMusic(music)">
                 <p>{{ music.name }}</p>
-            </div>
-            <span class="fa fa-play-circle-o"
-                  :class="{'fa-pause-circle-o': music.active}"
-                  @click="playMusic(i, music)"></span>
+            </v-touch>
+            <v-touch tag="span" class="fa fa-play-circle-o"
+                     :class="{'fa-pause-circle-o': music.active}"
+                     v-on:tap="playMusic(i, music)"></v-touch>
         </span>
     </div>
 </v-touch>

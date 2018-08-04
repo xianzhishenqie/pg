@@ -1,0 +1,158 @@
+<style type="text/css">
+ .jubao-item{position:relative;float:left;width:360px;height:55px;top:0;font-size:20px;line-height:55px;margin-left:20px;border-bottom:1px solid #EBEBEB}.jubao-radio{position:absolute;right:10px;width:25px;height:25px;top:20px}.jubao-detail{position:relative;float:left;width:360px;margin-left:20px}.jubao-detail textarea{width:360px;height:80px;font-size:20px;resize:none;line-height:40px;border:none;background-color:#eee;border-radius:10px;padding-left:10px}
+			</style>
+<div id="jubao-content" style="position: absolute; width: 400px; height: 540px; top: 100px; left: 50px; display: none; z-index: 15000; background-color: rgb(255, 255, 255);">
+ 	<div style="width:400px;height:45px;background-color:rgb(250,97,65);text-align:center;font-size:22px;color:#fff;line-height:45px;">举报有奖，欢迎举报投诉</div>
+ 	<div id="jubao-1" class="jubao-item" onclick="showjubaoimg(0)">色情低俗<img id="jubaoimg-0" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-2" class="jubao-item" onclick="showjubaoimg(1)">谣言<img id="jubaoimg-1" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-3" class="jubao-item" onclick="showjubaoimg(2)">诱导分享<img id="jubaoimg-2" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-4" class="jubao-item" onclick="showjubaoimg(3)">政治敏感<img id="jubaoimg-3" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-5" class="jubao-item" onclick="showjubaoimg(4)">冒用或诽谤他人<img id="jubaoimg-4" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div id="jubao-6" class="jubao-item" onclick="showjubaoimg(5)">相册播放有问题<img id="jubaoimg-5" class="jubao-radio" style="display:none" src="http://wangjianxun1.test.upcdn.net/img/TB2m8JgcygSXeFjy0FcXXahAXXa_!!1016194477.png"></div>
+ 	<div class="jubao-detail">
+ 		<textarea id="jubao-detail" placeholder="问题描述（必填，至少5个字）" oninput="showjubaoimg2()" maxlength="100"></textarea>
+ 	</div>
+ 	<div onclick="hidejubao()" id="jubao-cancel" style="position:absolute;width:120px;height:40px;background-color:#ACABAB;left:47px;top:480px;color:white;border-radius:5px;font-size:20px;line-height:40px;text-align:center;">取消</div>
+
+	<div onclick="submitjubao()" id="jubao-submit" style="position:absolute;width:120px;height:40px;background-color:rgb(250,97,65);left:229px;top:480px;color:white;border-radius:5px;font-size:20px;line-height:40px;text-align:center;display:block">提交</div>
+ </div>
+
+<script>
+var bjubao_type = true;
+
+function showjubao ()
+	{
+
+		$('#jubao-content').css("display","block");
+	}
+
+function hidejubao ()
+	{
+		$('#jubao-content').css("display","none");
+	}
+
+function showjubaoimg (num)
+	{
+		var img = $('#jubaoimg-'+num);
+
+		if(img.css("display") == 'none')
+		{
+
+			var imgarr = document.getElementsByClassName('jubao-radio');
+			for(var i=0;i<imgarr.length;i++)
+			{
+				imgarr[i].style.display = 'none';
+			}
+			img.css("display","block");return;
+			if($("#jubao-detail").value >=5)
+			{
+				$('#jubao-submit').css("display","block");
+			}
+			bjubao_type = true;
+		}
+		else
+		{
+			img.css("display","none");
+			$('#jubao-submit').css("display","none");
+			bjubao_type = false;
+
+		}
+	}
+function nottofeedback()
+	{
+		if(bjubao_type == false)
+			alert('您已经反馈过这个相册了')
+		else
+			alert('反馈必须不少于5个字');
+	}
+
+function showjubaoimg2()
+	{
+
+		if($("#jubao-detail").val().length >= 0 && bjubao_type)
+		{
+			$('#jubao-submit').css("display","block");
+		}
+		else
+		{
+			$('#jubao-submit').css("display","none");
+		}
+	}
+
+function submitjubao ()
+	{
+
+		var img_arr = document.getElementsByClassName('jubao-radio');
+		var jubao_type = 0;
+		while(img_arr[jubao_type].style.display == 'none')
+		{
+			jubao_type++;
+		}
+		alert('反馈提交成功！');
+		$('#jubao-content').css("display","none");
+
+		var jubaourl = 'http://pt.nihao888.top/index.php?g=Wap&m=Photo&a=jubao&token=hrttor1464854411&type='+jubao_type + '&href='+encodeURIComponent(window.location.href) + '&detail=' + encodeURIComponent($("#jubao-detail").val());
+		XMLHttp.sendReq("get", jubaourl, "", function(objXMLHttp){
+		});
+	}
+
+</script>
+	<script>
+
+var _czc = _czc || [];
+
+_czc.push(["_setAccount", "1260896103"]);
+</script>
+<div style='display:none'><img src="http://c.cnzz.com/wapstat.php?siteid=1260896103&r=http%3A%2F%2Fphoto.91youxing.com%2Findex.php%3Fg%3DWap%26m%3DPhoto%26a%3Dindex%26token%3Dnbozvy1523608960%26bookname%3DoWKJOuD1sni87WtOJ5x88pLW31hgwqlcms1531403344%26n%3D0.7157294395061655%26n%3D0.3739699990921499%26n%3D0.966114960538385%26n%3D0.9129511817164953%26n%3D0.18270520762776532%26n%3D0.43540858547614136%26n%3D0.8339625991086765%26n%3D0.09052049564677%26n%3D0.1753932216342673%26n%3D0.13414050461374272%26n%3D0.06314603081158432%26n%3D0.05195402954526385%26n%3D0.00017631275396601254%26n%3D0.9145652153075416%26n%3D0.21320159773754233%26n%3D0.54620418640248%26n%3D0.030189049967986437%26n%3D0.2147025647823224%26n%3D0.392976949077392%26n%3D0.5274030492375685%26n%3D0.9802892480373284%26n%3D0.13309086533297654%26n%3D0.03310408090531225%26n%3D0.3378795853195964%26n%3D0.32197413895072735%26n%3D0.5378840369849278%26n%3D0.36704649541902223%26n%3D0.5347552903195869%26n%3D0.051975056066794645%26n%3D0.48261853933726573%26n%3D0.09716769796262259%26n%3D0.16711832717514508%26n%3D0.47705206222771124%26n%3D0.04208759850852406%26n%3D0.2587394582264839%26n%3D0.9058242191939792%26n%3D0.4108818745600795%26n%3D0.568461843886148%26n%3D0.45776191533855015%26n%3D0.6831623368270068%26n%3D0.6442575355986513%26n%3D0.7085588819822084%26n%3D0.6007631316077238%26n%3D0.05821783511529399%26n%3D0.30534489155216904%26n%3D0.5419164540000594%26n%3D0.7510821921175297%26n%3D0.5235081760509135%26n%3D0.07830223872318176%26n%3D0.35476928939398467%26n%3D0.9984545655462989%26n%3D0.35965120225953484%26n%3D0.48875062527650126%26n%3D0.19917070188436647%26n%3D0.2571052190505807%26n%3D0.5015099471022317%26n%3D0.4527496029274942%26n%3D0.49515995056863615%26n%3D0.17750318232543028%26n%3D0.22465346164070632%26n%3D0.24832194357038717%26n%3D0.8105199757733315%26n%3D0.19535073912476864%26n%3D0.18744461009324964%26n%3D0.8091892799748468%26n%3D0.18745523875171788%26n%3D0.7260796491966621%26n%3D0.39006026777555136%26n%3D0.12113539145986518%26n%3D0.8223688185200746%26n%3D0.4626279975851255%26n%3D0.9161737847002924%26n%3D0.9729243197573296%26n%3D0.9778590299202712%26n%3D0.4743928970716136%26n%3D0.16785814779532582%26n%3D0.3879411579911298%26n%3D0.9696327517588836%26n%3D0.8844541237109571%26n%3D0.3015405544495253%26n%3D0.9184487820823632%26n%3D0.15072696166776112&rnd=127919560" width="0" height="0"/></div>
+<!--举报-->
+    <!--模板动画-->
+    <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/eva_album.css?t=1e24316269946c0a03dfa0c6df2d92114" />
+    <section id="sec_content">
+<div id="div_player"></div>
+ <div id="wrapper_cover">
+    <div id="wrapper_player_cover_bkgnd">
+     <img />
+     <div id="wrapper_player_cover_title">
+      <span id="album_title"></span>
+     </div>
+    </div>
+    <div id="div_player_loadingText">
+     <span id="player_loadingText"></span>
+    </div>
+    <div id="wrapper_player_cover_logo">
+     <div id="player_icon"></div>
+    </div>
+   </div>
+   <div id="div_player_mask">
+    <a id="div_player_btn_more" href="follow_guide.html">
+     <div id="div_player_footer">
+      <div id="w_create_guide">
+       <div class="create_btn_bkgnd_outer"></div>
+       <div class="create_btn_bkgnd_inner"></div>
+       <div class="create_btn_text">
+        马上做炫拍
+       </div>
+      </div>
+     </div></a>
+   </div>
+     </section>
+<link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/weui.css" />
+  <script src="http://wangjianxun1.test.upcdn.net/js/zepto.min.js"></script>
+  <script src="http://wangjianxun1.test.upcdn.net/js/common.min.js"></script>
+  <script src="http://wangjianxun1.test.upcdn.net/js/eva_album.min.js"></script>
+  <script src="http://wangjianxun1.test.upcdn.net/js/effect.min.js"></script>
+  <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/effect.min.css" />
+<script type="text/javascript">
+var e = document.body.scrollWidth,
+    t = document.body.scrollHeight;
+    APP_URL = "http://wangjianxun1.test.upcdn.net/";
+     g_album_info = {"status":1,"title": e_desc,"bkgnd":"","create_time":"1451654199","music":"","user_name":"","uid":null,"id":"16347"};
+     var template ={"name":e_scene,"script":"http://wangjianxun1.test.upcdn.net/album_template/"+e_scene+"/"+e_scene+".js","object":"EVA_ALBUM_"+e_scene,"version":"1.0","music":"http:\/\/ws.stream.qqmusic.qq.com\/78540.m4a?fromtag=46","id":"12"}
+g_albumPlayer = new EVA_Player("div_player", e, t);
+for(var i=0;i<slider_images_url.length;i++){
+    g_albumPlayer.addMedia(
+      {"url":slider_images_url[i],"type":"image","location":"url"})
+}
+g_albumPlayer.applyTemplate(template),
+  g_albumPlayer.play();
+</script>

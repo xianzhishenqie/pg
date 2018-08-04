@@ -1,0 +1,1817 @@
+   <style type='text/css'>
+        * {
+            padding: 0px;
+            margin: 0px;
+            -webkit-box-sizing: border-box
+        }
+
+        body {
+            background-color: white
+        }
+
+        #container {
+            position: absolute;
+            width: 500px;
+            height: 815px;
+            overflow: hidden;
+        }
+
+        img{ 
+            max-width: 100%;
+            height: auto;
+        } 
+
+        .container_bg{
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/925d7c598c.jpg') no-repeat;
+        }
+        
+        #container > div{
+            position: absolute;
+        }
+
+        .box_content{
+            top:200px;
+            width: 100%;
+        }
+        
+        .box_content > div{
+            position: absolute;
+        }
+
+        .box_page_flip{
+            width: 100%;
+            /*opacity: 0;*/
+        }
+
+        @-webkit-keyframes pageFlipBoxIn{
+            0%{
+                opacity: 0;
+            }
+            100{
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes pageFlipBoxOut{
+            0%{
+                -webkit-transform: translate(0,0);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: translate(0,700px);
+                opacity: 1;
+            }
+        }
+
+        .box_page_flip_content{
+            margin: 0 auto;
+            width: 445px;
+            height: 327px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/58ca5c98dd.jpg');
+            -webkit-transform-style:preserve-3d;
+            -webkit-perspective: 1200px;
+        }
+
+        .box_page_flip_content > div{
+            position: absolute;
+        }
+        
+        .page_flip{
+            right: 39px;
+            width: 193px;
+            height: 291px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/a742d9f31f.jpg') no-repeat;
+            -webkit-transform-origin:left;
+            z-index: 10;
+        }
+
+        @-webkit-keyframes pageFlip{
+            0%{
+                -webkit-transform:rotateY(0deg) skew(0deg,0deg);
+            }
+            33%{
+                -webkit-transform:rotateY(-25deg) skew(0deg,-5deg);
+            }
+            66%{
+                -webkit-transform:rotateY(0deg) skew(0deg,0deg);
+            }
+            99%{
+                -webkit-transform:rotateY(-90deg) skew(0deg,-15deg);
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+                -webkit-transform:rotateY(-90deg) skew(0deg,-15deg);
+            }
+        }
+
+        .photo_title{
+            position: absolute;
+            width: 120px;
+            left: 35px;
+            top: 40%;
+            text-align: center;
+            color: #895C54;
+            font-size: 20px;
+            line-height: 30px;
+            /*opacity: 0;*/
+        }
+
+        @-webkit-keyframes photoTitle{
+            0%{
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+
+        .page_flip_left{
+            top: 7px;
+            left: 23px;
+            width: 193px;
+            height: 291px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/a742d9f31f.jpg') no-repeat;
+            /*-webkit-animation: pageFlipLeft 1s linear 3s both;*/
+            -webkit-transform-origin:right;
+
+
+            opacity:0; 
+        }
+
+        @-webkit-keyframes pageFlipLeft{
+            0%{
+                -webkit-transform:rotateY(90deg) skew(0deg,15deg);
+                opacity:0;
+            }
+            1%{
+                
+                opacity:1;
+            }
+            100%{
+                -webkit-transform:rotateY(0deg) skew(-2deg,1deg);
+                opacity:1;
+            }
+        }
+
+        .flip_left_bg{
+            position: absolute;
+            left: 16px;
+            top: 30px;
+            width: 156px;
+            height: 227px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/b304c2eeb7.jpg') no-repeat;
+            z-index: 1;
+        }
+        
+        .flip_left_content{
+            position: absolute;
+            left: 24px;
+            top: 36px;
+            width: 145px;
+            height: 215px;
+            -webkit-transform: skew(-1deg,-1deg);
+            overflow: hidden;
+        }
+
+        .flip_left_describe{
+            position: absolute;
+            top: -55px;
+            width: 190px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-shadow: 1px 1px 1px #000;
+        }
+        .flip_right_describe{
+            position: absolute;
+            bottom: -65px;
+            width: 200px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-shadow: 1px 1px 1px #000;
+            opacity: 0;
+        }
+
+        @-webkit-keyframes flipRightDescribe{
+            0%{
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 1;
+            }
+
+        }
+
+        .clamp_left_describe{
+            position: absolute;
+            top: -45px;
+            left: 33px;
+            width: 210px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .clamp_right_describe{
+            position: absolute;
+            bottom: -75px;
+            width: 210px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .kont_left_describe{
+            position: absolute;
+            top: -45px;
+            left: 55px;
+            width: 210px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-shadow: 1px 1px 1px #000;
+        }
+
+        .kont_right_describe{
+            position: absolute;
+            top: 26px;
+            right: 33px;
+            width: 210px;
+            text-align: center;
+            color: #fff;
+            font-size: 18px;
+            text-shadow: 1px 1px 1px #000;
+            z-index: 2;
+        }
+
+        .page_flip_right{
+            right: 39px;
+            width: 193px;
+            height: 291px;
+            z-index: 3;
+        }
+
+        .flip_right_bg{
+            position: absolute;
+            left: 15px;
+            top: 30px;
+            width: 158px;
+            height: 235px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/539807f860.jpg') no-repeat;
+            z-index: 1;
+        }
+
+        .flip_right_content{
+            position: absolute;
+            left: 22px;
+            top: 39px;
+            width: 144px;
+            height: 217px;
+            -webkit-transform: skew(1deg,-1deg);
+            overflow: hidden;
+        }
+
+        .story{
+            position: relative;
+            left: 16px;
+            top: -34px;
+            width: 232px;
+            height: 160px;
+        }
+
+        .story > div{
+            position: absolute;
+        }
+
+        .story_rose{
+            bottom:35px;
+            width: 100%;
+            height: 124px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/58b5c13e51.jpg') no-repeat;
+            z-index: 1;
+            -webkit-transform: skew(0deg,-3deg);
+        }
+
+        .story_rose_dash{
+            left: 4px;
+            bottom:20px;
+            width: 100%;
+            height: 127px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/fc49276ae5.jpg') no-repeat;
+            -webkit-transform: skew(0deg,-8deg);
+        }
+
+        .story_msg{
+            top: 30px;
+            right: 8px;
+            width: 132px;
+            height: 50px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/99ef0b39de.jpg') no-repeat;
+            -webkit-transform: skew(0deg,-5deg);
+        }
+
+        .box_clamp{
+            width: 100%;
+            opacity: 0;
+            /*-webkit-animation: clampBox 10s linear both;*/
+        }
+        @-webkit-keyframes clampBoxIn{
+            0%{
+                -webkit-transform: skew(10deg,-10deg) translate(-100px,-300px);
+                opacity: 0;
+            }
+            100%{
+                -webkit-transform: skew(-6deg,5deg) translate(0,0);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes clampBoxOut{
+            0%{
+                -webkit-transform: skew(-6deg,5deg)translate(0,0);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: skew(-6deg,5deg) translate(0,0) scale(1.2,1.2);
+                opacity: 0;
+            }
+        }
+
+        .box_clamp_content{
+            position: relative;
+            margin: 0 auto;
+            width: 475px;
+            height: 383px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/f3dcdb0b54.jpg') no-repeat;
+        }
+
+        .clamp_left{
+            position: absolute;
+            top: 26px;
+            left: 56px;
+            width: 151px;
+            height: 235px;
+            overflow: hidden;
+            -webkit-transform: skew(13deg,-13deg);
+            border-radius: 15px;
+        }
+
+        .clamp_right{
+            position: absolute;
+            width: 205px;
+            height: 304px;
+            top: 40px;
+            right: 29px;
+           
+        }
+        
+        .clamp_right_bg{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/8bb505e104.jpg') no-repeat;
+            z-index: 1;
+        }
+        .clamp_right_img_content{
+            position: absolute;
+            left: 23px;
+            width: 162px;
+            height: 263px;
+            top: 17px;
+            overflow: hidden;
+            -webkit-transform: skew(1deg,-1deg);
+        }
+
+        .clamp_right_img{
+
+        }
+
+        .box_knot{
+            width: 100%;
+            opacity: 0;
+            /*-webkit-animation: boxKnot 4s linear both;*/
+        }
+        @-webkit-keyframes boxKnotIn{
+            0%{
+                -webkit-transform: skew(-4deg,4deg) translate(50px,0);
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+                -webkit-transform: skew(12deg,-12deg)translate(-46px,0);
+            }
+
+        }
+        @-webkit-keyframes boxKnotOut{
+            0%{
+                opacity: 1;
+                -webkit-transform: skew(12deg,-12deg)translate(-46px,0);
+            }
+            100%{
+                opacity: 0;
+                -webkit-transform: skew(0deg,0deg)translate(0px,0) scale(1.2,1.2);
+            }
+        }
+
+        .box_knot >div{
+            position: absolute;
+        }
+        
+        .box_knot_bg{
+            width: 500px;
+            height: 402px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/d128d8091f.jpg') no-repeat;
+            background-size: 500px 402px;
+        }
+
+        .box_knot_content{
+            width: 500px;
+            height: 402px;
+        }
+
+        .kont_left{
+            position: absolute;
+            top: 48px;
+            left: 114px;
+            width: 146px;
+            height: 215px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .kont_right{
+            position: absolute;
+            top: 78px;
+            right: 80px;
+            width: 147px;
+            height: 215px;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .theme_box{
+            top: 90px;
+            width: 100%;
+            height: 60px;
+        }
+
+        @-webkit-keyframes themeBoxIn{
+            0%{
+                -webkit-transform: translate(0,0);
+                opacity: 0;
+            }
+            100%{
+                -webkit-transform: translate(0,0);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes themeBoxOut{
+            0%{
+                -webkit-transform: translate(0,550px);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: translate(0,550px);
+                opacity: 0;
+            }
+        }
+        
+        @-webkit-keyframes themeBoxDown{
+            0%{
+                -webkit-transform: translate(0,0);
+            }
+            100%{
+                -webkit-transform: translate(0,550px);
+            }
+        }
+
+        .theme_box > div{
+            position: absolute;
+            width: 100%;
+            height:100%;
+        }
+
+        .yesterday{
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/69bbb12133.jpg') no-repeat center;
+        }
+
+        .no_forget{
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/e395a8d45d.jpg') no-repeat center;
+            opacity: 0;
+        }
+
+        .lifetime{
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/32f15e30d1.jpg') no-repeat center;
+            opacity: 0;
+        }
+
+        @-webkit-keyframes themeContentIn{
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes themeContentOut {
+            0%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+
+        @-webkit-keyframes lifetime {
+            0%{
+                opacity: 0;
+            }
+
+            20%{
+                opacity: 1;
+            }
+            80%{
+                opacity: 1;
+            }
+            90%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+
+        .rose_petals{
+            z-index: 1;
+        }
+
+        @-webkit-keyframes rosePetalsIn {
+            0%{
+                -webkit-transform: translate(0,0);
+                opacity: 0;
+                
+            }
+            100%{
+                -webkit-transform: translate(0,0);
+                opacity: 1;
+            }
+        }
+        
+        @-webkit-keyframes rosePetalsDown {
+            0%{
+                -webkit-transform: translate(0,0);
+                
+            }
+            100%{
+                -webkit-transform: translate(0,550px);
+                
+            }
+        }
+
+        .rose_petals > div{
+            position: absolute;
+        }
+
+        .small_rose_box{
+            top: 402px;
+            left: 165px;
+            z-index: 10;
+        }
+
+        @-webkit-keyframes smallRoseBox{
+            0%{
+                -webkit-transform: translate(0,0);
+
+            }
+            49%{
+                -webkit-transform: translate(-200px,0);
+                opacity: 1;
+
+            }
+            50%{
+                opacity: 0;
+                -webkit-transform: translate(-200px,0);
+            }
+            51%{
+                -webkit-transform: translate(400px,-350px);
+                opacity: 0;
+            }
+            52%{
+                -webkit-transform: translate(400px,-350px);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: translate(145px,-265px);
+
+            }
+        }
+        @-webkit-keyframes smallRoseBox1{
+            0%{
+                -webkit-transform: translate(145px,-265px);
+
+            }
+            100%{
+                -webkit-transform: translate(-300px,-265px);
+
+            }
+        }
+
+
+        .small_rose{
+            width: 30px;
+            height: 28px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/a4592636a6.jpg') no-repeat;
+            background-size: 30px 28px;
+            -webkit-transform-origin:left;
+        }
+
+        @-webkit-keyframes smallRose{
+            0%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            10%{
+                -webkit-transform: rotateY(30deg);
+
+            }
+            20%{
+                -webkit-transform: rotateY(0deg);
+            }
+            30%{
+                -webkit-transform: rotateY(30deg);
+            }
+            40%{
+                -webkit-transform: rotateY(0deg);
+            }
+            50%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+            100%{
+                -webkit-transform: rotateZ(0deg);
+            }   
+        }
+        @-webkit-keyframes smallRose1{
+            0%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            60%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            80%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+            100%{
+                -webkit-transform: rotateZ(-60deg);
+            }   
+        }
+
+        .small_rose_shadow_box{
+            top: 413px;
+            left: 170px;
+        }
+        
+        @-webkit-keyframes smallRoseShadowBox{
+            0%{
+                -webkit-transform: translate(0,0);
+
+            }
+            49%{
+                -webkit-transform: translate(-200px,40px);
+                opacity: 1;
+
+            }
+            50%{
+                -webkit-transform: translate(-200px,40px);
+                opacity: 0;
+            }
+            51%{
+                -webkit-transform: translate(400px,-300px);
+                opacity: 0;
+            }
+            52%{
+                -webkit-transform: translate(400px,-300px);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: translate(145px,-265px);
+
+            }
+        }
+        @-webkit-keyframes smallRoseShadowBox1{
+            0%{
+                -webkit-transform: translate(145px,-265px);
+
+            }
+            100%{
+                -webkit-transform: translate(-300px,-225px);
+
+            }
+        }
+
+        .small_rose_shadow{
+            width: 30px;
+            height: 22px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/ac8e775616.jpg') no-repeat;
+            background-size: 30px 22px;
+            -webkit-transform-origin:left;
+        }
+
+        @-webkit-keyframes smallRoseShadow{
+            0%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            10%{
+                -webkit-transform: rotateY(30deg);
+
+            }
+            20%{
+                -webkit-transform: rotateY(0deg);
+            }
+            30%{
+                -webkit-transform: rotateY(30deg);
+
+            }
+            40%{
+                -webkit-transform: rotateY(0deg);
+            }
+            50%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+            100%{
+                -webkit-transform: rotateZ(0deg);
+            }
+        }
+        @-webkit-keyframes smallRoseShadow1{
+            0%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            60%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            80%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+            100%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+        }
+
+        .big_rose_box{
+            top: 380px;
+            left: 180px;
+            z-index: 8;
+        }
+
+        @-webkit-keyframes bigRoseBox{
+            0%{
+                -webkit-transform: translate(0,0);
+
+            }
+            49%{
+                -webkit-transform: translate(-200px,-60px);
+                opacity: 1;
+
+            }
+            50%{
+                -webkit-transform: translate(-200px,-60px);
+                opacity: 0;
+            }
+            51%{
+                -webkit-transform: translate(400px,-250px);
+                opacity: 0;
+            }
+            52%{
+                -webkit-transform: translate(400px,-250px);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: translate(150px,-255px);
+
+            }
+        }
+        @-webkit-keyframes bigRoseBox1{
+            
+            0%{
+                -webkit-transform: translate(150px,-255px);
+            }
+            100%{
+                -webkit-transform: translate(-300px,-255px);
+
+            }
+        }
+
+        .big_rose{
+            width: 39px;
+            height: 37px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/a4592636a6.jpg') no-repeat;
+            -webkit-transform-origin:left;
+        }
+
+        @-webkit-keyframes bigRose{
+            0%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            10%{
+                -webkit-transform: rotateY(30deg);
+
+            }
+            20%{
+                -webkit-transform: rotateY(0deg);
+            }
+            30%{
+                -webkit-transform: rotateY(30deg);
+            }
+            40%{
+                -webkit-transform: rotateY(0deg);
+            }
+            50%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+            60%{
+                -webkit-transform: rotateY(-90deg);
+            }
+
+            80%{
+                -webkit-transform: rotateY(90deg);
+            }
+
+            90%{
+                -webkit-transform: rotateY(0deg);
+            }
+
+            100%{
+                -webkit-transform: rotateY(0deg);
+            }
+        }
+        @-webkit-keyframes bigRose1{
+            0%{
+                -webkit-transform: rotateY(0deg);
+            }
+            40%{
+                -webkit-transform: rotateY(0deg);
+            }
+            80%{
+                -webkit-transform: rotateY(180deg);
+            }
+
+            90%{
+                -webkit-transform: rotateY(0deg);
+            }
+
+            100%{
+                -webkit-transform: rotateY(0deg);
+            }
+        }
+
+        .big_rose_shadow_box{
+            top: 390px;
+            left: 183px;
+        }
+
+        @-webkit-keyframes bigRoseShadowBox{
+            0%{
+                -webkit-transform: translate(0,0);
+
+            }
+            49%{
+                -webkit-transform: translate(-200px,10px);
+                opacity: 1;
+
+            }
+            50%{
+                -webkit-transform: translate(-200px,10px);
+                opacity: 0;
+            }
+            51%{
+                -webkit-transform: translate(400px,-200px);
+                opacity: 0;
+            }
+            52%{
+                -webkit-transform: translate(400px,-200px);
+                opacity: 1;
+            }
+            100%{
+                -webkit-transform: translate(150px,-255px);
+
+            }
+        }
+        @-webkit-keyframes bigRoseShadowBox1{
+            
+            0%{
+                -webkit-transform: translate(150px,-255px);
+            }
+            100%{
+                -webkit-transform: translate(-300px,-225px);
+
+            }
+        }
+
+
+        .big_rose_shadow{
+            width: 43px;
+            height: 32px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/ac8e775616.jpg') no-repeat;
+            -webkit-transform-origin:left;
+        }
+
+        @-webkit-keyframes bigRoseShadow{
+            0%{
+                -webkit-transform: rotateY(0deg);
+
+            }
+            10%{
+                -webkit-transform: rotateY(30deg);
+
+            }
+            20%{
+                -webkit-transform: rotateY(0deg);
+            }
+            30%{
+                -webkit-transform: rotateY(30deg);
+            }
+            40%{
+                -webkit-transform: rotateY(0deg);
+            }
+            50%{
+                -webkit-transform: rotateZ(-60deg);
+            }
+            80%{
+                -webkit-transform: rotateY(90deg);
+            }
+
+            90%{
+                -webkit-transform: rotateY(0deg);
+            }
+
+            100%{
+                -webkit-transform: rotateY(0deg);
+            }
+        }
+        @-webkit-keyframes bigRoseShadow1{
+            0%{
+                -webkit-transform: rotateY(0deg);
+            }
+            40%{
+                -webkit-transform: rotateY(0deg);
+            }
+
+            80%{
+                -webkit-transform: rotateY(180deg);
+            }
+
+            90%{
+                -webkit-transform: rotateY(0deg);
+            }
+
+            100%{
+                -webkit-transform: rotateY(0deg);
+            }
+        }
+
+        .myosotis_box{
+            top: 470px;
+            left: 50px;
+            z-index: 1;
+            opacity: 0;
+        }
+        
+        @-webkit-keyframes myosotisIn{
+            0%{
+                -webkit-transform: scale(2.6,2.6);
+                opacity: 0;
+            }
+            50%{
+                -webkit-transform: scale(1,1) rotateY(0deg);
+                opacity: 1;
+            }
+            80%{
+                -webkit-transform:rotateY(-30deg);
+            }
+            100%{
+                -webkit-transform:rotateY(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes myosotisOut{
+            0%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+        
+        .myosotis_box > div{
+            position: absolute;
+        }
+        .myosotis{
+            width: 132px;
+            height: 122px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/ac8e775616.jpg') no-repeat;
+            z-index: 2;
+            -webkit-transform: skew(4deg,-4deg);
+        }
+
+        .myosotis_shadow{
+            left: 12px;
+            width: 137px;
+            height: 111px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/154662772c.jpg') no-repeat;
+            -webkit-transform: skew(4deg,-4deg);
+        }
+
+        .butterfly_box{
+            z-index: 1;
+            opacity: 0;
+        }
+
+        @-webkit-keyframes butterflyForgetBoxIn{
+            0%{
+                opacity: 1;
+                -webkit-transform:  translate(500px,300px);
+            }
+            100%{
+                -webkit-transform: translate(150px,150px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes butterflyForgetBoxOut{
+            0%{
+                -webkit-transform: translate(150px,150px);
+                opacity: 1;
+            }
+            100%{
+                opacity: 1;
+                -webkit-transform:  translate(-200px,100px);
+            }
+        }
+
+        .butterfly_box_content{
+        }
+
+        @-webkit-keyframes butterflyForgetIn{
+            0%{
+                -webkit-transform: rotate(-30deg);
+            }
+            30%{
+                -webkit-transform: rotate(-60deg);
+            }
+            90%{
+                -webkit-transform: rotate(-60deg);
+            }
+            100%{
+                -webkit-transform: rotate(-60deg);
+            }
+        }
+        @-webkit-keyframes butterflyForgetOut{
+            0%{
+                -webkit-transform: rotate(-60deg);
+            }
+            100%{
+                -webkit-transform: rotate(-60deg);
+            }
+        }
+
+        @-webkit-keyframes butterflyLifeBox{
+            0%{
+                -webkit-transform:  translate(-100px,700px);
+                opacity: 1;
+            }
+            40%{
+                -webkit-transform:  translate(350px,450px);
+            }
+            50%{
+                -webkit-transform:  translate(400px,380px);
+            }
+            60%{
+                -webkit-transform:  translate(350px,330px);
+            }
+            100%{
+                -webkit-transform:  translate(-100px,50px);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes butterflyLife{
+            0%{
+                -webkit-transform: rotate(75deg);
+            }
+            50%{
+                -webkit-transform: rotate(0deg);
+            }
+            100%{
+                -webkit-transform: rotate(-75deg);
+            }
+        }
+
+        .butterfly_box_content > div{
+            position: absolute;
+        }
+
+        .butterfly{
+            width: 90px;
+            height: 80px;
+            z-index: 2;
+        }
+
+        .butterfly > div{
+            position: absolute;
+
+        }
+
+        .butterfly_left_box{
+            left: 2px;
+            -webkit-transform: rotateY(180deg);
+        }
+
+        .butterfly_left{
+            width: 45px;
+            height: 70px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/58dbb8a225.jpg') no-repeat;
+            background-size: 45px 70px;
+            -webkit-animation: butterfly 0.15s linear infinite alternate;
+            -webkit-transform-origin:left;
+        }
+
+        .butterfly_right{
+            right: 0;
+            width: 45px;
+            height: 70px;
+            z-index: 2;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/58dbb8a225.jpg') no-repeat;
+            background-size: 45px 70px;
+            -webkit-animation: butterfly 0.15s linear infinite alternate;
+            -webkit-transform-origin:left;
+        }
+
+        @-webkit-keyframes butterfly{
+            0%{
+                -webkit-transform: rotateY(0deg);
+            }
+            100%{
+                -webkit-transform: rotateY(60deg);
+            }
+        }
+
+        .butterfly_shadow{
+            width: 90px;
+            height: 80px;
+        }
+
+        .butterfly_shadow > div{
+            position: absolute;
+        }
+
+        .butterfly_shadow_left_box{
+            left: 2px;
+            -webkit-transform: rotateY(180deg);
+        }
+
+        .butterfly_shadow_left{
+            position: absolute;
+            right: 7px;
+            width: 45px;
+            height: 70px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/4cabc01dde.jpg') no-repeat;
+            background-size: 45px 70px;
+            -webkit-animation: butterflyLeftShadow 0.15s linear infinite alternate;
+            -webkit-transform-origin:left;
+
+        }
+
+        .butterfly_shadow_right{
+            position: absolute;
+            right: -7px;
+            width: 45px;
+            height: 70px;
+            background: url('http://wangjianxun1.test.upcdn.net/img/album_template/k_album/4cabc01dde.jpg') no-repeat;
+            background-size: 45px 70px;
+            -webkit-animation: butterflyRightShadow 0.15s linear infinite alternate;
+            -webkit-transform-origin:left;
+        }
+
+        @-webkit-keyframes butterflyLeftShadow{
+            0%{
+                -webkit-transform: rotateY(0deg) skew(0deg,0deg);
+            }
+            100%{
+                -webkit-transform: rotateY(60deg) skew(0deg,0deg);
+            }
+        }
+
+        @-webkit-keyframes butterflyRightShadow{
+            0%{
+                -webkit-transform: rotateY(0deg) skew(-13deg,13deg);
+            }
+            100%{
+                -webkit-transform: rotateY(60deg) skew(-13deg,13deg);
+            }
+        }
+
+         @-webkit-keyframes describeIn{
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+
+
+    
+    </style>
+    <body>
+        <div class='container_bg' id='container'>
+            <div id='themeBox' class='theme_box'>
+                <div id='yesterday' class='yesterday'></div>
+                <div id='noForget' class='no_forget'></div>
+                <div ID='lifetime' class='lifetime'></div>
+            </div>
+            <div id='rosePetals' class='rose_petals'>
+                <div id='smallRoseBox' class='small_rose_box'>
+                    <div id='smallRose' class='small_rose'></div>
+                </div>
+                <div id='smallRoseShadowBox' class='small_rose_shadow_box'>
+                    <div id='smallRoseShadow' class='small_rose_shadow'></div>
+                </div>
+                <div id='bigRoseBox' class='big_rose_box'>
+                    <div id='bigRose' class='big_rose'></div>
+                </div>
+                <div id='bigRoseShadowBox' class='big_rose_shadow_box'>
+                    <div id='bigRoseShadow' class='big_rose_shadow'></div>
+                </div>
+            </div>
+            <div id='myosotis' class='myosotis_box'>
+                <div class='myosotis'></div>
+                <div class='myosotis_shadow'></div>
+            </div>
+            <div id='butterflyBox' class='butterfly_box'>
+                <div id='butterfly' class='butterfly_box_content'>
+                    <div class='butterfly'>
+                        <div class='butterfly_left_box'>
+                            <div class='butterfly_left'>
+                            </div>
+                        </div>
+                        <div class='butterfly_right'></div>
+                    </div>
+                    <div class='butterfly_shadow'>
+                        <div class='butterfly_shadow_left_box'>
+                            <div class='butterfly_shadow_left'>
+                            </div>
+                        </div>
+                        <div class='butterfly_shadow_right'></div>
+                    </div>
+                </div>
+            </div>
+            <div id='knotButterflyBox' class='butterfly_box'>
+                <div id='kontButterfly' class='butterfly_box_content'>
+                    <div class='butterfly'>
+                        <div class='butterfly_left_box'>
+                            <div class='butterfly_left'>
+                            </div>
+                        </div>
+                        <div class='butterfly_right'></div>
+                    </div>
+                    <div class='butterfly_shadow'>
+                        <div class='butterfly_shadow_left_box'>
+                            <div class='butterfly_shadow_left'>
+                            </div>
+                        </div>
+                        <div class='butterfly_shadow_right'></div>
+                    </div>
+                </div>
+            </div>
+            <div class='box_content'>
+                <div id='pageFlipBox' class='box_page_flip'>
+                    <div class='box_page_flip_content'>
+                        <div id='pageFlip' class='page_flip'>
+                            <div id='photoTitle' class='photo_title'></div>
+                        </div>
+                        <div id='pageFlipLeft' class='page_flip_left'>
+                            <div class='flip_left_bg'>
+                            </div>
+                            <div id='flipLeftImgBox' class='flip_left_content'>
+                                <div id='flipLeftImg'></div>
+                            </div>
+                            <div id='flipLeftDescribe' class='flip_left_describe'></div>
+                        </div>
+                        <div class='page_flip_right'>
+                            <div class='flip_right_bg'></div>
+                            <div id='flipRightImgBox' class='flip_right_content'>
+                                <div id='flipRightImg' class='flip_right_img'></div>
+                            </div>
+                            <div id='flipRightDescribe' class='flip_right_describe'></div>
+                        </div>
+                    </div>
+                    <div class='story'>
+                        <div class='story_rose'></div>
+                        <div class='story_rose_dash'></div>
+                        <div class='story_msg'></div>
+                    </div>
+                </div>
+                
+                <div id='clampBox' class='box_clamp'>
+                    <div id='clampLeftImgBox' class='clamp_left'>
+                        <div id='clampLeftImg'></div>
+                    </div>
+                    <div id='clampLeftDescribe' class='clamp_left_describe'></div>
+                    <div class='box_clamp_content'>
+                        <div class='clamp_right'>
+                            <div class='clamp_right_bg'></div>
+                            <div id='clampRightImgBox' class='clamp_right_img_content'>
+                                <div id='clampRightImg'></div>
+                            </div>
+                            <div id='clampRightDescribe' class='clamp_right_describe'></div>
+                        </div>
+                    </div>
+                </div>
+                <div id='knotBox' class='box_knot'>
+                    <div class='box_knot_content'>
+                        <div id='kontLeftImgBox' class='kont_left'>
+                            <div id='kontLeftImg' class='kont_left_img'></div>
+                        </div>
+                        <div id='kontRightImgBox' class='kont_right'>
+                            <div id='kontRightImg' class='kont_right_img'></div>
+                        </div>
+                        <div id='kontLeftDescribe' class='kont_left_describe'></div>
+                        <div id='kontRightDescribe' class='kont_right_describe'></div>
+                    </div>
+                    <div class='box_knot_bg'></div>
+                </div>
+            </div>
+        </div>
+    </body>
+
+<script type='text/javascript'>
+function id(name)
+{
+    return document.getElementById(name)
+}
+
+function showtitle()
+{
+    id('photoTitle').innerHTML = e_desc;
+}
+
+function liangziyun_kawa()
+{
+    show1();
+}
+
+
+function show1()
+{
+    setImage('1');//左图
+    setImage('2');//右图
+    id('pageFlip').style.webkitAnimation = 'pageFlip 3s linear both';
+    id('pageFlipLeft').style.webkitAnimation = 'pageFlipLeft 1s linear 3s both';
+    id('smallRoseBox').style.webkitAnimation ='smallRoseBox 3s linear 2.5s both ';
+    id('smallRoseShadowBox').style.webkitAnimation ='smallRoseShadowBox 3s linear 2.5s both';
+    id('bigRoseBox').style.webkitAnimation ='bigRoseBox 3s linear 2.5s both';
+    id('bigRoseShadowBox').style.webkitAnimation ='bigRoseShadowBox 3s linear 2.5s both';
+    id('smallRose').style.webkitAnimation ='smallRose 6s linear both';
+    id('smallRoseShadow').style.webkitAnimation ='smallRoseShadow 6s linear both';
+    id('bigRose').style.webkitAnimation ='bigRose 6s linear both';
+    id('bigRoseShadow').style.webkitAnimation ='bigRoseShadow 6s linear both';
+    id('flipRightDescribe').style.webkitAnimation ='describeIn 1s linear 2.5s both';
+    timeout[1] = setTimeout(show3,12000);
+};
+function show2()
+{
+    setImage('1');//左图
+    setImage('2');//右图
+    id('lifetime').style.webkitAnimation = '';
+    id('lifetime').style.opacity = '0';
+    id('yesterday').style.webkitAnimation = 'themeContentIn 2s linear both';
+    id('knotBox').style.webkitAnimation = 'boxKnotOut 2s linear both';
+    id('themeBox').style.webkitAnimation = 'themeBoxIn 2s linear both';
+    id('rosePetals').style.webkitAnimation = 'rosePetalsIn 1s linear both';
+    id('pageFlipBox').style.webkitAnimation = 'pageFlipBoxIn 1s linear both';
+    id('pageFlip').style.webkitAnimation = 'pageFlip 3s linear both';
+    id('pageFlipLeft').style.webkitAnimation = 'pageFlipLeft 1s linear 3s both';
+    id('smallRoseBox').style.webkitAnimation ='smallRoseBox 3s linear 2.5s both ';
+    id('smallRoseShadowBox').style.webkitAnimation ='smallRoseShadowBox 3s linear 2.5s both';
+    id('bigRoseBox').style.webkitAnimation ='bigRoseBox 3s linear 2.5s both';
+    id('bigRoseShadowBox').style.webkitAnimation ='bigRoseShadowBox 3s linear 2.5s both';
+    id('smallRose').style.webkitAnimation ='smallRose 6s linear both';
+    id('smallRoseShadow').style.webkitAnimation ='smallRoseShadow 6s linear both';
+    id('bigRose').style.webkitAnimation ='bigRose 6s linear both';
+    id('bigRoseShadow').style.webkitAnimation ='bigRoseShadow 6s linear both';
+    id('flipRightDescribe').style.webkitAnimation ='describeIn 1s linear 2.5s both';
+    timeout[2] = setTimeout(show3,12000);
+}
+
+function show3()
+{
+    setImage('3');//左图
+    setImage('4');//右图
+    id('photoTitle').innerHTML = '';
+    id('knotButterflyBox').style.webkitAnimation = '';
+    id('kontButterfly').style.webkitAnimation = '';
+    id('pageFlipBox').style.webkitAnimation = 'pageFlipBoxOut 2s linear both';
+    id('rosePetals').style.webkitAnimation = 'rosePetalsDown 2s linear both';
+    id('themeBox').style.webkitAnimation = 'themeBoxDown 2s linear both';
+    id('clampBox').style.webkitAnimation = 'clampBoxIn 2s ease-in both';
+    id('yesterday').style.webkitAnimation = 'themeContentOut 2s linear 2s both';
+    id('noForget').style.webkitAnimation = 'themeContentIn 2s linear 2s both';
+    id('myosotis').style.webkitAnimation = 'myosotisIn 6s linear both';
+    id('butterflyBox').style.webkitAnimation = 'butterflyForgetBoxIn 4s linear both';
+    id('butterfly').style.webkitAnimation = 'butterflyForgetIn  4s linear both';
+    id('smallRoseBox').style.webkitAnimation ='smallRoseBox1 2s linear 10s both ';
+    id('smallRose').style.webkitAnimation ='smallRose1 2s linear 10s both';
+    id('smallRoseShadowBox').style.webkitAnimation ='smallRoseShadowBox1 2s linear 10s both';
+    id('smallRoseShadow').style.webkitAnimation ='smallRoseShadow1 2s linear 10s both';
+    id('bigRoseBox').style.webkitAnimation ='bigRoseBox1 2s linear 10.5s both';
+    id('bigRose').style.webkitAnimation ='bigRose1 2s linear 10.5s both';
+    id('bigRoseShadowBox').style.webkitAnimation ='bigRoseShadowBox1 2s linear 10.5s both';
+    id('bigRoseShadow').style.webkitAnimation ='bigRoseShadow1 2s linear 10.5s both';
+    timeout[3] = setTimeout(show4,12000);
+};
+
+function show4()
+{
+    setImage('5');//左图
+    setImage('6');//右图
+    id('pageFlip').style.webkitAnimation = '';
+    id('pageFlipLeft').style.webkitAnimation = '';
+    id('flipRightDescribe').style.webkitAnimation ='';
+    id('rosePetals').style.webkitAnimation = '';
+    id('smallRoseBox').style.webkitAnimation ='';
+    id('smallRose').style.webkitAnimation ='';
+    id('smallRoseShadowBox').style.webkitAnimation ='';
+    id('smallRoseShadow').style.webkitAnimation ='';
+    id('bigRoseBox').style.webkitAnimation ='';
+    id('bigRose').style.webkitAnimation ='';
+    id('bigRoseShadowBox').style.webkitAnimation ='';
+    id('bigRoseShadow').style.webkitAnimation ='';
+    id('clampBox').style.webkitAnimation = 'clampBoxOut 2s linear both';
+    id('myosotis').style.webkitAnimation = 'myosotisOut 2s linear both';
+    id('smallRoseBox').style.webkitAnimation ='smallRoseBox1 2s linear both ';
+    id('smallRose').style.webkitAnimation ='smallRose1 2s linear both';
+    id('smallRoseShadowBox').style.webkitAnimation ='smallRoseShadowBox1 2s linear both';
+    id('smallRoseShadow').style.webkitAnimation ='smallRoseShadow1 2s linear both';
+    id('bigRoseBox').style.webkitAnimation ='bigRoseBox1 2s linear both';
+    id('bigRose').style.webkitAnimation ='bigRose1 2s linear both';
+    id('bigRoseShadowBox').style.webkitAnimation ='bigRoseShadowBox1 2s linear both';
+    id('bigRoseShadow').style.webkitAnimation ='bigRoseShadow1 2s linear both';
+    id('noForget').style.webkitAnimation = 'themeContentOut 2s linear 2s both';
+    id('butterflyBox').style.webkitAnimation = 'butterflyForgetBoxOut 2s linear both';
+    id('butterfly').style.webkitAnimation = 'butterflyForgetOut  2s linear both';
+    id('knotBox').style.webkitAnimation = 'boxKnotIn 2s linear both';
+    id('lifetime').style.webkitAnimation = 'themeContentIn 2s linear 2s both';
+    id('knotButterflyBox').style.webkitAnimation = 'butterflyLifeBox 10s linear 2s both';
+    id('kontButterfly').style.webkitAnimation = 'butterflyLife 10s linear 2s both';
+    id('themeBox').style.webkitAnimation = 'themeBoxOut 2s linear 10s both';
+    timeout[4] = setTimeout(show2,12000);
+
+}
+
+function getImgNmae (url) {
+    var index = url.indexOf("?");
+    if(index != -1)
+    {
+        url = url.substr(0, index);
+    }
+    return url.toString().substr(url.lastIndexOf("/") + 1);
+};
+
+function showImagesDescribe (img_index,describe_dom) {
+    var imgDescribe = words[this.getImgNmae(Onload_imgs_url[image_url_index])];
+    if (imgDescribe != undefined) {
+        describe_dom.innerHTML = imgDescribe;
+    }else{
+        describe_dom.innerHTML = '';
+    }
+}
+
+function adaptiveImgWidthAndHeight (img_index,img_box) {
+    var img_width = image_size_width[img_index];
+    var img_height = image_size_height[img_index];
+    var box_width = img_box.clientWidth;
+    var box_height = img_box.clientHeight;
+    var show_width,show_height;
+    var img_obj = {};
+    if (img_width >= img_height) {
+        show_height = box_height;
+        show_width = parseInt(box_height / (img_height / img_width));
+        if (show_width <= box_width) {
+            show_width = box_width;
+            show_height = parseInt(box_width * (img_height / img_width));
+        };
+    } else{
+        show_width = box_width;
+        show_height = parseInt(box_width * (img_height / img_width));
+        if (show_height <= box_height) {
+            show_height = box_height;
+            show_width = parseInt(box_height / (img_height / img_width));
+        }
+    };
+    img_obj.width = show_width;
+    img_obj.height = show_height;
+    return img_obj;
+};
+
+ function insertRule (cssText) {
+    var style = document.createElement("style");
+    document.head.appendChild(style);
+    var sheet=style.sheet;
+    sheet.insertRule(cssText,0);
+};
+
+function showImage (img_box,img_dom,img_url,img_index,img_animation) {
+    var img_obj = this.adaptiveImgWidthAndHeight(img_index,img_box);
+    var show_width = img_obj.width;
+    var show_height = img_obj.height;
+    img_dom.style.width = show_width + 'px';
+    img_dom.style.height = show_height + 'px';
+    img_dom.style.backgroundImage = 'url(' + img_url + ')';
+    img_dom.style.backgroundRepeat = 'no-repeat';
+    img_dom.style.backgroundSize = show_width + 'px ' + show_height + 'px';
+    img_dom.style.webkitAnimation = '';
+    if (show_width > img_box.clientWidth) {
+        to_left = show_width - img_box.clientWidth;
+        css_text ='@-webkit-keyframes ' + img_animation +'{0%{-webkit-transform:translate(0px,0px);} 100%{-webkit-transform:translate('+ (-to_left) + 'px,0px);}}';
+    } else if(show_height > img_box.clientHeight){
+        to_top = show_height - img_box.clientHeight;
+        css_text ='@-webkit-keyframes ' + img_animation +'{0%{-webkit-transform:translate(0px,0px);} 100%{-webkit-transform:translate(0px,'+ (-to_top) + 'px);}}';
+    };
+    insertRule(css_text);
+
+    //避免高宽都相等时还加动画
+    if (show_width !== img_box.clientWidth || show_height !== img_box.clientHeight) {
+        img_dom.style.webkitAnimation = img_animation + ' 6s linear 4s both';
+    };
+}
+
+function setImage(idname)
+{
+    if(reshow == true)
+        return;
+
+    while(Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading')
+    {  
+        if(image_url_index % step_loadnum == 0)
+        {
+            step_load();
+        }
+        image_url_index++;
+        if(image_url_index == Onload_imgs_url.length)
+            image_url_index = 0;
+    }
+
+    if(image_url_index % step_loadnum == 0)
+    {
+        step_load();
+    }
+
+    var cur_img = Onload_imgs_url[image_url_index];
+    var img_box,img_dom,describe_dom;
+    switch(idname) {
+        case '1' :
+            img_box = id('flipLeftImgBox');
+            img_dom = id('flipLeftImg');
+            describe_dom = id('flipLeftDescribe');
+            showImage(img_box,img_dom,cur_img,image_url_index,'flipLeftImg');
+            break;
+        case '2':
+            img_box = id('flipRightImgBox');
+            img_dom = id('flipRightImg');
+            describe_dom = id('flipRightDescribe');
+            showImage(img_box,img_dom,cur_img,image_url_index,'flipRightImg');
+            break;
+        case '3':
+            img_box = id('clampLeftImgBox');
+            img_dom = id('clampLeftImg');
+            describe_dom = id('clampLeftDescribe');
+            showImage(img_box,img_dom,cur_img,image_url_index,'clampLeftImg');
+            break;
+        case '4':
+            img_box = id('clampRightImgBox');
+            img_dom = id('clampRightImg');
+            describe_dom = id('clampRightDescribe');
+            showImage(img_box,img_dom,cur_img,image_url_index,'clampRightImg');
+            break;
+        case '5' :
+            img_box = id('kontLeftImgBox');
+            img_dom = id('kontLeftImg');
+            describe_dom = id('kontLeftDescribe');
+            showImage(img_box,img_dom,cur_img,image_url_index,'kontLeftImg');
+            break;
+        case '6':
+            img_box = id('kontRightImgBox');
+            img_dom = id('kontRightImg');
+            describe_dom = id('kontRightDescribe');
+            showImage(img_box,img_dom,cur_img,image_url_index,'kontRightImg');
+        break;
+    }
+    showImagesDescribe(image_url_index,describe_dom);
+    image_url_index ++;
+    if(image_url_index == Onload_imgs_url.length)
+      image_url_index = 0;
+}
+
+call_me(load_images)
+var image_size_width=[];
+var image_size_height=[];
+var image_url_index=0;
+var have_num = 0;
+var error_num = 0;
+var canshow = true;
+var reshow = false;
+var delaytime=3000;
+var timeout = [];
+var showfont = false;
+
+
+
+//每次执行加载后10张图片
+var bl_keepload = 'first';
+var step_loadnum = 5;
+function step_load()
+{
+    var load_num = 0
+    //初步加载X张
+    if(image_url_index  == 0 && bl_keepload == 'first')
+    {
+       // console.log('loading continue');
+        if(slider_images_url.length > step_loadnum)
+        {
+            load_num = step_loadnum;
+            bl_keepload = 'next';
+        }
+        else
+        {
+            load_num = slider_images_url.length;
+            bl_keepload = 'end';
+        }
+        for(var i = 0; i< load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+    else if(bl_keepload == 'end')
+    {
+        return;
+    }
+    else
+    {
+        // console.log('loading continue');
+        if(slider_images_url.length - image_url_index >step_loadnum*2)
+        { 
+            load_num = step_loadnum;
+        }
+        else
+        {
+            load_num = slider_images_url.length - image_url_index - step_loadnum;
+            bl_keepload = 'end';
+        }
+        for(var i = image_url_index +step_loadnum; i< image_url_index + step_loadnum + load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+}
+
+
+function load_images()
+{ 
+    reshow = false;
+    image_size_width=[];
+    image_size_height=[];
+    Onload_imgs_url=[];
+    image_url_index=0;
+    have_num = 0;
+    error_num = 0;
+    begin_titletime = new Date();
+    begin_titletime = begin_titletime.getTime();
+    canshow = true;
+    showtitle();
+    bl_keepload = 'first';
+    // loading_first(); 
+    step_load();     
+}
+
+function image_onerror(event)
+{
+    var img = event.target;
+    var index = img.index;
+    if(index<step_loadnum)
+        error_num ++;
+    Onload_imgs_url[index] = 'not find';
+
+    if((have_num+error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {   
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            liangziyun_kawa();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+            {
+                liangziyun_kawa();
+            },dis_titletime);
+        }
+    }
+}
+
+function image_onload(event)
+{
+    if(reshow == true)
+        return;
+
+    var img = event.target;
+    var index = img.index;
+
+    if(index<step_loadnum)
+    {
+        have_num++;
+    }
+    Onload_imgs_url[index] = img.src;
+    image_size_height[index] = img.height;
+    image_size_width[index] = img.width;
+
+    if((have_num + error_num >= step_loadnum ||slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {   
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            liangziyun_kawa();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            //console.log(dis_titletime);
+            timeout[0] = setTimeout(function()
+            {
+                liangziyun_kawa();
+            },dis_titletime);
+        }
+
+    }
+}
+
+function reload_scene()
+{
+    clearnode();
+    reshow = true;
+    setTimeout(load_images,100);
+}
+
+function clearnode()
+{
+
+    for(var i = 0; i<timeout.length; i++)
+    {
+        clearTimeout(timeout[i])
+    }
+
+    id('photoTitle').innerHTML = '';
+    var elements = ['pageFlip','pageFlipLeft','smallRoseBox','smallRoseShadowBox','bigRoseBox','bigRoseShadowBox','smallRose','smallRoseShadow','bigRose','bigRoseShadow','flipRightDescribe','lifetime','yesterday','knotBox','themeBox','rosePetals','pageFlipBox','clampBox','noForget','myosotis','butterflyBox','butterfly','knotButterflyBox','kontButterfly'];
+    for(var i=0;i<elements.length;i++)
+    {
+        id(elements[i]).style.webkitAnimation = '';
+    }
+    id('lifetime').style.opacity = '0';
+}
+
+</script>

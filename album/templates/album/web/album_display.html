@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load staticfiles %}
-{% load static_v %}
+{% load pg_common %}
 
 {% block title %}
     我的相册
@@ -40,18 +40,11 @@
 
 {% block container %}
 <div class="w-100 h-100" id="albumDisplay">
-    <div class="position-absolute w-100 h-100" id="vueMask">
-        <div class="music position-absolute">
-            <img class="music-icon"
-                 src="{% static 'album/web/img/music.png' %}"
-                 :class="{'animated infinite spin': music.active}"
-                 @click="toggleMusic">
-            <audio :src="album.music_data.url || album.music_data.file" autoplay="autoplay" loop="loop" v-if="album.music_data.id"></audio>
-        </div>
-        <v-touch class="mask w-100 h-100 position-absolute d-none" v-on:panleft="editAlbum"></v-touch>
-    </div>
 
-    {% include './album_templates/k_july.html' %}
+
+    {% with template_path='album/web/album_templates/'|add:template_name|add:'.html' %}
+        {% include template_path %}
+    {% endwith %}
 </div>
     {% include './components/album_edit.html' %}
 {% endblock %}
@@ -84,18 +77,8 @@ var adVue = new Vue({
             name: '',
             desc: '',
             picture_list: [],
-            music_data: {
-                id: '',
-                name: '',
-                file: '',
-                url: '',
-            },
-            template_data: {
-                id: '',
-                name: '',
-                cover: '',
-                cover_url: '',
-            },
+            music_data: null,
+            template_data: null,
         },
     },
     methods: {

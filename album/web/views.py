@@ -1,3 +1,4 @@
+import json
 import urllib
 
 from django.conf import settings
@@ -13,7 +14,10 @@ from base.utils.rest.decorators import request_data
 from we import setting as we_setting
 from we.utils.decorators import auto_login
 
+from album import models as album_models
 from album.utils import common
+
+from . import serializers as mserializers
 
 
 render = get_app_render(__package__)
@@ -68,7 +72,19 @@ def album_display_page(request, pk):
         'pk': pk,
     }
 
-    return render(request, 'album_display.html', context)
+    try:
+        album = album_models.Album.objects.get(pk=pk)
+    except Exception as e:
+        return default_views.Http404Page(request, e)
+
+
+    album_data = mserializers.AlbumSerializers(album).data
+
+    context['album'] = album
+    context['album_data'] = album_data
+    context['pictures'] = json.dumps([picture_data['image'] for picture_data in album_data['picture_list']])
+
+    return render(request, 'album_show.html', context)
 
 
 @api_view(['GET', 'POST'])

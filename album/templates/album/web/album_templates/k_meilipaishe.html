@@ -1,0 +1,753 @@
+  <style type="text/css">
+
+*
+{
+    padding: 0px;
+    margin: 0px;
+    -webkit-box-sizing: border-box;
+}
+
+body
+{
+    background-color: black;
+}
+
+#container
+{
+    width: 500px;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+#container >div,#container > img
+{
+    position: absolute;
+}
+
+#div1>div
+{
+    position: absolute;
+}
+#photo-card{
+	width: 430px;
+	height: 695px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+	display: none;
+}
+.cenp{
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	margin: auto;
+	display: none;
+}
+
+
+#red{
+	position: absolute;
+	right: 13.79%;
+    top: 9%;
+    opacity: 0;
+}
+#bg1{
+	width: 100%;
+	height: 100%;
+	background-size: cover;
+	background-position: center;
+}
+.bgg{
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-size: cover;
+	background-position: center;
+}
+
+#clock{
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+    bottom: 78px;
+    left: 20px;
+    display: none;
+}
+.white{
+	width: 4px;
+	height: 80px;
+	background-color: white;
+	bottom: 58px;
+}
+#white1{
+	right: 10px;
+}
+#white2{
+	right: 20px;
+}
+#white3{
+	right: 30px;
+}
+#white4{
+	right: 40px;
+}
+#white5{
+	right: 50px;
+}
+#white6{
+	right: 60px;
+}
+#white7{
+	right: 70px;
+}
+#white8{
+	right: 80px;
+}
+#topwhite{
+	width: 100%;
+	background-color: white;
+	height: 33%;
+	top: 0;
+	opacity: 0;
+}
+#bottomwhite{
+	width: 100%;
+	background-color: white;
+	height: 33%;
+	bottom: 0;
+	opacity: 0;
+}
+#outerwhite{
+	position: relative;
+	right: 0;
+	bottom: 0;
+	display: none;
+}
+#outerwhite div{
+	position: absolute;
+}
+.blur{
+	filter: blur(7px);
+	-webkit-filter: blur(7px);
+}
+#word1{
+	bottom: 95px;
+    right: 24px;
+    display: none;
+}
+#word2{
+	bottom: 89px;
+	left: 50px;
+	display: none;
+}
+.bg{
+	-webkit-animation: bg3 2s linear,bg1 1s  2s linear;
+}
+
+.pagetitle{ margin:-125px 0;position:absolute;width:400px;height:250px;background:RGBA(255,255,255,0.6);top:50%;left:500px; opacity:0;overflow:hidden;}
+.pagetitle1{ margin:0 auto; width:360px; height:100%;}
+.titlecontent{width:360px;height:250px;line-height:150%;vertical-align:middle;display:table-cell;text-align:center;font-size:34px; color:#333;}
+
+ @-webkit-keyframes bg3{
+    0%{
+     -webkit-transform: scale(1.8);
+    }
+    10%{
+    -webkit-transform: scale(1.3);
+    }
+    95%{
+    -webkit-transform: scale(1);
+    }
+    100%{
+    -webkit-transform: scale(1);
+    }
+}
+
+@-webkit-keyframes bg1{
+    0%{
+     -webkit-transform: scale(1);
+    }
+    30%{
+    -webkit-transform: scale(1.15);
+    }
+    60%{
+    -webkit-transform: scale(1);
+    }
+    80%{
+    -webkit-transform: scale(1.05);
+    }
+    100%{
+    -webkit-transform: scale(1);
+    }
+}
+@-webkit-keyframes interphoto{
+    0%{
+     -webkit-transform: scale(1);
+    }
+    30%{
+    -webkit-transform: scale(0.6);
+    }
+    60%{
+    -webkit-transform: scale(1);
+    }
+    80%{
+    -webkit-transform: scale(0.65);
+    }
+    100%{
+    -webkit-transform: scale(1);
+    }
+}
+@-webkit-keyframes white1{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white2{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white3{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white4{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white5{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white6{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white7{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes white8{
+    from{
+        height:0;
+    }
+    to{
+        height: 80px;
+    }
+}
+@-webkit-keyframes red{
+    0%{opacity: 1;}
+    10%{opacity: 1;}
+    20%{opacity: 1;}
+    30%{opacity: 0;}
+    40%{opacity: 0;}
+    50%{opacity: 0;}
+    60%{opacity: 1;}
+    70%{opacity: 1;}
+    80%{opacity: 1;}
+    90%{opacity: 0;}
+    100%{opacity: 0;}
+}
+@-webkit-keyframes topwhite{
+    0%{opacity: 0;}
+    25%{opacity: 1;}
+    50%{opacity: 0;}
+    75%{opacity: 1;}
+    100%{opacity: 0;}
+}
+@-webkit-keyframes bottomwhite{
+    0%{opacity: 0;}
+    25%{opacity: 0.3;}
+    50%{opacity: 0;}
+    75%{opacity: 0.3;}
+    100%{opacity: 0;}
+}
+@-webkit-keyframes titlein
+{
+    from  {opacity: 0;}
+    to    {opacity: 1;left:50px;}
+}
+
+@-webkit-keyframes titleout
+{
+    from  {opacity: 1;left:50px;}
+    to    {opacity: 0;left:500px;}
+}
+
+@-webkit-keyframes titleMove
+{
+    0%  {opacity: 1;left:50px;-webkit-transform: translate(0px,0px);}
+    25% {opacity: 1;left:50px;-webkit-transform: translate(10px,0px);}
+	75% {opacity: 1;left:50px;-webkit-transform: translate(-10px,0px);}
+	100%  {opacity: 1;left:50px;-webkit-transform: translate(0px,0px);}
+}
+
+</style>
+<div id='container'>
+    <div id="bg1">
+
+    </div>
+    <div id="bg2" class="bgg">
+
+    </div>
+    <div id="bg3" class="bgg">
+
+    </div>
+    <div id="bg4" class="bgg">
+
+    </div>
+    <div id="bg5" class="bgg">
+
+    </div>
+    <div id="bg6" class="bgg">
+
+    </div>
+    <div id="photo-card">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/81cf2a689e.jpg" id="outerphoto" />
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/d5de7f3153.jpg" id="interphoto" class="cenp"/>
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/6f95eb4237.jpg" id="centerphoto" class="cenp"/>
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/cc92b50691.jpg"id="centerphoto1" class="cenp"/>
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/07be06cc5c.jpg" id="red"/>
+    </div>
+    <div id="outerwhite" >
+        <div id="white1" class="white"></div>
+        <div id="white2" class="white"></div>
+        <div id="white3" class="white"></div>
+        <div id="white4" class="white"></div>
+        <div id="white5" class="white"></div>
+        <div id="white6" class="white"></div>
+        <div id="white7" class="white"></div>
+        <div id="white8" class="white"></div>
+    </div>
+    <div id="topwhite"></div>
+    <div id="bottomwhite"></div>
+    <div id="clock" class="nnone">00:00:00:00</div>
+    <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/c2da26f357.jpg" id="word1"/>
+    <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_meilipaishe/aa32ac83ee.jpg" id="word2"/>
+    <audio src="http://wangjianxun1.test.upcdn.net/lyric/2.m4a" id="muisc359a"></audio>
+    <audio src="http://wangjianxun1.test.upcdn.net/lyric/2.m4a" id="muisc359b"></audio>
+    <div id='pagetitle' class='pagetitle'>
+         <div id='pagetitle1' class='pagetitle1'>
+              <div id='titlecontent' class='titlecontent'></div>
+         </div>
+    </div>
+</div>
+<script>
+    var image_size_width = [];
+    var image_size_height = [];
+    var image_url_index = 0;
+    var have_num = 0;
+    var error_num = 0;
+    var canshow = true;
+    var reshow = false;
+    var timeout0;
+    var timeout1;
+    var timeout2;
+    var timeout3;
+    var timeout4;
+    var timeout5;
+    var timeout6;
+    var delaytime = 5000;
+
+    function id(name) {
+        return document.getElementById(name);
+    }
+    function play_music2(id) {
+        var music02 = document.getElementById(id);
+        music02.preload = "auto";
+        music02.play();
+    }
+    function muiscFn() {
+        play_music2("muisc359a");
+
+        timeout10 = setTimeout(function () {
+            play_music2("muisc359b");
+        }, 300);
+    }
+
+    function show1() {
+        setImage('1');
+        $("#photo-card").css("display", "block")
+        $("#bg6").css("display", "none");
+        $("#bg1").css("display", "block");
+        id('bg1').style.WebkitAnimation = "bg1 1s linear";
+        $("#word1").css("display", "none");
+        $("#word2").css("display", "none");
+        $("#clock").css("display", "block");
+        $("#outerphoto").css("display", "block");
+        $('#interphoto').css("display", "block");
+        $("#centerphoto").css("display", "block");
+        $("#outerwhite").css("display", "block");
+        id('interphoto').style.WebkitAnimation = "interphoto 1s linear";
+        id('white1').style.WebkitAnimation = "white1 .7s linear infinite alternate";
+        id('white2').style.WebkitAnimation = "white2 .4s linear infinite alternate";
+        id('white3').style.WebkitAnimation = "white3 .8s linear infinite alternate";
+        id('white4').style.WebkitAnimation = "white4 .3s linear infinite alternate";
+        id('white5').style.WebkitAnimation = "white5 .6s linear infinite alternate";
+        id('white6').style.WebkitAnimation = "white6 .9s linear infinite alternate";
+        id('white7').style.WebkitAnimation = "white7 .7s linear infinite alternate";
+        id('white8').style.WebkitAnimation = "white8 .4s linear infinite alternate";
+        id('centerphoto1').style.WebkitAnimation = "topwhite 1s linear";
+        id('red').style.WebkitAnimation = "red 1.5s linear infinite";
+        timerStart();
+        blur("#bg1");
+        timeout0 = setTimeout(clearFn, 1000);
+        id('topwhite').style.webkitAnimation = "";
+        id('bottomwhite').style.webkitAnimation = "";
+
+    }
+    function clearFn1() {
+        muiscFn();
+        $('#outerwhite').css("display", "none");
+        $('#centerphoto').css("display", "none");
+        $('#outerphoto').css("display", "none");
+        $('#interphoto').css("display", "none");
+        $('#clock').css("display", "none");
+        id('interphoto').style.WebkitAnimation = "";
+
+        id('bg1').style.WebkitAnimation = "";
+        id('bg2').style.WebkitAnimation = "";
+        id('bg4').style.WebkitAnimation = "";
+        id('bg3').style.WebkitAnimation = "";
+        id('bg5').style.WebkitAnimation = "";
+        id('bg6').style.WebkitAnimation = "";
+        id('topwhite').style.webkitAnimation = "topwhite .4s linear both";
+        id('bottomwhite').style.webkitAnimation = "bottomwhite .5s linear both";
+        id('red').style.WebkitAnimation = "";
+        id('centerphoto1').style.WebkitAnimation = "";
+    }
+    function clearFn() {
+        $("#word2").css("display", "block");
+        clearFn1();
+        timeout1 = setTimeout(show2, 1500)
+    }
+    function clearFn2() {
+        $('#word1').css("display", "block");
+        clearFn1();
+        timeout2 = setTimeout(show4, 1500);
+    }
+    function clearall() {
+        clearFn1();
+        id('clock').innerText = "00:00:00:00";
+        clearInterval(timer1);
+        t = 0;
+        lt = 0;
+        timeout9 = setTimeout(show1, 1500);
+    }
+    function show2() {
+        setImage('2');
+        $("#word2").css("display", "none");
+        $('#bg1').css("display", "none");
+        $('#bg2').css("display", "block");
+        id('bg2').style.WebkitAnimation = "bg3 2.5s linear";
+        sFn();
+        timeout3 = setTimeout(show3, 2500);
+        id('topwhite').style.webkitAnimation = "";
+        id('bottomwhite').style.webkitAnimation = "";
+    }
+    function sFn() {
+        $('#outerphoto').css("display", "block");
+        $('#interphoto').css("display", "block");
+        $('#outerwhite').css("display", "block");
+        $('#clock').css("display", "block");
+        id('red').style.WebkitAnimation = "red 1.8s linear infinite";
+    }
+    function show3() {
+        setImage('3');
+        $('#bg2').css("display", "none");
+        $('#bg3').css("display", "block");
+        $('#bg3').addClass("bg");
+        id('interphoto').style.WebkitAnimation = "interphoto 1s 2s linear";
+        id('centerphoto1').style.WebkitAnimation = "topwhite 1s 2s linear";
+        timeout4 = setTimeout(function () {
+            $('#centerphoto').css("display", "block");
+            blur("#bg3");
+        }, 2000);
+        timeout5 = setTimeout(clearFn2, 3000);
+
+    }
+    function show4() {
+        setImage('4');
+        $('#bg3').css("display", "none");
+        $('#bg4').css("display", "block");
+        $('#word1').css("display", "none");
+        sFn();
+        id('bg4').style.WebkitAnimation = "bg3 2.5s linear";
+        timeout6 = setTimeout(show5, 2500);
+        id('topwhite').style.webkitAnimation = "";
+        id('bottomwhite').style.webkitAnimation = "";
+
+    }
+    function show5() {
+        setImage('5');
+        $('#bg4').css("display", "none");
+        $('#bg5').css("display", "block");
+        id('bg5').style.WebkitAnimation = "bg3 2.5s linear";
+        timeout7 = setTimeout(show6, 2500);
+
+    }
+    function show6() {
+        setImage('6');
+        $('#bg5').css("display", "none");
+        $('#bg6').css("display", "block");
+        id('bg6').style.WebkitAnimation = "bg1 1s linear";
+        $('#centerphoto').css("display", "block");
+        id('centerphoto1').style.WebkitAnimation = "topwhite 1s linear";
+        id('interphoto').style.WebkitAnimation = "interphoto 1s linear";
+        blur('#bg6');
+        timeout8 = setTimeout(clearall, 1000);
+
+    }
+    function blur(obj) {
+        setTimeout(function () {
+            $(obj).removeClass("blur");
+            setTimeout(function () {
+                $(obj).addClass("blur");
+                setTimeout(function () {
+                    $(obj).removeClass("blur");
+                    setTimeout(function () {
+                        $(obj).addClass("blur");
+                        setTimeout(function () {
+                            $(obj).removeClass("blur");
+                        }, 200);
+                    }, 200);
+                }, 200);
+            }, 200);
+        }, 200);
+    }
+    function timerStart() {
+        var t = 0;
+        var lt = 100;
+        timer1 = setInterval(function () {
+            lt += 5;
+            if (lt > 95) {
+                lt = 0;
+                t++;
+            }
+            id('clock').innerText = "00:00:" + ((t < 10) ? ("0" + t) : t) + ":" + ((lt < 10) ? ("0" + lt) : lt);
+        }, 50)
+    }
+    function load_images() {
+        reshow = false;
+        image_size_width = [];
+        image_size_height = [];
+        Onload_imgs_url = [];
+        image_url_index = 0;
+        have_num = 0;
+        error_num = 0;
+        begin_titletime = new Date();
+        begin_titletime = begin_titletime.getTime();
+        showtitle();
+        canshow = true;
+        bl_keepload = 'first';
+        step_load();
+
+    }
+
+    //ÿ��ִ�м��غ�5��ͼƬ
+    var bl_keepload = 'first';
+    var step_loadnum = 5;
+    var juli = 0;
+    function step_load() {
+        var load_num = 0
+        //��������X��
+        if (image_url_index == 0 && bl_keepload == 'first') {
+            if (slider_images_url.length > step_loadnum) {
+                load_num = step_loadnum;
+                bl_keepload = 'next';
+            }
+            else {
+                load_num = slider_images_url.length;
+                bl_keepload = 'end';
+            }
+            for (var i = 0; i < load_num; i++) {
+                var img = new Image();
+                img.index = i;
+                img.src = slider_images_url[i];
+                img.onload = image_onload;
+                img.onerror = image_onerror;
+                Onload_imgs_url[i] = 'loading';
+                if (i == 0) {
+                    $("#bg1").css("background-image", "url(" + slider_images_url[i] + ")");
+                }
+            }
+        }
+        else if (bl_keepload == 'end') {
+            return;
+        }
+        else {
+            if (slider_images_url.length - image_url_index > step_loadnum * 2) {
+                load_num = step_loadnum;
+            }
+            else {
+                load_num = slider_images_url.length - image_url_index - step_loadnum;
+                bl_keepload = 'end';
+            }
+            for (var i = image_url_index + step_loadnum; i < image_url_index + step_loadnum + load_num; i++) {
+                var img = new Image();
+                img.index = i;
+                img.src = slider_images_url[i];
+                img.onload = image_onload;
+                img.onerror = image_onerror;
+                Onload_imgs_url[i] = 'loading';
+            }
+        }
+
+    }
+    function image_onerror(event) {
+        var img = event.target;
+        var index = img.index;
+        if (index < step_loadnum)
+            error_num++;
+        Onload_imgs_url[index] = 'not find';
+        if ((have_num + error_num >= step_loadnum || slider_images_url.length == (have_num + error_num)) && canshow == true) {
+            reshow = false;
+            canshow = false;
+            if (have_num == 0)
+                return;
+            var end_titletime = new Date();
+            end_titletime = end_titletime.getTime();
+            var dis_titletime = Math.abs(end_titletime - begin_titletime);
+            if (dis_titletime > delaytime) {
+                show1();
+                //          liangziyun();
+            }
+            else {
+                dis_titletime = delaytime - dis_titletime;
+                timeout0 = setTimeout(function () {
+                    show1();
+                    //                  liangziyun();
+                }, dis_titletime);
+            }
+        }
+    }
+    function image_onload(event) {
+        if (reshow == true)
+            return;
+
+        var img = event.target;
+        var index = img.index;
+
+        if (index < step_loadnum) {
+            have_num++;
+        }
+        Onload_imgs_url[index] = img.src;
+        image_size_height[index] = img.height;
+        image_size_width[index] = img.width;
+
+        if ((have_num + error_num >= step_loadnum || slider_images_url.length == (have_num + error_num)) && canshow == true) {
+            reshow = false;
+            canshow = false;
+            if (have_num == 0)
+                return;
+            var end_titletime = new Date();
+            end_titletime = end_titletime.getTime();
+            var dis_titletime = Math.abs(end_titletime - begin_titletime);
+            if (dis_titletime > delaytime) {
+                distitle();
+            }
+            else {
+                dis_titletime = delaytime - dis_titletime;
+                timeout0 = setTimeout(function () {
+                    distitle();
+                }, dis_titletime);
+            }
+
+        }
+    }
+    function setImage(idname) {
+        if (reshow == true)
+            return;
+
+        while (Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading') {
+            image_url_index++;
+            if (image_url_index == Onload_imgs_url.length)
+                image_url_index = 0;
+        }
+        if (image_url_index % step_loadnum == 0) {
+            step_load();
+        }
+        //  console.log(Onload_imgs_url[image_url_index]);
+        //  console.log(Onload_imgs_url,image_url_index);
+        //  console.log(Onload_imgs_url,image_url_index);
+        $("#bg" + idname).css("background-image", "url(" + Onload_imgs_url[image_url_index] + ")");
+        image_url_index++;
+
+        if (image_url_index == Onload_imgs_url.length) image_url_index = 0;
+    }
+
+    function showtitle() {
+        id('pagetitle').style.webkitAnimation = 'titlein .5s linear forwards';
+        setTimeout(function () {
+            id('pagetitle').style.webkitAnimation = 'titleMove 2s linear infinite';
+        }, 600)
+        id('titlecontent').innerHTML = e_desc;
+
+    }
+    function distitle() {
+        id('pagetitle').style.webkitAnimation = 'titleout .5s linear forwards';
+        setTimeout(function () {
+            show1();
+        }, 500)
+    }
+
+    call_me(load_images);
+
+    function reload_scene() {
+        clearnode();
+        reshow = true;
+        setTimeout(load_images, 100);
+    }
+
+    function clearnode() {
+        clearTimeout(timeout0);
+        clearTimeout(timeout1);
+        clearTimeout(timeout2);
+        clearTimeout(timeout3);
+        clearTimeout(timeout4);
+        clearTimeout(timeout5);
+        clearTimeout(timeout6);
+        clearTimeout(timeout7);
+        clearTimeout(timeout8);
+        clearTimeout(timeout9);
+        clearTimeout(timeout10);
+    }
+    function photo_auto_height() {
+        var h1 = $(window).height();
+        if (h1 < 760) h1 = 760;
+        if (h1 > 815) h1 = 815;
+        $("#container").height(h1 + "px");
+    }
+    //�Զ��߶���Ӧ
+    photo_auto_height();
+</script>

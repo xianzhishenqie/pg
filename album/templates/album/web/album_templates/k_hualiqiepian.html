@@ -1,0 +1,50 @@
+    <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/eva_album.css?t=1e24316269946c0a03dfa0c6df2d92114" />
+    <section id="sec_content">
+<div id="div_player"></div>
+ <div id="wrapper_cover">
+    <div id="wrapper_player_cover_bkgnd">
+     <img />
+     <div id="wrapper_player_cover_title">
+      <span id="album_title"></span>
+     </div>
+    </div>
+    <div id="div_player_loadingText">
+     <span id="player_loadingText"></span>
+    </div>
+    <div id="wrapper_player_cover_logo">
+     <div id="player_icon"></div>
+    </div>
+   </div>
+   <div id="div_player_mask">
+    <a id="div_player_btn_more" href="follow_guide.html">
+     <div id="div_player_footer">
+      <div id="w_create_guide">
+       <div class="create_btn_bkgnd_outer"></div>
+       <div class="create_btn_bkgnd_inner"></div>
+       <div class="create_btn_text">
+        马上做炫拍
+       </div>
+      </div>
+     </div></a>
+   </div>
+     </section>
+<link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/weui.css" />
+  <script src="http://wangjianxun1.test.upcdn.net/js/zepto.min.js"></script>
+  <script src="http://wangjianxun1.test.upcdn.net/js/common.min.js"></script>
+  <script src="http://wangjianxun1.test.upcdn.net/js/eva_album.min.js"></script>
+  <script src="http://wangjianxun1.test.upcdn.net/js/effect.min.js"></script>
+  <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/effect.min.css" />
+<script type="text/javascript">
+var e = document.body.scrollWidth,
+    t = document.body.scrollHeight;
+    APP_URL = "http://wangjianxun1.test.upcdn.net/";
+     g_album_info = {"status":1,"title": e_desc,"bkgnd":"","create_time":"1451654199","music":"","user_name":"","uid":null,"id":"16347"};
+     var template ={"name":e_scene,"script":"http://wangjianxun1.test.upcdn.net/album_template/"+e_scene+"/"+e_scene+".js","object":"EVA_ALBUM_"+e_scene,"version":"1.0","music":"http:\/\/ws.stream.qqmusic.qq.com\/78540.m4a?fromtag=46","id":"12"}
+g_albumPlayer = new EVA_Player("div_player", e, t);
+for(var i=0;i<slider_images_url.length;i++){
+    g_albumPlayer.addMedia(
+      {"url":slider_images_url[i],"type":"image","location":"url"})
+}
+g_albumPlayer.applyTemplate(template),
+  g_albumPlayer.play();
+</script>

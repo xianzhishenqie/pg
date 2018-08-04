@@ -1,0 +1,382 @@
+    <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/templete/liangqingxiangyue/liangqingxiangyue.css">
+<style type="text/css">
+    #T036_leaf_left{position:absolute;left:0;top:0;width:106px;height:99px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) -310px 0 no-repeat;overflow:hidden}
+#T036_leaf_right{position:absolute;right:0;top:0;width:48px;height:150px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) -112px 0 no-repeat;overflow:hidden}
+#T036_leaf_top{position:absolute;top:0;left:50%;margin-left:-77px;width:153px;height:92px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) 0 -164px no-repeat;display:none; overflow:hidden}
+#T036_leaf_rt{position:absolute;right:0;top:0;width:158px;height:80px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) -416px 0 no-repeat;overflow:hidden}
+#T036_leaf_lights{position:absolute;left:0;right:0;top:0;height:300px;}#T036_leaf_bottom_l{position:absolute;bottom:0;left:0;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) no-repeat;height:164px;width:112px;overflow:hidden}#T036_leaf_bottom_r{position:absolute;bottom:0;right:0;width:150px;height:135px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) -160px 0 no-repeat;overflow:hidden;} #T036_leaf_bottom_m{display:none;position:absolute;bottom:0;left:50%;margin-left:-70px;width:139px;height:60px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/2163d12973.jpg) -153px -164px no-repeat;overflow:hidden;}
+    </style>
+<div id="container">
+
+    </div>
+    <script type="text/javascript">
+        ZMTXIFENBAO_Animation_Mgr = new
+ function () {
+     function t(t) {
+         var r = $(this).data(e),
+         c = o(this),
+         l = c > -1 ? a[c] : null,
+         d = l && l.param[n],
+         p = l && l.param[i];
+         if (d && d(this, t.animationName), t.animationName == r) p && p(this);
+         else {
+             var f = l.param.animates[++a[c].frame];
+             s(this, f)
+         }
+     }
+     var e = "animation-mgr-last-animation-name",
+     n = "progress",
+     i = "end",
+     a = [],
+     o = function (t) {
+         for (var e = 0; e < a.length; ++e) if (a[e].obj == t) return e;
+         return -1
+     };
+     this.animate = function (n, i) {
+         if (i && i.animates && !(i.animates.length < 1)) {
+             $(n).data(e, i.animates[i.animates.length - 1].name);
+             var r = o(n);
+             r > -1 ? (a[r].param = i, a[r].frame = 0) : a.push({
+                 obj: n,
+                 frame: 0,
+                 param: i
+             }),
+             s(n, i.animates[0]),
+             $listen(n, "webkitAnimationEnd", t),
+             $listen(n, "animationEnd", t)
+         }
+     };
+     var s = function (t, e) {
+         e && t && window.setTimeout(function () {
+             var n = e.name,
+             i = e.duration + "s",
+             a = e.timing,
+             o = e.count;
+             jQuery(t).css("animation-name", n).css("-webkit-animation-name", n).css("animation-duration", i).css("-webkit-animation-duration", i).css("animation-delay", "").css("-webkit-animation-delay", "0").css("animation-timing-function", a).css("-webkit-animation-timing-function", a).css("animation-iteration-count", o).css("-webkit-animation-iteration-count", o)
+         },
+         1e3 * ("undefined" != e.delay ? e.delay : 0))
+     }
+ };
+        ZMTXIFENBAO_Image = new
+function () {
+    this.loadImage = function (t) {
+        var e = new Image;
+        e.onload = function () {
+            t && t.success && t.success(this)
+        },
+        e.onerror = function () {
+            t && t.fail && t.fail(this)
+        },
+        e.src = t.url
+    },
+    this.clip = function (t, e, n, i, a) {
+        var o, s, r, c;
+        i / a > e / n ? (s = n, o = Math.floor(n * (i / a))) : (o = e, s = Math.floor(e * (a / i))),
+        r = (o - e) / 2,
+        c = (s - n) / 2,
+        $(t).width(o).height(s).css("left", 0 - r + "px").css("top", 0 - c + "px"),
+        t.style.clip = "rect(" + c + "px " + Math.floor(r + e) + "px " + Math.floor(c + n) + "px " + r + "px)"
+    }
+};
+        ZMTXIFENBAO = new
+function () {
+    var e = "",
+    t = 5,
+    i = !1;
+    this.init = function () {
+        n()
+    };
+    var n = function () {
+        $("#playendtips_replay").click(function () {
+            $("#wrapper_play_end").hide(),
+            ZMTXIFENBAO_DA.click("album.view.play.endtip.replay")
+        }),
+        $("#playendtips_stop").click(function () {
+            ZMTXIFENBAO_DA.click("album.view.play.endtip.stop"),
+            window.close(),
+            wx.closeWindow()
+        })
+    }
+    this.isPlayEndTipsShowed = function () {
+        return i
+    },
+    this.setBizId = function (t) {
+        e = t
+    },
+    this.getBizId = function () {
+        return e
+    },
+    this.imgMgr = new
+    function () {
+        var e = "ZMTXIFENBAO_ImageMgr",
+        t = [],
+        i = 0;
+        this.append = function (i) {
+            i && i.url && i.url.length > 0 && t.push({
+                url: i.url
+            })
+        },
+        this.getNextImg = function () {
+            return t.length < 1 ? null : t[i++ % t.length]
+        },
+        this.isAllImgDisplayed = function () {
+            return i > t.length
+        },
+        this.getImgCount = function () {
+            return t.length
+        },
+        this.getDisplayedImgCount = function () {
+            return i
+        },
+        this.getImg = function (e) {
+            return e < t.length ? t[e] : null
+        }
+    }
+};
+        function calcImgClip(t, e, n, i) {
+            var a, o, s, r;
+            return n / i > t / e ? (o = e, a = Math.floor(e * (n / i))) : (a = t, o = Math.floor(t * (i / n))),
+            s = (a - t) / 2,
+            r = (o - e) / 2,
+            {
+                objWidth: a,
+                objHeight: o,
+                clipLeft: s,
+                clipTop: r
+            }
+        }
+        function $listen(t, e, n) {
+            t.addEventListener ? t.addEventListener(e, n, !1) : t.attachEvent && t.attachEvent(e, n)
+        }
+        function $unlisten(t, e, n) {
+            t.removeEventListener ? t.removeEventListener(e, n) : t.detachEvent && t.detachEvent(e, n)
+        }
+        function $transform(t, e) {
+            t.style.transform = t.style["-webkit-transform"] = t.style["-ms-transform"] = e
+        }
+        function hasClass(t, e) {
+            return t.className.match(new RegExp("(\\s|^)" + e + "(\\s|$)"))
+        }
+        function addClass(t, e) {
+            hasClass(t, e) || (t.className += " " + e)
+        }
+        function removeClass(t, e) {
+            if (hasClass(t, e)) {
+                var n = new RegExp("(\\s|^)" + e + "(\\s|$)");
+                t.className = t.className.replace(n, "")
+            }
+        }
+        function T036_pentagon_flare(t, a, e, i) {
+            function n() {
+                s.x = -50 + Math.random() * s.max_x,
+                s.y = Math.random() * s.max_y,
+                s.oFlare.style.left = s.x + "px",
+                s.oFlare.style.top = s.y + "px"
+            }
+            this.max_x = a,
+            this.max_y = e,
+            this.x = -50 + Math.random() * a,
+            this.y = Math.random() * e,
+            this.oFlare = document.createElement("div"),
+            this.oFlare.className = "t036_pentagon " + i,
+            this.oFlare.style.left = this.x + "px",
+            this.oFlare.style.top = this.y + "px",
+            this.oFlare.style.webkitAnimationDuration = 5 + 10 * Math.random() + "s",
+            t.appendChild(this.oFlare);
+            var s = this;
+            window.setTimeout(function () {
+                s.oFlare.style.display = "block"
+            },
+            1e3 + 5e3 * Math.random()),
+            $listen(this.oFlare, "webkitAnimationIteration", n),
+            $listen(this.oFlare, "animationIteration", n)
+        }
+        function t036_effect_leaf(t, a, e) {
+            var i = document.createElement("div");
+            i.className = "t036_effect_leaf",
+            i.innerHTML = "<img>";
+            var n = $(i).find("img");
+            n[0].src = "http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/a05dd098ce.jpg";
+            var s = 48;
+            $(i).width(s).height(s).css("left", Math.random() * a + "px").css("top", "-100px"),
+            n.css("opacity", .8).width(s).height(s),
+            i.style.webkitAnimationName = "kf_t036_leaf_fade, kf_t036_leaf_drop";
+            var r = Math.random() < .5 ? "kf_t036_leaf_clockwiseSpin" : "kf_t036_leaf_counterclockwiseSpinAndFlip";
+            n.css("-webkit-animation-name", r).css("animation-name", r);
+            var o = function (t, a) {
+                return t + Math.random() * (a - t)
+            },
+            l = o(10, 15) + "s",
+            d = o(6, 10) + "s";
+            i.style.webkitAnimationDuration = l + ", " + l;
+            var m = o(0, 10) + "s";
+            i.style.webkitAnimationDelay = m + ", " + m,
+            n[0].style.webkitAnimationDuration = d,
+            t.appendChild(i)
+        }
+        function ZMTXIFENBAO_Create_T036_Leaf(t, a, e) {
+            new t036_effect_leaf(t, a, e)
+        }
+        var params = { max_width: $(window).width(), max_height: $(window).height(), canvas_id: "container" };
+        ZMTXIFENBAO_Album_Template(params);
+        function ZMTXIFENBAO_Album_Template(t) {
+            function a() {
+                d()
+            }
+            var e = t.max_width,
+            i = t.max_height,
+            n = !1,
+            s = 0,
+            r = null,
+            o = $("#" + t.canvas_id),
+            divl = document.createElement("div");
+            divl.id = "EVA_ALBUM_T036",
+            divl.style.width = e + "px",
+            divl.style.height = i + "px",
+            divl.innerHTML = '    <div id="T036_imgbox_wrapper">    </div>    <div id="T036_leaf_wrapper">        <div id="T036_leaf_left"></div>        <div id="T036_leaf_right"></div>        <div id="T036_leaf_rt"></div>        <div id="T036_leaf_top"></div>        <div id="T036_leaf_lights"></div>        <div id="T036_leaf_bottom_m"></div>        <div id="T036_leaf_bottom_l"></div>        <div id="T036_leaf_bottom_r"></div>    </div>',
+            o.append(divl);
+            for (var j = 0; j < mvCfg.pics.length; j++) {
+                ZMTXIFENBAO.imgMgr.append({
+                    url: mvCfg.pics[j]
+                })
+            }
+            m = function () {
+                window.setTimeout(rm, 5e3)
+            };
+            rm = function () {
+                var t = ZMTXIFENBAO.imgMgr.getNextImg();
+                r.show(t.url)
+            };
+            var d = function () {
+                if (1 == n) return void console.log("warning,re init");
+                n = !0;
+                var t = $("#T036_imgbox_wrapper"),
+                a = 4,
+                s = i,
+                o = e,
+                l = parseInt(o / a),
+                d = parseInt(s / a);
+                o = l * a,
+                s = d * a;
+                for (var _ = (e - o) / 2, p = (i - s) / 2, c = $("#T036_leaf_wrapper"), f = 0; a > f; ++f) for (var h = 0; a > h; ++h) {
+                    var g = document.createElement("div");
+                    g.className = "T036_image_wrapper",
+                    g.innerHTML = '<div class="T036_image_front"><img class="T036_image"></div><div class="T036_image_back"><img class="T036_image"></div>',
+                    g.style.left = h * l + "px",
+                    g.style.top = f * d + "px",
+                    g.style.width = l + "px",
+                    g.style.height = d + "px",
+                    t.append(g);
+                    var T = document.createElement("img");
+                    T.className = "T036_image_leaf",
+                    $(T).attr("src", "http://wangjianxun1.test.upcdn.net/img/album_template/k_liangqingxiangyue/a05dd098ce.jpg"),
+                    $(T).data("pos", f * a + h).data("x", _ + h * l + (l - 42) / 2).data("y", p + f * d + (d - 42) / 2),
+                    c.append(T)
+                }
+                for (t.css("left", (e - o) / 2 + "px").css("top", (i - s) / 2 + "px").width(o).height(s), r = new T036Scene(t[0], a, o, s, m), h = 0; 10 > h; h++) ZMTXIFENBAO_Create_T036_Leaf(c[0], e, i);
+                //for ($("#T036_leaf_lights").height(708 * e / 1080), f = 0; 10 > f; ++f) new T036_pentagon_flare(c[0], e, i, "t036_pentagon_big");
+                divl.style.display = "block",
+               s = 0;
+                var t = window.setInterval(function () {
+                    (window.clearInterval(t), rm())
+                },
+                20)
+            };
+            d();
+        }
+        function T036Scene(t, a, e, i, n) {
+            this.imgBox = t;
+            var s = 0,
+            r = this.imgBox.getElementsByClassName("T036_image_wrapper"),
+            o = r.length,
+            l = o,
+            d = function (t) {
+                if (l--, $(this).hasClass("T036_leaf_drop")) {
+                    if ("-webkit-transform" == t.propertyName || "transform" == t.propertyName) {
+                        $(this).css("opacity", 0).removeClass("T036_leaf_drop").addClass("T036_leaf_hide");
+                        var a = $(".T036_image_wrapper").eq(parseInt($(this).data("pos")));
+                        a.find(".T036_image_front").css("opacity", 1),
+                        a.find(".T036_image_back").css("opacity", 0)
+                    }
+                } else $(this).hasClass("T036_leaf_hide") && "opacity" == t.propertyName && $(this).css("-webkit-transition", "none").css("transition", "none").css("-webkit-transform", "none").css("transform", "none").removeClass("T036_leaf_hide");
+                0 == l && n()
+            };
+            $(".T036_image_leaf").each(function () {
+                $listen(this, "webkitTransitionEnd", d),
+                $listen(this, "transitionEnd", d)
+            });
+            var m = function (t) {
+                return 10 + 100 * t
+            },
+            _ = function (t) {
+                return 10 + 100 * (a * a - t)
+            },
+            p = function (t) {
+                return 10 + 300 * parseInt(t / a)
+            },
+            c = function (t) {
+                return 10 + 220 * (a - parseInt(t / a))
+            },
+            f = function (t) {
+                return 10 + 220 * parseInt(t % a)
+            },
+            h = function (t) {
+                return 10 + 220 * (a - parseInt(t % a))
+            },
+            g = function (t) {
+                return 10 + 1e3 * Math.random()
+            },
+            T = [m, _, p, c, f, h, g];
+            this.show = function (t) {
+                l = o;
+                var r = new Image,
+                d = this;
+                r.onload = function () {
+                    for (var n = d.imgBox.getElementsByClassName("T036_image_wrapper"), r = calcImgClip(e, i, this.width, this.height), o = parseInt(e / a), l = parseInt(i / a), m = 0; a > m; ++m) for (var _ = 0; a > _; ++_) {
+                        var p = n[m * a + _];
+                        p.style.display = "block";
+                        var c = p.getElementsByClassName("T036_image_back")[0],
+                        f = c.getElementsByClassName("T036_image")[0];
+                        f.style.width = r.objWidth*0.8 + "px",
+                        f.style.height = r.objHeight * 0.8 + "px";
+                        var h = [0 - r.clipLeft - _ * o, 0 - r.clipTop - m * l];
+                        f.style.left = (h[0] + r.objWidth * 0.1) + "px",
+                        f.style.top = (h[1] + r.objHeight * 0.1) + "px",
+                        f.src = t,
+                        $(c).data("left", h[0]).data("top", h[1]).css("opacity", 0);
+                        var g = p.getElementsByClassName("T036_image_front")[0];
+                        $transform(c, "none"),
+                        $transform(g, "none"),
+                        removeClass(g, "T036_image_front"),
+                        addClass(g, "T036_image_back"),
+                        removeClass(c, "T036_image_back"),
+                        addClass(c, "T036_image_front")
+                    }
+                    var v = 0;
+                    v = d.isAllSceneDisplayed() ? parseInt(Math.random() * T.length) : s,
+                    $(".T036_image_leaf").each(function () {
+                        var t = $(this),
+                        a = 0 - 2 * e + 4 * Math.random() * e;
+                        a = Math.random() > .5 ? 0 - e : e;
+                        var n = -50;
+                        n = Math.random() > .5 ? 0 - i : i,
+                        t.show().css("opacity", .1).css("transform", "translate3d(" + a + "px," + n + "px,0) rotate(-90deg)").css("-webkit-transform", "translate3d(" + a + "px," + n + "px,0) rotate(-90deg)"),
+                        window.setTimeout(function () {
+                            var a = parseInt(t.data("x")),
+                            e = parseInt(t.data("y"));
+                            t.css("-webkit-transition", "-webkit-transform 4.2s,opacity 2s").css("transition", "transform 4.2s,opacity 2s").css("transform", "translate3d(" + a + "px," + e + "px,0) rotate(50deg)").css("-webkit-transform", "translate3d(" + a + "px," + e + "px,0) rotate(50deg)").addClass("T036_leaf_drop").css("opacity", 1)
+                        },
+                        T[v](parseInt(t.data("pos"))))
+                    }),
+                    s++
+                },
+                r.onerror = function () {
+                    n()
+                },
+                r.src = t
+            },
+            this.isAllSceneDisplayed = function () {
+                return s >= T.length
+            }
+        }
+ </script>

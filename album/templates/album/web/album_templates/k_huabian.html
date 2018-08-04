@@ -1,0 +1,422 @@
+<style type="text/css">*{padding:0;margin:0;-webkit-box-sizing:border-box}#container{margin:0 auto;width:500px;height:100%}#album{width:100%;height:815px;position:relative;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/5c295da08f.jpg) no-repeat}#album div,#album img,#album>section,.photo-word{position:absolute}@-webkit-keyframes blink{0%,85%{opacity:1}100%{opacity:0}}@-webkit-keyframes rock{25%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:linear}27%{-webkit-transform:translateY(5px);transform:translateY(5px);-webkit-animation-timing-function:linear}29%{-webkit-transform:translateY(0);transform:translateY(0);-webkit-animation-timing-function:steps(1,end)}35%{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);-webkit-animation-timing-function:steps(1,end)}41%{-webkit-transform:translateY(0) rotateY(180deg);transform:translateY(0) rotateY(180deg);-webkit-animation-timing-function:linear}43%{-webkit-transform:translateY(5px) rotate(10deg) rotateY(180deg);transform:translateY(5px) rotate(10deg) rotateY(180deg);-webkit-animation-timing-function:linear}45%{-webkit-transform:translateY(0) rotateY(180deg);transform:translateY(0) rotateY(180deg);-webkit-animation-timing-function:steps(1,end)}100%,50%{-webkit-transform:translateY(0) rotateY(0);transform:translateY(0) rotateY(0);-webkit-animation-timing-function:steps(1,end)}}@-webkit-keyframes rotate{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes rotateBack{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(-360deg);transform:rotate(-360deg)}}@-webkit-keyframes rotate20{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(20deg);transform:rotate(20deg)}}@-webkit-keyframes rotate30{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(30deg);transform:rotate(30deg)}}@-webkit-keyframes moveUpIn{0%{-webkit-transform:translateY(100px);transform:translateY(100px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes moveDownIn{0%{-webkit-transform:translateY(-100px);transform:translateY(-100px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes moveUpOff{0%{-webkit-transform:translateY(0);transform:translateY(0)}100%{-webkit-transform:translateY(-100px);transform:translateY(-100px)}}@-webkit-keyframes moveDownOff{0%{-webkit-transform:translateY(0);transform:translateY(0)}100%{-webkit-transform:translateY(100px);transform:translateY(100px)}}@-webkit-keyframes flower_zoomIn{0%{-webkit-transform:scale(.3,.3);transform:scale(.3,.3)}100%{-webkit-transform:scale(1,1);transform:scale(1,1)}}@-webkit-keyframes zoomInOff{0%{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:1}100%{-webkit-transform:scale(1.2,1.2);transform:scale(1.2,1.2);opacity:0}}@-webkit-keyframes photo_zoomOutOn{0%,50%{-webkit-transform:scale(1.2,1.2);transform:scale(1.2,1.2);opacity:0}100%{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:1}}@-webkit-keyframes photo_zoomOutOff{0%{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:1}100%{-webkit-transform:scale(.5,.5);transform:scale(.5,.5);opacity:0}}@-webkit-keyframes zoomOutOff{0%{-webkit-transform:scale(1,1);transform:scale(1,1);opacity:1}100%{-webkit-transform:scale(.8,.8);transform:scale(.8,.8);opacity:0}}@-webkit-keyframes zoomToggle{0%,100%{-webkit-transform:scale(1,1);transform:scale(1,1)}50%{-webkit-transform:scale(.95,.95);transform:scale(.95,.95)}}@-webkit-keyframes fadeIn{0%{opacity:0}100%{opacity:1}}@-webkit-keyframes fadeOut{0%{opacity:1}100%{opacity:0}}@-webkit-keyframes leaf1{0%{-webkit-transform:translate(0,0) rotate(0);transform:translate(0,0) rotate(0)}100%{-webkit-transform:translate(430px,430px) rotate(500deg);transform:translate(430px,430px) rotate(500deg)}}@-webkit-keyframes leaf2{0%{-webkit-transform:translate(0,0) rotate(0);transform:translate(0,0) rotate(0)}100%{-webkit-transform:translate(500px,400px) rotate(720deg);transform:translate(500px,400px) rotate(720deg)}}@-webkit-keyframes leaf3{0%{-webkit-transform:translate(0,0) rotate(0);transform:translate(0,0) rotate(0)}100%{-webkit-transform:translate(500px,400px) rotate(200deg);transform:translate(500px,400px) rotate(200deg)}}@-webkit-keyframes star{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:0}10%,90%{opacity:1}100%{-webkit-transform:translateY(-100px);transform:translateY(-100px);opacity:0}}@-webkit-keyframes titlebox{0%{opacity:0}100%{opacity:1}}@-webkit-keyframes fontcolor{0%,100%{color:#91D5C6}25%{color:#8D545C}50%{color:#EF7768}75%{color:#6195C6}}@-webkit-keyframes sec3_moveright{0%{-webkit-transform:translateX(-120px);transform:translateX(-120px)}100%{-webkit-transform:translateX(0);transform:translateX(0)}}@-webkit-keyframes sec3_movedown{0%{-webkit-transform:translateY(-120px);transform:translateY(-120px)}100%{-webkit-transform:translateY(0);transform:translateY(0)}}@-webkit-keyframes sec3_petals{0%{-webkit-transform:translate(0,0) scale(1) rotate(0);transform:translate(0,0) scale(1) rotate(0)}100%{-webkit-transform:translate(400px,700px) scale(1.5) rotate(270deg);transform:translate(400px,700px) scale(1.5) rotate(270deg)}}@-webkit-keyframes sec3_photo_1{0%{-webkit-transform:translate(0,0);transform:translate(0,0)}100%{-webkit-transform:translate(4px,5px);transform:translate(4px,5px);box-shadow:10px 15px 10px rgba(0,0,0,.15)}}@-webkit-keyframes sec3_photo_2{0%{-webkit-transform:translate(0,0);transform:translate(0,0)}100%{-webkit-transform:translate(0,5px);transform:translate(0,5px);box-shadow:10px 15px 10px rgba(0,0,0,.15)}}@-webkit-keyframes sec3_photo_in1{0%{-webkit-transform:rotate(0) scale(.83);transform:rotate(0) scale(.83)}25%{-webkit-transform:rotate(-5.5deg) scale(1) translate(-12px,-15px);transform:rotate(-5.5deg) scale(1) translate(-12px,-15px)}100%{-webkit-transform:rotate(-11.8deg) scale(1) translate(-74px,-20px);transform:rotate(-11.8deg) scale(1) translate(-74px,-20px)}}@-webkit-keyframes sec3_photo_in2{0%{-webkit-transform:rotate(0) scale(.83);transform:rotate(0) scale(.83)}25%{-webkit-transform:rotate(3.5deg) scale(1) translate(0,0);transform:rotate(3.5deg) scale(1) translate(0,0)}60%{-webkit-transform:rotate(13.2deg) scale(1) translate(21px,0);transform:rotate(13.2deg) scale(1) translate(21px,0)}100%{-webkit-transform:rotate(17.8deg) scale(1) translate(57px,6px);transform:rotate(17.8deg) scale(1) translate(57px,6px)}}@-webkit-keyframes sec3_photo_out1{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(-20deg);transform:rotate(-20deg)}}@-webkit-keyframes sec3_photo_out2{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(20deg);transform:rotate(20deg)}}@-webkit-keyframes flower_drop_1{0%{-webkit-transform:translateY(0) rotate(0);transform:translateY(0) rotate(0);opacity:0}30%{opacity:1}100%{-webkit-transform:translateY(100px) rotate(45deg);transform:translateY(100px)
+  rotate(45deg);opacity:0}}@-webkit-keyframes flower_drop_2{0%{-webkit-transform:translateY(0) rotate(0);transform:translateY(0) rotate(0);opacity:0}30%{opacity:1}100%{-webkit-transform:translateY(150px) rotate(90deg);transform:translateY(150px) rotate(90deg);opacity:0}}@-webkit-keyframes sec5_photo_Out{0%{-webkit-transform:translateX(0);transform:translateX(0)}100%{-webkit-transform:translateX(100px);transform:translateX(100px)}}@-webkit-keyframes blossom1{0%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes blossom2{0%,20%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes blossom3{0%,40%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes blossom4{0%,60%{-webkit-transform:scale(0);transform:scale(0)}100%{-webkit-transform:scale(1);transform:scale(1)}}@-webkit-keyframes wither1{0%{-webkit-transform:translate(0,0);transform:translate(0,0)}100%{-webkit-transform:translate(500px,-250px);transform:translate(500px,-250px)}}@-webkit-keyframes wither2{0%{-webkit-transform:translate(0,0);transform:translate(0,0)}100%{-webkit-transform:translate(400px,-120px);transform:translate(400px,-120px)}}@-webkit-keyframes wither3{0%{-webkit-transform:translate(0,0);transform:translate(0,0)}100%{-webkit-transform:translate(300px,-60px);transform:translate(300px,-60px)}}@-webkit-keyframes wither4{0%{-webkit-transform:translate(0,0);transform:translate(0,0)}100%{-webkit-transform:translate(50px,0);transform:translate(50px,0)}}@-webkit-keyframes sec5_photo_rotate_v1{0%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}100%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}}@-webkit-keyframes sec5_photo_rotate_v2{0%{-webkit-transform:rotate(-5deg);transform:rotate(-5deg)}100%{-webkit-transform:rotate(5deg);transform:rotate(5deg)}}@-webkit-keyframes sec5_photo_rotate_h1{0%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}100%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}}@-webkit-keyframes sec5_photo_rotate_h2{0%{-webkit-transform:rotate(-5deg);transform:rotate(-5deg)}100%{-webkit-transform:rotate(5deg);transform:rotate(5deg)}}@-webkit-keyframes sec5_photo_In_v1{0%{-webkit-transform:translate(-200px,-10px) rotate(-15deg);transform:translate(-200px,-10px) rotate(-15deg)}100%{-webkit-transform:translate(0,0) rotate(-15deg);transform:translate(0,0) rotate(-15deg)}}@-webkit-keyframes sec5_photo_In_v2{0%{-webkit-transform:translate(-200px,-50px) rotate(-15deg);transform:translate(-200px,-50px) rotate(-15deg)}100%{-webkit-transform:translate(0,0) rotate(-5deg);transform:translate(0,0) rotate(-5deg)}}@-webkit-keyframes sec5_photo_In_h1{0%{-webkit-transform:translate(-200px,-10px) rotate(15deg);transform:translate(-200px,-10px) rotate(15deg)}100%{-webkit-transform:translate(0,0) rotate(15deg);transform:translate(0,0) rotate(15deg)}}@-webkit-keyframes sec5_photo_In_h2{0%{-webkit-transform:translate(-200px,-50px) rotate(-15deg);transform:translate(-200px,-50px) rotate(-15deg)}100%{-webkit-transform:translate(0,0) rotate(-5deg);transform:translate(0,0) rotate(-5deg)}}@-webkit-keyframes sec6_mum1{0%{-webkit-transform:translate(0,0) rotate(0);transform:translate(0,0) rotate(0)}100%{-webkit-transform:translate(-150px,150px) rotate(45deg);transform:translate(-150px,150px) rotate(45deg)}}@-webkit-keyframes sec6_mum2{0%{-webkit-transform:translate(0,0) rotate(0);transform:translate(0,0) rotate(0)}100%{-webkit-transform:translate(-270px,200px) rotate(45deg);transform:translate(-270px,200px) rotate(45deg)}}@-webkit-keyframes sec6_photo_rotate{0%,100%{-webkit-transform:rotate(10deg);transform:rotate(10deg)}10%{-webkit-transform:rotate(15deg);transform:rotate(15deg)}60%{-webkit-transform:rotate(-15deg);transform:rotate(-15deg)}}@-webkit-keyframes sec6_photo_in{0%{-webkit-transform:rotate(-5deg) scale(1.2);transform:rotate(-5deg) scale(1.2)}100%{-webkit-transform:rotate(10deg) scale(1);transform:rotate(10deg) scale(1)}}@-webkit-keyframes sec6_photo_out{0%{-webkit-transform:rotate(0) scale(1);transform:rotate(0) scale(1)}100%{-webkit-transform:rotate(45deg) scale(.8);transform:rotate(45deg) scale(.8)}}#album>section{width:100%;height:100%;opacity:0;-webkit-transition:opacity 1s ease-out;transition:opacity 1s ease-out;overflow:hidden}.position-center{left:0;right:0;margin-left:auto;margin-right:auto}.position-middle{top:0;bottom:0;margin-top:auto;margin-bottom:auto}.photo-wrap{width:100%;height:100%;z-index:8}.photo{padding:10px;box-sizing:content-box;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/26e3d6c88d.jpg) no-repeat;background-size:cover;box-shadow:20px 25px 10px rgba(0,0,0,.15);z-index:9}.photo-word{width:100%;right:0;left:0;bottom:10px;padding:10px;margin:0 auto;line-height:120%;text-align:center;font-family:微软雅黑;font-size:20px;color:#fff;text-shadow:1px 1px 2px #000}.bottom,.sec-bg,.top{z-index:0}#branch{top:23%;left:-50px;z-index:2}#branch>.bird{z-index:-1;left:140px;top:65px}.bird>.bird-body{width:54px;height:73px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/bb43ae7491.jpg) no-repeat;background-size:cover}.bird>.bird-head{width:32px;height:38px;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/57f18e48a0.jpg) no-repeat;background-size:cover;left:24px;top:-17px;-webkit-animation:rock 12s infinite}.bird-head:after,.bird-head:before{position:absolute;-webkit-animation:blink 1.2s steps(1,start) infinite;content:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/8e85d79963.jpg);z-index:10}.bird-head:before{left:0;top:2px;-webkit-transform:scaleX(.8);transform:scaleX(.8)}.bird-head:after{left:18px;top:8px}#branch>.branch{z-index:0}#branch>.flower{z-index:5}#branch>.flower>img{position:static}#branch>.flower:nth-child(1){-webkit-animation:rotate20 2.5s linear infinite alternate;left:405px;top:20px}#branch>.flower:nth-child(2){-webkit-animation:rotate20 2.2s linear infinite alternate;left:230px;top:75px}#branch>.flower:nth-child(3){left:465px;top:83px;-webkit-animation:rotate30 2.7s linear infinite alternate}#branch>.flower:nth-child(4){left:490px;top:128px;-webkit-animation:rotate 4s linear infinite}#branch>.flower:nth-child(5){left:355px;top:10px;-webkit-animation:rotate20 1.8s linear infinite alternate}#branch>.flower:nth-child(6){left:183px;top:154px;-webkit-animation:rotate20 2.8s linear infinite alternate}#branch>.flower:nth-child(7){left:135px;top:-13px;-webkit-animation:rotate20 2.6s linear infinite alternate}#branch>.flower:nth-child(8){left:250px;top:175px;-webkit-animation:rotate30 3s linear infinite alternate}.leaf{opacity:.8;width:30px;height:40px;position:absolute;z-index:1}.leaf1{left:200px;top:200px;-webkit-animation:leaf1 10s linear infinite}.leaf2{left:200px;top:300px;-webkit-animation:leaf1 10s linear 3s infinite}.leaf3,.leaf4{left:0;top:400px;-webkit-animation:leaf3
+  10s linear infinite}.star{bottom:0;z-index:0}.star>img{opacity:0;bottom:0}.star>img:first-child{-webkit-animation:star 5s linear infinite}.star>img:last-child{-webkit-animation:star 5s linear 2.5s infinite}#titlebox{height:230px;width:500px;top:40%;background:url(http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/122fcd7572.jpg) center no-repeat;filter:alpha(opacity=80);z-index:9}#title{display:table-cell;vertical-align:middle;text-align:center;color:#91D5C6;font-family:"微软雅黑";font-size:22px;width:200px;height:120px;top:40px;margin:auto 0;position:relative;left:200px;overflow:hidden}#sec-2>.photo-wrap>.photo{-webkit-animation:zoomToggle 4s linear infinite}#sec-2>.photo-wrap>.photo.h{width:350px;height:520px}#sec-2>.photo-wrap>.photo.v{width:400px;height:265px}#sec-3>.petals{left:200px;top:-100px;width:150px;height:150px;-webkit-animation:sec3_petals 5s linear infinite;z-index:3}#sec-3>.petals>.petal:nth-child(1){right:0;bottom:0}#sec-3>.petals>.petal:nth-child(2){right:20%;top:0}#sec-3>.petals>.petal:nth-child(3){left:0;bottom:0}#sec-3>.petals>.petal:nth-child(4){left:0;top:40%}#sec-3>.photo-wrap>.photo.h{width:228px;height:364px;-webkit-transform-origin:50% 200%;transform-origin:50% 200%}#sec-3>.photo-wrap>.photo.v{width:364px;height:228px;-webkit-transform-origin:50% 400%;transform-origin:50% 400%}#sec-3>.photo-wrap:nth-of-type(1){-webkit-transform:rotate(-11.8deg) scale(1) translate(-74px,-20px);transform:rotate(-11.8deg) scale(1) translate(-74px,-20px)}#sec-3>.photo-wrap:nth-of-type(2){-webkit-transform:rotate(17.8deg) scale(1) translate(57px,6px);transform:rotate(17.8deg) scale(1) translate(57px,6px);-webkit-transform-origin:50% 80%;transform-origin:50% 80%}#sec-3>.photo-wrap:nth-of-type(1)>.photo.v{top:150px}#sec-3>.photo-wrap:nth-of-type(2)>.photo.v{bottom:150px}#sec-3>.photo-wrap:nth-of-type(1)>.photo.h{top:50px}#sec-3>.photo-wrap:nth-of-type(2)>.photo.h{bottom:50px}#sec-4>.drop-flower{width:25px;height:25px;z-index:10}#sec-4>.drop-flower:nth-child(1){top:20px;left:200px;-webkit-animation:flower_drop_1 2.8s linear infinite}#sec-4>.drop-flower:nth-child(2){top:100px;left:400px;-webkit-animation:flower_drop_2 2s linear infinite}#sec-4>.drop-flower:nth-child(3){top:50px;left:500px;-webkit-animation:flower_drop_1 3s linear infinite}#sec-4>.photo-wrap>.photo{-webkit-animation:zoomToggle 4s linear infinite}#sec-4>.photo-wrap>.photo.h{width:350px;height:520px}#sec-4>.photo-wrap>.photo.v{width:400px;height:265px}#sec-5>.petal>img{position:static}#sec-5>.petal:nth-child(1){left:-103px;top:-80px;-webkit-animation:rotate 20s linear infinite;z-index:5}#sec-5>.petal:nth-child(2){left:124px;top:-73px;-webkit-animation:rotateBack 30s linear infinite;z-index:4}#sec-5>.petal:nth-child(3){left:269px;top:-72px;-webkit-animation:rotateBack 60s linear infinite;-webkit-transform-origin:40% 55%;transform-origin:40% 55%;z-index:3}#sec-5>.petal:nth-child(4){left:427px;top:-60px;-webkit-animation:rotate 60s linear infinite;-webkit-transform-origin:40% 55%;transform-origin:40% 55%;z-index:3}#sec-5>.petal:nth-child(5){left:355px;top:319px;-webkit-animation:rotate 5s linear infinite;z-index:3}#sec-5>.photo-wrap>.photo.h{width:230px;height:350px}#sec-5>.photo-wrap>.photo.v{width:350px;height:230px}#sec-5>.photo-wrap>.photo.v:first-child{bottom:150px;-webkit-animation:sec5_photo_rotate_v1 30s linear infinite alternate}#sec-5>.photo-wrap>.photo.v:last-child{top:150px;-webkit-animation:sec5_photo_rotate_v2 10s linear infinite alternate}#sec-5>.photo-wrap>.photo.h:first-child{bottom:50px;-webkit-animation:sec5_photo_rotate_h1 30s linear infinite alternate}#sec-5>.photo-wrap>.photo.h:last-child{top:50px;-webkit-animation:sec5_photo_rotate_h2 10s linear infinite alternate}#sec-6>.mum{width:35px;height:35px}#sec-6>.mum:nth-child(1){top:-30;left:200px;-webkit-animation:sec6_mum1 3s linear infinite}#sec-6>.mum:nth-child(2){top:-30;left:320px;-webkit-animation:sec6_mum2 3s linear infinite}#sec-6>.photo-wrap>.photo.h,#sec-6>.photo-wrap>.photo.v{-webkit-animation:sec6_photo_rotate 60s linear infinite}#sec-6>.photo-wrap>.photo.h{width:330px;height:500px}#sec-6>.photo-wrap>.photo.v{width:400px;height:265px}</style>
+<body>
+  <main id="container">
+    <div id="album">
+      <section id="sec-1">
+        <div id="titlebox" class="position-center">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/7b6582b320.jpg" alt="">
+          <p id="title"></p>
+        </div>
+        <div id="branch">
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/0f0ee4a503.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/ea9f5cddb0.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/d3ba2dd130.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/9201a6b922.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/db0b54625d.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/903f37468f.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/aa991b9dfe.jpg" alt=""></div>
+          <div class="flower">
+            <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/1e7939fdeb.jpg" alt=""></div>
+          <div class="bird">
+            <div class="bird-body"></div>
+            <div class="bird-head"></div>
+          </div>
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/2f8b2968ab.jpg" class="branch"></img>
+        </div>
+        <div class="star position-center">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/913c39aea3.jpg" alt="" class="position-center">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/e82fe9feb8.jpg" alt="" class="position-center"></div>
+        <img class="leaf leaf1" src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/f796950e41.jpg"></img>
+        <img class="leaf leaf2" src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/f796950e41.jpg"></img>
+        <img class="leaf leaf3" src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/f796950e41.jpg"></img>
+      </section>
+      <section id="sec-2">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/71bf8b3bca.jpg" alt="" class="top position-center">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/cd99203ae5.jpg" alt="" class="bottom position-center">
+        <div class="photo-wrap">
+          <div class="photo v position-center position-middle"></div>
+        </div>
+        <div class="star position-center">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/913c39aea3.jpg" alt="" class="position-center">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/e82fe9feb8.jpg" alt="" class="position-center"></div>
+        <img class="leaf leaf1" src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/f796950e41.jpg"></img>
+        <img class="leaf leaf4" src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/f796950e41.jpg"></img>
+      </section>
+      <section id="sec-3">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/47f1fdcbd5.jpg" alt="" class="top">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/18d3417c9e.jpg" alt="" class="bottom">
+        <div class="photo-wrap">
+          <div class="photo v position-center"></div>
+        </div>
+        <div class="photo-wrap">
+          <div class="photo v position-center"></div>
+        </div>
+        <div class="petals">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/8446b12c1d.jpg" alt="" class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/512e57390e.jpg" alt="" class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/d941d57da1.jpg" alt="" class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/4d5e7f300a.jpg" alt="" class="petal"></div>
+      </section>
+      <section id="sec-4">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/ea9f5cddb0.jpg" alt="" class="drop-flower">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/dc22ff61b2.jpg" alt="" class="drop-flower">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/ea9f5cddb0.jpg" alt="" class="drop-flower">
+        <div class="photo-wrap">
+          <div class="photo h position-center position-middle"></div>
+        </div>
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/c0dd796e78.jpg" alt="" class="sec-bg position-center"></section>
+      <section id="sec-5">
+        <div class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/bacdbfbaeb.jpg" width="280px"></div>
+        <div class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/bacdbfbaeb.jpg" width="200px"></div>
+        <div class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/7ded9a2b17.jpg" width="140px"></div>
+        <div class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/7ded9a2b17.jpg" width="130px"></div>
+        <div class="petal">
+          <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/5481010099.jpg" alt=""></div>
+        <div class="photo-wrap">
+          <div class="photo h position-center"></div>
+          <div class="photo h position-center"></div>
+        </div>
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/f8b91b5780.jpg" alt="" class="bottom position-center"></section>
+      <section id="sec-6">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/affec8b4ce.jpg" alt="" class="mum">
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/affec8b4ce.jpg" alt="" class="mum">
+        <div class="photo-wrap">
+          <div class="photo h position-middle position-center"></div>
+        </div>
+        <img src="http://wangjianxun1.test.upcdn.net/img/album_template/k_huabian/ea2a056d40.jpg" alt="" class="sec-bg position-center"></section>
+    </div>
+  </main>
+  <script>"use strict";
+    function Action(t) {
+      "use strick";
+      var n = this;
+      if (arguments.length < 1 || !arguments[0]) throw new Error("Error in Act");
+      if (this.actDom = document.querySelector("#" + t), !this.actDom) throw new Error("Error in Act");
+      var o = this.actDom.querySelectorAll(".photo"),
+      e = (this.actDom.querySelectorAll(".desc"),
+      function() {}),
+      i = function() {},
+      r = 0,
+      s = 500,
+      c = function() {
+        n.actDom.style.opacity = 1
+      },
+      l = function() {
+        n.actDom.style.opacity = 0
+      };
+      l();
+      var u = function(t, n) {
+        return function() {
+          var o = function(o) {
+            for (var e = document.querySelectorAll(o), i = function(i) {
+              var r = e[i].style.webkitAnimation;
+              r && (e[i].style.webkitAnimation = ""),
+              e[i].style.webkitAnimation = t[o],
+              window.setTimeout(function() {
+                e[i].style.webkitAnimation = r || ""
+              },
+              n)
+            },
+            r = 0; r < e.length; r++) i(r)
+          };
+          for (var e in t) o(e)
+        }
+      };
+      this.getPhotoPlaceNum = function() {
+        return o.length
+      },
+      this.setLoadIn = function(t, n) {
+        e = u(t, n)
+      },
+      this.setLoadOut = function(t, n) {
+        i = u(t, n),
+        r = parseInt(n) || r
+      },
+      this.fill = function(t) {
+        if (0 !== t.length) for (var n = 0; n < o.length; n++) {
+          var e = t[n].cloneNode(),
+          i = o[n].classList;
+          o[n].style.cssText = "";
+          var r = e.width,
+          s = e.height,
+          c = r / s;
+          if (c > 1 ? (i.remove("h"), i.add("v"), e.width = parseFloat(window.getComputedStyle(o[n]).width), e.height = e.width / c, o[n].style.height = e.height + "px") : (i.remove("v"), i.add("h"), e.height = parseFloat(window.getComputedStyle(o[n]).height), e.width = e.height * c, o[n].style.width = e.width + "px"), o[n].innerHTML = "", o[n].appendChild(e), e.alt) {
+            var l = document.createElement("span");
+            l.className = "photo-word",
+            l.innerHTML = e.alt,
+            o[n].appendChild(l)
+          }
+        }
+      },
+      this.progress = Promise.resolve(),
+      this.play = function(t) {
+        return c(),
+        e(),
+        window.setTimeout(function() {
+          i(),
+          l()
+        },
+        t),
+        this.progress = new Promise(function(n, o) {
+          window.setTimeout(function() {
+            n()
+          },
+          t + r - s)
+        }),
+        this.progress
+      }
+    }
+    function Player() {
+      "use strick";
+      function t() {
+        function c() {
+          p = new Promise(function(t, n) {
+            var e = y instanceof Action ? y.play(o) : Promise.resolve();
+            e.then(t, n).
+            catch(function(t) {
+              console.error(t)
+            })
+          }),
+          t()
+        }
+        var v = r.length,
+        m = s.length,
+        y = void 0;
+        if (0 === v) return void console.log("Empty Action Set");
+        if (f >= m - h && !u && !d && (d = n(l, l + h), d.then(function() {
+          d = null
+        })), p || a || f) {
+          var g = function() {
+            y = r[a % (v || 1)];
+            var n = y.getPhotoPlaceNum();
+            if (d instanceof Promise && n > m) return console.log("等待加载..."),
+            d.then(function() {
+              t()
+            }),
+            {
+              v: void 0
+            };
+            var o = f % (m || 1);
+            o + n > m ? y.fill(s.slice(o).concat(s.slice(0, m - o))) : y.fill(s.slice(o, o + n)),
+            Promise.resolve(p).then(function() {
+              1 === e ? (a++, f += n, c()) : p = null
+            }).
+            catch(function(t) {
+              return console.error(t)
+            })
+          } ();
+          if ("object" === ("undefined" == typeof g ? "undefined": _typeof(g))) return g.v
+        } else y = i,
+        c()
+      }
+      function n(t, n) {
+        console.log("开始预加载：" + t + " - " + (n - 1));
+        for (var o = [], e = [], i = function(n) {
+          var i = new Promise(function(o, i) {
+            var r = new Image;
+            r.src = c[n].src,
+            r.alt = c[n].desc,
+            r.onload = function() {
+              console.log("图片载入成功：" + this.src),
+              r.onload = null,
+              e[n - t] = r,
+              o("图片[" + n + "]载入成功")
+            },
+            r.onerror = function() {
+              console.warn("图片载入失败：" + this.src),
+              e[n - t] = null,
+              o("图片[" + n + "]载入失败")
+            }
+          });
+          o.push(i)
+        },
+        r = t; r < n && r < c.length; r++) i(r);
+        return Promise.all(o).then(function(t) {
+          console.log(t),
+          l += e.length;
+          for (var n = 0; n < e.length; n++) null !== e[n] && s.push(e[n]);
+          l >= c.length && (u = !0),
+          console.log("预加载完毕，当前图片队列长度：" + s.length)
+        })
+      }
+      var o = 5e3,
+      e = 0,
+      i = void 0,
+      r = [],
+      s = [],
+      c = [],
+      l = 0,
+      u = !1,
+      h = 5,
+      a = 0,
+      f = 0,
+      d = void 0,
+      p = void 0;
+      this.setTitleAction = function(t) {
+        if (!t instanceof Action) throw new Error;
+        i = t
+      },
+      this.setTitle = function(t) {
+        var n = document.getElementById("title");
+        n && (n.innerHTML = t)
+      },
+      this.addAction = function(t) {
+        if (!t instanceof Action) throw new Error;
+        r.push(t)
+      },
+      this.addPhoto = function(t) {
+        var n = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "";
+        u = !1,
+        c.push({
+          src: t,
+          desc: n
+        })
+      },
+      this.setTimeSpan = function(t) {
+        o = parseInt(t) || o
+      },
+      this.setLoadStride = function(t) {
+        h = parseInt(t) || h
+      },
+      this.replay = function() {
+        var t = this;
+        this.stop(),
+        Promise.resolve(p).then(function() {
+          return t.play()
+        }).
+        catch(function(t) {
+          return console.err(t)
+        })
+      },
+      this.play = function() {
+        1 !== e && (p || (e = 1, t()))
+      },
+      this.stop = function() {
+        e = 0,
+        a = 0,
+        f = 0
+      },
+      this.pause = function() {
+        e = 2
+      }
+    }
+    var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ?
+    function(t) {
+      return typeof t
+    }: function(t) {
+      return t && "function" == typeof Symbol && t.constructor === Symbol && t !== Symbol.prototype ? "symbol": typeof t
+    };
+    Player.prototype.init = function() {
+      var t = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
+      n = this,
+      o = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : "",
+      e = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : {};
+      t.forEach(function(t) {
+        var o = t.substring(t.lastIndexOf("/") + 1);
+        n.addPhoto(t, e[o])
+      }),
+      this.setTitle(o)
+    };</script>
+  <script>"use strict"; !
+    function() {
+      window.player = new Player,
+      window.player.setTimeSpan(7e3);
+      var e = new Action("sec-1");
+      e.setLoadIn({
+        "#branch>.flower>img": "flower_zoomIn 2s linear",
+        "#titlebox": "fadeIn 2s linear",
+        "#title": "fontcolor 1s linear 2s 4"
+      },
+      5e3),
+      e.setLoadOut({
+        "#branch": "zoomOutOff 2s ease-in",
+        "#titlebox": "zoomOutOff 2s ease-in"
+      },
+      1e3);
+      var o = new Action("sec-2");
+      o.setLoadIn({
+        "#sec-2>.top": "moveDownIn 1s linear",
+        "#sec-2>.bottom": "moveUpIn 1s linear",
+        "#sec-2>.photo-wrap": "photo_zoomOutOn 2s linear"
+      },
+      2e3),
+      o.setLoadOut({
+        "#sec-2>.top": "zoomInOff 1s linear",
+        "#sec-2>.bottom": "zoomInOff 1s linear",
+        "#sec-2>.photo-wrap": "photo_zoomOutOff 1s linear"
+      },
+      1e3);
+      var t = new Action("sec-3");
+      t.setLoadIn({
+        "#sec-3>.top": "sec3_movedown 7s linear",
+        "#sec-3>.bottom": "sec3_moveright 7s linear",
+        "#sec-3>.photo-wrap:nth-of-type(1)": "sec3_photo_in1 7s linear",
+        "#sec-3>.photo-wrap:nth-of-type(2)": "sec3_photo_in2 7s linear"
+      },
+      7e3),
+      t.setLoadOut({
+        "#sec-3>.photo-wrap:nth-of-type(1)>.photo": "sec3_photo_out1 1s linear",
+        "#sec-3>.photo-wrap:nth-of-type(2)>.photo": "sec3_photo_out2 1s linear"
+      },
+      1e3);
+      var s = new Action("sec-4");
+      s.setLoadIn({
+        "#sec-4>.photo-wrap": "photo_zoomOutOn 1s linear"
+      },
+      1e3),
+      s.setLoadOut({
+        "#sec-4>.sec-bg": "zoomInOff 1s linear .2s",
+        "#sec-4>.photo-wrap": "zoomInOff 1s linear"
+      },
+      1e3);
+      var n = new Action("sec-5");
+      n.setLoadIn({
+        "#sec-5>.photo-wrap>.photo.v:first-child": "sec5_photo_In_v1 1s linear",
+        "#sec-5>.photo-wrap>.photo.v:last-child": "sec5_photo_In_v2 1s linear",
+        "#sec-5>.photo-wrap>.photo.h:first-child": "sec5_photo_In_h1 1s linear",
+        "#sec-5>.photo-wrap>.photo.h:last-child": "sec5_photo_In_h2 1s linear",
+        "#sec-5>.petal:nth-child(1)": "blossom1 .4s linear",
+        "#sec-5>.petal:nth-child(2)": "blossom2 .6s linear",
+        "#sec-5>.petal:nth-child(3)": "blossom3 .8s linear",
+        "#sec-5>.petal:nth-child(4)": "blossom4 1s linear"
+      },
+      1e3),
+      n.setLoadOut({
+        "#sec-5>.photo-wrap": "sec5_photo_Out 1s linear",
+        "#sec-5>.petal:nth-child(1)": "wither1 1s linear",
+        "#sec-5>.petal:nth-child(2)": "wither2 1s linear",
+        "#sec-5>.petal:nth-child(3)": "wither3 1s linear",
+        "#sec-5>.petal:nth-child(4)": "wither4 1s linear"
+      },
+      1e3);
+      var p = new Action("sec-6");
+      p.setLoadIn({
+        "#sec-6>.photo-wrap>.photo": "sec6_photo_in 1s linear"
+      },
+      1e3),
+      p.setLoadOut({
+        "#sec-6>.photo-wrap": "sec6_photo_out 1s linear"
+      },
+      1e3),
+      window.player.setTitleAction(e),
+      window.player.addAction(o),
+      window.player.addAction(t),
+      window.player.addAction(s),
+      window.player.addAction(n),
+      window.player.addAction(p);
+      player.init(slider_images_url, e_desc, words),
+      player.play()
+    } ();</script>

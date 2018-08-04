@@ -1,3 +1,7 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<link rel="stylesheet" href="{% static 'base/common/lib/dragula/dragula.css' %}"/>
 <style type="text/css">
     ul, p, label{
         margin-bottom: auto;
@@ -15,11 +19,21 @@
         content: ' ';
         display: table;
     }
+    #album .weui-uploader__file .el{
+        background: no-repeat center center;
+        background-size: cover;
+    }
+    .el.gu-mirror{
+        max-width: 79px!important;
+        max-height: 79px!important;
+        background: no-repeat center center;
+        background-size: cover;
+    }
 </style>
 
 {% verbatim %}
 <v-touch id="album" v-on:panright="hide" v-cloak>
-    <p class="weui-cells__title">照片上传</p>
+    <p class="weui-cells__title">照片上传(拖动照片更换顺序)</p>
     <div class="weui-cells weui-cells_form" id="uploaderCustom">
         <div class="weui-cell">
             <div class="weui-cell__bd">
@@ -29,10 +43,10 @@
                         <ul class="weui-uploader__files" id="uploaderCustomFiles">
                             <li class="weui-uploader__file"
                                 :data-seq="picture.seq"
-                                :style="'background-image: url(' + picture.image + ');'"
                                 @click="displayPicture(picture)"
-                                v-for="picture in album.picture_list"></li>
-
+                                v-for="picture in album.picture_list">
+                                <div class="el w-100 h-100" :style="'background-image: url(' + picture.image + ');'" :data-id="picture.id"></div>
+                            </li>
                         </ul>
                         <div class="weui-uploader__input-box"><input id="uploaderCustomInput"
                                                                      class="weui-uploader__input" type="file"
@@ -45,27 +59,27 @@
 
     <p class="weui-cells__title">相册模板</p>
     <div class="weui-cells">
-        <span class="weui-cell weui-cell_access">
+        <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap="enterSelectTemplate">
             <div class="weui-cell__hd"><img :src="album.template_data ? (album.template_data.cover_url || album.template_data.cover) : ''"
                                             class="d-block"
                                             alt=""
                                             style="width:20px;height:20px;margin-right:5px;"></div>
-            <div class="weui-cell__bd weui-cell_primary" @click="enterSelectTemplate">
+            <div class="weui-cell__bd weui-cell_primary">
                 <p>{{ album.template_data ? album.template_data.name : '未选择' }}</p>
             </div>
-            <span class="weui-cell__ft" @click="enterSelectTemplate"></span>
-        </span>
+            <span class="weui-cell__ft"></span>
+        </v-touch>
     </div>
 
     <p class="weui-cells__title">相册音乐</p>
     <div class="weui-cells">
-        <span class="weui-cell weui-cell_access">
+        <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap="enterSelectMusic">
             <div class="weui-cell__hd"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></div>
-            <div class="weui-cell__bd weui-cell_primary" @click="enterSelectMusic">
+            <div class="weui-cell__bd weui-cell_primary">
                 <p>{{ album.music_data ? album.music_data.name : '未选择' }}</p>
             </div>
-            <span class="weui-cell__ft" @click="enterSelectMusic"></span>
-        </span>
+            <span class="weui-cell__ft"></span>
+        </v-touch>
     </div>
 </v-touch>
 {% endverbatim %}
@@ -73,12 +87,14 @@
 {% include './template_select.html' %}
 {% include './music_select.html' %}
 
+<script src="{% static 'base/common/lib/dragula/dragula.js' %}"></script>
 <script type="text/javascript">
     $.extend(context, {
         pk: {{ pk }},
         canHideEditor: false,
         albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
         albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
+        albumPictureExchangeApiUrl: '{% url "album:web:api:album-exchange-pictures" pk %}',
 
         selectTemplate: function (template) {
             if (aVue.album.template_data && template.id == aVue.album.template_data.id) {
@@ -114,6 +130,7 @@
                 albumShowState: '',
 
                 pictureSeq: 0,
+                pictureDrake: null,
             },
             methods: {
                 getAlbum: function () {
@@ -121,6 +138,9 @@
                     http.get(context.albumDetailApiUrl, {}, function (res) {
                         vue.album = res;
                         vue.getPictureSeq();
+                        Vue.nextTick(function () {
+                            vue.bindDragPictures();
+                        });
                     });
                 },
                 getPictureSeq: function () {
@@ -136,12 +156,11 @@
                     var gallery = weui.gallery(picture.image, {
                         onDelete: function () {
                             if (confirm('确定删除该图片？')) {
+                                var pictureList = vue.album.picture_list;
+                                pictureList.splice(pictureList.indexOf(picture), 1);
                                 http.delete(context.albumPictureApiUrl, {
                                     picture__id: picture.id,
-                                }, function () {
-                                    var pictureList = vue.album.picture_list;
-                                    pictureList.splice(pictureList.indexOf(picture), 1);
-                                })
+                                }, function () {})
                             }
                             gallery.hide();
                         }
@@ -173,6 +192,52 @@
                 enterSelectTemplate: function () {
                     tVue.templateId = this.album.template_data ? this.album.template_data.id : null;
                     tVue.show();
+                },
+                bindDragPictures: function () {
+                    var vue = this;
+                    if (vue.pictureDrake) {
+                        vue.pictureDrake.destroy();
+                    }
+                    var containers = $(vue.$el).find('.weui-uploader__file').toArray();
+                    var lastTarget;
+                    var drake = dragula(containers, {
+                        accepts: function (el, target, source, sibling) {
+                            lastTarget = target;
+                            return false;
+                        },
+                    });
+                    drake.on('drag', function (el, source) {
+                        lastTarget = null;
+                    });
+                    drake.on('cancel', function (el, container, source) {
+                        var pictureId = $(el).attr('data-id');
+                        var lastPictureId = lastTarget ? $(lastTarget).find('.el').attr('data-id') : null;
+                        if (lastPictureId && pictureId != lastPictureId) {
+                            var pictureMap = {};
+                            $.each(vue.album.picture_list, function (i, picture) {
+                                pictureMap[picture.id] = picture;
+                            });
+                            var lPicture = pictureMap[pictureId];
+                            var rPicture = pictureMap[lastPictureId];
+                            var lSeq = lPicture.seq;
+                            var rSeq = rPicture.seq;
+                            lPicture.seq = rSeq;
+                            rPicture.seq = lSeq;
+                            vue.album.picture_list.sort(function (a, b) {
+                                if (a.seq < b.seq) {
+                                    return -1;
+                                } else {
+                                    return 1;
+                                }
+                            });
+                            http.post(context.albumPictureExchangeApiUrl, {
+                                l_picture_id: pictureId,
+                                r_picture_id: lastPictureId,
+                            }, function () {});
+                        }
+
+                    });
+                    vue.pictureDrake = drake;
                 },
             },
             mounted: function () {
@@ -235,13 +300,18 @@
                                 return 1;
                             }
                         });
+                        Vue.nextTick(function () {
+                            vue.bindDragPictures();
+                        });
                         // return true; // 阻止默认行为，不使用默认的成功态
                     },
                     onError: function (err) {
                         // return true; // 阻止默认行为，不使用默认的失败态
                     }
                 });
-            }
+            },
+
+
 
         });
     });

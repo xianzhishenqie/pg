@@ -6,6 +6,15 @@
     transform: translate(-50%, -50%);
 }
 
+.pg-mask{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+}
+
 .w-80{
     width: 80%;
 }
@@ -30,4 +39,3 @@
 .h-95{
     height: 95%;
 }
-

@@ -1,0 +1,944 @@
+<style type="text/css">
+
+*
+{
+    padding: 0px;
+    margin: 0px;
+    -webkit-box-sizing: border-box;
+}
+
+body
+{
+    background-color: white;
+}
+
+#container
+{
+    width: 500px;
+    height: 815px;
+    position: absolute;
+    overflow: hidden;
+}
+#container > div,#container > img
+{
+    position: absolute;
+}
+.img
+{
+    position: absolute;
+}
+#page1
+{
+    opacity: 0;
+}
+#kuang1-0
+{
+    left: 0px;
+    top: 0px;
+    /*opacity: 0;*/
+}
+#kuang1-1
+{
+    left: -50px;
+    top: 493px;
+    /*opacity: 0;*/
+}
+#div1v
+{
+    position: absolute;
+    width: 500px;
+    height: 750px;
+    background-color: #ccc;
+    top: -220px;
+    overflow: hidden;
+    /*opacity: 0;*/
+}
+#div1h
+{
+    position: absolute;
+    width: 600px;
+    height: 415px;
+    background-color: #ccc;
+    top: 115px;
+    left: 0px;
+    overflow: hidden;
+}
+
+#page2
+{
+    opacity: 0;
+}
+#kuang2-0
+{
+    top: 0px;
+}
+#kuang2-1
+{
+    top: 481px;
+}
+#div2h
+{
+    position: absolute;
+    top: 60px;
+    width: 700px;
+    height: 475px;
+    background-color: #ccc;
+    overflow: hidden;
+    left: -200px;
+}
+#div2v
+{
+    position: absolute;
+    top: 57px;
+    width: 500px;
+    height: 750px;
+    background-color: #ccc;
+    overflow: hidden;
+}
+
+#page3
+{
+    opacity: 0;
+}
+#kuang3-0
+{
+    top: 0px;
+    -webkit-transform-origin: 100% 00%;
+}
+#kuang3-1
+{
+    top: 669px;
+    -webkit-transform-origin: 0% 100%;
+}
+#div3v
+{
+    position: absolute;
+    width: 500px;
+    height: 750px;
+    top: 0px;
+    overflow: hidden;
+}
+#div3h
+{
+    position: absolute;
+    width: 750px;
+    height: 544px;
+    top: 199px;
+    overflow: hidden;
+}
+
+#page4
+{
+    opacity: 0;
+}
+#kuang4-0
+{
+    top: 0px;
+    left: 0px;
+}
+#kuang4-1
+{
+    top: 451px;
+    left: -40px;
+}
+#div4h
+{
+    width: 680px;
+    height: 454px;
+    position: absolute;
+    overflow: hidden;
+    top: 33px;
+    left: -180px;
+}
+#div4v
+{
+    width: 500px;
+    height: 750px;
+    overflow: hidden;
+    top: 33px;
+    position: absolute;
+}
+#leaf1-0
+{
+    left: -30px;
+    top: 50px;
+    /*-webkit-animation: leaf1 10s linear both;*/
+}
+#leaf1-1
+{
+    left: -40px;
+    top: 200px;
+    /*-webkit-animation: leaf1 9s 3s linear both;*/
+}
+#leaf2-0
+{
+    left: 96px;
+    top: 200px;
+    opacity: 0;
+}
+#leaf2-1
+{
+    left: 90px;
+    top: 400px;
+    /*-webkit-animation: leaf2 8s 2s linear both;*/
+    opacity: 0;
+}
+#leaf3-0
+{
+    left: 341px;
+    top: 27px;
+    position: absolute;
+}
+#leaf3-1
+{
+    left: 0px;
+    top: 530px;
+    position: absolute;
+    width: 30px;
+    height: 45px;
+}
+#leaf3-11
+{
+    position: absolute;
+
+}
+#leaf4-0
+{
+    left: 500px;
+    top: 215px;
+
+}
+#leaf4-1
+{
+    left: 500px;
+    top: 315px;
+
+}
+#leaf4-2
+{
+    top: 700px;
+    left: -50px;
+
+}
+#leaf5-0
+{
+    left: 9px;
+    top: 0px;
+
+}
+#leaf5-1
+{
+    left: 127px;
+    top: 0px;
+
+}
+#leaf5-2
+{
+    left: 203px;
+    top: 0px;
+
+}
+.wordspan
+{
+    width: 420px;
+    color: #fff;
+    font-family: bold;
+    text-shadow: 1px 1px 3px #000;
+    font-size: 28px;
+    position: absolute;
+    text-align: center;
+    font-weight: bold;
+    left: 40px;
+}
+</style>
+<style type="text/css">
+@-webkit-keyframes bg1
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(-142px,0px);}
+}
+@-webkit-keyframes fadein
+{
+    from  {opacity: 0}
+    to    {opacity: 1}
+}
+@-webkit-keyframes fadeout
+{
+    from  {opacity: 1}
+    to    {opacity: 0}
+}
+@-webkit-keyframes kuang1-0
+{
+    0%    {-webkit-transform: translate(0px,0px);}
+    /*20%   {-webkit-transform: translate(-10px,0px);}*/
+    100%  {-webkit-transform: translate(-50px,0px);}
+}
+@-webkit-keyframes kuang1-1
+{
+    0%    {-webkit-transform: translate(0px,0px);}
+    /*20%   {-webkit-transform: translate(10px,0px);}*/
+    100%  {-webkit-transform: translate(50px,0px);}
+}
+@-webkit-keyframes div1v_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(0px,320px);}
+}
+@-webkit-keyframes div1h_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(-100px,0px);}
+}
+@-webkit-keyframes kuang2-0
+{
+    0%   {-webkit-transform: translate(0px,-20px);}
+    50%  {-webkit-transform: translate(0px,0px);}
+    100% {-webkit-transform: translate(0px,-18px);}
+}
+@-webkit-keyframes kuang2-1
+{
+    0%   {-webkit-transform: translate(0px,30px);}
+    50%  {-webkit-transform: translate(0px,0px);}
+    100% {-webkit-transform: translate(0px,15px);}
+}
+@-webkit-keyframes div2v_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(0px,-260px);}
+}
+@-webkit-keyframes div2h_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(200px,0px);}
+}
+@-webkit-keyframes kuang3-0
+{
+    from  {-webkit-transform: scale(1.1,1);}
+    to    {-webkit-transform: scale(1,1);}
+}
+@-webkit-keyframes div3v_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(0px,195px);}
+}
+@-webkit-keyframes div3h_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(-250px,0px);}
+}
+@-webkit-keyframes kuang4-0_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(40px,0px);}
+}
+@-webkit-keyframes kuang4-1_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(-40px,0px);}
+}
+@-webkit-keyframes kuang4-0_out
+{
+    from  {-webkit-transform: translate(40px,0px);}
+    to    {-webkit-transform: translate(0px,0px);}
+}
+@-webkit-keyframes kuang4-1_out
+{
+    from  {-webkit-transform: translate(-40px,0px);}
+    to    {-webkit-trasnform: translate(0px,0px);}
+}
+@-webkit-keyframes div4h_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(180px,0px);}
+}
+@-webkit-keyframes div4v_in
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(0px,-203px);}
+}
+@-webkit-keyframes leaf1
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(0deg);}
+    to    {-webkit-transform: translate(550px,450px) rotate(-360deg);}
+}
+@-webkit-keyframes leaf2
+{
+    0%    {-webkit-transform: translate(0px,0px) rotate(0deg);opacity: 0}
+    20%   {-webkit-transform: translate(80px,60px) rotate(-30deg);opacity: 1}
+    100%  {-webkit-transform: translate(400px,300px) rotate(-180deg);opacity: 1}
+}
+@-webkit-keyframes leaf3-0
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(0px,30px);}
+}
+@-webkit-keyframes rotating
+{
+    from  {-webkit-transform: rotate(0deg);}
+    to    {-webkit-transform: rotate(360deg);}
+}
+@-webkit-keyframes leaf3-1
+{
+    0%    {-webkit-transform: translate(0px,0px);-webkit-animation-timing-function: ease-out;}
+    16%   {-webkit-transform: translate(80px,-90px);-webkit-animation-timing-function: ease-in;}
+    32%   {-webkit-transform: translate(160px,0px);-webkit-animation-timing-function: ease-out;}
+    48%   {-webkit-transform: translate(240px,-90px);-webkit-animation-timing-function: ease-in;}
+    64%   {-webkit-transform: translate(320px,0px);-webkit-animation-timing-function: ease-out;}
+    80%   {-webkit-transform: translate(400px,-90px);-webkit-animation-timing-function: ease-in;}
+    96%   {-webkit-transform: translate(480px,0px);-webkit-animation-timing-function: ease-out;}
+    100%  {-webkit-transform: translate(480px,0px);-webkit-animation-timing-function: ease-out;}
+}
+
+@-webkit-keyframes leaf4-0
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(0deg);}
+    to    {-webkit-transform: translate(-550px,100px) rotate(360deg);}
+}
+@-webkit-keyframes leaf4-2
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(0deg);}
+    to    {-webkit-transform: translate(550px,-50px) rotate(360deg);}
+}
+@-webkit-keyframes leaf5
+{
+    0%   {-webkit-transform: translate(0px,0px) rotate(0deg);opacity: 0}
+    20%  {-webkit-transform: translate(100px,100px) rotate(72deg);opacity: 1}
+    100% {-webkit-transform: translate(500px,500px) rotate(360deg);opacity: 1}
+}
+</style>
+
+<div id='container'>
+    <img id='bg1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/052ea8becc.jpg'>
+
+    <div id='pagetitle' style='position:absolute;top:176px;left:121px;opacity:0;'>
+        <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/7c7933850f.jpg'>
+        <div style='position:absolute;width:180px;height:200px;top:112px;left:55px;overflow:hidden;display:table;'>
+            <div id='titlecontent' style='width:180px;height:200px;vertical-align:middle;display:table-cell;text-align:center;font-size:25px;line-height:45px;color:#7B0800;'></div>
+        </div>
+    </div>
+
+    <div id='page1'>
+        <div id='div1v'>
+            <img id='img1v' class='img'>
+        </div>
+
+        <div id='div1h'>
+            <img id='img1h' class='img'>
+        </div>
+
+        <img id='kuang1-0' class='img' width='550' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/67f6bddc9c.jpg'>
+        <img id='kuang1-1' class='img' width='550' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/1ebca95da8.jpg'>
+        <div id='word1' style='top:533px;' class='wordspan'></div>
+    </div>
+
+    <div id='page2'>
+
+        <div id='div2v'>
+            <img id='img2v' class='img'>
+        </div>
+
+
+        <div id='div2h'>
+            <img id='img2h' class='img'>
+        </div>
+
+        <img id='leaf3-0' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/2f5ee1d51a.jpg'>
+        <div id='leaf3-1'>
+            <img id='leaf3-11' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/2f5ee1d51a.jpg'>
+        </div>
+
+        <img id='kuang2-0' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/67068dc9bf.jpg'>
+        <img id='kuang2-1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/930f57c3c6.jpg'>
+
+        <div id='word2' style='top:538px;' class='wordspan'></div>
+
+    </div>
+
+    <div id='page3'>
+
+        <div id='div3v'>
+            <img id='img3v' class='img'>
+        </div>
+
+        <div id='div3h'>
+            <img id='img3h' class='img'>
+        </div>
+
+        <img id='kuang3-0' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/49aa5d374f.jpg'>
+        <img id='kuang3-1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/c9a4213ecd.jpg'>
+
+        <img id='leaf4-0' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/8f22ed064b.jpg'>
+        <img id='leaf4-1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/8f22ed064b.jpg'>
+        <img id='leaf4-2' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/8f22ed064b.jpg'>
+
+        <div id='word3' style='top:151px;' class='wordspan'></div>
+
+    </div>
+
+    <div id='page4'>
+
+        <div id='div4v'>
+            <img id='img4v' class='img'>
+        </div>
+        <div id='div4h'>
+            <img id='img4h' class='img'>
+        </div>
+
+        <img id='leaf5-0' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/0c49450fb6.jpg'>
+        <img id='leaf5-1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/0c49450fb6.jpg'>
+        <img id='leaf5-2' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/0c49450fb6.jpg'>
+
+        <img id='kuang4-0' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/cafa6851f0.jpg'>
+        <img id='kuang4-1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/e762e28917.jpg'>
+        <div id='word4' style='top:492px;' class='wordspan'></div>
+
+    </div>
+
+    <img id='leaf1-0' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/337f3b3e21.jpg'>
+    <img id='leaf1-1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/337f3b3e21.jpg'>
+
+    <img id='leaf2-0' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/0c49450fb6.jpg'>
+    <img id='leaf2-1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_autumn/0c49450fb6.jpg'>
+
+
+</div>
+
+<script>
+function id(name)
+{
+    return document.getElementById(name)
+}
+
+function showtitle()
+{
+    id('bg1').style.webkitAnimation = 'bg1 6s linear both';
+    id('pagetitle').style.webkitAnimation = 'fadein 1s linear both';
+    id('titlecontent').innerHTML = e_desc;
+
+    id('leaf1-0').style.webkitAnimation = 'leaf1 10s linear both';
+    id('leaf1-1').style.webkitAnimation = 'leaf1 9s 3s linear both';
+
+    // setTimeout(distitle,6000)
+}
+
+function zimeitixfb()
+{
+    setImage('1');
+    id('pagetitle').style.webkitAnimation = 'fadeout 1s linear both';
+
+    id('page1').style.webkitAnimation = 'fadein 1s linear both';
+    id('kuang1-0').style.webkitAnimation = 'kuang1-0 7s linear both';
+    id('kuang1-1').style.webkitAnimation = 'kuang1-1 7s linear both';
+
+    id('div1v').style.webkitAnimation = 'div1v_in 7s linear both';
+    id('div1h').style.webkitAnimation = 'div1h_in 7s linear both';
+
+    id('kuang2-0').style.webkitAnimation = '';
+    id('kuang2-1').style.webkitAnimation = '';
+    id('div2h').style.webkitAnimation = '';
+    id('div2v').style.webkitAnimation = '';
+
+    id('leaf2-0').style.webkitAnimation = 'leaf2 8s linear both';
+    id('leaf2-1').style.webkitAnimation = 'leaf2 8s 2s linear both';
+
+    id('leaf3-0').style.webkitAnimation = '';
+    id('leaf3-1').style.webkitAnimation = '';
+    id('leaf3-11').style.webkitAnimation = '';
+
+    timeout[1] = setTimeout(show2, 7000)
+}
+
+function show2()
+{
+    setImage('2');
+
+    id('page1').style.webkitAnimation = 'fadeout 1s linear both';
+
+    id('page2').style.webkitAnimation = 'fadein 1s linear both';
+    id('kuang2-0').style.webkitAnimation = 'kuang2-0 1.5s linear both';
+    id('kuang2-1').style.webkitAnimation = 'kuang2-1 1.5s linear both';
+
+    id('div2v').style.webkitAnimation = 'div2v_in 7s linear both';
+    id('div2h').style.webkitAnimation = 'div2h_in 7s linear both';
+
+    id('kuang3-0').style.webkitAnimation = '';
+    id('kuang3-1').style.webkitAnimation = '';
+    id('div3h').style.webkitAnimation = '';
+    id('div3v').style.webkitAnimation = '';
+
+    id('leaf3-0').style.webkitAnimation = 'leaf3-0 1s 0.5s linear both';
+    id('leaf3-1').style.webkitAnimation = 'leaf3-1 8s linear both';
+    id('leaf3-11').style.webkitAnimation = 'rotating 2s linear infinite';
+
+    id('leaf4-0').style.webkitAnimation = '';
+    id('leaf4-1').style.webkitAnimation = '';
+    id('leaf4-2').style.webkitAnimation = '';
+
+    timeout[2] = setTimeout(show3,7000)
+}
+
+function show3()
+{
+    setImage('3');
+
+    id('page2').style.webkitAnimation = 'fadeout 1s linear both';
+
+    id('page3').style.webkitAnimation = 'fadein 1s linear both';
+    id('kuang3-0').style.webkitAnimation = 'kuang3-0 2s linear both';
+    id('kuang3-1').style.webkitAnimation = 'kuang3-0 2s linear both';
+
+    id('div3h').style.webkitAnimation = 'div3h_in 7s linear both';
+    id('div3v').style.webkitAnimation = 'div3v_in 7s linear both';
+
+    id('kuang4-0').style.webkitAnimation = '';
+    id('kuang4-1').style.webkitAnimation = '';
+    id('div4h').style.webkitAnimation = '';
+    id('div4v').style.webkitAnimation = '';
+
+    id('leaf4-0').style.webkitAnimation = 'leaf4-0 7s linear both';
+    id('leaf4-1').style.webkitAnimation = 'leaf4-0 7s linear both';
+    id('leaf4-2').style.webkitAnimation = 'leaf4-2 7s linear both';
+
+    id('leaf5-0').style.webkitAnimation = '';
+    id('leaf5-1').style.webkitAnimation = '';
+    id('leaf5-2').style.webkitAnimation = '';
+
+    timeout[3] = setTimeout(show4,7000)
+}
+
+function show4()
+{
+    setImage('4');
+
+    id('page3').style.webkitAnimation = 'fadeout 1s linear both';
+
+    id('page4').style.webkitAnimation = 'fadein 1s linear both';
+    id('kuang4-0').style.webkitAnimation = 'kuang4-1_in 2s ease-out both';
+    id('kuang4-1').style.webkitAnimation = 'kuang4-0_in 2s ease-out both';
+
+    id('div4h').style.webkitAnimation = 'div4h_in 7s linear both';
+    id('div4v').style.webkitAnimation = 'div4v_in 7s linear both';
+
+    id('kuang1-0').style.webkitAnimation = '';
+    id('kuang1-1').style.webkitAnimation = '';
+    id('div1h').style.webkitAnimation = '';
+    id('div1v').style.webkitAnimation = '';
+
+    id('leaf5-0').style.webkitAnimation = 'leaf5 8s linear both';
+    id('leaf5-1').style.webkitAnimation = 'leaf5 8s 2s linear both';
+    id('leaf5-2').style.webkitAnimation = 'leaf5 7s 1s linear both';
+
+    timeout[4] = setTimeout(show1,7000)
+}
+
+function show1()
+{
+    setImage('1');
+    id('page4').style.webkitAnimation = 'fadeout 1s linear both';
+    id('kuang4-0').style.webkitAnimation = 'kuang4-1_out 2s ease-in both';
+    id('kuang4-1').style.webkitAnimation = 'kuang4-0_out 2s ease-in both';
+
+    id('page1').style.webkitAnimation = 'fadein 1s linear both';
+    id('kuang1-0').style.webkitAnimation = 'kuang1-0 7s linear both';
+    id('kuang1-1').style.webkitAnimation = 'kuang1-1 7s linear both';
+
+    id('div1v').style.webkitAnimation = 'div1v_in 7s linear both';
+    id('div1h').style.webkitAnimation = 'div1h_in 7s linear both';
+
+    id('kuang2-0').style.webkitAnimation = '';
+    id('kuang2-1').style.webkitAnimation = '';
+    id('div2h').style.webkitAnimation = '';
+    id('div2v').style.webkitAnimation = '';
+
+    id('leaf2-0').style.webkitAnimation = '';
+    id('leaf2-1').style.webkitAnimation = '';
+
+    timeout[5] = setTimeout(show2,7000)
+
+}
+
+call_me(load_images)
+
+
+var image_size_width=[];
+var image_size_height=[];
+var image_url_index=0;
+var have_num = 0;
+var error_num = 0;
+var canshow = true;
+var reshow = false;
+var delaytime = 5000;
+var timeout = [];
+var showfont = false;
+var imgtype = 0;
+
+function load_images()
+{
+    reshow = false;
+    image_size_width=[];
+    image_size_height=[];
+    Onload_imgs_url=[];
+    image_url_index=0;
+    have_num = 0;
+    error_num = 0;
+    begin_titletime = new Date();
+    begin_titletime = begin_titletime.getTime();
+    canshow = true;
+    showtitle();
+    bl_keepload = 'first';
+    // loading_first();
+    step_load();
+}
+
+function image_onerror(event)
+{
+    var img = event.target;
+    var index = img.index;
+    if(index<step_loadnum)
+        error_num ++;
+    Onload_imgs_url[index] = 'not find';
+
+    if((have_num+error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixfb();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixfb();
+                },dis_titletime);
+        }
+    }
+}
+
+function image_onload(event)
+{
+    if(reshow == true)
+        return;
+
+    var img = event.target;
+    var index = img.index;
+
+    if(index<step_loadnum)
+    {
+        have_num++;
+    }
+    Onload_imgs_url[index] = img.src;
+    image_size_height[index] = img.height;
+    image_size_width[index] = img.width;
+
+    console.log(Onload_imgs_url[index]);
+
+    if((have_num + error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixfb();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixfb();
+                },dis_titletime);
+        }
+
+    }
+}
+//每次执行加载后5张图片
+var bl_keepload = 'first';
+var step_loadnum = 5;
+function step_load()
+{
+    var load_num = 0
+    //初步加载X张
+    if(image_url_index  == 0 && bl_keepload == 'first')
+    {
+        console.log('loading continue');
+        if(slider_images_url.length > step_loadnum)
+        {
+            load_num = step_loadnum;
+            bl_keepload = 'next';
+        }
+        else
+        {
+            load_num = slider_images_url.length;
+            bl_keepload = 'end';
+        }
+        for(var i = 0; i< load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+    else if(bl_keepload == 'end')
+    {
+        return;
+    }
+    else
+    {
+         console.log('loading continue');
+        if(slider_images_url.length - image_url_index >step_loadnum*2)
+        {
+            load_num = step_loadnum;
+        }
+        else
+        {
+            load_num = slider_images_url.length - image_url_index - step_loadnum;
+            bl_keepload = 'end';
+        }
+        for(var i = image_url_index +step_loadnum; i< image_url_index + step_loadnum + load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+}
+
+var divwidth  = {'1h':600,'1v':500,'2h':700,'2v':500,'3h':750,'3v':500,'4h':680,'4v':500};
+var divheight = {'1h':415,'1v':750,'2h':475,'2v':750,'3h':544,'3v':750,'4h':454,'4v':750};
+function setImage(idname)
+{
+    if(reshow == true)
+        return;
+
+    while(Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading')
+    {
+        if(image_url_index % step_loadnum == 0)
+        {
+            step_load();
+        }
+        image_url_index++;
+        if(image_url_index == Onload_imgs_url.length)
+            image_url_index = 0;
+    }
+
+    if(image_url_index % step_loadnum == 0)
+    {
+        step_load();
+    }
+    var img_bili = image_size_width[image_url_index]/image_size_height[image_url_index];
+
+    var hname = idname + 'h';
+    var vname = idname + 'v';
+
+    if(img_bili > 1)
+    {
+        var img = id('img' + hname);
+        var div = id('div' + hname);
+        var div1 = id('div' + vname);
+
+        width  = divwidth[hname];
+        height = divheight[hname];
+    }
+    else
+    {
+        var img = id('img' + vname);
+        var div = id('div' + vname);
+        var div1 = id('div' + hname);
+
+        width  = divwidth[vname];
+        height = divheight[vname];
+    }
+
+    div.style.display = 'block';
+    div1.style.display = 'none';
+
+    var word = id('word' +idname);
+    var str = words[get_pid(Onload_imgs_url[image_url_index])];
+    if(str != undefined)
+    {
+        word.innerHTML = str;
+    }
+    else
+    {
+        word.innerHTML = '';
+    }
+    img.src = Onload_imgs_url[image_url_index];
+
+
+    if(img_bili > (width/height))
+    {
+        img.style.top = '0px';
+        img.style.height = height + 'px';
+        img.style.width = height*img_bili + 'px';
+        img.style.left = -((height*img_bili-width)/2)+'px';
+    }
+    else
+    {
+        img.style.left = '0px';
+        img.style.width = width+'px';
+        img.style.height = width/img_bili + 'px';
+        img.style.top = -((width/img_bili-height)/2) + 'px';
+    }
+
+    image_url_index ++;
+    if(image_url_index == Onload_imgs_url.length)
+      image_url_index = 0;
+
+}
+
+var get_pid = function(url)
+{
+    var index1 = url.indexOf("?");
+    if(index1 != -1)
+    {
+        url = url.substr(0, index1);
+    }
+    return url.toString().substr(url.lastIndexOf("/") + 1);
+}
+
+function reload_scene()
+{
+    clearnode();
+    reshow = true;
+    setTimeout(load_images,100);
+}
+
+
+function clearnode()
+{
+    for(var i=0; i<timeout.length;i++)
+    {
+        clearTimeout(timeout[i])
+    }
+
+    id('bg1').style.webkitAnimation = '';
+    id('pagetitle').style.webkitAnimation = '';
+    id('leaf1-0').style.webkitAnimation = '';
+    id('leaf1-1').style.webkitAnimation = '';
+
+    id('page1').style.webkitAnimation = '';
+    id('page2').style.webkitAnimation = '';
+    id('page3').style.webkitAnimation = '';
+    id('page4').style.webkitAnimation = '';
+
+}
+</script>

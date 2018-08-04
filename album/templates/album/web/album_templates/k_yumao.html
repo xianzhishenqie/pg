@@ -1,0 +1,955 @@
+<style type="text/css">
+
+*
+{
+    padding: 0px;
+    margin: 0px;
+    -webkit-box-sizing: border-box;
+}
+
+body
+{
+    background-color: white;
+}
+
+#container
+{
+    width: 500px;
+    height: 815px;
+    position: absolute;
+    overflow: hidden;
+}
+#container > img,#container > div
+{
+    position: absolute;
+}
+.pic1
+{
+    left: -202px;
+    top: -190px;
+    -webkit-animation: rotateing 15s linear infinite;
+}
+.pic2
+{
+    left: 230px;
+    top: -221px;
+    -webkit-animation: rotateing 20s linear infinite;
+}
+.pic3
+{
+    left: -245px;
+    top: 486px;
+    -webkit-animation: rotateing 20s linear infinite;
+}
+.pic4
+{
+    left: 205px;
+    top: 96px;
+    -webkit-animation: roting1 8s linear infinite alternate;
+}
+
+@-webkit-keyframes rotateing
+{
+    from  {-webkit-transform: rotate(0deg);}
+    to    {-webkit-transform: rotate(360deg);}
+}
+@-webkit-keyframes roting1
+{
+    from  {-webkit-transform: rotate(20deg);}
+    to    {-webkit-transform: rotate(-20deg);}
+}
+.leftwing
+{
+    left: 0px;
+    top: 0px;
+    position: absolute;
+    -webkit-transform-origin: 100% 50%;
+    -webkit-animation: wingmove 0.5s linear infinite;
+}
+.rightwing
+{
+    left: 55px;
+    top: 0px;
+    position: absolute;
+    -webkit-transform-origin: 0% 50%;
+    -webkit-animation: wingmove 0.5s linear infinite;
+}
+.bfbody
+{
+    left: 52px;
+    top: 3px;
+    position: absolute;
+    width: 6px;
+}
+@-webkit-keyframes wingmove
+{
+    0%     {-webkit-transform: scale(1,1);}
+    60%    {-webkit-transform: scale(0.1,1);}
+    100%   {-webkit-transform: scale(1,1);}
+}
+#hudie1
+{
+    width: 100px;
+    height: 80px;
+    left: 1348px;
+    top: -681px;
+    -webkit-transform: translate(0px,0px) rotate(136deg);
+    -webkit-transform-origin: -800% 50%;
+}
+@-webkit-keyframes hudie1
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(136deg);}
+    to    {-webkit-transform: translate(0px,-30px) rotate(91deg);}
+}
+@-webkit-keyframes fadein
+{
+    from  {opacity: 0}
+    to    {opacity: 1}
+}
+@-webkit-keyframes fadeout
+{
+    from  {opacity: 1}
+    to    {opacity: 0}
+}
+#mao1
+{
+    position: absolute;
+}
+#maodiv1
+{
+    left: 100px;
+    top: 250px;
+}
+#hudie2
+{
+    left: 146px;
+    top: 869px;
+    -webkit-transform: scale(1.4) rotate(45deg);
+    color: black;
+    width: 100px;
+    height: 100px;
+}
+#hudie3
+{
+    left: 171px;
+    top: 853px;
+    -webkit-transform: scale(1.1) rotate(-35deg);
+    color: black;
+    width: 100px;
+    height: 100px;
+}
+@-webkit-keyframes hudie3
+{
+    from  {-webkit-transform: translate(0px,0px) scale(1.1) rotate(-25deg);}
+    to    {-webkit-transform: translate(-300px,-500px) scale(1.1) rotate(-25deg);}
+}
+@-webkit-keyframes  maomao
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(0px,50px);}
+}
+@-webkit-keyframes title_clip
+{
+    from  {-webkit-clip-path: polygon(0% 0%,0% 0%,0% 100%,0% 100%);}
+    to    {-webkit-clip-path: polygon(0% 0%,100% 0%, 100% 100%, 0% 100%);}
+}
+@-webkit-keyframes yumaomove
+{
+    from  {-webkit-transform: translate(0px,0px);}
+    to    {-webkit-transform: translate(300px,0px);}
+}
+@-webkit-keyframes yumaomove1
+{
+    from  {-webkit-transform: translate(300px,0px);}
+    to    {-webkit-transform: translate(240px,120px);}
+}
+@-webkit-keyframes maomao1
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(0deg);opacity: 1}
+    to    {-webkit-transform: translate(-50px,50px) rotate(-150deg);opacity: 0}
+}
+@-webkit-keyframes hudie2
+{
+    from  {-webkit-transform: translate(0px,0px)  scale(1.4) rotate(35deg);}
+    to    {-webkit-transform: translate(400px,-400px) scale(1.4) rotate(35deg);}
+}
+
+
+#yumao1
+{
+    left: -10px;
+    top: 550px;
+    -webkit-transform: rotate(-20deg);
+    opacity: 0;
+}
+@-webkit-keyframes yumao1_in
+{
+    from  {opacity: 0;-webkit-transform: translate(0px,0px) rotate(-20deg);}
+    to    {opacity: 1;-webkit-transform: translate(0px,10px) rotate(0deg);}
+}
+@-webkit-keyframes yumao1_out
+{
+    from  {opacity: 1;-webkit-transform: translate(0px,10px) rotate(0deg);}
+    to    {opacity: 0;-webkit-transform: translate(-50px,60px) rotate(0deg);}
+}
+#bg1
+{
+    -webkit-animation: bg1 15s linear both;
+}
+@-webkit-keyframes bg1
+{
+    0%   {opacity: 0}
+    30%  {opacity: 0}
+    50%  {opacity: 1}
+    80%  {opacity: 1}
+    100% {opacity: 0}
+}
+.div
+{
+    border: 4px solid #fff;
+    position: absolute;
+}
+@-webkit-keyframes div1_clipin
+{
+    0%    {-webkit-clip-path: polygon(80% 0%, 100% 20%, 100% 20% ,100% 20% ,80% 0%, 80% 0%)}
+    50%   {-webkit-clip-path: polygon(80% 0%, 100% 20% , 100% 100% ,100% 100%,0% 0%,0% 0%)}
+    100%  {-webkit-clip-path: polygon(80% 0%, 100% 20% , 100% 100% ,0% 100%,0% 100%,0% 0%)}
+}
+@-webkit-keyframes div1_in
+{
+    from  {opacity: 0;-webkit-transform: translate(50px,0px);}
+    to    {opacity: 1;-webkit-transform: translate(0px,0px);}
+}
+#font1
+{
+    position: absolute;
+    right: -66px;
+    top: -64px;
+}
+#dian11
+{
+    position: absolute;
+    right: -22px;
+    top: 95px;
+}
+#dian12
+{
+    position: absolute;
+    right: 109px;
+    top: -35px;
+}
+#xian1
+{
+    width: 180px;
+    height: 2px;
+    background-color: #97CCD4;
+    -webkit-transform: scale(0,1) rotate(45deg);
+    right: -43px;
+    top: 33px;
+    position: absolute;
+}
+#div1,#div2,#div3,#div4,#div6
+{
+    opacity: 0;
+}
+#titlepic
+{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    opacity: 0.5;
+}
+@-webkit-keyframes titlepic
+{
+    from  {opacity: 0.5;-webkit-transform: scale(1);}
+    to    {opacity: 0;-webkit-transform: scale(1.1);}
+}
+@-webkit-keyframes xian1
+{
+    from  {-webkit-transform: rotate(45deg) scale(0,1);}
+    to    {-webkit-transform: rotate(45deg) scale(1,1);}
+}
+@-webkit-keyframes div2_in
+{
+    from  {-webkit-transform: translate(99px,252px) scale(0.5) rotate(0deg);opacity: 0}
+    to    {-webkit-transform: translate(99px,252px) scale(0.5) rotate(20deg);opacity: 1}
+}
+@-webkit-keyframes div2_out
+{
+    from  {-webkit-transform: translate(99px,252px) scale(0.5) rotate(20deg);opacity: 1}
+    to    {-webkit-transform: translate(150px,252px) scale(0.5) rotate(60deg);opacity: 0}
+}
+@-webkit-keyframes hudie3_1
+{
+    from  {-webkit-transform: translate(-287px,-248px) scale(1) rotate(88deg);}
+    to    {-webkit-transform: translate(200px,-423px) scale(1) rotate(14deg);}
+}
+@-webkit-keyframes hudie3_2
+{
+    from  {-webkit-transform: translate(200px,-423px) scale(1) rotate(14deg);}
+    to    {-webkit-transform: translate(-152px,-799px) scale(1) rotate(-32deg);}
+}
+@-webkit-keyframes hudie3_3
+{
+    from  {-webkit-transform: translate(-152px,-799px) scale(1) rotate(-32deg);}
+    to    {-webkit-transform: translate(-302px,-950px) scale(1) rotate(-32deg);}
+}
+@-webkit-keyframes div3_in
+{
+    from  {opacity:0;-webkit-transform: translate(-80px,-134px) scale(0.8) rotate(5deg);}
+    to    {opacity:1;-webkit-transform: translate(-80px,-134px) scale(0.8) rotate(-5deg);}
+}
+@-webkit-keyframes div3_out
+{
+    from  {opacity:1;-webkit-transform: translate(-80px,-134px) scale(0.8) rotate(-5deg);}
+    to    {opacity:0;-webkit-transform: translate(-180px,-134px) scale(0.8) rotate(-8deg);}
+}
+@-webkit-keyframes div4_in
+{
+    from  {opacity: 0;-webkit-transform: translate(72px,183px) scale(0.8) rotate(-5deg);}
+    to    {opacity: 1;-webkit-transform: translate(72px,183px) scale(0.8) rotate(5deg);}
+}
+@-webkit-keyframes div4_out
+{
+    from  {opacity: 1;-webkit-transform: translate(72px,183px) scale(0.8) rotate(5deg);}
+    to    {opacity: 0;-webkit-transform: translate(172px,183px) scale(0.8) rotate(8deg);}
+}
+#yumao2
+{
+    width: 91px;
+    left: 505px;
+    top: 341px;
+    -webkit-transform: rotate(26deg);
+}
+@-webkit-keyframes yumao2
+{
+    0%      {-webkit-transform: translate(0px,0px) rotate(26deg);opacity: 1}
+    70%     {-webkit-transform: translate(-420px,280px) rotate(60deg);opacity: 1}
+    100%    {-webkit-transform: translate(-600px,400px) rotate(70deg);opacity: 0}
+}
+#div5
+{
+    -webkit-transform: scale(0,1);
+}
+@-webkit-keyframes div5_in
+{
+    from  {-webkit-transform: scale(0,1);opacity: 1}
+    to    {-webkit-transform: scale(1,1);opacity: 1}
+}
+@-webkit-keyframes div5_out
+{
+    from  {-webkit-transform: scale(1,1);opacity: 1}
+    to    {-webkit-transform: scale(1,1);opacity: 0}
+}
+
+@-webkit-keyframes yumao1_3
+{
+    from  {-webkit-transform: translate(459px,-514px) rotate(3deg) scale(0.4);opacity: 1}
+    to    {-webkit-transform: translate(-150px,0px) rotate(-43deg) scale(0.4);opacity: 1}
+}
+#yumao3
+{
+    left: 241px;
+    top: -99px;
+    -webkit-transform: rotate(-67deg);
+    width: 80px;
+}
+@-webkit-keyframes yumao3
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(-67deg);}
+    to    {-webkit-transform: translate(-400px,400px) rotate(-130deg);}
+}
+#yumao4
+{
+    left: 488px;
+    top: 400px;
+    -webkit-transform: rotate(-74deg);
+    width: 110px;
+}
+@-webkit-keyframes yumao4
+{
+    from  { -webkit-transform: translate(0px,0px) rotate(-74deg);}
+    to    {-webkit-transform:  translate(-400px,500px) rotate(-150deg);}
+}
+@-webkit-keyframes div6_in
+{
+    from  {-webkit-transform: translate(0px,-20px);opacity: 0}
+    to    {-webkit-transform: translate(0px,0px);opacity: 1}
+}
+@-webkit-keyframes div6_out
+{
+    from  {-webkit-transform: translate(0px,0px);opacity: 1}
+    to    {-webkit-transform: translate(0px,20px);opacity: 0}
+}
+#yumao5
+{
+    left: 500px;
+    top: 327px;
+}
+@-webkit-keyframes yumao5
+{
+    from  {-webkit-transform: translate(0px,0px) rotate(0deg);}
+    to    {-webkit-transform: translate(-700px,400px) rotate(-30deg);}
+}
+@-webkit-keyframes hudie3_6
+{
+    from  {-webkit-transform: translate(310px,-620px) rotate(-30deg);}
+    to    {-webkit-transform: translate(210px,-720px) rotate(-16deg);}
+}
+@-webkit-keyframes hudie3_7
+{
+    from  {-webkit-transform: translate(210px,-720px) rotate(-16deg);}
+    to    {-webkit-transform: translate(10px,-1020px) rotate(-16deg);}
+}
+.myword
+{
+    width: 100%;
+    /*height: 200px;*/
+    color: #fff;
+    position: absolute;
+    text-shadow: 1px 1px 2px #000;
+    text-align: center;
+}
+</style>
+
+<div id='container'>
+    <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/938a4fb295.jpg'>
+    <img id='bg1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/4b8eae777b.jpg'>
+
+    <img class='pic1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/467aeb7fcf.jpg'>
+    <img class='pic2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/a26faa2ef3.jpg'>
+    <img class='pic3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/a26faa2ef3.jpg'>
+    <img class='pic4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/d272ea5496.jpg'>
+
+    <div id='hudie1'>
+        <img class='leftwing' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/fb46819769.jpg'>
+        <img class='rightwing' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/001ebe9bc0.jpg'>
+        <img class='bfbody' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/e653426a2a.jpg'>
+    </div>
+
+    <div id='hudie2'>
+        <img class='leftwing' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/fb46819769.jpg'>
+        <img class='rightwing' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/001ebe9bc0.jpg'>
+        <img class='bfbody' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/e653426a2a.jpg'>
+    </div>
+
+
+
+    <div id='pagetitle' style='position:absolute;top:270px;left:65px;'>
+        <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/d1dcd06f0e.jpg'>
+        <img id='titlepic' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/d1dcd06f0e.jpg'>
+        <div style='position:absolute;width:300px;height:140px;top:36px;left:39px;overflow:hidden;display:table'>
+            <div id='titlecontent' style='width:300px;height:140px;vertical-align:middle;display:table-cell;text-align:center;font-size:26px;line-height:45px;color:#14544D;'></div>
+        </div>
+    </div>
+
+    <div id='maodiv1'>
+        <img id='mao1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/924b32debe.jpg'>
+    </div>
+
+    <div id='div1'>
+        <div id='img1'  class='div'></div>
+        <img id='font1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/9496ec5c5f.jpg'>
+        <img id='dian11' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/b29073e046.jpg'>
+        <img id='dian12' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/b29073e046.jpg'>
+        <div id='xian1'></div>
+        <div id='word1' style='top:-30px;font-size:25px;' class='myword'></div>
+    </div>
+    <div id='div2'>
+        <div id='img2' class='div'></div>
+        <div id='word2' style='top:-100px;font-size:42px;' class='myword'></div>
+    </div>
+
+    <div id='div3'>
+        <div id='img3' class='div'>
+            <div id='word3' class='myword' style='bottom: 10px;font-size:30px;'></div>
+        </div>
+    </div>
+
+    <div id='div4'>
+        <div id='img4' class='div'>
+            <div id='word4' class='myword' style='bottom: 10px;font-size:30px;'></div>
+        </div>
+
+    </div>
+
+    <img id='OptionBar' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/54602d5700.jpg'>
+    <div id='div5'>
+        <div id='img5' class='div'>
+            <div id='word5' class='myword' style='top:100%;font-size:25px;'></div>
+        </div>
+    </div>
+
+    <div id='div6'>
+        <div id='img6' class='div'>
+            <div id='word6' class='myword' style='top:100%;font-size:25px;'></div>
+        </div>
+    </div>
+
+    <img id='yumao1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/d271566750.jpg'>
+    <img id='yumao2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/aa7642efb2.jpg'>
+
+    <img id='yumao3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/924b32debe.jpg'>
+    <img id='yumao4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/924b32debe.jpg'>
+    <img id='yumao5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/08b8dd18f3.jpg'>
+
+    <div id='hudie3'>
+        <img class='leftwing' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/fb46819769.jpg'>
+        <img class='rightwing' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/001ebe9bc0.jpg'>
+        <img class='bfbody' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_yumao/e653426a2a.jpg'>
+    </div>
+
+</div>
+
+<script>
+
+
+function id(name)
+{
+    return document.getElementById(name);
+}
+
+var get_pid = function(url)
+{
+    var index1 = url.indexOf("?");
+    if(index1 != -1)
+    {
+        url = url.substr(0, index1);
+    }
+    return url.toString().substr(url.lastIndexOf("/") + 1);
+}
+
+var userAgent = 0;
+function check_agent()
+{
+    var u = navigator.userAgent;
+    if(u.indexOf('Android') > -1 || u.indexOf('Linux') > -1)
+    {
+        userAgent = 1;
+    }
+    else
+    {
+        userAgent = 0;
+    }
+
+}
+
+function showtitle()
+{
+    id('hudie1').style.webkitAnimation = 'hudie1 5s linear both';
+
+    id('pagetitle').style.webkitAnimation = 'fadein 1s linear both';
+
+    titlecontent = id('titlecontent');
+    titlecontent.innerHTML = e_desc;
+    titlecontent.style.webkitAnimation = 'title_clip 3s linear both';
+
+    id('mao1').style.webkitAnimation = 'maomao 0.3s 10 linear alternate both';
+    id('maodiv1').style.webkitAnimation = 'yumaomove 3s linear both';
+    id('titlepic').style.webkitAnimation = 'titlepic 2s 3s linear infinite';
+
+    timeout[1] = setTimeout(function()
+    {
+        id('maodiv1').style.webkitAnimation = 'yumaomove1 2s ease-out both';
+        id('hudie2').style.webkitAnimation = 'hudie2 3.7s linear both';
+        id('hudie3').style.webkitAnimation = 'hudie3 3.5s 1.5s linear both';
+    },3200)
+
+}
+
+function zimeitixifenbao()
+{
+    id('mao1').style.webkitAnimation = 'maomao1 2.5s linear both';
+    id('pagetitle').style.webkitAnimation = 'fadeout 1.5s linear both';
+
+    timeout[2] = setTimeout(show1,1500)
+}
+
+function show1()
+{
+    setImage('1');
+    id('yumao1').style.webkitAnimation = 'yumao1_in 2s ease-out both';
+    id('div1').style.webkitAnimation = 'fadein 1s linear both';
+    // if(userAgent == 0)
+    //     id('img1').style.webkitAnimation = 'div1_clipin 3s linear both';
+    // else
+        id('img1').style.webkitAnimation = 'fadein 3s 1s linear both';
+
+    id('xian1').style.webkitAnimation = 'xian1 1s linear both';
+    id('dian11').style.webkitAnimation = 'fadein 1s 1s linear both';
+    id('dian12').style.webkitAnimation = 'fadein 1s 1s linear both';
+
+    setImage('2');
+    id('div2').style.webkitAnimation = 'div2_in 2s 4s ease-out both';
+    id('hudie3').style.webkitAnimation = 'hudie3_1 4s 6s linear both';
+
+
+    timeout[3] = setTimeout(show2,13000);
+}
+
+function show2()
+{
+    id('div1').style.webkitAnimation = 'fadeout 1s linear both';
+    id('div2').style.webkitAnimation = 'div2_out 1s ease-in both';
+    id('hudie3').style.webkitAnimation = 'hudie3_2 4s linear both';
+    id('yumao1').style.webkitAnimation = 'yumao1_out 2s linear both';
+
+    setImage('3');
+    setImage('4');
+    id('div3').style.webkitAnimation = 'div3_in 2s 1s ease-out both';
+    id('div4').style.webkitAnimation = 'div4_in 2s 1s ease-out both';
+    id('yumao2').style.webkitAnimation = 'yumao2 6s 2s linear both';
+
+    // id('yumao1').style.webkitAnimation = '';
+    id('yumao3').style.webkitAnimation = '';
+    id('yumao4').style.webkitAnimation = '';
+
+    timeout[4] = setTimeout(show3,8000)
+}
+
+function show3()
+{
+    id('div3').style.webkitAnimation = 'div3_out 1s ease-in both';
+    id('div4').style.webkitAnimation = 'div4_out 1s ease-in both';
+    id('hudie3').style.webkitAnimation = 'hudie3_3 2s ease-in both';
+
+    setImage('5');
+    id('div5').style.webkitAnimation = 'div5_in 3s ease-out both';
+    //id('OptionBar').style.webkitAnimation = 'fadein 1s 1s linear both';
+    id('yumao1').style.webkitAnimation = 'yumao1_3 7s linear both';
+    id('yumao3').style.webkitAnimation = 'yumao3 8s linear both';
+    id('yumao4').style.webkitAnimation = 'yumao4 9s 2s linear both';
+
+    id('yumao5').style.webkitAnimation = '';
+
+    timeout[5] = setTimeout(show4,7000)
+}
+
+function show4()
+{
+   // id('OptionBar').style.webkitAnimation = 'fadeout 1s linear both';
+    id('div5').style.webkitAnimation = 'div5_out 1s linear both';
+
+    setImage('6');
+    id('div6').style.webkitAnimation = 'div6_in 1s 1s ease-out both';
+    id('yumao5').style.webkitAnimation = 'yumao5 8s linear both';
+    id('hudie3').style.webkitAnimation = 'hudie3_6 2s linear both';
+
+    timeout[6] = setTimeout(function()
+    {
+        id('hudie3').style.webkitAnimation = 'hudie3_7 3s linear both';
+    },3000)
+
+    id('yumao1').style.webkitAnimation = '';
+    id('img1').style.webkitAnimation = '';
+    id('xian1').style.webkitAnimation = '';
+    id('dian11').style.webkitAnimation = '';
+    id('dian12').style.webkitAnimation = '';
+
+    timeout[7] = setTimeout(show7,7000)
+}
+
+function show7()
+{
+    id('div6').style.webkitAnimation = 'div6_out 1s ease-in both';
+    setImage('1');
+    id('yumao1').style.webkitAnimation = 'yumao1_in 2s ease-out both';
+    id('div1').style.webkitAnimation = 'fadein 1s linear both';
+    // if(userAgent == 0)
+    //     id('img1').style.webkitAnimation = 'div1_clipin 3s linear both';
+    // else
+        id('img1').style.webkitAnimation = 'fadein 3s 1s linear both';
+
+    id('xian1').style.webkitAnimation = 'xian1 1s linear both';
+    id('dian11').style.webkitAnimation = 'fadein 1s 1s linear both';
+    id('dian12').style.webkitAnimation = 'fadein 1s 1s linear both';
+
+    setImage('2');
+    id('div2').style.webkitAnimation = 'div2_in 2s 4s ease-out both';
+    id('hudie3').style.webkitAnimation = 'hudie3_1 4s 6s linear both';
+
+    timeout[8] = setTimeout(show2,12000);
+}
+
+
+call_me(load_images);
+
+function setImage(idname)
+{
+
+    if(reshow == true)
+        return;
+
+    while(Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading')
+    {
+        if(image_url_index % step_loadnum == 0)
+        {
+            step_load();
+        }
+        image_url_index++;
+        if(image_url_index == Onload_imgs_url.length)
+            image_url_index = 0;
+    }
+
+    if(image_url_index % step_loadnum == 0)
+    {
+        step_load();
+    }
+    var img_bili = image_size_width[image_url_index]/image_size_height[image_url_index];
+
+    var img = id('img'+idname);
+    var div = id('div' + idname);
+
+    img.style.backgroundImage = 'url('+Onload_imgs_url[image_url_index]+')';
+
+    var word = id('word' + idname);
+    var str = words[get_pid(Onload_imgs_url[image_url_index])];
+    if(str != undefined)
+    {
+        word.innerHTML = str;
+    }
+    else
+    {
+        word.innerHTML = '';
+    }
+    //500 760
+    if(img_bili < (380/600))
+    {
+        var height = 600;
+        var width = 600 * img_bili;
+        var top = 80;
+        var left = (500-width)/2;
+    }
+    else if(img_bili <= 1)
+    {
+        var width = 380;
+        var height = 380 / img_bili;
+        var left = 60;
+        var top = (740-height)/2
+    }
+    else if(img_bili > 1)
+    {
+        var width = 440;
+        var height = 440/img_bili;
+        var left = 30;
+        var top = (740-height)/2;
+    }
+
+    div.style.width = width + 'px';
+    div.style.height = height + 'px';
+    div.style.left = left + 'px';
+    div.style.top = top + 'px';
+    img.style.backgroundSize = (width-8) + 'px ' + (height-8) + 'px';
+    img.style.width = width + 'px';
+    img.style.height = height + 'px';
+    // div.style.backgroundPosition = '4px 4px';
+
+    if(idname == '1')
+    {
+        img.style.webkitClipPath = 'polygon(0px 0px,'+(width-80)+'px 0px, 100% 80px, 100% 100%, 0% 100%)';
+    }
+    if(idname == '3' || idname == '4')
+    {
+        if(width < height)
+            img.style.webkitTransform = 'scale(0.8)';
+        else
+        {
+            if(idname == '3')
+                img.style.webkitTransform = 'translate(20px,0px) scale(1)';
+            else
+                img.style.webkitTransform = 'translate(-20px,0px) scale(1)';
+        }
+    }
+
+
+    image_url_index ++;
+    if(image_url_index == Onload_imgs_url.length)
+      image_url_index = 0;
+}
+
+
+//每次执行加载后5张图片
+var bl_keepload = 'first';
+var step_loadnum = 5;
+function step_load()
+{
+    var load_num = 0
+    //初步加载X张
+    if(image_url_index  == 0 && bl_keepload == 'first')
+    {
+        console.log('loading continue');
+        if(slider_images_url.length > step_loadnum)
+        {
+            load_num = step_loadnum;
+            bl_keepload = 'next';
+        }
+        else
+        {
+            load_num = slider_images_url.length;
+            bl_keepload = 'end';
+        }
+        for(var i = 0; i< load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+    else if(bl_keepload == 'end')
+    {
+        return;
+    }
+    else
+    {
+         console.log('loading continue');
+        if(slider_images_url.length - image_url_index >step_loadnum*2)
+        {
+            load_num = step_loadnum;
+        }
+        else
+        {
+            load_num = slider_images_url.length - image_url_index - step_loadnum;
+            bl_keepload = 'end';
+        }
+        for(var i = image_url_index +step_loadnum; i< image_url_index + step_loadnum + load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+
+}
+function load_images()
+{
+    reshow = false;
+    image_size_width=[];
+    image_size_height=[];
+    Onload_imgs_url=[];
+    image_url_index=0;
+    have_num = 0;
+    error_num = 0;
+    begin_titletime = new Date();
+    begin_titletime = begin_titletime.getTime();
+    canshow = true;
+    showtitle();
+    bl_keepload = 'first';
+    step_load();
+
+}
+
+function image_onerror(event)
+{
+    var img = event.target;
+    var index = img.index;
+    if(index<step_loadnum)
+        error_num ++;
+    Onload_imgs_url[index] = 'not find';
+
+    if((have_num+error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixifenbao();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixifenbao();
+                },dis_titletime);
+        }
+    }
+}
+
+function image_onload(event)
+{
+    if(reshow == true)
+        return;
+
+    var img = event.target;
+    var index = img.index;
+
+    if(index<step_loadnum)
+    {
+        have_num++;
+    }
+    Onload_imgs_url[index] = img.src;
+    image_size_height[index] = img.height;
+    image_size_width[index] = img.width;
+
+    console.log(Onload_imgs_url[index]);
+    // console.log(have_num + '-' + error_num);
+
+    if((have_num + error_num >= step_loadnum ||slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixifenbao();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixifenbao();
+                },dis_titletime);
+        }
+
+    }
+}
+var image_size_width=[];
+var image_size_height=[];
+var image_url_index=0;
+var have_num = 0;
+var error_num = 0;
+var canshow = true;
+var reshow = false;
+var delaytime=6000;
+var timeout = [];
+
+function reload_scene()
+{
+    clearnode();
+    reshow = true;
+    setTimeout(load_images,100);
+}
+
+function clearnode()
+{
+
+    for(var i = 0; i<timeout.length; i++)
+    {
+        clearTimeout(timeout[i]);
+    }
+
+    var itemlist = ['div1','img1','div2','div3','div4','div5','div6','xian1','dian11','dian12','mao1','maodiv1','titlepic','hudie1','hudie2','hudie3','yumao1','yumao2','yumao3','yumao4','yumao5','OptionBar','pagetitle','titlecontent'];
+
+    for(var i =0; i<itemlist.length;i++)
+    {
+        id(itemlist[i]).style.webkitAnimation = '';
+    }
+
+}
+</script>

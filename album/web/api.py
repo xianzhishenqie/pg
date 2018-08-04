@@ -1,3 +1,4 @@
+import json
 
 from django.db import transaction
 from django.db.models import Count
@@ -149,3 +150,27 @@ class AlbumViewSet(common_mixins.PGMixin,
 
             return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @action(['POST'], detail=True)
+    @api_request_data
+    def exchange_pictures(self, request, pk=None):
+        try:
+            l_picture_id = request.shift_data.get('l_picture_id')
+            r_picture_id = request.shift_data.get('r_picture_id')
+        except:
+            raise exceptions.ParseError()
+
+        instance = self.get_object()
+        pictures = instance.pictures.filter(pk__in=(l_picture_id, r_picture_id))
+        if len(pictures) != 2:
+            raise exceptions.ParseError()
+        l_picture = pictures[0]
+        r_picture = pictures[1]
+        l_picture.seq, r_picture.seq = r_picture.seq, l_picture.seq
+        with transaction.atomic():
+            try:
+                l_picture.save()
+                r_picture.save()
+            except:
+                raise exceptions.APIException()
+
+        return Response()

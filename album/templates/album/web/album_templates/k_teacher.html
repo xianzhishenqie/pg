@@ -1,0 +1,653 @@
+<style type="text/css">
+
+*
+{
+    padding: 0px;
+    margin: 0px;
+    -webkit-box-sizing: border-box;
+}
+
+body
+{
+    background-color: white;
+}
+
+#container
+{
+    width: 500px;
+    height: 815px;
+    position: absolute;
+    overflow: hidden;
+}
+#container > div, #container >img
+{
+    position: absolute;
+}
+.kuangh
+{
+    left: 81px;
+    top: 180px;
+}
+.kuangv
+{
+    left: 20px;
+    top: 172px;
+    -webkit-transform: rotate(90deg);
+}
+.maskv
+{
+    width: 302px;
+    height: 371px;
+    left: 47px;
+    top: 126px;
+    /*opacity: 0.2;*/
+}
+.maskh
+{
+    width: 370px;
+    height: 305px;
+    left: 73px;
+    top: 165px;
+}
+.img
+{
+    position: absolute;
+}
+#divh
+{
+    width: 335px;
+    height: 263px;
+    left: 89px;
+    top: 188px;
+    background-color: #ccc;
+    overflow: hidden;
+}
+#divv
+{
+    width: 263px;
+    height: 336px;
+    left: 65px;
+    top: 142px;
+    background-color: #ccc;
+    overflow: hidden;
+}
+#divv,#divh,#kuangv,#kuangh,#maskh,#maskv,#wordh,#wordv
+{
+    display: none;
+}
+#wordh
+{
+    font-size: 20px;
+    color: #fff;
+    left: 59px;
+    top: 469px;
+    width: 400px;
+    text-align: center;
+}
+
+#wordv
+{
+    font-size: 20px;
+    color: #fff;
+    width: 139px;
+    text-align: center;
+    left: 333px;
+    top: 200px;
+}
+</style>
+
+<style type="text/css">
+@-webkit-keyframes draw
+{
+    0%{-webkit-transform:translate(0px,0px);}
+    8%{-webkit-transform:translate(0px,0px);}
+    14%{-webkit-transform:translate(0px,200px);}
+    18%{-webkit-transform:translate(0px,0px);}
+    22%{-webkit-transform:translate(0px,200px);}
+    26%{-webkit-transform:translate(0px,0px);}
+    30%{-webkit-transform:translate(0px,200px);}
+    34%{-webkit-transform:translate(0px,0px);}
+    39%{-webkit-transform:translate(0px,200px);}
+    43%{-webkit-transform:translate(0px,0px);}
+    100%{-webkit-transform:translate(0px,0px);}
+}
+@-webkit-keyframes drawv
+{
+    0%{-webkit-transform:translate(0px,0px);}
+    8%{-webkit-transform:translate(0px,0px);}
+    14%{-webkit-transform:translate(0px,50px);}
+    18%{-webkit-transform:translate(50px,0px);}
+    22%{-webkit-transform:translate(0px,90px);}
+    26%{-webkit-transform:translate(90px,50px);}
+    30%{-webkit-transform:translate(0px,80px);}
+    34%{-webkit-transform:translate(120px,100px);}
+    39%{-webkit-transform:translate(0px,120px);}
+    43%{-webkit-transform:translate(50px,150px);}
+    100%{-webkit-transform:translate(100px,150px);}
+}
+@-webkit-keyframes handmove
+{
+    0%{-webkit-transform:translate(0px,0px);}
+    8%{-webkit-transform:translate(-450px,-140px);}
+    35%{-webkit-transform:translate(-150px,-140px);}
+    50%{-webkit-transform:translate(0px,0px);}
+    100%{-webkit-transform:translate(0px,0px);}
+}
+@-webkit-keyframes handmovev
+{
+    0%{-webkit-transform:translate(0px,0px);}
+    8%{-webkit-transform:translate(-400px,-140px);}
+    35%{-webkit-transform:translate(-400px,0px);}
+    50%{-webkit-transform:translate(0px,0px);}
+    100%{-webkit-transform:translate(0px,0px);}
+}
+@-webkit-keyframes handmove1
+{
+    0%{-webkit-transform:translate(0px,0px);}
+    10%{-webkit-transform:translate(-400px,-100px);}
+    15%{-webkit-transform:translate(-350px,150px);}
+    20%{-webkit-transform:translate(-300px,-100px);}
+    24%{-webkit-transform:translate(0px,0px);}
+    44%{-webkit-transform:translate(0px,0px);}
+    50%{-webkit-transform:translate(0px,0px);}
+    60%{-webkit-transform:translate(0px,0px);}
+    100%{-webkit-transform:translate(0px,0px);}
+}
+@-webkit-keyframes fadein
+{
+    from  {opacity: 0}
+    to    {opacity: 1}
+}
+@-webkit-keyframes fadeout
+{
+    from  {opacity: 1;}
+    to    {opacity: 0;}
+}
+@-webkit-keyframes titlemove
+{
+    from  {-webkit-clip-path: polygon(0 0, 0 0,0% 100%,0 100%);}
+    to    {-webkit-clip-path: polygon(0 0,100% 0, 100% 100%,  0 100%);}
+}
+</style>
+
+<div id='container'>
+    <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/b44a4be824.jpg'>
+
+
+    <div id='divh'>
+        <img id='imgh' class='img'>
+    </div>
+    <img id='kuangh' class='kuangh' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/2c36c541d3.jpg'>
+
+    <div id='divv'>
+        <img id='imgv' class='img'>
+    </div>
+    <img id='kuangv' class='kuangv' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/2c36c541d3.jpg'>
+
+
+
+    <div id='maskv' class='maskv'>
+        <img id='maskv1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/0a9b00c53c.jpg'>
+        <img id='maskv2' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/9d838fb340.jpg'>
+        <img id='maskv3' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/a09b20e435.jpg'>
+        <img id='maskv4' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/a641f30468.jpg'>
+        <img id='maskv5' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/c3a7f863ea.jpg'>
+        <img id='maskv6' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/9bcbcccd83.jpg'>
+    </div>
+
+    <div id='maskh' class='maskh'>
+        <img id='maskh1' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/5a140735e7.jpg'>
+        <img id='maskh2' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/21f71fff2d.jpg'>
+        <img id='maskh3' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/9e6d577ad1.jpg'>
+        <img id='maskh4' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/c92b7cc293.jpg'>
+        <img id='maskh5' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/f8a126dd7f.jpg'>
+        <img id='maskh6' class='img' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/8933b33e09.jpg'>
+    </div>
+
+
+    <div id='wordh'></div>
+
+    <div id='wordv'></div>
+
+    <div id='pagetitle' style='position:absolute;width:340px;height:220px;top:200px;left:80px;opacity:1;'>
+        <div style='position:absolute;width:340px;height:220px;overflow:hidden;display:table'>
+            <div id='titlecontent' style='width:340px;height:220px;vertical-align:middle;display:table-cell;text-align:center;font-size:30px;line-height:45px;color: #fff;'></div>
+        </div>
+    </div>
+
+
+    <div id='hand1' style='position:absolute;left:470px;top:200px;'>
+        <img id='hand1_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/580b6e9eac.jpg' style='position:absolute;left:0px;top:0px;'>
+    </div>
+    <div id='hand2' style='position:absolute;left:500px;top:150px;'>
+        <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_teacher/b01a47efbc.jpg' style='position:absolute;'>
+    </div>
+
+</div>
+
+<script>
+
+function id(name)
+{
+    return document.getElementById(name);
+}
+
+function showtitle()
+{
+    id('hand1').style.webkitAnimation='handmove 5s linear both';
+    id('hand1_1').style.webkitAnimation='draw 5s linear both';
+
+    id('pagetitle').style.webkitAnimation = 'fadein 3s linear 0.5s both';
+    // id('pagetitle').style.webkitAnimation = 'titlemove 1.8s linear 0.5s both';
+    id('titlecontent').innerHTML = e_desc;
+
+    // id('hand2').style.webkitAnimation='handmove1 5s linear 3.7s both';
+
+    // setTimeout(distitle,4000)
+}
+
+function zimeitixifenbao()
+{
+    id('pagetitle').style.webkitAnimation = 'fadeout 1s linear both';
+    id('hand2').style.webkitAnimation='handmove1 5s linear both';
+
+    id('hand1').style.webkitAnimation='';
+    id('hand1_1').style.webkitAnimation='';
+
+    timeout[1] = setTimeout(show1,1000)
+}
+
+function show1()
+{
+
+    id('divv').style.webkitAnimation = '';
+    id('divh').style.webkitAnimation = '';
+    id('kuangv').style.webkitAnimation = '';
+    id('kuangh').style.webkitAnimation = '';
+
+    setImage('1');
+    if(image_size_width[image_url_index]/image_size_height[image_url_index] <1)
+    {
+        id('divh').style.display = 'none';
+        id('maskh').style.display = 'none';
+        id('kuangh').style.display = 'none';
+        id('wordh').style.display = 'none';
+
+        id('divv').style.display = 'block';
+        id('maskv').style.display = 'block';
+        id('kuangv').style.display = 'block';
+        id('wordv').style.display = 'block';
+
+        for(var i = 1; i<7; i++)
+        {
+            id('maskh' + i).style.webkitAnimation = '';
+        }
+
+        for(var i = 1; i<7; i++)
+        {
+            id('maskv' + i).style.webkitAnimation = 'fadeout 0.5s '+ i*0.3 + 's ease-in both';
+        }
+
+
+        id('wordh').style.webkitAnimation = 'fadein 1s 3s linear both';
+        id('wordv').style.webkitAnimation = 'fadein 1s 3s linear both';
+
+        id('hand1').style.webkitAnimation = '';
+        id('hand1_1').style.webkitAnimation = '';
+        timeout[2] = setTimeout(function()
+        {
+            id('hand1').style.webkitAnimation = 'handmovev 5s linear both';
+            id('hand1_1').style.webkitAnimation = 'drawv 5s linear both';
+        },100)
+    }
+    else
+    {
+        id('divh').style.display = 'block';
+        id('maskh').style.display = 'block';
+        id('kuangh').style.display = 'block';
+        id('wordh').style.display = 'block';
+
+        id('divv').style.display = 'none';
+        id('maskv').style.display = 'none';
+        id('kuangv').style.display = 'none';
+        id('wordv').style.display = 'none';
+
+        for(var i = 1; i<7; i++)
+        {
+            id('maskv' + i).style.webkitAnimation = '';
+        }
+
+        for(var i = 1; i<7; i++)
+        {
+            id('maskh' + i).style.webkitAnimation = 'fadeout 0.7s '+ (i+1)*0.3 + 's ease-out both';
+        }
+
+        id('wordh').style.webkitAnimation = 'fadein 1s 3s linear both';
+        id('wordv').style.webkitAnimation = 'fadein 1s 3s linear both';
+
+
+        id('hand1').style.webkitAnimation = '';
+        id('hand1_1').style.webkitAnimation = '';
+        timeout[3] = setTimeout(function()
+        {
+            id('hand1').style.webkitAnimation = 'handmove 5s linear both';
+            id('hand1_1').style.webkitAnimation = 'draw 5s linear both';
+        },100)
+
+    }
+
+
+    image_url_index ++;
+    if(image_url_index == Onload_imgs_url.length)
+      image_url_index = 0;
+
+
+  timeout[4] = setTimeout(clear1,6000)
+}
+
+function clear1()
+{
+    id('hand2').style.webkitAnimation='';
+    timeout[5] = setTimeout(function()
+    {
+        id('hand2').style.webkitAnimation='handmove1 5s linear both';
+    },100)
+
+    id('divv').style.webkitAnimation = 'fadeout 1s linear both';
+    id('divh').style.webkitAnimation = 'fadeout 1s linear both';
+    id('kuangv').style.webkitAnimation = 'fadeout 1s linear both';
+    id('kuangh').style.webkitAnimation = 'fadeout 1s linear both';
+
+    id('wordh').style.webkitAnimation = 'fadeout 1s linear both';
+    id('wordv').style.webkitAnimation = 'fadeout 1s linear both';
+
+    timeout[6] = setTimeout(function()
+    {
+        for(var i = 1; i<7; i++)
+        {
+            id('maskh' + i).style.webkitAnimation = '';
+            id('maskv' + i).style.webkitAnimation = '';
+        }
+        timeout[7] = setTimeout(show1,100)
+    },1100)
+}
+
+
+var image_size_width=[];
+var image_size_height=[];
+var image_url_index=0;
+var have_num = 0;
+var error_num = 0;
+var canshow = true;
+var reshow = false;
+var delaytime = 5000;
+var timeout = [];
+var showfont = false;
+var imgtype = 0;
+
+function load_images()
+{
+    reshow = false;
+    image_size_width=[];
+    image_size_height=[];
+    Onload_imgs_url=[];
+    image_url_index=0;
+    have_num = 0;
+    error_num = 0;
+    begin_titletime = new Date();
+    begin_titletime = begin_titletime.getTime();
+    canshow = true;
+    showtitle();
+    bl_keepload = 'first';
+    // loading_first();
+    step_load();
+}
+
+function image_onerror(event)
+{
+    var img = event.target;
+    var index = img.index;
+    if(index<step_loadnum)
+        error_num ++;
+    Onload_imgs_url[index] = 'not find';
+
+    if((have_num+error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixifenbao();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixifenbao();
+                },dis_titletime);
+        }
+    }
+}
+
+function image_onload(event)
+{
+    if(reshow == true)
+        return;
+
+    var img = event.target;
+    var index = img.index;
+
+    if(index<step_loadnum)
+    {
+        have_num++;
+    }
+    Onload_imgs_url[index] = img.src;
+    image_size_height[index] = img.height;
+    image_size_width[index] = img.width;
+
+    console.log(Onload_imgs_url[index]);
+
+    if((have_num + error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixifenbao();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixifenbao();
+                },dis_titletime);
+        }
+
+    }
+}
+//每次执行加载后5张图片
+var bl_keepload = 'first';
+var step_loadnum = 5;
+function step_load()
+{
+    var load_num = 0
+    //初步加载X张
+    if(image_url_index  == 0 && bl_keepload == 'first')
+    {
+        console.log('loading continue');
+        if(slider_images_url.length > step_loadnum)
+        {
+            load_num = step_loadnum;
+            bl_keepload = 'next';
+        }
+        else
+        {
+            load_num = slider_images_url.length;
+            bl_keepload = 'end';
+        }
+        for(var i = 0; i< load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+    else if(bl_keepload == 'end')
+    {
+        return;
+    }
+    else
+    {
+         console.log('loading continue');
+        if(slider_images_url.length - image_url_index >step_loadnum*2)
+        {
+            load_num = step_loadnum;
+        }
+        else
+        {
+            load_num = slider_images_url.length - image_url_index - step_loadnum;
+            bl_keepload = 'end';
+        }
+        for(var i = image_url_index +step_loadnum; i< image_url_index + step_loadnum + load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+}
+
+function setImage(idname)
+{
+    if(reshow == true)
+        return;
+
+    while(Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading')
+    {
+        if(image_url_index % step_loadnum == 0)
+        {
+            step_load();
+        }
+        image_url_index++;
+        if(image_url_index == Onload_imgs_url.length)
+            image_url_index = 0;
+    }
+
+    if(image_url_index % step_loadnum == 0)
+    {
+        step_load();
+    }
+    var img_bili = image_size_width[image_url_index]/image_size_height[image_url_index];
+
+
+    if(img_bili >= 1)
+    {
+        var img = id('imgh');
+        var wordspan = id('wordh');
+        width = 335;
+        height = 263;
+
+    }
+    else
+    {
+        var img = id('imgv');
+        var wordspan = id('wordv');
+        width = 263;
+        height = 336;
+    }
+
+    var str = words[get_pid(Onload_imgs_url[image_url_index])];
+    if(str != undefined)
+        wordspan.innerHTML = str;
+    else
+        wordspan.innerHTML = '';
+    img.src = Onload_imgs_url[image_url_index];
+
+
+    if(img_bili > (width/height))
+    {
+        img.style.top = '0px';
+        img.style.height = height + 'px';
+        img.style.width = height*img_bili + 'px';
+        img.style.left = -((height*img_bili-width)/2)+'px';
+    }
+    else
+    {
+        img.style.left = '0px';
+        img.style.width = width+'px';
+        img.style.height = width/img_bili + 'px';
+        img.style.top = -((width/img_bili-height)/2) + 'px';
+    }
+
+}
+
+var get_pid = function(url)
+{
+    var index1 = url.indexOf("?");
+    if(index1 != -1)
+    {
+        url = url.substr(0, index1);
+    }
+    return url.toString().substr(url.lastIndexOf("/") + 1);
+}
+
+function reload_scene()
+{
+    clearnode();
+    reshow = true;
+    setTimeout(load_images,100);
+}
+
+function clearnode()
+{
+
+    for(var i = 0; i<timeout.length; i++)
+    {
+        clearTimeout(timeout[i])
+    }
+
+    var itemlist = ['pagetitle','hand1','hand2','hand1_1','divv','divh','kuangv','kuangh','maskh','maskv'];
+
+    for(var i =0; i<itemlist.length;i++)
+    {
+        id(itemlist[i]).style.webkitAnimation = '';
+    }
+
+    for(var i = 1; i<7; i++)
+    {
+        id('maskh' + i).style.webkitAnimation = '';
+        id('maskv' + i).style.webkitAnimation = '';
+    }
+
+    id('divh').style.display = 'none';
+    id('maskh').style.display = 'none';
+    id('kuangh').style.display = 'none';
+    id('wordh').style.display = 'none';
+
+    id('divv').style.display = 'none';
+    id('maskv').style.display = 'none';
+    id('kuangv').style.display = 'none';
+    id('wordv').style.display = 'none';
+
+
+}
+call_me(load_images)
+</script>

@@ -1,0 +1,1269 @@
+   <style type="text/css">
+        * {
+            padding: 0px;
+            margin: 0px;
+            -webkit-box-sizing: border-box
+        }
+
+        body {
+            background-color: white
+        }
+
+        #container {
+            position: relative;
+            width: 500px;
+            height: 815px;
+            overflow: hidden;
+        }
+        #container > img,#container > div {
+            position: absolute;
+        }
+
+        #bg_left{
+            position: absolute;
+            left: 0px;
+            opacity: 0;
+            -webkit-transform: scale(1.2,1.2);
+        }
+        #bg_right {
+            position: absolute;
+            right: 0px;
+            opacity: 0;
+            -webkit-transform: scale(1.2,1.2);
+        }
+
+        #laohu {
+            position: absolute;
+            top: 569px;
+            left: 0px;
+            -webkit-transform: translate(0px,100px);
+        }
+        #bg_btm {
+            position: absolute;
+            top: 600px;
+            left: -790px;
+            opacity: 0;
+            -webkit-transform: translate(0px,100px);
+        }
+
+        #yezi1_ctn {
+            position: absolute;
+            top: -110px;
+            right: -80px;
+            opacity: 0;
+
+        }
+        #yezi1 {
+            -webkit-transform: rotateY(180deg) scale(0.8,0.8);
+        }
+
+        #shuijiazi {
+            position: absolute;
+            top: 5px;
+            left: 2px;
+            opacity: 0;
+            -webkit-transform-origin: right;
+        }
+
+        #kaniu1_ctn {
+            position: absolute;
+            top: 640px;
+            left: 240px;
+            opacity: 0;
+            -webkit-transform: rotateY(180deg) translate(0px,250px);
+        }
+        #kawa1_ctn{
+            position: absolute;
+            top: 666px;
+            left: 310px;
+            opacity: 0;
+            -webkit-transform: translate(0px,250px);
+        }
+        #kaba1_ctn{
+            position: absolute;
+            top: 562px;
+            left: 305px;
+            opacity: 0;
+            -webkit-transform: rotate(30deg) translate(0px,250px);
+        }
+        #kama1_ctn{
+            position: absolute;
+            top: 612px;
+            left: 411px;
+            opacity: 0;
+            -webkit-transform: rotate(15deg) translate(0px,250px);
+
+        }
+        #kaniu1 {
+            -webkit-transform-origin: bottom;
+            -webkit-animation: kaniu1 1.2s linear infinite alternate both;
+        }
+        #kawa1 {
+            -webkit-transform-origin: bottom;
+            -webkit-animation: kawa1 1.2s linear infinite alternate both;
+        }
+        #kaba1 {
+            -webkit-transform-origin: bottom;
+            -webkit-animation: kaba1 1.2s linear infinite alternate both;
+        }
+        #kama1 {
+            -webkit-transform-origin: bottom;
+            -webkit-animation: kama1 1.2s linear infinite alternate both;
+
+        }
+
+        #pagetitle {
+            position:absolute;
+            width:346px;
+            height:190px;
+            top: 300px;
+            left: 77px;
+            opacity:0;
+        }
+
+        .titletable {
+            position: absolute;
+            width: 220px;
+            height: 150px;
+            top: 20px;
+            left: 100px;
+            display: table;
+        }
+
+        #titlecontent {
+            vertical-align:middle;
+            display:table-cell;
+            text-align:center;
+            font-size:22px;
+            line-height:36px;
+            color:#4672D1;
+        }
+
+        #yeshu1 {
+            position: absolute;
+            top: 20px;
+            left: -40px;
+            width: 100px;
+            height: 850px;
+            opacity: 0;
+            -webkit-transform-origin: bottom;
+            -webkit-transform: rotate(90deg);
+        }
+        #yeshuye1 {
+            position: absolute;
+            top: -165px;
+            left: 20px;
+            -webkit-transform-origin: left;
+            -webkit-animation: yeshuye1 3s linear infinite alternate both;
+
+        }
+        #yeshugan1 {
+            position: absolute;
+            -webkit-transform: rotate(-6deg);
+        }
+        #yeshu2 {
+            position: absolute;
+            top: 20px;
+            left: 0px;
+            width: 100px;
+            height: 850px;
+            opacity: 0;
+            -webkit-transform-origin: bottom;
+            -webkit-transform: rotate(90deg);
+        }
+        #yeshuye2 {
+            position: absolute;
+            top: -190px;
+            left: 86px;
+            -webkit-transform-origin: left;
+            -webkit-animation: yeshuye2 3s linear infinite alternate both;
+        }
+        #yeshugan2{
+            position: absolute;
+        }
+
+        #san {
+            position: absolute;
+            top: -40px;
+            left: 166px;
+            opacity: 0;
+        }
+
+        #kaniu2_ctn {
+            position: absolute;
+            top: 475px;
+            left: -50px;
+            opacity: 0;
+            -webkit-transform: translate(-250px,0);
+
+        }
+        #kawa2_ctn{
+            position: absolute;
+            top: 500px;
+            right: 0px;
+            opacity: 0;
+            -webkit-transform: translate(250px,0);
+        }
+        #kaba2_ctn{
+            position: absolute;
+            top: 388px;
+            right: -65px;
+            opacity: 0;
+            -webkit-transform: translate(250px,0);
+        }
+        #kama2_ctn{
+            position: absolute;
+            top: 353px;
+            right: -40px;
+            opacity: 0;
+            -webkit-transform:  rotate(-30deg) translate(250px,0);
+        }
+        #kaniu2 {
+            -webkit-transform-origin: left;
+            -webkit-animation: kaniu1 1.2s linear infinite alternate both;
+        }
+        #kawa2 {
+            -webkit-transform-origin: right;
+            -webkit-animation: kawa1 1.2s linear infinite alternate both;
+        }
+        #kaba2 {
+            -webkit-transform-origin: right;
+            -webkit-animation: kaba1 1.2s linear infinite alternate both;
+        }
+        #kama2 {
+            -webkit-transform-origin: right;
+            -webkit-animation: kama1 1.2s linear infinite alternate both;
+
+        }
+
+        #bg_kuang {
+            opacity: 0;
+        }
+
+        #hailang {
+            position: absolute;
+            top: 490px;
+            opacity: 0;
+        }
+
+        .page_ctn {
+            position: absolute;
+            left: 40px;
+            border:solid 15px #fff;
+            opacity: 0;
+        }
+        .page {
+
+        }
+        #page3_ctn {
+        }
+
+        .showwords {
+            font-size: 20px;
+            color: white;
+            position: absolute;
+            z-index: 1;
+            bottom: 20px;
+            left: 15%;
+            width: 70%;
+            height: 50px;
+            line-height: 30px;
+            text-align: center;
+            text-shadow: 1px 1px 2px #000;
+            letter-spacing: 2px;
+        }
+
+    </style>
+    <style type="text/css">
+
+        @-webkit-keyframes fadein
+        {
+            0%  {opacity: 0}
+            100%    {opacity: 1}
+        }
+        @-webkit-keyframes fadeout
+        {
+            from  {opacity: 1}
+            to    {opacity: 0}
+        }
+
+        @-webkit-keyframes pagetitlein
+        {
+            0% {
+                -webkit-transform: scale(1.5,1.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: scale(1,1);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes bg_left
+        {
+            0% {
+                -webkit-transform: scale(1.4,1.4);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: scale(1,1);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes bg_right
+        {
+            0% {
+                -webkit-transform: scale(1.4,1.4);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: scale(1,1);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes laohu
+        {
+            0% {
+                -webkit-transform: translate(0px,100px);
+            }
+            100% {
+                -webkit-transform: translate(0px,0px);
+            }
+        }
+        @-webkit-keyframes bg_btm
+        {
+            0% {
+                -webkit-transform: translate(0px,100px);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes shuijiaziin
+        {
+            0% {
+                -webkit-transform: scale(1.2,1.2);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: scale(1,1);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes shuijiaziout1
+        {
+            0% {
+                -webkit-transform:rotate(0deg) scale(1,1);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform:rotate(10deg) scale(0.9,0.9);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes shuijiaziout2
+        {
+            0% {
+                -webkit-transform:rotate(10deg) scale(0.9,0.9);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform:rotate(0deg) scale(1,1);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes yezi1_ctnin
+        {
+            0% {
+                -webkit-transform: translate(100px,0px) rotate(30deg);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+
+            100% {
+                -webkit-transform: translate(0px,0px) rotate(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes yezi1_ctnmove1
+        {
+            0% {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+            50% {
+                -webkit-transform: translate(50px,0px);
+                opacity: 1;
+            }
+            100% {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes yezi1_ctnmove2
+        {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes kama1_ctn
+        {
+            0%  {
+                -webkit-transform: rotate(15deg) translate(0px,250px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: rotate(15deg) translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes kaba1_ctn
+        {
+            0%  {
+                -webkit-transform: rotate(30deg) translate(0px,250px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: rotate(30deg) translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes kawa1_ctn
+        {
+            0%  {
+                -webkit-transform: translate(0px,250px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            70%  {
+                -webkit-transform: translate(0px,-10px);
+            }
+            100%  {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes kaniu1_ctn
+        {
+            0%  {
+                -webkit-transform: rotateY(180deg) translate(0px,250px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            70%  {
+                -webkit-transform: rotateY(180deg) translate(0px,-10px);
+            }
+            100%  {
+                -webkit-transform: rotateY(180deg) translate(0px,0px);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes kama1
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-5deg);
+            }
+        }
+        @-webkit-keyframes kawa1
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-5deg);
+            }
+        }
+        @-webkit-keyframes kaba1
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(5deg);
+            }
+        }
+        @-webkit-keyframes kaniu1
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-5deg);
+            }
+        }
+
+        @-webkit-keyframes titlein
+        {
+            0%  {
+                -webkit-transform: scale(1.2,1.2);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%  {
+                opacity: 1;
+                -webkit-transform: scale(1,1);
+            }
+        }
+
+        @-webkit-keyframes titleout1
+        {
+            0%  {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+            100%  {
+                opacity: 1;
+                -webkit-transform: translate(0px,-455px);
+            }
+        }
+        @-webkit-keyframes titleout2
+        {
+            0%  {
+                -webkit-transform: translate(0px,-455px);
+                opacity: 1;
+            }
+            100%  {
+                opacity: 1;
+                -webkit-transform: translate(0px,-550px);
+            }
+        }
+        @-webkit-keyframes kama2_ctn
+        {
+            0%  {
+                -webkit-transform:rotate(-30deg) translate(250px,0px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: rotate(-30deg) translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes kaba2_ctn
+        {
+            0%  {
+                -webkit-transform: translate(250px,0px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes kawa2_ctn
+        {
+            0%  {
+                -webkit-transform: translate(250px,0px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            70%  {
+                -webkit-transform: translate(-10px,0px);
+            }
+            100%  {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes kaniu2_ctn
+        {
+            0%  {
+                -webkit-transform: translate(-250px,0px);
+                opacity: 0;
+            }
+            10%{
+                opacity: 1;
+            }
+            70%  {
+                -webkit-transform: translate(10px,0px);
+            }
+            100%  {
+                -webkit-transform: translate(0px,0px);
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes kama2
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-5deg);
+            }
+        }
+        @-webkit-keyframes kawa2
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-5deg);
+            }
+        }
+        @-webkit-keyframes kaba2
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(5deg);
+            }
+        }
+        @-webkit-keyframes kaniu2
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-5deg);
+            }
+        }
+
+        @-webkit-keyframes san
+        {
+            0%  {
+                -webkit-transform: rotate(45deg) translate(400px,0px);
+                opacity: 0;
+            }
+            5%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: rotate(0deg) translate(0px,0px);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes yeshu1
+        {
+            0%  {
+                -webkit-transform: rotate(90deg);
+                opacity: 0;
+            }
+            5%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: rotate(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes yeshu2
+        {
+            0%  {
+                -webkit-transform: rotate(90deg);
+                opacity: 0;
+            }
+            5%{
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: rotate(0deg);
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes yeshuye1
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(2deg);
+            }
+        }
+        @-webkit-keyframes yeshuye2
+        {
+            0%  {
+                -webkit-transform: rotate(0deg);
+            }
+            100%  {
+                -webkit-transform: rotate(-2deg);
+            }
+        }
+
+        @-webkit-keyframes page1in
+        {
+            0%  {
+                -webkit-transform: translate(0px,850px);
+                opacity: 0;
+            }
+            2% {
+                opacity: 1;
+            }
+            12% {
+                -webkit-transform: translate(0px,-20px);
+            }
+            15% {
+                -webkit-transform: translate(0px,0px);
+            }
+            45% {
+                -webkit-transform: translate(0px,-50px);
+            }
+            80% {
+                -webkit-transform: translate(0px,0px);
+            }
+            90% {
+                -webkit-transform: translate(30px,0px);
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: translate(-500px,0px);
+                opacity: 0;
+            }
+        }
+        @-webkit-keyframes page2in
+        {
+            0%  {
+                -webkit-transform:  rotate(0deg) skewX(0deg);
+                opacity: 0;
+            }
+            2% {
+                opacity: 1;
+            }
+            4% {
+                -webkit-transform: rotate(180deg) skewX(-45deg);
+            }
+            5% {
+                -webkit-transform: rotate(180deg) skewX(-45deg);
+            }
+            9% {
+                -webkit-transform: rotate(0deg) skewX(0deg);
+            }
+
+            50% {
+                -webkit-transform: scale(1.1,1.1);
+            }
+            90% {
+                -webkit-transform: scale(1,1);
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: scale(1,1);
+                opacity: 0;
+            }
+        }
+        @-webkit-keyframes page3in
+        {
+            0%  {
+                -webkit-transform:  skewX(0deg) rotate(180deg) scaleX(0.5);
+                opacity: 0;
+            }
+            2% {
+                opacity: 1;
+            }
+            5% {
+                -webkit-transform:  skewX(-45deg) scaleX(0.5);
+            }
+            10% {
+                -webkit-transform:   skewX(0deg) rotate(0deg) scaleX(0.5);
+            }
+
+            15% {
+                -webkit-transform: scaleX(0.4);
+            }
+            70% {
+                -webkit-transform: scaleX(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100%  {
+                -webkit-transform: scaleX(1);
+                opacity: 0;
+            }
+        }
+
+    </style>
+
+        <div id='container'>
+            <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/db635dec92.jpg'/>
+
+            <div id='page1_ctn' class='page_ctn'>
+                <div id='page1' class='page'>
+                    <span id='word1' class='showwords'></span>
+                </div>
+            </div>
+
+            <div id='page2_ctn' class='page_ctn'>
+                <div id='page2' class='page'>
+                    <span id='word2' class='showwords'></span>
+                </div>
+            </div>
+
+            <div id='page3_ctn' class='page_ctn'>
+                <div id='page3' class='page'>
+                    <span id='word3' class='showwords'></span>
+                </div>
+            </div>
+
+
+            <div id='yezi1_ctn'>
+                <img id='yezi1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/d325e919c9.jpg'/>
+            </div>
+
+            <img id='bg_left' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/56a6c644aa.jpg'/>
+            <img id='bg_right' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/7bf3ad9f79.jpg'/>
+            <img id='bg_kuang' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/4b6adfc7b2.jpg/'>
+            <img id='hailang' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/9f2bf219d8.jpg'/>
+
+
+            <div id='pagetitle'>
+                <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/e5cb1429a5.jpg'>
+                <div class='titletable'>
+                    <div id='titlecontent'>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id='kaniu1_ctn'>
+                <img id='kaniu1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/e327e0a127.jpg'/>
+            </div>
+            <div id='kama1_ctn'>
+                <img id='kama1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/1f634ee3ef.jpg'/>
+            </div>
+            <div id='kaba1_ctn'>
+                <img id='kaba1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/3bd87040be.jpg'/>
+            </div>
+            <div id='kawa1_ctn'>
+                <img id='kawa1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/7220a7df7d.jpg'/>
+            </div>
+
+            <div id='kaniu2_ctn'>
+                <img id='kaniu2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/e327e0a127.jpg'/>
+            </div>
+            <div id='kama2_ctn'>
+                <img id='kama2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/1f634ee3ef.jpg'/>
+            </div>
+            <div id='kaba2_ctn'>
+                <img id='kaba2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/3bd87040be.jpg'/>
+            </div>
+            <div id='kawa2_ctn'>
+                <img id='kawa2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/7220a7df7d.jpg'/>
+            </div>
+
+            <div id='yeshu1'>
+                <img id='yeshugan1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/1cab3c97e7.jpg'/>
+                <img id='yeshuye1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/3052708659.jpg'/>
+            </div>
+            <div id='yeshu2'>
+                <img id='yeshugan2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/1cab3c97e7.jpg'/>
+                <img id='yeshuye2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/d325e919c9.jpg'/>
+            </div>
+            <img id='san' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/e276c5906e.jpg'/>
+
+            <img id='laohu' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/cf7b715571.jpg'/>
+            <img id='bg_btm' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/148f0872db.jpg'/>
+
+            <img id='shuijiazi' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_leyuan/ab362ae993.jpg'/>
+
+        </div>
+
+<script>
+var image_size_width=[];
+var image_size_height=[];
+var image_url_index=0;
+var have_num = 0;
+var error_num = 0;
+var canshow = true;
+var reshow = false;
+var timeout = [];
+var delaytime=3500;
+
+var get_pid = function(url){
+    var index1 = url.indexOf("?");
+    if(index1 != -1)
+    {
+        url = url.substr(0, index1);
+    }
+    return url.toString().substr(url.lastIndexOf("/") + 1);
+}
+
+function id(name)
+{
+    return document.getElementById(name);
+}
+function load_images()
+{
+    reshow = false;
+    image_size_width=[];
+    image_size_height=[];
+    Onload_imgs_url=[];
+    image_url_index=0;
+    have_num = 0;
+    error_num = 0;
+    begin_titletime = new Date();
+    begin_titletime = begin_titletime.getTime();
+    showtitle();
+    canshow = true;
+    for(var i=0;i<slider_images_url.length;i++)
+    {
+        var img=new Image();
+        img.index=i;
+        img.src=slider_images_url[i];
+        img.onload=image_onload;
+        img.onerror= image_onerror;
+        Onload_imgs_url[i] = 'loading';
+    }
+}
+
+function image_onerror(event)
+{
+    var img = event.target;
+    var index = img.index;
+    if(index<10)
+        error_num ++;
+    Onload_imgs_url[index] = 'not find';
+    console.log(Onload_imgs_url[index]);
+    console.log(have_num + '-' + error_num);
+    if((have_num+error_num >= 10 || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeiti();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeiti();
+                },dis_titletime);
+        }
+    }
+}
+
+function image_onload(event)
+{
+    if(reshow == true)
+        return;
+
+    var img = event.target;
+    var index = img.index;
+
+    if(index<10)
+    {
+        have_num++;
+    }
+    Onload_imgs_url[index] = img.src;
+    image_size_height[index] = img.height;
+    image_size_width[index] = img.width;
+
+    // console.log(Onload_imgs_url[index]);
+    // console.log(have_num + '-' + error_num);
+
+    if((have_num + error_num >= 10 ||slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeiti();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeiti();
+                },dis_titletime);
+        }
+
+    }
+}
+function showtitle()
+{
+    id('pagetitle').style.webkitAnimation = 'pagetitlein 0.5s linear both';
+
+    id('yezi1_ctn').style.webkitAnimation = 'yezi1_ctnin 0.2s 0.5s linear both';
+    id('bg_left').style.webkitAnimation = 'bg_left 0.5s ease-out both';
+    id('bg_right').style.webkitAnimation = 'bg_right 0.5s ease-out both';
+
+    id('laohu').style.webkitAnimation = 'laohu 0.5s ease-out both';
+    id('bg_btm').style.webkitAnimation = 'bg_btm 0.5s ease-out both';
+
+
+    id('kaniu1_ctn').style.webkitAnimation = 'kaniu1_ctn 0.6s 0.5s ease-in-out both';
+    id('kama1_ctn').style.webkitAnimation = 'kama1_ctn 0.6s 0.5s ease both';
+    id('kaba1_ctn').style.webkitAnimation = 'kaba1_ctn 0.6s 0.5s ease-out both';
+    id('kawa1_ctn').style.webkitAnimation = 'kawa1_ctn 0.6s 0.5s linear both';
+
+
+    id('shuijiazi').style.webkitAnimation = 'shuijiaziin 0.2s 0.5s linear both';
+
+
+    id('titlecontent').innerHTML = e_desc;
+
+    timeout[1] = setTimeout(function () {
+        id('yezi1_ctn').style.webkitAnimation = 'yezi1_ctnmove1 17.5s linear both';
+    }, 700);
+
+}
+
+function zimeiti()
+{
+    id('pagetitle').style.webkitAnimation = 'titleout1 0.5s linear both';
+
+    show1_1();
+}
+
+
+function show1_1()
+{
+    setImage('1');
+    id('page1_ctn').style.webkitAnimation = 'page1in 7s cubic-bezier(.41,.6,.63,.99) both';
+
+    timeout[2] = setTimeout(show2,7000);
+}
+function show1_2()
+{
+    setImage('1');
+    id('page2_ctn').style.webkitAnimation = '';
+
+    id('kaniu2_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+    id('kama2_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+    id('kaba2_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+    id('kawa2_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+
+    id('bg_kuang').style.webkitAnimation = 'fadeout 0.5s linear both';
+    id('hailang').style.webkitAnimation = 'fadeout 0.5s linear both';
+
+    id('yezi1_ctn').style.webkitAnimation = 'yezi1_ctnmove1 14s linear both';
+    id('bg_left').style.webkitAnimation = 'bg_left 0.5s ease-out both';
+    id('bg_right').style.webkitAnimation = 'bg_right 0.5s ease-out both';
+
+    id('laohu').style.webkitAnimation = 'laohu 0.5s ease-out both';
+    id('bg_btm').style.webkitAnimation = 'bg_btm 0.5s ease-out both';
+
+    id('kaniu1_ctn').style.webkitAnimation = 'kaniu1_ctn 0.6s 0.5s ease-in-out both';
+    id('kama1_ctn').style.webkitAnimation = 'kama1_ctn 0.6s 0.5s ease both';
+    id('kaba1_ctn').style.webkitAnimation = 'kaba1_ctn 0.6s 0.5s ease-out both';
+    id('kawa1_ctn').style.webkitAnimation = 'kawa1_ctn 0.6s 0.5s linear both';
+
+    id('shuijiazi').style.webkitAnimation = 'shuijiaziin 0.2s 0.5s linear both';
+
+    id('page1_ctn').style.webkitAnimation = 'page1in 7s cubic-bezier(.41,.6,.63,.99) both';
+
+    timeout[3] = setTimeout(show2,7000);
+}
+
+function show2()
+{
+    setImage('2');
+    id('page3_ctn').style.webkitAnimation = '';
+
+    id('pagetitle').style.webkitAnimation = 'titleout2 0.5s linear both';
+
+    id('shuijiazi').style.webkitAnimation = 'shuijiaziout1 0.2s linear both';
+
+    id('kaniu1_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+    id('kama1_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+    id('kaba1_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+    id('kawa1_ctn').style.webkitAnimation = 'fadeout 0.3s linear both';
+
+
+    id('yeshu1').style.webkitAnimation = 'yeshu1 0.5s ease-out both';
+    id('yeshu2').style.webkitAnimation = 'yeshu1 0.5s 0.2s ease-out both';
+
+    id('san').style.webkitAnimation = 'san 0.5s ease-out both';
+
+    id('page2_ctn').style.webkitAnimation = 'page2in 7s linear both';
+    timeout[4] = setTimeout(show3,7000);
+}
+
+function show3()
+{
+    setImage('3');
+    id('page1_ctn').style.webkitAnimation = '';
+
+    id('yeshu1').style.webkitAnimation = 'fadeout 0.5s linear both';
+    id('yeshu2').style.webkitAnimation = 'fadeout 0.5s linear both';
+    id('san').style.webkitAnimation = 'fadeout 0.5s linear both';
+    id('yezi1_ctn').style.webkitAnimation = 'yezi1_ctnmove2 0.5s linear both';
+
+    id('bg_left').style.webkitAnimation = 'fadeout 0.1s linear both';
+    id('bg_right').style.webkitAnimation = 'fadeout 0.1s linear both';
+    id('bg_btm').style.webkitAnimation = 'fadeout 0.1s linear both';
+
+    id('bg_kuang').style.webkitAnimation = 'fadein 0.1s linear both';
+    id('hailang').style.webkitAnimation = 'fadein 0.1s linear both';
+
+    id('shuijiazi').style.webkitAnimation = 'shuijiaziout2 0.2s linear both';
+    id('kaniu2_ctn').style.webkitAnimation = 'kaniu2_ctn 0.6s ease-out both';
+    id('kama2_ctn').style.webkitAnimation = 'kama2_ctn 0.6s ease-out both';
+    id('kaba2_ctn').style.webkitAnimation = 'kaba2_ctn 0.6s ease-out both';
+    id('kawa2_ctn').style.webkitAnimation = 'kawa2_ctn 0.6s ease-out both';
+
+    id('page3_ctn').style.webkitAnimation = 'page3in 7s linear both';
+
+    timeout[3] = setTimeout(show1_2,7000);
+}
+
+
+function setImage(idname)
+{
+    if(reshow == true)
+        return;
+
+    while(Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading')
+    {
+        // console.log(Onload_imgs_url[image_url_index]);
+        image_url_index++;
+        if(image_url_index == Onload_imgs_url.length)
+            image_url_index = 0;
+    }
+
+    var img_bili = image_size_width[image_url_index]/image_size_height[image_url_index];
+    var div;
+    var div1;
+    var divname;
+
+    div = id('page'+idname);
+    div_ctn = id('page'+idname + '_ctn');
+
+    if(img_bili < (380/600))
+    {
+        var height = 600;
+        var width = 600 * img_bili;
+        var top = 80;
+        var left = (500-width)/2-15;
+    }
+    else if(img_bili <= 1)
+    {
+        var width = 360;
+        var height = 360 / img_bili;
+        var left = 55;
+        var top = (740-height)/2
+    }
+    else if(img_bili > 1)
+    {
+        var width = 400;
+        var height = 400/img_bili;
+        var left = 35;
+        var top = (760-height)/2;
+    }
+
+
+    div.style.width = width + 'px';
+    div.style.height = height + 'px';
+    div.style.backgroundSize = (width) + 'px ' + (height) + 'px';
+    div.style.backgroundImage = 'url('+Onload_imgs_url[image_url_index]+')';
+    div.style.backgroundRepeat = 'no-repeat';
+
+    div_ctn.style.width = (width + 30) + 'px';
+    div_ctn.style.height = (height + 30) + 'px';
+    div_ctn.style.left = left + 'px';
+    div_ctn.style.top = top + 'px';
+
+    var word = id('word'+idname);
+
+    var word_string = words[get_pid(Onload_imgs_url[image_url_index])];
+    if(word_string != undefined)
+    {
+        word_string = word_string.replace(/[\n]/ig,'');
+
+        if (word_string.length > 8) {
+            word_string = word_string.substring(0,9) + ' \n ' + word_string.substring(9,word_string.length);
+            word.style.bottom = "20px";
+            word.style.lineHeight = '30px';
+        }else {
+            word.style.lineHeight = '50px';
+            word.style.bottom = "10px";
+        };
+        word.innerText = word_string;
+    }
+    else
+    {
+        word.innerText = "";
+    }
+
+    image_url_index++;
+    if(image_url_index==Onload_imgs_url.length)
+        image_url_index = 0;
+}
+
+
+call_me(load_images);
+
+function reload_scene()
+{
+    clearnode();
+    reshow = true;
+    setTimeout(load_images,100);
+}
+
+function clearnode()
+{
+    for(var i = 0; i<timeout.length; i++)
+    {
+        clearTimeout(timeout[i]);
+    }
+
+    var xinArr = ['pagetitle','yezi1_ctn','bg_left','bg_right','laohu','bg_btm','kaniu1_ctn','kama1_ctn','kaba1_ctn','kawa1_ctn','shuijiazi','page1_ctn','page2_ctn','page3_ctn','yeshu1','yeshu2','san','bg_kuang','hailang','kaniu2_ctn','kama2_ctn','kaba2_ctn','kawa2_ctn'];
+
+    for(var i = 0 ;i < xinArr.length ;i++)
+    {
+        id(xinArr[i]).style.webkitAnimation = '';
+    }
+
+}
+
+</script>

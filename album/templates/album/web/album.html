@@ -2,7 +2,7 @@
 
 {% load i18n %}
 {% load staticfiles %}
-{% load static_v %}
+{% load pg_common %}
 
 {% block title %}
     编辑相册
@@ -10,7 +10,7 @@
 
 {% block top_css %}
     {{ block.super }}
-    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
 {% endblock %}
 
 {% block local_css %}

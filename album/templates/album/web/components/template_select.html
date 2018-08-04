@@ -35,28 +35,31 @@
 {% verbatim %}
 <v-touch id="templateSelect" v-on:panright="hide" v-cloak>
     <div class="weui-navbar" style="position: initial;">
-        <div class="weui-navbar__item"
-             style="padding: 5px 0;"
-             :class="{'weui-bar__item_on text-danger border-bottom border-danger': templateTag.active}"
-             :data-id="templateTag.id"
-             @click="tagTemplateTag(templateTag)"
-             v-for="templateTag in templateTags">
+        <v-touch class="weui-navbar__item"
+                 style="padding: 5px 0;"
+                 :class="{'weui-bar__item_on text-danger border-bottom border-danger': templateTag.active}"
+                 :data-id="templateTag.id"
+                 :key="templateTag.id"
+                 v-on:tap="tagTemplateTag(templateTag)"
+                 v-for="templateTag in templateTags">
             {{ templateTag.name }}
-        </div>
+        </v-touch>
     </div>
     <div class="template-list row mx-0">
-        <div class="template-item col-4 pr-0"
-              @click="selectTemplate(template)"
-              v-for="template, i in templates">
-            <div class="border p-1" :class="{'text-primary border-primary': template.id == templateId}">
+        <v-touch class="template-item col-4 pr-0"
+                 :key="template.id"
+                 v-on:tap="selectTemplate(template)"
+                 v-for="template, i in templates">
+            <div class="border p-1 position-relative" :class="{'text-primary border-primary': template.id == templateId}">
                 <div class="template-cover position-relative w-100">
                     <img class="rounded-circle position-absolute w-100 h-100" :src="template.cover_url || template.cover" alt="">
                 </div>
                 <div class="template-name text-truncate">
                     {{ template.name }}
                 </div>
+                <div class="pg-mask"></div>
             </div>
-        </div>
+        </v-touch>
     </div>
 </v-touch>
 {% endverbatim %}

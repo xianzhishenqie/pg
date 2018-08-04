@@ -1,0 +1,1501 @@
+<style type="text/css">
+
+.showwords
+{
+    font-size: 25px;
+    color: black;
+    letter-spacing: 5px;
+    position: absolute;
+    font-weight: bold;
+    z-index: 1;
+    top: 94%;
+    margin: -39px;
+    left: 39px;
+    width: 100%;
+    height: 33px;
+    line-height: 33px;
+    text-align: center;
+    text-shadow: 2px 2px 10px white, -2px -2px 10px white, -2px 2px 10px white, 2px -2px 10px white;
+    /*background-color: rgba(255, 255, 255, 0.69);*/
+}
+
+*
+{
+    padding: 0px;
+    margin: 0px;
+    -webkit-box-sizing: border-box;
+}
+
+body
+{
+    background-color: white;
+}
+
+#container
+{
+    width: 500px;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+.page
+{
+  width: 500px;
+  height: 815px;
+  position: absolute;
+}
+.page > img, .page > div
+{
+  position: absolute;
+}
+#item1_1
+{
+  left: 3px;
+  top: 658px;
+}
+#item1_2
+{
+    left: 50px;
+    top: 632px;
+}
+#item1_3
+{
+    left: 296px;
+    top: 711px;
+}
+#item1_4
+{
+    left: 141px;
+    top: -58px;
+}
+#item1_5
+{
+    left: 31px;
+    top: 0px;
+}
+#item1_6
+{
+    left: 0px;
+    top: 0px;
+}
+#item1_7
+{
+    left: 235px;
+    top: 591px;
+}
+#item1_8
+{
+    left: 432px;
+    top: 0px;
+}
+#item1_9
+{
+    left: 25px;
+    top: 0px;
+}
+#item1_10
+{
+    left: 388px;
+    top: 0px;
+}
+#item1_11
+{
+    left: 413px;
+    top: 0px;
+}
+#div1
+{
+    left: 32px;
+    top: 134px;
+    width: 430px;
+    height: 430px;
+    border-radius: 215px;
+    background-color: #fff;
+    overflow: hidden;
+    position: absolute;
+}
+#item2_1
+{
+    left: 0px;
+    top: 74px;
+}
+#item2_2
+{
+    left: 126px;
+    top: 19px;
+}
+#item2_3
+{
+    left: 298px;
+    top: 59px;
+}
+#box2
+{
+    left: 17px;
+    top: 187px;
+    width: 475px;
+    height: 423px;
+}
+#div2
+{
+    width: 466px;
+    height: 416px;
+    overflow: hidden;
+    left: 1px;
+    top: 5px;
+    position: absolute;
+}
+#bottom2
+{
+  width: 500px;
+  top: 611px;
+  height: 300px;
+  overflow: hidden;
+}
+#bottom2 > img
+{
+  position: absolute;
+}
+#item2_4
+{
+    left: 8px;
+    top: -46px;
+}
+#item2_5
+{
+    left: 28px;
+    top: -42px;
+}
+#item2_6
+{
+    left: 41px;
+    top: -23px;
+}
+#item2_7
+{
+    left: 99px;
+    top: -20px;
+}
+#item2_8
+{
+    left: 427px;
+    top: -38px;
+}
+#item2_9
+{
+    left: 452px;
+    top: -44px;
+}
+#item2_10
+{
+    left: 173px;
+    top: 72px;
+}
+#item3_1
+{
+    left: 40px;
+    top: 0px;
+}
+#item3_2
+{
+    left: 39px;
+    top: 0px;
+}
+#item3_3
+{
+    left: 163px;
+    top: 0px;
+}
+
+#item3_4
+{
+    left: 325px;
+    top: 0px;
+}
+#item3_5
+{
+    left: 404px;
+    top: 0px;
+}
+#item3_6
+{
+    left: 3px;
+    top: 727px;
+}
+#item3_7
+{
+    left: 124px;
+    top: 665px;
+}
+#item3_8
+{
+    left: 235px;
+    top: 726px;
+}
+#item3_9
+{
+    left: 396px;
+    top: 710px;
+}
+#box3
+{
+    width: 457px;
+    height: 474px;
+    left: 24px;
+    top: 178px;
+    overflow: hidden;
+}
+#div3
+{
+    width: 445px;
+    height: 463px;
+    left: 5px;
+    top: 4px;
+    position: absolute;
+    overflow: hidden;
+}
+#item4_1
+{
+    left: 17px;
+    top: 0px;
+}
+#item4_2
+{
+    left: 112px;
+    top: 0px;
+}
+#item4_3
+{
+    left: 152px;
+    top: 0px;
+}
+#item4_4
+{
+    left: 419px;
+    top: 0px;
+}
+#item4_5
+{
+    left: 420px;
+    top: 0px;
+}
+#item4_6
+{
+    left: 10px;
+    top: 718px;
+}
+#item4_7
+{
+    left: 120px;
+    top: 652px;
+}
+#item4_8
+{
+    left: 284px;
+    top: 700px;
+}
+#item4_9
+{
+    left: 376px;
+    top: 704px;
+}
+#box4
+{
+    left: 16px;
+    top: 165px;
+}
+#box5
+{
+    left: 247px;
+    top: 164px;
+}
+#item4_10
+{
+    left: 20px;
+    top: 362px;
+    position: absolute;
+    -webkit-animation: ballmoving 1s linear infinite alternate;
+}
+#div4
+{
+    width: 213px;
+    height: 387px;
+    left: 5px;
+    top: 8px;
+    position: absolute;
+    overflow: hidden;
+}
+#div5
+{
+    width: 227px;
+    height: 457px;
+    left: 4px;
+    top: 8px;
+    position: absolute;
+    overflow: hidden;
+}
+#item5_1
+{
+    left: 14px;
+    top: 0px;
+}
+#item5_2
+{
+    left: 53px;
+    top: 0px;
+}
+#item5_3
+{
+    left: 241px;
+    top: 0px;
+}
+#item5_4
+{
+    left: 300px;
+    top: 0px;
+}
+#item5_5
+{
+    left: 442px;
+    top: 0px;
+}
+#item5_6
+{
+    left: 4px;
+    top: 725px;
+}
+#item5_7
+{
+    left: 69px;
+    top: 631px;
+}
+#item5_8
+{
+    left: 197px;
+    top: 685px;
+}
+#item5_9
+{
+    left: 286px;
+    top: 705px;
+}
+#box6
+{
+    left: 2px;
+    top: 120px;
+    -webkit-transform: rotate(-8deg);
+}
+#box7
+{
+    left: 92px;
+    top: 348px;
+}
+#div6
+{
+    width: 370px;
+    height: 266px;
+    left: 10px;
+    top: 17px;
+    overflow: hidden;
+    position: absolute;
+    -webkit-transform: rotate(3.5deg);
+}
+#div7
+{
+    width: 371px;
+    height: 268px;
+    left: 10px;
+    top: 17px;
+    overflow: hidden;
+    position: absolute;
+    -webkit-transform: rotate(3.5deg);
+}
+#item5_10
+{
+    position: absolute;
+    left: 17px;
+    top: 271px;
+    -webkit-animation: ballrotating 0.8s ease-in-out infinite alternate;
+    -webkit-transform-origin: 50% 0%;
+}
+#item5_11
+{
+    position: absolute;
+    left: 43px;
+    top: 269px;
+    -webkit-animation: ballrotating 1.2s 1s ease-in-out infinite alternate;
+    -webkit-transform-origin: 50% 0%;
+}
+#item6_1
+{
+    left: 43px;
+    top: 0px;
+}
+#item6_2
+{
+    left: 28px;
+    top: 0px;
+}
+#item6_3
+{
+    left: 138px;
+    top: 0px;
+}
+
+#item6_4
+{
+    left: 410px;
+    top: 0px;
+}
+#item6_5
+{
+    left: 0px;
+    top: 705px;
+}
+#item6_6
+{
+    left: 162px;
+    top: 688px;
+}
+#item6_7
+{
+    left: 334px;
+    top: 573px;
+}
+#div8
+{
+    left: 33px;
+    top: 290px;
+    width: 284px;
+    height: 385px;
+    background-color: #9c9c9c;
+    border: 5px solid #fff;
+    box-shadow: 5px -5px 3px #77DEDC;
+    overflow: hidden;
+    position: absolute;
+}
+#box9
+{
+  position:absolute;
+
+}
+#div9
+{
+    left: 181px;
+    top: 132px;
+    width: 289px;
+    height: 250px;
+    background-color: #9c9c9c;
+    border: 5px solid #fff;
+    box-shadow: 5px -5px 3px #77DEDC;
+    overflow: hidden;
+    position: absolute;
+}
+#item6_8
+{
+    position: absolute;
+    left: 414px;
+    top: 375px;
+    -webkit-animation: ballrotating 1.2s 1s ease-in-out infinite alternate;
+    -webkit-transform-origin: 50% 0%;
+}
+#item6_9
+{
+    position: absolute;
+    left: 385px;
+    top: 379px;
+    -webkit-animation: ballrotating 1s 1s ease-in-out infinite alternate;
+    -webkit-transform-origin: 50% 0%;
+}
+</style>
+
+<style type="text/css">
+@-webkit-keyframes aa_in_bounce_center
+{
+    0%{
+        opacity:0;
+        -webkit-transform:scale(.3)
+    }
+    50%{
+        opacity:1;
+        -webkit-transform:scale(1.05)
+    }
+    70%{
+        -webkit-transform:scale(.9)
+    }
+    100%{
+        -webkit-transform:scale(1)
+    }
+}
+@-webkit-keyframes aa_out_bounce_center
+{
+    0%{
+        -webkit-transform:scale(1)
+    }
+    25%{
+        -webkit-transform:scale(.95)
+    }
+    50%{
+        opacity:1;
+        -webkit-transform:scale(1.1)
+    }
+    100%{
+        opacity:0;
+        -webkit-transform:scale(.3)
+    }
+}
+
+/*---往下跳---*/
+@-webkit-keyframes aa_in_bounce_down
+{
+    0%{
+        opacity:0;
+        -webkit-transform:translateY(-2000px)
+    }
+    60%{
+        opacity:1;
+        -webkit-transform:translateY(30px)
+    }
+    80%{
+        -webkit-transform:translateY(-10px)
+    }
+    100%{
+        -webkit-transform:translateY(0)
+    }
+}
+
+@-webkit-keyframes aa_out_bounce_down
+{
+    0%{
+        -webkit-transform:translateY(0)
+    }
+    20%{
+        opacity:1;
+        -webkit-transform:translateY(-20px)
+    }
+    100%{
+        opacity:0;
+        -webkit-transform:translateY(2000px)
+    }
+}
+/*---往上跳---*/
+@-webkit-keyframes aa_in_bounce_up
+{
+    0%{
+        opacity:0;
+        -webkit-transform:translateY(2000px)
+    }
+    60%{
+        opacity:1;
+        -webkit-transform:translateY(-30px)
+    }
+    80%{
+        -webkit-transform:translateY(10px)
+    }
+    100%{
+        -webkit-transform:translateY(0)
+    }
+}
+@-webkit-keyframes aa_out_bounce_up
+{
+   0%{
+    -webkit-transform:translateY(0)
+    }
+    20%{
+        opacity:1;
+        -webkit-transform:translateY(20px)
+    }
+    100%{
+        opacity:0;
+        -webkit-transform:translateY(-2000px)
+    }
+}
+/*---往左跳---*/
+@-webkit-keyframes aa_in_bounce_left
+{
+    0%{
+        opacity:0;
+        -webkit-transform:translateX(-2000px)
+    }
+    60%{
+        opacity:1;
+        -webkit-transform:translateX(30px)
+    }
+    80%{
+        -webkit-transform:translateX(-10px)
+    }
+    100%{
+        -webkit-transform:translateX(0)
+    }
+}
+@-webkit-keyframes aa_out_bounce_left1
+{
+    0%{
+        -webkit-transform:translateX(0)
+    }
+    20%{
+        opacity:1;
+        -webkit-transform:translateX(20px)
+    }
+    100%{
+        opacity:0;
+        -webkit-transform:translateX(-2000px)
+    }
+}
+
+/*---往右跳---*/
+@-webkit-keyframes aa_in_bounce_right
+{
+    0%{
+        opacity:0;
+        -webkit-transform:translateX(2000px)
+    }
+    60%{
+        opacity:1;
+        -webkit-transform:translateX(-30px)
+    }
+    80%{
+        -webkit-transform:translateX(10px)
+    }
+    100%{
+        -webkit-transform:translateX(0)
+    }
+}
+@-webkit-keyframes aa_out_bounce_right
+{
+    0%{
+        -webkit-transform:translateX(0)
+    }
+    20%{
+        opacity:1;
+        -webkit-transform:translateX(-20px)
+    }
+    100%{
+        opacity:0;
+    -webkit-transform:translateX(2000px)
+    }
+}
+@-webkit-keyframes fadein
+{
+  from  {opacity: 0}
+  to    {opacity: 1}
+}
+@-webkit-keyframes ballmoving
+{
+  from  {-webkit-transform: translate(0px,-10px);}
+  to    {-webkit-transform: translate(0px,10px);}
+}
+@-webkit-keyframes ballrotating
+{
+  from  {-webkit-transfrom: rotate(3deg);}
+  to    {-webkit-transform: rotate(-3deg);}
+}
+
+  @-webkit-keyframes aa_in_zoom_down
+    {
+        0% {
+            opacity: 0;
+            -webkit-transform: scale3d(.1, .1, .1) translate3d(0, -1000px, 0);
+            transform: scale3d(.1, .1, .1) translate3d(0, -1000px, 0);
+            -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+            animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+        }
+
+        60% {
+            opacity: 1;
+            -webkit-transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+            transform: scale3d(.475, .475, .475) translate3d(0, 60px, 0);
+            -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+            animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+        }
+        100%{
+            opacity: 1
+        }
+    }
+ @-webkit-keyframes aa_out_zoom_down
+    {
+        0%{
+            opacity: 1
+        }
+          40% {
+            opacity: 1;
+            -webkit-transform: scale3d(.475, .475, .475) translate3d(0, -60px, 0);
+            transform: scale3d(.475, .475, .475) translate3d(0, -60px, 0);
+            -webkit-animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+            animation-timing-function: cubic-bezier(0.550, 0.055, 0.675, 0.190);
+          }
+
+          100% {
+            opacity: 0;
+            -webkit-transform: scale3d(.1, .1, .1) translate3d(0, 2000px, 0);
+            transform: scale3d(.1, .1, .1) translate3d(0, 2000px, 0);
+            -webkit-transform-origin: center bottom;
+            transform-origin: center bottom;
+            -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+            animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1);
+          }
+    }
+.divbox > img
+{
+    position: absolute;
+}
+</style>
+
+<div id='container'>
+    <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/699e2aa3e1.jpg' style='position:absolute'>
+    <div id='pagetitle' style='position:absolute;width:370px;height:215px;top:232px;left:65px;background-color:#fff;border: 9px solid rgb(98, 239, 222);;border-radius: 51px;box-shadow: rgba(106,215,211,0.7) 5px 4px 0px;opacity:0;'>
+      <div style='position:absolute;width:300px;height:200px;overflow:hidden;display:table;left:25px;'>
+          <div id='titlecontent' style='width:300px;height:200px;vertical-align:middle;display:table-cell;text-align:center;font-size:30px;line-height:40px;color:#036471;'></div>
+      </div>
+    </div>
+  <div id='page1' class='page' style='display:none'>
+    <!-- <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/699e2aa3e1.jpg'> -->
+
+    <div id='box1'>
+      <div id='div1' class='divbox'>
+        <img id='img1'>
+        <span id='word1' class='showwords'></span>
+      </div>
+      <img id='item1_6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/ce538d53d9.jpg'>
+    </div>
+
+    <img id='item1_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/61f8a9b61c.jpg'>
+    <img id='item1_2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/e717f96ef0.jpg'>
+    <img id='item1_3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/0af64e54f1.jpg'>
+    <img id='item1_4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/e85dedc2a5.jpg'>
+    <img id='item1_5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/9d41f902a4.jpg'>
+
+    <img id='item1_7' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/42cd90a1be.jpg'>
+    <img id='item1_8' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/2545aa806c.jpg'>
+    <img id='item1_9' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/a854f26c0b.jpg'>
+    <img id='item1_10' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/47c2b95f4e.jpg'>
+    <img id='item1_11' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/3680371727.jpg'>
+  </div>
+
+  <div id='page2' class='page' style='display:none'>
+    <img id='bg2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/de7e80b14f.jpg' style='opacity:0'>
+    <img id='item2_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/3736323ca7.jpg'>
+    <img id='item2_2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/ddc4795841.jpg'>
+    <img id='item2_3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/ddc4795841.jpg'>
+
+    <div id='box2'>
+      <div id='div2' class='divbox'>
+        <img id='img2'>
+        <span id='word2' class='showwords'></span>
+      </div>
+      <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/ed65492621.jpg' style='position:absolute'>
+    </div>
+    <div id='bottom2'>
+      <img id='item2_4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/526de594cf.jpg'>
+      <img id='item2_5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/e4b610066b.jpg'>
+      <img id='item2_6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/9019134924.jpg'>
+      <img id='item2_7' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/cef0916adb.jpg'>
+      <img id='item2_8' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/0df24c6a82.jpg'>
+      <img id='item2_9' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/ac7453db84.jpg'>
+      <img id='item2_10' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/bb6a8bbc17.jpg'>
+    </div>
+  </div>
+
+  <div id='page3' class='page' style='display:none'>
+
+    <img id='bg3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/132f2133c2.jpg' style='opacity:0;'>
+    <div id='box3'>
+      <div id='div3' class='divbox'>
+        <img id='img3'>
+        <span id='word3' class='showwords'></span>
+      </div>
+      <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/2b42450d52.jpg' style='position:absolute'>
+    </div>
+    <img id='item3_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/99ceca04e5.jpg'>
+    <img id='item3_2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/d452935b1d.jpg'>
+    <img id='item3_3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/2876cfd88b.jpg'>
+    <img id='item3_4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/b0da88c746.jpg'>
+    <img id='item3_5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/b6f30c8485.jpg'>
+
+    <img id='item3_6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/518c4a8ac5.jpg'>
+    <img id='item3_7' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/f3b713c99d.jpg'>
+    <img id='item3_8' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/15596511db.jpg'>
+    <img id='item3_9' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/e3401f24db.jpg'>
+
+  </div>
+
+  <div id='page4' class='page' style='display:none'>
+    <img id='bg4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/68ba9f1b44.jpg' style='opacity:0'>
+    <div id='box4'>
+      <img id='item4_10' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/db809a99ae.jpg'>
+      <div id='div4' class='divbox'>
+        <img id='img4'>
+        <span id='word4' class='showwords'></span>
+      </div>
+      <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/bc9975fda9.jpg' style='position:absolute'>
+    </div>
+    <div id='box5'>
+      <div id='div5' class='divbox'>
+        <img id='img5'>
+        <span id='word5' class='showwords'></span>
+      </div>
+      <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/5bee4c8e4a.jpg' style='position:absolute'>
+    </div>
+
+    <img id='item4_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/2f7ea338e3.jpg'>
+    <img id='item4_2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/749dfb601e.jpg'>
+    <img id='item4_3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/d30611dfc0.jpg'>
+    <img id='item4_4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/69f648d7c0.jpg'>
+    <img id='item4_5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/8eb0241798.jpg'>
+
+    <img id='item4_6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/1157b620e5.jpg'>
+    <img id='item4_7' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/bb93c2d869.jpg'>
+    <img id='item4_8' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/a38a8f1270.jpg'>
+    <img id='item4_9' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/d5d547b90c.jpg'>
+  </div>
+
+  <div id='page5' class='page' style='display:none'>
+    <img id='bg5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/d99f43a62e.jpg' style='opacity:0;'>
+    <div id='box6'>
+      <img id='item5_10' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/8170c7a8c5.jpg'>
+      <img id='item5_11' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/4c7bb3f0f0.jpg'>
+      <div id='div6' class='divbox'>
+        <img id='img6'>
+        <span id='word6' class='showwords'></span>
+      </div>
+      <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/f1d706bb65.jpg' style='position:absolute'>
+    </div>
+    <div id='box7'>
+      <div id='div7' class='divbox'>
+        <img id='img7'>
+        <span id='word7' class='showwords'></span>
+      </div>
+      <img src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/45e44666b2.jpg' style='position:absolute'>
+    </div>
+    <img id='item5_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/f3b64c1414.jpg'>
+    <img id='item5_2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/4c893add94.jpg'>
+    <img id='item5_3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/21f9dd0197.jpg'>
+    <img id='item5_4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/425fed0d33.jpg'>
+    <img id='item5_5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/8102975cce.jpg'>
+
+    <img id='item5_6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/e85e1a26db.jpg'>
+    <img id='item5_7' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/f41ba74ca9.jpg'>
+    <img id='item5_8' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/cce3872e75.jpg'>
+    <img id='item5_9' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/7424f200a2.jpg'>
+  </div>
+
+  <div id='page6' class='page' style='display:none'>
+    <img id='bg6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/573af79d6e.jpg' style='opacity:0'>
+    <div id='box9'>
+      <img id='item6_8' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/b0863dda94.jpg'>
+      <img id='item6_9' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/c4d2fc8862.jpg'>
+      <div id='div9' class='divbox'>
+        <img id='img9'>
+        <span id='word9' class='showwords'></span>
+      </div>
+    </div>
+    <div id='div8' class='divbox'>
+      <img id='img8'>
+      <span id='word8' class='showwords'></span>
+    </div>
+    <img id='item6_1' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/73c318e50d.jpg'>
+    <img id='item6_2' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/1c4106005e.jpg'>
+    <img id='item6_3' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/ee27da759d.jpg'>
+    <img id='item6_4' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/8d08983b76.jpg'>
+
+    <img id='item6_5' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/8d08983b76.jpg'>
+    <img id='item6_6' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/c925b5fc52.jpg'>
+    <img id='item6_7' src='http://wangjianxun1.test.upcdn.net/img/album_template/k_maxituan/c925b5fc52.jpg'>
+  </div>
+
+
+
+
+</div>
+
+<script type="text/javascript">
+function id(name)
+{
+  return document.getElementById(name);
+}
+
+var get_pid = function(url)
+{
+    var index1 = url.indexOf("?");
+    if(index1 != -1)
+    {
+        url = url.substr(0, index1);
+    }
+    return url.toString().substr(url.lastIndexOf("/") + 1);
+}
+
+function rand(min,max)
+{
+    return min+Math.floor(Math.random()*(max-min+1));
+}
+
+function showtitle()
+{
+  showpage(1);
+  var item_down = ['item1_5','item1_8','item1_9','item1_10','item1_11','item1_4'];
+  for(var i = 0; i< item_down.length; i++)
+  {
+    id(item_down[i]).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,10)/20 + 's ease-out both';
+  }
+
+  var item_up = ['item1_1','item1_2','item1_3'];
+  for(var i = 0; i< item_up.length; i++)
+  {
+    id(item_up[i]).style.webkitAnimation = 'aa_in_bounce_up 2s ' + rand(0,20)/20 + 's ease-out both';
+  }
+  id('item1_7').style.webkitAnimation = 'aa_in_bounce_right 2s ease-out both';
+  id('box1').style.display = 'none';
+
+  id('pagetitle').style.webkitAnimation = 'aa_in_zoom_down 2s ease both';
+  id('titlecontent').innerHTML = e_desc;
+
+  // setTimeout(distitle,5000)
+
+}
+
+function zimeitixfb()
+{
+    id('pagetitle').style.webkitAnimation = 'aa_out_zoom_down 1s ease both';
+    id('box1').style.webkitAnimation = 'aa_in_bounce_center 1s 1s ease-in-out both';
+    setImage('1');
+    id('box1').style.display = 'block';
+
+    timeout[1] = setTimeout(clear1,5000);
+}
+
+function show1()
+{
+  setImage('1');
+  showpage(1);
+  var item_down = ['item1_5','item1_8','item1_9','item1_10','item1_11','item1_4'];
+  for(var i = 0; i< item_down.length; i++)
+  {
+    id(item_down[i]).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,20)/20 + 's ease-out both';
+  }
+
+  var item_up = ['item1_1','item1_2','item1_3'];
+  for(var i = 0; i< item_up.length; i++)
+  {
+    id(item_up[i]).style.webkitAnimation = 'aa_in_bounce_up 2s ' + rand(0,20)/20 + 's ease-out both';
+  }
+  id('item1_7').style.webkitAnimation = 'aa_in_bounce_right 2s ease-out both';
+
+  id('box1').style.webkitAnimation = 'aa_in_bounce_center 1s 1s ease-in-out both';
+
+  timeout[2] = setTimeout(clear1,5000)
+}
+
+function clear1()
+{
+  var item_down = ['item1_5','item1_8','item1_9','item1_10','item1_11','item1_4'];
+  for(var i = 0; i< item_down.length; i++)
+  {
+    id(item_down[i]).style.webkitAnimation = 'aa_out_bounce_up 2s ' + rand(0,10)/20 + 's ease-out both';
+  }
+
+  var item_up = ['item1_1','item1_2','item1_3'];
+  for(var i = 0; i< item_up.length; i++)
+  {
+    id(item_up[i]).style.webkitAnimation = 'aa_out_bounce_down 2s ' + rand(0,10)/20 + 's ease-out both';
+  }
+  id('item1_7').style.webkitAnimation = 'aa_out_bounce_right 2s ease-out both';
+
+  id('box1').style.webkitAnimation = 'aa_out_bounce_center 1s 0.5s ease-in-out both';
+
+  timeout[3] = setTimeout(show2,1800)
+}
+
+function show2()
+{
+  showpage(2);
+  setImage('2');
+  id('bg2').style.webkitAnimation = 'fadein 0.2s linear both';
+  for(var i = 1;i < 4; i++)
+  {
+    id('item2_'+i).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,20)/20 +'s ease-out both';
+  }
+  id('box2').style.webkitAnimation = 'aa_in_bounce_center 2s ease-out both';
+
+  for(var i =4; i<11; i++)
+  {
+    id('item2_'+i).style.webkitAnimation = 'aa_in_bounce_down 2s '+rand(20,40)/20 +'s ease-out both';
+  }
+
+  timeout[4] = setTimeout(clear2,5000)
+}
+
+function clear2()
+{
+  for(var i = 1;i < 4; i++)
+  {
+    id('item2_'+i).style.webkitAnimation = 'aa_out_bounce_up 2s ' + rand(0,10)/20 +'s ease-out both';
+  }
+  id('box2').style.webkitAnimation = 'aa_out_bounce_center 2s ease-out both';
+
+  for(var i =4; i<11; i++)
+  {
+    id('item2_'+i).style.webkitAnimation = 'aa_out_bounce_up 2s '+rand(0,10)/20 +'s ease-out both';
+  }
+
+  timeout[5] = setTimeout(show3,1800)
+}
+
+function show3()
+{
+  showpage(3);
+  setImage('3');
+  id('bg3').style.webkitAnimation = 'fadein 0.2s linear both';
+  for(var i = 1;i < 6; i++)
+  {
+    id('item3_'+i).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,20)/20 +'s ease-out both';
+  }
+  id('box3').style.webkitAnimation = 'aa_in_bounce_center 2s ease-out both';
+
+  for(var i =6; i<10; i++)
+  {
+    id('item3_'+i).style.webkitAnimation = 'aa_in_bounce_up 2s '+rand(0,20)/20 +'s ease-out both';
+  }
+
+  timeout[6] = setTimeout(clear3,5000)
+}
+
+function clear3()
+{
+  for(var i = 1;i < 6; i++)
+  {
+    id('item3_'+i).style.webkitAnimation = 'aa_out_bounce_up 2s ' + rand(0,10)/20 +'s ease-out both';
+  }
+  id('box3').style.webkitAnimation = 'aa_out_bounce_center 2s ease-out both';
+
+  for(var i =6; i<10; i++)
+  {
+    id('item3_'+i).style.webkitAnimation = 'aa_out_bounce_down 2s '+rand(0,10)/20 +'s ease-out both';
+  }
+
+  timeout[7] = setTimeout(show4,1800)
+}
+
+function show4()
+{
+  showpage(4);
+  setImage('4');
+  setImage('5');
+  id('bg4').style.webkitAnimation = 'fadein 0.2s linear both';
+  for(var i = 1;i < 6; i++)
+  {
+    id('item4_'+i).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,20)/20 +'s ease-out both';
+  }
+  id('box5').style.webkitAnimation = 'aa_in_bounce_right 2s ease-out both';
+  id('box4').style.webkitAnimation = 'aa_in_bounce_left 2s ease-out both';
+
+  for(var i =6; i<10; i++)
+  {
+    id('item4_'+i).style.webkitAnimation = 'aa_in_bounce_up 2s '+rand(0,20)/20 +'s ease-out both';
+  }
+
+  timeout[8] = setTimeout(clear4,5000)
+}
+
+function clear4()
+{
+  for(var i = 1;i < 6; i++)
+  {
+    id('item4_'+i).style.webkitAnimation = 'aa_out_bounce_up 2s ' + rand(0,10)/20 +'s ease-out both';
+  }
+  id('box5').style.webkitAnimation = 'aa_out_bounce_right 2s ease-out both';
+  id('box4').style.webkitAnimation = 'aa_out_bounce_left1 2s ease-out both';
+
+  for(var i =6; i<10; i++)
+  {
+    id('item4_'+i).style.webkitAnimation = 'aa_out_bounce_down 2s '+rand(0,10)/20 +'s ease-out both';
+  }
+
+  timeout[9] = setTimeout(show5,1500)
+}
+
+
+function show5()
+{
+  showpage(5);
+  setImage('6');
+  setImage('7');
+  id('bg5').style.webkitAnimation = 'fadein 0.2s linear both';
+  for(var i = 1;i < 6; i++)
+  {
+    id('item5_'+i).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,20)/20 +'s ease-out both';
+  }
+  id('box6').style.webkitAnimation = 'aa_in_bounce_right 2s ease-out both';
+  id('box7').style.webkitAnimation = 'aa_in_bounce_left 2s ease-out both';
+
+  for(var i =6; i<10; i++)
+  {
+    id('item5_'+i).style.webkitAnimation = 'aa_in_bounce_up 2s '+rand(0,20)/20 +'s ease-out both';
+  }
+
+  timeout[10] = setTimeout(clear5,5000)
+}
+
+function clear5()
+{
+  for(var i = 1;i < 6; i++)
+  {
+    id('item5_'+i).style.webkitAnimation = 'aa_out_bounce_up 2s ' + rand(0,10)/20 +'s ease-out both';
+  }
+  id('box6').style.webkitAnimation = 'aa_out_bounce_right 2s ease-out both';
+  id('box7').style.webkitAnimation = 'aa_out_bounce_left1 2s ease-out both';
+
+  for(var i =6; i<10; i++)
+  {
+    id('item5_'+i).style.webkitAnimation = 'aa_out_bounce_down 2s '+rand(0,10)/20 +'s ease-out both';
+  }
+
+  timeout[11] = setTimeout(show6,1500)
+}
+
+function show6()
+{
+  showpage(6);
+  setImage('8');
+  setImage('9');
+  id('bg6').style.webkitAnimation = 'fadein 0.2s linear both';
+  for(var i = 1;i < 5; i++)
+  {
+    id('item6_'+i).style.webkitAnimation = 'aa_in_bounce_down 2s ' + rand(0,20)/20 +'s ease-out both';
+  }
+  id('div8').style.webkitAnimation = 'aa_in_bounce_right 2s ease-out both';
+  id('box9').style.webkitAnimation = 'aa_in_bounce_left 2s ease-out both';
+
+  for(var i =5; i<8; i++)
+  {
+    id('item6_'+i).style.webkitAnimation = 'aa_in_bounce_up 2s '+rand(0,20)/20 +'s ease-out both';
+  }
+
+  timeout[12] = setTimeout(clear6,5000)
+}
+
+function clear6()
+{
+  for(var i = 1;i < 5; i++)
+  {
+    id('item6_'+i).style.webkitAnimation = 'aa_out_bounce_up 2s ' + rand(0,10)/20 +'s ease-out both';
+  }
+  id('div8').style.webkitAnimation = 'aa_out_bounce_right 2s ease-out both';
+  id('box9').style.webkitAnimation = 'aa_out_bounce_left1 2s ease-out both';
+
+  for(var i =5; i<8; i++)
+  {
+    id('item6_'+i).style.webkitAnimation = 'aa_out_bounce_down 2s '+rand(0,10)/20 +'s ease-out both';
+  }
+
+  timeout[13] = setTimeout(show1,1500)
+}
+
+function showpage(index)
+{
+    for(var i=1;i<7;i++)
+    {
+        if(i == index)
+            id('page'+i).style.display = 'block';
+        else
+            id('page'+i).style.display = 'none';
+    }
+}
+
+function load_images()
+{
+    reshow = false;
+    image_size_width=[];
+    image_size_height=[];
+    Onload_imgs_url=[];
+    image_url_index=0;
+    have_num = 0;
+    error_num = 0;
+    begin_titletime = new Date();
+    begin_titletime = begin_titletime.getTime();
+    canshow = true;
+    showtitle();
+    bl_keepload = 'first';
+    // loading_first();
+    step_load();
+}
+
+function image_onerror(event)
+{
+    var img = event.target;
+    var index = img.index;
+    if(index<step_loadnum)
+        error_num ++;
+    Onload_imgs_url[index] = 'not find';
+    // console.log(Onload_imgs_url[index]);
+    // console.log(have_num + '-' + error_num);
+    if((have_num+error_num >= step_loadnum || slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        // loading_others();
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixfb();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixfb();
+                },dis_titletime);
+        }
+    }
+}
+
+function image_onload(event)
+{
+    if(reshow == true)
+        return;
+
+    var img = event.target;
+    var index = img.index;
+
+    if(index<step_loadnum)
+    {
+        have_num++;
+    }
+    Onload_imgs_url[index] = img.src;
+    image_size_height[index] = img.height;
+    image_size_width[index] = img.width;
+
+    console.log(Onload_imgs_url[index]);
+    // console.log(have_num + '-' + error_num);
+
+    if((have_num + error_num >= step_loadnum ||slider_images_url.length == (have_num+error_num)) && canshow == true)
+    {
+        // loading_others();
+        reshow = false;
+        canshow =false;
+        if(have_num == 0)
+            return;
+        var end_titletime = new Date();
+        end_titletime = end_titletime.getTime();
+        var dis_titletime = Math.abs(end_titletime-begin_titletime);
+        if(dis_titletime>delaytime)
+        {
+            zimeitixfb();
+        }
+        else
+        {
+            dis_titletime = delaytime- dis_titletime;
+            timeout[0] = setTimeout(function()
+                {
+                    zimeitixfb();
+                },dis_titletime);
+        }
+
+    }
+}
+
+var divwidth  = {'1':430,'2':466,'3':445,'4':213,'5':227,'6':370,'7':371,'8':284,'9':289};
+var divheight = {'1':430,'2':416,'3':463,'4':387,'5':457,'6':266,'7':268,'8':385,'9':250};
+function setImage(idname)
+{
+    if(reshow == true)
+        return;
+
+    while(Onload_imgs_url[image_url_index] == 'not find' || Onload_imgs_url[image_url_index] == 'loading')
+    {
+        if(image_url_index % step_loadnum == 0)
+        {
+            step_load();
+        }
+        image_url_index++;
+        if(image_url_index == Onload_imgs_url.length)
+            image_url_index = 0;
+    }
+
+    if(image_url_index % step_loadnum == 0)
+    {
+        step_load();
+    }
+    var img_bili = image_size_width[image_url_index]/image_size_height[image_url_index];
+
+    var div = id('div'+idname);
+
+    var height = divheight[idname];
+    var width = divwidth[idname];
+
+    var img = id('img'+idname);
+    img.src = Onload_imgs_url[image_url_index];
+    console.log('setimg:'+image_url_index);
+
+    var word = id('word' + idname);
+    var word_string = words[get_pid(Onload_imgs_url[image_url_index])];
+    if(word_string != undefined)
+    {
+        var word_string = word_string.replace(/[\n]/ig,'');
+
+        var word_length = word_string.length;
+        word.style.top = "94%";
+        if(idname == 7) {
+            word.style.top = "100%";
+            // word.style.color = "red";
+        }else if(idname == 8) {
+            word.style.fontSize = "20px";
+        }else if(idname == 9) {
+            word.style.fontSize = "20px";
+        }
+        else
+        {
+            word.style.top = "90%";
+            word.style.fontSize = "25px";
+        }
+
+        if(word_length > 10)
+        {
+            word.style.top = "85%";
+            if(idname == 1)
+                word_string = insertEnter(word_string, 11);
+            else if(idname == 2 || idname == 3)
+                word_string = insertEnter(word_string, 5);
+            else if(idname >=6 && idname <= 9)
+                word_string = insertEnter(word_string, 5);
+
+        }
+        word.innerText = word_string;
+    }
+    else
+    {
+        word.innerText = "";
+    }
+
+    if(img_bili > (width/height))
+    {
+        img.style.top = '0px';
+        img.style.height = height + 'px';
+        img.style.width = height*img_bili + 'px';
+        img.style.left = -((height*img_bili-width)/2)+'px';
+    }
+    else
+    {
+        img.style.left = '0px';
+        img.style.width = width+'px';
+        img.style.height = width/img_bili + 'px';
+        img.style.top = -((width/img_bili-height)/2) + 'px';
+    }
+    image_url_index ++;
+    if(image_url_index == Onload_imgs_url.length)
+      image_url_index = 0;
+}
+
+function insertEnter(str,n){
+    var len = str.length;
+    var strTemp = '';
+    if(len > n){
+    strTemp = str.substring(0,n);
+    str = str.substring(n,len);
+    return strTemp+'\n'+str;
+    }else{
+    return str;
+    }
+}
+call_me(load_images)
+var image_size_width=[];
+var image_size_height=[];
+var image_url_index=0;
+var have_num = 0;
+var error_num = 0;
+var canshow = true;
+var reshow = false;
+var delaytime=5000;
+var timeout = [];
+
+
+// 本模板及模板代码为深圳量子云科技有限公司版权所有 抄袭必究
+function id (name)
+{
+    return document.getElementById(name);
+}
+
+//每次执行加载后10张图片
+var bl_keepload = 'first';
+var step_loadnum = 8;
+function step_load()
+{
+    var load_num = 0
+    //初步加载X张
+    if(image_url_index  == 0 && bl_keepload == 'first')
+    {
+        console.log('loading continue');
+        if(slider_images_url.length > step_loadnum)
+        {
+            load_num = step_loadnum;
+            bl_keepload = 'next';
+        }
+        else
+        {
+            load_num = slider_images_url.length;
+            bl_keepload = 'end';
+        }
+        for(var i = 0; i< load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+    else if(bl_keepload == 'end')
+    {
+        return;
+    }
+    else
+    {
+         console.log('loading continue');
+        if(slider_images_url.length - image_url_index >step_loadnum*2)
+        {
+            load_num = step_loadnum;
+        }
+        else
+        {
+            load_num = slider_images_url.length - image_url_index - step_loadnum;
+            bl_keepload = 'end';
+        }
+        for(var i = image_url_index +step_loadnum; i< image_url_index + step_loadnum + load_num; i++)
+        {
+            var img=new Image();
+            img.index=i;
+            img.src=slider_images_url[i];
+            img.onload=image_onload;
+            img.onerror= image_onerror;
+            Onload_imgs_url[i] = 'loading';
+        }
+    }
+}
+
+function reload_scene()
+{
+    clearnode();
+    reshow = true;
+    setTimeout(load_images,100);
+}
+
+function clearnode()
+{
+    for(var i = 1; i<7;i++)
+    {
+        id('page'+i).style.display = 'none';
+    }
+    for(var i = 0;i< timeout.length;i++)
+    {
+        clearTimeout(timeout[i]);
+    }
+    id('pagetitle').style.webkitAnimation = '';
+
+}
+
+</script>
