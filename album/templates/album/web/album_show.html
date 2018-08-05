@@ -527,7 +527,7 @@
                  src="{% static 'album/web/img/music.png' %}"
                  :class="{'animated infinite spin': music.active}"
                  v-on:tap="toggleMusic" />
-        <audio :src="music.url" autoplay="autoplay" loop="loop"></audio>
+        <audio :src="music.url" loop="loop"></audio>
     </div>
     <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
 </div>
@@ -684,19 +684,20 @@ var editmode =true ;
         for (var i = 0; i < module_inits.length; i++) {
             module_inits[i]();
         }
+        adVue.toggleMusic();
     }
     function call_me(fun) {
         module_inits.push(fun);
     }
     var ua = navigator.userAgent.toLowerCase();
-    if(ua.match(/MicroMessenger/i) == 'micromessenger')
-    {
-        wx.ready(load_init_modules);
-    }
-    else
-    {
+    {#if(ua.match(/MicroMessenger/i) == 'micromessenger')#}
+    {#{#}
+    {#    wx.ready(load_init_modules);#}
+    {#}#}
+    {#else#}
+    {#{#}
         onload = load_init_modules;
-    }
+    {#}#}
 </script>
 
 {% with template_path='album/web/album_templates/'|add:album.template.path_name|add:'.html' %}
@@ -740,7 +741,7 @@ var adVue = new Vue({
     el: '#vueMask',
     data: {
         music: {
-            active: true,
+            active: false,
             url: '{% if album_data.music_data %}{{ album_data.music_data.url }}{% endif %}' || '{% if album_data.music_data %}{{ album_data.music_data.file }}{% endif %}',
         },
     },

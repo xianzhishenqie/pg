@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 
 from album import models as album_models
-
+from album.utils import common
 
 
 class TemplateTagSerializers(serializers.ModelSerializer):
@@ -58,6 +58,9 @@ class AlbumSerializers(serializers.ModelSerializer):
             return None
 
     def get_template_data(self, obj):
+        if not obj.template:
+            common.fix_empty_template_album(obj)
+
         if obj.template:
             return TemplateSerializers(obj.template).data
         else:

@@ -51,8 +51,8 @@
     <div class="weui-cells mt-0">
         <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
         <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
-            <v-touch class="weui-cell__hd" v-on:tap="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
-            <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap="selectMusic(music)">
+            <v-touch class="weui-cell__hd" v-on:tap.prevent="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
+            <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap.prevent="selectMusic(music)">
                 <p>{{ music.name }}</p>
             </v-touch>
             <v-touch tag="span" class="fa fa-play-circle-o"

@@ -11,8 +11,12 @@
         animation-duration: 0.5s;
         display: none;
     }
+    #templateSelect:after{
+        content: ' ';
+        display: table;
+    }
     #templateSelect .template-list{
-        padding: 15px 15px 0 0;
+        padding: 15px 15px 0  0;
         overflow: auto;
     }
     #templateSelect .template-item{
@@ -48,7 +52,7 @@
     <div class="template-list row mx-0">
         <v-touch class="template-item col-4 pr-0"
                  :key="template.id"
-                 v-on:tap="selectTemplate(template)"
+                 v-on:tap.prevent="selectTemplate(template)"
                  v-for="template, i in templates">
             <div class="border p-1 position-relative" :class="{'text-primary border-primary': template.id == templateId}">
                 <div class="template-cover position-relative w-100">
@@ -136,7 +140,7 @@
                 },
                 fixListPanelHeight: function () {
                     var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight();
-                    $(this.$el).find('.template-list').height(height);
+                    $(this.$el).find('.template-list').height(height - 15);
                 },
                 show: function () {
                     docUtil.setTitle('选择模板');

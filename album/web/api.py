@@ -43,8 +43,8 @@ class TemplateViewSet(common_mixins.CacheModelMixin,
     filter_backends = (filters.SearchFilter, filters.OrderingFilter)
     search_fields = ('name',)
 
-    ordering_fields = ('create_time',)
-    ordering = ('-create_time',)
+    ordering_fields = ('create_time', 'id')
+    ordering = ('-create_time', '-id')
 
     page_cache_age = None
     unlimit_pagination = True
