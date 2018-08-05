@@ -2,6 +2,7 @@ import json
 
 from django.db import transaction
 from django.db.models import Count
+from django.utils import timezone
 
 from rest_framework import exceptions, filters, permissions, status, viewsets
 from rest_framework.decorators import action
@@ -104,6 +105,12 @@ class MusicViewSet(common_mixins.CacheModelMixin,
             queryset = queryset.filter(tags=tag)
 
         return queryset
+
+    def sub_perform_update(self, serializer):
+        serializer.save(
+            update_time=timezone.now()
+        )
+        return True
 
 
 class AlbumViewSet(common_mixins.PGMixin,

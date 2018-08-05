@@ -12,7 +12,7 @@ class Music(models.Model):
     name = models.CharField(max_length=100, default='')
     author = models.CharField(max_length=100, default='')
     file = models.FileField(upload_to='music', default='')
-    url = models.URLField()
+    url = models.URLField(default='')
 
     lyric_file = models.FileField(upload_to='lyric', default='')
     lyric_url = models.URLField(default='')

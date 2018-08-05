@@ -45,9 +45,7 @@ var http = (function (baseModules) {
             },
         };
         if (customOptions) {
-            $.each(customOptions, function (key, value) {
-                options[key] = value;
-            });
+            $.extend(true, options, customOptions)
         }
         $.ajax(options);
     };

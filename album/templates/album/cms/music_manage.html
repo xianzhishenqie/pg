@@ -16,16 +16,16 @@
 {% block container %}
 
 <style>
+    ul, p, label{
+        margin-bottom: auto;
+    }
     #musicManage {
         position: absolute;
-        z-index: 1000;
         left: 0;
         top: 0;
         width: 100%;
         height: 100%;
         background-color: #ffffff;
-        animation-duration: 0.5s;
-        display: none;
     }
     #musicManage .weui-cells {
         overflow: auto;
@@ -33,69 +33,183 @@
     #musicManage .weui-cells:before {
         border-top: none;
     }
+    #musicManage #addMusic {
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        width: 30px;
+        height: 30px;
+    }
+    #musicManage #addMusic .x{
+        height: 2px;
+        width: 60%;
+    }
+    #musicManage #addMusic .y{
+        height: 60%;
+        width: 2px;
+    }
+    #musicManage #music {
+        position: absolute;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f8f8f8;
+        display: none;
+    }
 </style>
 
 {% verbatim %}
-<v-touch id="musicManage" v-cloak>
-    <div class="weui-navbar" style="position: initial;">
-        <v-touch class="weui-navbar__item border-bottom"
-             style="padding: 5px 0;"
-             :class="{'weui-bar__item_on text-danger border-bottom border-danger': musicTag.active}"
-             :data-id="musicTag.id"
-             :key="musicTag.id"
-             v-on:tap="tagMusicTag(musicTag)"
-             v-for="musicTag in musicTags">
-            {{ musicTag.name }}
-        </v-touch>
-    </div>
-    <div class="weui-search-bar" id="searchBar">
-        <div class="weui-search-bar__form">
-            <div class="weui-search-bar__box">
-                <i class="weui-icon-search"></i>
-                <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
-                       @input="getMusics"
-                       v-model="search">
-                <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap="clearSearch"></v-touch>
-            </div>
-            <label class="weui-search-bar__label">
-                <i class="weui-icon-search"></i>
-                <span>搜索</span>
-            </label>
-        </div>
-        <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap="clearSearch">取消</v-touch>
-    </div>
-    <div class="weui-cells mt-0">
-        <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
-        <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
-            <v-touch class="weui-cell__hd" v-on:tap.prevent="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
-            <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap.prevent="selectMusic(music)">
-                <p>{{ music.name }}</p>
+<div id="musicManage" v-cloak>
+    <div id="musicSelect">
+        <div class="weui-navbar" style="position: initial;">
+            <v-touch class="weui-navbar__item border-bottom"
+                 style="padding: 5px 0;"
+                 :class="{'weui-bar__item_on text-danger border-bottom border-danger': tag.active}"
+                 :data-id="tag.id"
+                 :key="tag.id"
+                 v-on:tap="tagMusicTag(tag)"
+                 v-for="tag in musicTags">
+                {{ tag.name }}
             </v-touch>
-            <v-touch tag="span" class="fa fa-play-circle-o"
-                     :class="{'fa-pause-circle-o': music.active}"
-                     v-on:tap="playMusic(i, music)"></v-touch>
-        </span>
+        </div>
+        <div class="weui-search-bar" id="searchBar">
+            <div class="weui-search-bar__form">
+                <div class="weui-search-bar__box">
+                    <i class="weui-icon-search"></i>
+                    <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
+                           @input="getMusics"
+                           v-model="search">
+                    <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap="clearSearch"></v-touch>
+                </div>
+                <label class="weui-search-bar__label">
+                    <i class="weui-icon-search"></i>
+                    <span>搜索</span>
+                </label>
+            </div>
+            <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap="clearSearch">取消</v-touch>
+        </div>
+        <div class="weui-cells mt-0">
+            <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
+            <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
+                <v-touch class="weui-cell__hd" v-on:tap.prevent="selectMusic(music)" v-on:press.prevent="actionMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
+                <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap.prevent="selectMusic(music)" v-on:press.prevent="actionMusic(music)">
+                    <p>{{ music.name }}</p>
+                </v-touch>
+                <v-touch tag="span" class="fa fa-play-circle-o"
+                         :class="{'fa-pause-circle-o': music.active}"
+                         v-on:tap="playMusic(i, music)"></v-touch>
+            </span>
+        </div>
     </div>
-</v-touch>
+    <v-touch id="addMusic" class="position-absolute rounded-circle text-success border border-success" v-on:tap="createMusic">
+        <div class="bg-success pg-center x"></div>
+        <div class="bg-success pg-center y"></div>
+    </v-touch>
+    <v-touch id="music" v-on:panright="hideMusic">
+        <div class="weui-cells__title">音乐名称</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入音乐名称" v-model="editingMusic.name">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">音乐作者</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入音乐作者" v-model="editingMusic.author">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">音乐地址(优先使用音乐地址)</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入音乐地址" v-model="editingMusic.url">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">音乐文件(优先使用音乐地址)</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <span v-if="editingMusic.file && typeof(editingMusic.file) == 'string'">已有<a :href="editingMusic.file" download>文件</a>，重新</span>
+                    <input type="file" @change="selectEditingMusicFile($event)">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title d-none">歌词地址(优先使用歌词地址)</div>
+        <div class="weui-cells d-none">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入歌词地址" v-model="editingMusic.lyric_url">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title d-none">歌词文件(优先使用歌词地址)</div>
+        <div class="weui-cells d-none">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <input class="weui-input" type="text" placeholder="请输入歌词文件" v-model="editingMusic.lyric_file">
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells__title">音乐标签</div>
+        <div class="weui-cells">
+            <v-touch class="weui-cell weui-cell_access" v-on:tap="checkMusicTag(editingMusic.tags[0])">
+                <div class="weui-cell__bd">
+                    <span>{{ musicTagMap[editingMusic.tags[0]] ? musicTagMap[editingMusic.tags[0]].name : '请选择音乐标签' }}</span>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </v-touch>
+        </div>
+
+        <div class="weui-btn-area">
+            <v-touch tag="span" class="weui-btn weui-btn_primary" v-on:tap.prevent="submitMusic">确定</v-touch>
+        </div>
+    </v-touch>
+</div>
 {% endverbatim %}
 
 <script type="text/javascript">
     $.extend(context, {
         musicTagApiUrl: '{% url "album:cms:api:music-tag-list" %}',
         musicApiUrl: '{% url "album:cms:api:music-list" %}',
+        fakeMusicDetailApiUrl: '{% url "album:cms:api:music-detail" 0 %}',
         selectMusic: function (music) {},
     });
 
     $(function () {
+        var emptyMusic = {
+            id: '',
+            name: '',
+            author: '',
+            url: '',
+            file: '',
+            lyric_url: '',
+            lyric_file: '',
+            tags: [1],
+        };
         window.mVue = new Vue({
             el: '#musicManage',
             data: {
                 musicTags: [],
+                musicTagMap: {},
                 musics: [],
 
+                allMuiscTag: {
+                    id: '',
+                    name: '全部',
+                    active: true,
+                },
                 musicTag: null,
                 search: '',
                 music: null,
+
+                editingMusic: emptyMusic,
 
                 musicId: null,
             },
@@ -103,9 +217,15 @@
                 getMusicTags: function () {
                     var vue = this;
                     http.get(context.musicTagApiUrl, {}, function (res) {
-                        vue.musicTags = res.rows;
-                        vue.musicTag = vue.musicTags[0];
+                        vue.allMuiscTag.active = true;
+                        vue.musicTags = [vue.allMuiscTag].concat(res.rows);
+                        $.each(vue.musicTags, function (i, tag) {
+                            vue.musicTagMap[tag.id] = tag;
+                        });
                         vue.getMusics();
+                        Vue.nextTick(function () {
+                            vue.fixListPanelHeight();
+                        });
                     });
                 },
                 tagMusicTag: function(musicTag) {
@@ -161,22 +281,120 @@
                     Vue.set(vue, 'music', music);
                 },
                 fixListPanelHeight: function () {
-                    var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight() - $(this.$el).find('.weui-search-bar').outerHeight();
-                    $(this.$el).find('.weui-cells').height(height);
+                    var height = document.documentElement.clientHeight - $(this.$el).find('#musicSelect .weui-navbar').outerHeight() - $(this.$el).find('#musicSelect .weui-search-bar').outerHeight();
+                    $(this.$el).find('#musicSelect .weui-cells').height(height);
                 },
                 selectMusic: function (music) {
-                    this.hide();
+                    $.extend(true, this.editingMusic, music);
                     this.musicId = music.id;
-                    context.selectMusic(music);
+                    this.showMusic();
                 },
+                createMusic: function () {
+                    this.editingMusic = $.extend(true, this.editingMusic, emptyMusic);;
+                    this.showMusic();
+                },
+
+                showMusic: function () {
+                    if (this.editingMusic.id) {
+                        docUtil.setTitle('编辑音乐');
+                    } else {
+                        docUtil.setTitle('添加音乐');
+                    }
+                    $(this.$el).find('#music').animateCss('slideInRight').show();
+                },
+                hideMusic: function () {
+                    docUtil.revertTitle();
+                    $(this.$el).find('#music').animateCss('slideOutRight', function ($el) {
+                        $el.hide();
+                    });
+                },
+                submitMusic: function () {
+                    var vue = this;
+                    vue.hideMusic();
+                    var formData = new FormData();
+                    var fileInputNames = ['file', 'lyric_file'];
+                    $.each(this.editingMusic, function (name, value) {
+                        if (arrayUtil.in(name, fileInputNames) && (!value || typeof(value) == 'string')) {
+
+                        } else {
+                            formData.append(name, value);
+                        }
+                    });
+                    if (this.editingMusic.id) {
+                        http.patch(context.fakeMusicDetailApiUrl.replace('0', this.editingMusic.id), formData, function () {
+                            vue.getMusics();
+                        }, null, {
+                            processData:false,
+                            contentType:false,
+                        });
+                    } else {
+                        http.post(context.musicApiUrl, formData, function () {
+                            vue.getMusics();
+                        }, null, {
+                            processData:false,
+                            contentType:false,
+                        });
+                    }
+                },
+                checkMusicTag: function (tagId) {
+                    var vue = this;
+                    var pickerOptions = [];
+                    $.each(vue.musicTags, function (i, tag) {
+                        if (i > 0) {
+                            pickerOptions.push({
+                                label: tag.name,
+                                value: tag.id,
+                            });
+                        }
+                    });
+                    var defaultValue = [];
+                    if (tagId) {
+                        defaultValue.push(tagId)
+                    } else {
+                        defaultValue.push(pickerOptions[0].value)
+                    }
+                    weui.picker(pickerOptions, {
+                       container: 'body',
+                       defaultValue: defaultValue,
+                       onConfirm: function (result) {
+                           vue.editingMusic.tags = [result[0].value];
+                       },
+                    });
+                },
+                selectEditingMusicFile: function(e){
+                    var fileInput = e.currentTarget;
+                    this.editingMusic.file = fileInput.files[0];
+                },
+                actionMusic: function (music) {
+                    var vue = this;
+                    weui.actionSheet([
+                        {
+                            label: '删除音乐',
+                            onClick: function () {
+                                http.delete(context.fakeMusicDetailApiUrl.replace('0', music.id), {}, function () {
+                                    vue.getMusics();
+                                });
+                            }
+                        }
+                    ], [
+                        {
+                            label: '取消',
+                            onClick: function () {
+                            }
+                        }
+                    ], {
+                        onClose: function(){
+                        }
+                    });
+                }
             },
             mounted: function () {
-                {#this.fixListPanelHeight();#}
                 weui.searchBar('#searchBar');
 
                 var vue = this;
+                vue.musicTag = vue.allMuiscTag;
                 vue.getMusicTags();
-            }
+            },
         });
     });
 </script>

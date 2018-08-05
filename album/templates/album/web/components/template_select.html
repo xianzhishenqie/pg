@@ -44,11 +44,11 @@
     <div class="weui-navbar" style="position: initial;">
         <v-touch class="weui-navbar__item border-bottom"
                  style="padding: 5px 0;"
-                 :class="{'weui-bar__item_on text-danger border-bottom border-danger': templateTag.active}"
-                 :data-id="templateTag.id"
-                 :key="templateTag.id"
-                 v-on:tap="tagTemplateTag(templateTag)"
-                 v-for="templateTag in templateTags">
+                 :class="{'weui-bar__item_on text-danger border-bottom border-danger': tag.active}"
+                 :data-id="tag.id"
+                 :key="tag.id"
+                 v-on:tap="tagTemplateTag(tag)"
+                 v-for="tag in templateTags">
             {{ templateTag.name }}
         </v-touch>
     </div>

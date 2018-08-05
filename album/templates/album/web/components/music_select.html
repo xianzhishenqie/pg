@@ -24,11 +24,11 @@
     <div class="weui-navbar" style="position: initial;">
         <v-touch class="weui-navbar__item border-bottom"
              style="padding: 5px 0;"
-             :class="{'weui-bar__item_on text-danger border-bottom border-danger': musicTag.active}"
-             :data-id="musicTag.id"
-             :key="musicTag.id"
-             v-on:tap="tagMusicTag(musicTag)"
-             v-for="musicTag in musicTags">
+             :class="{'weui-bar__item_on text-danger border-bottom border-danger': tag.active}"
+             :data-id="tag.id"
+             :key="tag.id"
+             v-on:tap="tagMusicTag(tag)"
+             v-for="tag in musicTags">
             {{ musicTag.name }}
         </v-touch>
     </div>
