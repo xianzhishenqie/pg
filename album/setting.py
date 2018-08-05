@@ -9,3 +9,5 @@ APP_MENUS = {
         "url": "http://www.baidu.com/",
     }]
 }
+
+ADMIN_KEY = 'd5ae35cf-2989-4770-a7c2-466524a7b32e'

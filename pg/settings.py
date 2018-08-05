@@ -194,5 +194,3 @@ SUB_MODULES = [
 ]
 
 ENCODING = 'utf-8'
-
-USE_CDN = False

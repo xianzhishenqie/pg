@@ -22,7 +22,7 @@ from base.utils.app import get_pg_urls
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
 ]
 
 urlpatterns += get_pg_urls()

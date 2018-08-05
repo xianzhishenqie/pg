@@ -75,5 +75,5 @@ class AlbumSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = album_models.Album
-        fields = ('id', 'name', 'user', 'music', 'template', 'picture_list', 'music_data', 'template_data')
-        read_only_fields = ('type', 'name', 'user')
+        fields = ('id', 'name', 'desc', 'user', 'music', 'template', 'picture_list', 'music_data', 'template_data')
+        read_only_fields = ('user',)

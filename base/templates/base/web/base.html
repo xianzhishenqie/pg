@@ -5,10 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    {% block lv %}
-        {% get_current_language as LANGUAGE_CODE %}
-        {% use_cdn as UC %}
-    {% endblock %}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% use_cdn as UC %}
     <meta charset="utf-8">
     <title>{% block title %}PG{% endblock %}</title>
 

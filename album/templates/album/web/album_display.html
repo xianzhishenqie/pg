@@ -1,84 +1,760 @@
-{% extends './base.html' %}
-
 {% load i18n %}
 {% load staticfiles %}
 {% load pg_common %}
 
-{% block title %}
-    我的相册
-{% endblock %}
+<!DOCTYPE HTML>
+<html style="height: 100%;">
+<head>
+    {% use_cdn as UC %}
+    <meta charset="utf-8">
+    <title>{{ album.name }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+    <meta content="telephone=no, address=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="full-screen" content="true" />
+    <meta name="screen-orientation" content="portrait" />
+    <meta name="x5-fullscreen" content="true" />
+    <meta name="360-fullscreen" content="true" />
 
-
-{% block top_css %}
-    {{ block.super }}
+    {% if user.is_authenticated %}
+        {% if UC %}
+            <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+            <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
+        {% else %}
+            <link rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% static 'base/common/lib/font-awesome/css/font-awesome.css' %}">
+            <link rel="stylesheet" href="{% static 'we/common/lib/weui/css/weui.css' %}">
+        {% endif %}
+    {% endif %}
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/magic/magic.css' %}">
-    <link type="text/css" rel="stylesheet" href="{% static_v 'base/common/css/animation.css' %}">
-{% endblock %}
+    <link rel="stylesheet" href="{% static_v 'base/common/css/animation.css' %}">
+    <link rel="stylesheet" href="{% static_v 'base/common/css/common.css' %}">
+        <style type="text/css">
+            [v-cloak] {
+                display: none;
+            }
+            html, body {
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+        <script type="text/javascript">
+            var context = {};
+        </script>
 
-{% block local_css %}
-    <style type="text/css">
-        #vueMask {
-            left: 0;
-            right: 0;
+
+    {% if UC %}
+        <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/keditor.css?v=09ss081141">
+        <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/text_animate.css?v=09081141">
+        <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/merge.css?v=113sd3dd334">
+    {% else %}
+        <link rel="stylesheet" href="{% static_v 'album/web/css/keditor.css' %}">
+        <link rel="stylesheet" href="{% static_v 'album/web/css/text_animate.css' %}1">
+        <link rel="stylesheet" href="{% static_v 'album/web/css/merge.css' %}">
+    {% endif %}
+
+    <style>
+    #enddiv
+    {
+        position: absolute;
+        width: 500px;
+        height: 815px;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 10000;
+        display: none;
+        opacity: 0;
+    }
+    #title_div
+    {
+        width: 320px;
+        height: 200px;
+
+        top: 250px;
+        color: #fff;
+        font-size: 25px;
+        position: relative;
+        line-height: 45px;
+        text-align: center;
+        font-family: '微软雅黑';
+        display:table;
+    }
+    #title_line
+    {
+        position: absolute;
+        width: 370px;
+        height: 2px;
+        background-color: #fff;
+        top: 415px;
+        left: 65px;
+    }
+    #reshowbtn
+    {
+        position: absolute;
+        width: 150px;
+        height: 44px;
+        border-radius: 10px;
+        background-color: rgba(94,159,177,0.9);
+        color: #fff;
+        font-size: 22px;
+        text-align: center;
+        line-height: 44px;
+        top: 446px;
+        left: 74px;
+    }
+    #guanzhubtn
+    {
+        position: absolute;
+        width: 150px;
+        height: 44px;
+        border-radius: 10px;
+        background-color: rgba(185,91,83,0.9);
+        color: #fff;
+        font-size: 22px;
+        text-align: center;
+        line-height: 44px;
+        top: 446px;
+        left: 268px;
+    }
+    #morexiangce
+    {
+        position: fixed;
+        width: 240px;
+        height: 50px;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        text-align: center;
+        border-radius: 25px;
+        bottom: 20px;
+        left: 130px;
+        padding: 0px;
+        margin: 0px;
+        -webkit-box-sizing: border-box;
+        font-size: 24px;
+        padding-top: 11px;
+        z-index: 9999;
+        line-height: 28px;
+        border: 1px solid #fff;
+        display: none;
+    }
+    #saveoff
+    {
+        position: fixed;
+        width: 100px;
+        height: 50px;
+        background-color: rgba(0,0,0,0.5);
+        color: white;
+        text-align: center;
+        border-radius: 25px;
+        bottom: 20px;
+        left: 10px;
+        padding: 0px;
+        margin: 0px;
+        font-size: 14pt;
+        z-index: 9999;
+        line-height: 50px;
+        border: 1px solid #fff;
+        display: none;
+    }
+    @-webkit-keyframes fadein
+    {
+        from  {opacity: 0}
+        to    {opacity: 1}
+    }
+    @-webkit-keyframes fadeout
+    {
+        from  {opacity: 1}
+        to    {opacity: 0}
+    }
+    #loadingdiv
+    {
+        width: 500px;
+        height: 815px;
+        z-index: 20000;
+        background-color: rgba(255,255,255,0.5);
+        position: absolute;
+        pointer-events: none;
+    }
+    .loadingword
+    {
+        font-size: 25px;
+        color: rgba(82,82,82,0.9);
+        font-family: '微软雅黑';
+        text-align: center;
+        width: 500px;
+        position: relative;
+        top: 300px;
+        line-height: 50px;
+    }
+    .gspan1
+    {
+        -webkit-animation: spanmove 3s linear infinite;
+        position: absolute;
+        left: 50px;
+    }
+    .gspan2
+    {
+        -webkit-animation: spanmove 3s 0.6s linear infinite;
+        position: absolute;
+        left: 75px;
+    }
+    .gspan3
+    {
+        -webkit-animation: spanmove 3s 1.2s linear infinite;
+        position: absolute;
+        left: 100px;
+    }
+    .gspan4
+    {
+        -webkit-animation: spanmove 3s 1.8s linear infinite;
+        position: absolute;
+        left: 125px;
+    }
+    .gspan5
+    {
+        -webkit-animation: spanmove 3s 2.4s linear infinite;
+        position: absolute;
+        left: 150px;
+    }
+    @-webkit-keyframes spanmove
+    {
+        0%   {-webkit-transform: scale(1);}
+        10%  {-webkit-transform: scale(1.5);}
+        20%  {-webkit-transform: scale(1);}
+        100% {-webkit-transform: scale(1);}
+    }
+    #letter
+    {
+        /*position: fixed;*/
+    /*	left: 25px;
+        bottom: 30px;*/
+        width: 120px;
+        height: 80px;
+        /*-webkit-animation: lettermove 2s linear infinite alternate;*/
+        z-index: 10000;
+        position: absolute;
+        top: 0px;
+    }
+    #letterpicdiv
+    {
+        position: fixed;
+        left: 25px;
+        bottom: 30px;
+        width: 120px;
+        height: 80px;
+        -webkit-animation: lettermove 2s linear infinite alternate;
+        z-index: 10000;
+        display: none;
+    }
+    @-webkit-keyframes lettermove
+    {
+        from  {-webkit-transform: rotate(15deg) scale(0.8);}
+        to    {-webkit-transform: rotate(-15deg) scale(0.8);}
+    }
+    #letterdiv
+    {
+        width: 500px;
+        position: absolute;
+        height: 815px;
+        background-color: rgba(0,0,0,0.7);
+        z-index: 10001;
+        display: none;
+    }
+    .lettercon
+    {
+        width: 350px;
+        height: 450px;
+        background-color: #fff;
+        left: 75px;
+        top: 150px;
+        position: absolute;
+    }
+    .lettertitle
+    {
+        width: 100%;
+        height: 45px;
+        background-color: #F44336;
+        color: #fff;
+        font-size: 25px;
+        text-align: center;
+        line-height: 45px;
+    }
+    .lettercontent
+    {
+        width: 310px;
+        margin-top: 15px;
+        margin-left: 20px;
+        font-size: 22px;
+        line-height: 35px;
+        text-align: center;
+    }
+    .letterimg
+    {
+        width: 150px;
+        text-align: center;
+
+        /*margin-left: 75px;*/
+    }
+    #lettername
+    {
+        width: 100%;
+        font-size: 18px;
+        text-align: right;
+        margin-top: 10px;
+    }
+    .newxiangce
+    {
+        width: 250px;
+        height: 50px;
+        background-color: #F44336;
+        border-radius: 10px;
+        margin-top: 10px;
+        color: #fff;
+        margin-left: 50px;
+        font-size: 24px;
+        line-height: 50px;
+        text-align: center;
+        -webkit-animation: guangzhu_ani 0.7s linear infinite alternate;
+        position: absolute;
+        bottom: 20px;
+    }
+    a
+    {
+        text-decoration: none;
+    }
+    .letterclose
+    {
+        font-size: 40px;
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        left: 305px;
+        top: 0px;
+        color: #fff;
+        line-height: 45px;
+
+    }
+    #letternotice
+    {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: #ff0000;
+        border-radius: 15px;
+        left: 103px;
+        top: -10px;
+        z-index: 10000;
+        color: #fff;
+        font-size: 22px;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        display: none;
+    }
+
+    @-webkit-keyframes guanzhu_test
+    {
+        0%    {-webkit-transform: translate(-400px,0px) scale(1.1);opacity: 1}
+        10%   {-webkit-transform: translate(0px,0px) scale(1.1);opacity: 1}
+        20%   {-webkit-transform: translate(0px,0px) scale(1.15);opacity: 1}
+        30%   {-webkit-transform: translate(0px,0px) scale(1.1);opacity: 1}
+        40%   {-webkit-transform: translate(0px,0px) scale(1.15);opacity: 1}
+        50%   {-webkit-transform: translate(0px,0px) scale(1.1);opacity: 1}
+        60%   {-webkit-transform: translate(0px,0px) scale(1.15);opacity: 1}
+        70%   {-webkit-transform: translate(0px,0px) scale(1.1);opacity: 1}
+        80%   {-webkit-transform: translate(0px,0px) scale(1.15);opacity: 1}
+        90%   {-webkit-transform: translate(0px,0px) scale(1.1);opacity: 1}
+        94%   {-webkit-transform: translate(0px,0px) scale(1.2);opacity: 1}
+        100%  {-webkit-transform: translate(0px,0px) scale(0.5);opacity: 0}
+    }
+
+    @-webkit-keyframes fadeOut {
+        0% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+    @keyframes fadeOut {
+        0% {opacity: 1;}
+        100% {opacity: 0;}
+    }
+
+
+    @-webkit-keyframes shakeIn {
+        0%{
+            opacity: 0;
         }
-        #albumDisplay .music {
-            right: 20px;
-            top: 20px;
-            z-index: 201;
+        75%{
+            opacity: 1;
+            -webkit-transform: scale3d(1, 1, 1);
         }
-        #albumDisplay .mask {
-            left: 0;
-            right: 0;
-            z-index: 200;
+        82%{
+            -webkit-transform: scale3d(1.1, 0.8, 1);
         }
-        #album{
+        84%{
+            -webkit-transform: scale3d(1.05, .95, 1);
+        }
+        87%{
+            -webkit-transform: scale3d(1, 1, 1);
+        }
+        91%{
+            -webkit-transform: scale3d(1.1, 0.8, 1);
+        }
+        100%{
+            -webkit-transform: scale3d(1, 1, 1);
+        }
+    }
+    #MusicView ul .serch li[class='serch'] {  display: block;}
+        .green.button {
+        background-color: #91bd09;
+    }
+    .green.button {
+        -webkit-animation-name: greenPulse;
+        -webkit-animation-duration: 3s;
+    }
+
+    a.button {
+        -webkit-animation-duration: 2s;
+        -webkit-animation-iteration-count: infinite;
+    }
+    .button {
+        background: #222 url() repeat-x 0 0;
+        display: inline-block;
+        padding: 5px 15px 6px;
+        color: #fff !important;
+        font-size: 13px;
+        font-weight: bold;
+        line-height: 1;
+        text-decoration: none;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+        text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+        border-bottom: 1px solid rgba(0,0,0,0.25);
+        position: relative;
+        cursor: pointer;
+        overflow: visible;
+        width: auto;
+    }
+
+    @media screen and (min-width: 600px) { /*当屏幕尺寸小于600px时，应用下面的CSS样式*/
+       .jb_infoContainer{
+            width: 300px;
+            height: 57.53%;
+            position: absolute;
+            top: 17.4%;
+            left: 50%;
+            margin-left: -150px;
+            background-color: white;
+            z-index: 9999;
             display: none;
-        }
+       }
+    }
+    @-webkit-keyframes shake {
+        0%, 100% {-webkit-transform: translateX(0);}
+        10%, 30%, 50%, 70%, 90% {-webkit-transform: translateX(-10px);}
+        20%, 40%, 60%, 80% {-webkit-transform: translateX(10px);}
+    }
+    @-moz-keyframes shake {
+        0%, 100% {-moz-transform: translateX(0);}
+        10%, 30%, 50%, 70%, 90% {-moz-transform: translateX(-10px);}
+        20%, 40%, 60%, 80% {-moz-transform: translateX(10px);}
+    }
     </style>
-{% endblock %}
 
-{% block container %}
-<div class="w-100 h-100" id="albumDisplay">
+{% if UC %}
+    <script src="http://wangjianxun1.test.upcdn.net/js/zepto.min.js?v=12101011"></script>
+    <script src="http://wangjianxun1.test.upcdn.net/js/vector.js"></script>
+    <script src='http://wangjianxun1.test.upcdn.net/js/xmlHttp.js'></script>
+{% else %}
+    <script src="{% static_v 'album/web/js/zepto.min.js' %}"></script>
+    <script src="{% static_v 'album/web/js/vector.js' %}"></script>
+    <script src="{% static_v 'album/web/js/xmlHttp.js' %}"></script>
+{% endif %}
 
+{% if user.is_authenticated %}
+    {% if UC %}
+        <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    {% else %}
+        <script src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
+    {% endif %}
+{% endif %}
 
-    {% with template_path='album/web/album_templates/'|add:template_name|add:'.html' %}
-        {% include template_path %}
-    {% endwith %}
-</div>
-    {% include './components/album_edit.html' %}
-{% endblock %}
-
-{% block bottom_js %}
-    {{ block.super }}
-    <script type="text/javascript" src="{% static 'base/common/lib/anime/anime.min.js' %}"></script>
-{% endblock %}
-{% block local_js %}
 <script type="text/javascript">
-    $.extend(context, {
-        pk: {{ pk }},
-        canHideEditor: true,
-        albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
-        hideEdit: function (isChanged) {
-            if (isChanged) {
-                window.location.reload();
+   $(function(){
+       // 初始化 传入dom id
+       var victor = new Victor("moxuanloading", "outmoxuanloading");
+       var theme = [
+               ["#002c4a", "#005584"],
+               ["#35ac03", "#3f4303"],
+               ["#ac0908", "#cd5726"],
+               ["#18bbff", "#00486b"]
+       ]
+       var initInterval = setInterval(function(){
+           victor(theme[Math.floor(Math.random()*3)]).set();
+       },1000)
+   });
+</script>
+</head>
+<body>
+
+<style>
+    .position-absolute{
+        position: absolute;
+    }
+    .w-100{
+        width: 100%;
+    }
+    .h-100{
+        height: 100%;
+    }
+    #vueMask {
+        left: 0;
+        right: 0;
+    }
+    #vueMask .music {
+        right: 20px;
+        top: 20px;
+        z-index: 201;
+    }
+    #vueMask .mask {
+        left: 0;
+        right: 0;
+        z-index: 200;
+    }
+    #album{
+        display: none;
+    }
+</style>
+<div class="position-absolute w-100 h-100" id="vueMask">
+    <div class="music position-absolute">
+        <v-touch tag="img" class="music-icon"
+                 src="{% static 'album/web/img/music.png' %}"
+                 :class="{'animated infinite spin': music.active}"
+                 v-on:tap="toggleMusic" />
+        <audio :src="music.url" loop="loop"></audio>
+    </div>
+    {% if user.is_authenticated %}
+    <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
+    {% endif %}
+</div>
+
+<div id="moxuanloading">
+    <div id="outmoxuanloading"></div>
+    <div class="moxuanloadingsk-spinner moxuanloadingsk-spinner-pulse"></div>
+    <div class="loadingNum">
+        <p id='loadingText'>加载中</p>
+        <p id='loadingPro'>5%</p>
+    </div>
+</div>
+
+<div id='enddiv'>
+    <div id='title_div'>
+        <div id='title_text' style='top:0px;left:0px;right:0px;bottom:0px;vertical-align:middle;display:table-cell;'></div>
+    </div>
+    <div id='title_line'></div>
+    <div id='reshowbtn' ontouchstart='reload_scene()'>再看一遍</div>
+</div>
+
+<script>
+    function addEgret() {
+        var height = window.innerHeight;
+        var weight = window.innerWidth;
+        var per = height / weight;
+        var t = "";
+        if (per <= 4 / 3) {
+            t = "showAll";
+        } else {
+            t = "noBorder";
+        }
+        setCookie("scaleMode", t);
+    }
+    addEgret();
+    //写cookies
+    function setCookie(name, value) {
+        var Days = 30;
+        var exp = new Date();
+        exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
+        document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+    }
+    //读取cookies
+    function getCookie(name) {
+        var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+        if (arr = document.cookie.match(reg))
+            return unescape(arr[2]);
+        else
+            return null;
+    }
+    //删除cookies
+    function delCookie(name) {
+        var exp = new Date();
+        exp.setTime(exp.getTime() - 1);
+        var cval = getCookie(name);
+        if (cval != null)
+            document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+    }
+</script>
+
+<div style="margin: auto;width: 100%;" class="egret-player" id="egret-player" data-entry-class="Main" data-orientation="auto" data-scale-mode ="noBorder" data-resolution-mode="retina" data-frame-rate="60" data-content-width="640" data-content-height="1008" data-show-paint-rect="false" data-multi-fingered="2" data-show-fps="false" data-show-log="false" data-log-filter="" data-show-fps-style="x:0,y:0,size:30,textColor:0x00c200,bgAlpha:0.9">
+  <div class='TextView'>
+  </div>
+  <input type="hidden" value="" id="per"/>
+</div>
+
+{% if UC %}
+    <script src="http://wangjianxun1.test.upcdn.net/js/common.js?v=12101011"></script>
+    <script>
+        var staticUrl = 'http://wangjianxun1.test.upcdn.net/';
+    </script>
+    <script src="http://wangjianxun1.test.upcdn.net/js/text_config.js?v=12101011"></script>
+{% else %}
+    <script src="{% static_v 'album/web/js/common.js' %}"></script>
+    <script>
+        var staticUrl = '/static/album/web';
+    </script>
+    <script src="{% static_v 'album/web/js/text_config.js' %}"></script>
+{% endif %}
+
+<script>
+var words = {"kawa_8482915447240":"\u6492\u6253\u7b97s","kawa_8487426126688":"\u6253\u626b\u6253\u626bs'd","kawa_8487426236236":"\u963f\u8428"};
+var editmode =true ;
+ var mvCfg = {
+        pics: {{ pictures | safe }},
+        token: '56',
+        tp: '{{ album.template.path_name }}',
+        title: '{{ album.name }}',
+        miaoshu: '{{ album.desc }}',
+        picsRotate: [0,0,0,],
+        texts: [],
+    };
+    // 文本转义
+    (function () {
+        for (var i = 0, len = mvCfg.texts.length; i < len; ++i) {
+            mvCfg.texts[i] = decodeEscapeHtml(mvCfg.texts[i]);
+        }
+    })();
+
+</script>
+
+{% if UC %}
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+    <script src="http://wangjianxun1.test.upcdn.net/js/md5.min.js"></script>
+    <script src="http://wangjianxun1.test.upcdn.net/js/base64.min.js"></script>
+{% else %}
+    <script src="{% static_v 'album/web/js/jweixin-1.0.0.js' %}"></script>
+
+    <script src="{% static_v 'album/web/js/md5.min.js' %}"></script>
+    <script src="{% static_v 'album/web/js/base64.min.js' %}"></script>
+{% endif %}
+
+<script>
+    function init_viewport()
+    {
+        if(/Android (\d+\.\d+)/.test(navigator.userAgent))
+        {
+            var version = parseFloat(RegExp.$1);
+            if(version>2.3)
+            {
+                var phoneScale = parseInt(window.screen.width)/500;
+                document.write('<meta name="viewport" content="width=500, minimum-scale = '+ phoneScale +', maximum-scale = '+ phoneScale +', target-densitydpi=device-dpi">');
+            }
+            else
+            {
+                document.write('<meta name="viewport" content="width=500, target-densitydpi=device-dpi">');
             }
         }
-    });
+        else if(navigator.userAgent.indexOf('iPhone') != -1)
+        {
+            var phoneScale = parseInt(window.screen.width)/500;
+            document.write('<meta name="viewport" content="width=500, height=750,initial-scale=' + phoneScale +', user-scalable=no" /> ');
+        }
+        else
+        {
+            document.write('<meta name="viewport" content="width=500, height=750,initial-scale=0.64" /> ');
+
+        }
+    }
+    init_viewport();
+
+    var slider_images_url = mvCfg.pics;
+    var e_desc = mvCfg.title;
+    var e_scene = mvCfg.tp.replace("k_","");
+
+    $('#moxuanloading').hide();
+
+    textPlayer.start(mvCfg.texts,textCfg);
+
+    //部分函数
+    var module_inits = [];
+    function load_init_modules() {
+        for (var i = 0; i < module_inits.length; i++) {
+            module_inits[i]();
+        }
+        adVue.toggleMusic();
+    }
+    function call_me(fun) {
+        module_inits.push(fun);
+    }
+    var ua = navigator.userAgent.toLowerCase();
+    {#if(ua.match(/MicroMessenger/i) == 'micromessenger')#}
+    {#{#}
+    {#    wx.ready(load_init_modules);#}
+    {#}#}
+    {#else#}
+    {#{#}
+        onload = load_init_modules;
+    {#}#}
 </script>
+
+{% with template_path='album/web/album_templates/'|add:album.template.path_name|add:'.html' %}
+    {% include template_path %}
+{% endwith %}
+
+{% if UC %}
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
+    <script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
+{% else %}
+    <script src="{% static 'base/common/lib/vue/vue.js' %}"></script>
+    <script src="{% static 'base/common/lib/hammer/hammer.js' %}"></script>
+{% endif %}
+<script src="{% static 'base/common/lib/vue-touch/vue-touch.js' %}"></script>
+
+{% if user.is_authenticated %}
+    {% if UC %}
+        <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    {% else %}
+        <script src="{% static 'base/common/lib/popper/umd/popper.js' %}"></script>
+        <script src="{% static 'base/common/lib/bootstrap/js/bootstrap.js' %}"></script>
+    {% endif %}
+    <script src="{% static 'we/common/lib/weui/js/weui.js' %}"></script>
+
+    <script src="{% static_v 'base/common/js/ajax.csrf.js' %}"></script>
+    <script src="{% static_v 'base/common/js/utils.js' %}"></script>
+    <script src="{% static_v 'base/common/js/constants.js' %}"></script>
+
+    {% include './components/album_edit.html' %}
+    <script type="text/javascript">
+        $.extend(context, {
+            pk: {{ pk }},
+            canHideEditor: true,
+            hideEdit: function (isChanged) {
+                if (isChanged) {
+                    window.location.reload();
+                }
+            }
+        });
+    </script>
+{% endif %}
 <script type="text/javascript">
 var adVue = new Vue({
     el: '#vueMask',
     data: {
         music: {
-            active: true,
-        },
-        album: {
-            name: '',
-            desc: '',
-            picture_list: [],
-            music_data: null,
-            template_data: null,
+            active: false,
+            url: '{% if album_data.music_data %}{{ album_data.music_data.url }}{% endif %}' || '{% if album_data.music_data %}{{ album_data.music_data.file }}{% endif %}',
         },
     },
     methods: {
@@ -91,23 +767,16 @@ var adVue = new Vue({
                 audio.pause();
             }
         },
-        getAlbum: function () {
-            var vue = this;
-            http.get(context.albumDetailApiUrl, {}, function(res){
-                vue.album = res;
-
-            });
-        },
+        {% if user.is_authenticated %}
         editAlbum: function () {
             aVue.show();
         },
+        {% endif %}
     },
-    mounted: function () {
-        var vue = this;
-
-        vue.getAlbum();
-    }
-
 });
 </script>
-{% endblock %}
+<script>
+    $("#sec_content,#biyeji_container").css("marginTop",-$(window).height());
+</script>
+</body>
+</html>

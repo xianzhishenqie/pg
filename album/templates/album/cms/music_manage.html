@@ -1,0 +1,183 @@
+{% extends './base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load pg_common %}
+
+{% block title %}
+    音乐管理
+{% endblock %}
+
+{% block top_css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
+{% endblock %}
+
+{% block container %}
+
+<style>
+    #musicManage {
+        position: absolute;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        animation-duration: 0.5s;
+        display: none;
+    }
+    #musicManage .weui-cells {
+        overflow: auto;
+    }
+    #musicManage .weui-cells:before {
+        border-top: none;
+    }
+</style>
+
+{% verbatim %}
+<v-touch id="musicManage" v-cloak>
+    <div class="weui-navbar" style="position: initial;">
+        <v-touch class="weui-navbar__item border-bottom"
+             style="padding: 5px 0;"
+             :class="{'weui-bar__item_on text-danger border-bottom border-danger': musicTag.active}"
+             :data-id="musicTag.id"
+             :key="musicTag.id"
+             v-on:tap="tagMusicTag(musicTag)"
+             v-for="musicTag in musicTags">
+            {{ musicTag.name }}
+        </v-touch>
+    </div>
+    <div class="weui-search-bar" id="searchBar">
+        <div class="weui-search-bar__form">
+            <div class="weui-search-bar__box">
+                <i class="weui-icon-search"></i>
+                <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
+                       @input="getMusics"
+                       v-model="search">
+                <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap="clearSearch"></v-touch>
+            </div>
+            <label class="weui-search-bar__label">
+                <i class="weui-icon-search"></i>
+                <span>搜索</span>
+            </label>
+        </div>
+        <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap="clearSearch">取消</v-touch>
+    </div>
+    <div class="weui-cells mt-0">
+        <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
+        <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
+            <v-touch class="weui-cell__hd" v-on:tap.prevent="selectMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
+            <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap.prevent="selectMusic(music)">
+                <p>{{ music.name }}</p>
+            </v-touch>
+            <v-touch tag="span" class="fa fa-play-circle-o"
+                     :class="{'fa-pause-circle-o': music.active}"
+                     v-on:tap="playMusic(i, music)"></v-touch>
+        </span>
+    </div>
+</v-touch>
+{% endverbatim %}
+
+<script type="text/javascript">
+    $.extend(context, {
+        musicTagApiUrl: '{% url "album:cms:api:music-tag-list" %}',
+        musicApiUrl: '{% url "album:cms:api:music-list" %}',
+        selectMusic: function (music) {},
+    });
+
+    $(function () {
+        window.mVue = new Vue({
+            el: '#musicManage',
+            data: {
+                musicTags: [],
+                musics: [],
+
+                musicTag: null,
+                search: '',
+                music: null,
+
+                musicId: null,
+            },
+            methods: {
+                getMusicTags: function () {
+                    var vue = this;
+                    http.get(context.musicTagApiUrl, {}, function (res) {
+                        vue.musicTags = res.rows;
+                        vue.musicTag = vue.musicTags[0];
+                        vue.getMusics();
+                    });
+                },
+                tagMusicTag: function(musicTag) {
+                    var vue = this;
+                    if (musicTag.active) {
+                        return;
+                    }
+
+                    if (vue.musicTag) {
+                        Vue.set(vue.musicTag, 'active', false);
+                    }
+                    Vue.set(musicTag, 'active', true);
+                    vue.musicTag = musicTag;
+                    vue.getMusics();
+                },
+                getMusics: function () {
+                    var vue = this;
+                    http.get(context.musicApiUrl, {
+                        tag: vue.musicTag.id,
+                        search: vue.search,
+                    }, function (res) {
+                        vue.musics = res.rows;
+                        $.each(vue.musics, function (i, music) {
+                            if (vue.music && vue.music.id == music.id) {
+                                music.active = true;
+                            }
+                        });
+                    });
+                },
+                clearSearch: function () {
+                    this.search = '';
+                    this.getMusics();
+                },
+                playMusic: function (i, music) {
+                    var vue = this;
+                    if (music == vue.music) {
+                        Vue.set(music, 'active', !music.active);
+
+                        var audio = $(vue.$el).find('audio')[0];
+                        if (music.active) {
+                            audio.play();
+                        } else {
+                            audio.pause();
+                        }
+                        return;
+                    }
+
+                    if (vue.music) {
+                        Vue.set(vue.music, 'active', false);
+                    }
+                    Vue.set(music, 'active', true);
+                    Vue.set(vue.musics, i, music);
+                    Vue.set(vue, 'music', music);
+                },
+                fixListPanelHeight: function () {
+                    var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight() - $(this.$el).find('.weui-search-bar').outerHeight();
+                    $(this.$el).find('.weui-cells').height(height);
+                },
+                selectMusic: function (music) {
+                    this.hide();
+                    this.musicId = music.id;
+                    context.selectMusic(music);
+                },
+            },
+            mounted: function () {
+                {#this.fixListPanelHeight();#}
+                weui.searchBar('#searchBar');
+
+                var vue = this;
+                vue.getMusicTags();
+            }
+        });
+    });
+</script>
+{% endblock %}

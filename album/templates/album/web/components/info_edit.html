@@ -1,0 +1,91 @@
+
+<style>
+    #infoEdit {
+        position: absolute;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #f8f8f8;
+        animation-duration: 0.5s;
+        display: none;
+    }
+    #infoEdit .weui-cells {
+        overflow: auto;
+    }
+    #infoEdit .weui-cells:before {
+        border-top: none;
+    }
+</style>
+
+{% verbatim %}
+<v-touch id="infoEdit" v-on:panright="hide" v-cloak>
+    <div class="weui-cells__title">相册名称</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" type="text" placeholder="请输入相册名称" v-model="name">
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-cells__title">相册描述</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" placeholder="请输入相册描述" rows="3"  v-model="desc"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="weui-btn-area">
+        <v-touch tag="span" class="weui-btn weui-btn_primary" v-on:tap.prevent="submit">确定</v-touch>
+    </div>
+</v-touch>
+{% endverbatim %}
+
+<script type="text/javascript">
+    $.extend(context, {
+        fakeAlbumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
+        confirmInfo: function (info) {},
+    });
+
+    $(function () {
+        window.iVue = new Vue({
+            el: '#infoEdit',
+            data: {
+                id: '',
+                name: '',
+                desc: '',
+            },
+            methods: {
+                init: function(album) {
+                    this.id = album.id;
+                    this.name = album.name;
+                    this.desc = album.desc;
+                },
+                show: function () {
+                    docUtil.setTitle('修改相册信息');
+                    $(this.$el).animateCss('slideInRight').show();
+                },
+                hide: function () {
+                    docUtil.revertTitle();
+                    $(this.$el).animateCss('slideOutRight', function ($el) {
+                        $el.hide();
+                    });
+                },
+                submit: function () {
+                    this.hide();
+                    var info = {
+                        name: this.name,
+                        desc: this.desc,
+                    };
+                    context.confirmInfo(info);
+                },
+            },
+            mounted: function () {
+                var vue = this;
+            }
+        });
+    });
+</script>

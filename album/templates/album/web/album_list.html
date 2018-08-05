@@ -13,12 +13,23 @@
         ul, p, label{
             margin-bottom: auto;
         }
+        #albumList{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f8f8;
+        }
         #albumList .album-list{
             padding: 15px 15px 0 0;
         }
         #albumList .album-item{
             margin-bottom: 15px;
             text-align: center;
+        }
+        #albumList .album-item>div{
+            background-color: #ffffff;
         }
         #albumList .album-cover{
             padding-bottom: 100%;
@@ -37,7 +48,7 @@
 {% block container %}
     {% verbatim %}
     <div id="albumList" v-cloak>
-        <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span></p>
+        <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span> <a class="float-right text-info" :href="createAlbumUrl">创建相册</a></p>
         <div class="album-list row mx-0">
             <v-touch class="album-item col-4 pr-0"
                      v-on:press="actionTemplate(album)"
@@ -59,10 +70,6 @@
     {% endverbatim %}
 {% endblock %}
 
-
-{% block bottom_js %}
-    {{ block.super }}
-{% endblock %}
 {% block local_js %}
 <script type="text/javascript">
     var context = {
@@ -76,6 +83,7 @@
 var aVue = new Vue({
     el: '#albumList',
     data: {
+        createAlbumUrl: context.albumPageUrl,
         albums: [],
     },
     methods: {

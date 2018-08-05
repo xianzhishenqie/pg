@@ -38,7 +38,7 @@ def index(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 @request_data
-@auto_login
+@auto_login()
 def album_page(request, pk):
     if pk == 0:
         try:
@@ -57,7 +57,7 @@ def album_page(request, pk):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 @request_data
-@auto_login
+@auto_login()
 def album_list_page(request):
     context = {}
     return render(request, 'album_list.html', context)
@@ -66,10 +66,16 @@ def album_list_page(request):
 @api_view(['GET'])
 @permission_classes([AllowAny])
 @request_data
-@auto_login
+@auto_login(ignore=True)
 def album_display_page(request, pk):
+    has_key = False
+    openid_key = request.query_params.get('key')
+    if openid_key and request.user.is_authenticated and openid_key == request.user.weuser.openid_key:
+        has_key = True
+
     context = {
         'pk': pk,
+        'has_key': has_key,
     }
 
     try:
@@ -84,7 +90,7 @@ def album_display_page(request, pk):
     context['album_data'] = album_data
     context['pictures'] = json.dumps([picture_data['image'] for picture_data in album_data['picture_list']])
 
-    return render(request, 'album_show.html', context)
+    return render(request, 'album_display.html', context)
 
 
 @api_view(['GET', 'POST'])

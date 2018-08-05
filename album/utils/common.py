@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import logging
 import random
 
@@ -28,6 +28,8 @@ def get_or_create_default_album(user):
     if not album:
         template = random_template()
         album = album_models.Album.objects.create(
+            name='我用照片制作了一个相册,打开看看！',
+            desc='这个相册，送给你',
             user=user,
             template=template,
             music=template.default_music,

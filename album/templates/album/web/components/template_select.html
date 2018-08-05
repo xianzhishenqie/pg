@@ -7,7 +7,7 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: #ffffff;
+        background-color: #f8f8f8;
         animation-duration: 0.5s;
         display: none;
     }
@@ -22,6 +22,9 @@
     #templateSelect .template-item{
         margin-bottom: 15px;
         text-align: center;
+    }
+    #templateSelect .template-item>div{
+        background-color: #ffffff;
     }
     #templateSelect .template-cover{
         padding-bottom: 100%;
@@ -39,7 +42,7 @@
 {% verbatim %}
 <v-touch id="templateSelect" v-on:panright="hide" v-cloak>
     <div class="weui-navbar" style="position: initial;">
-        <v-touch class="weui-navbar__item"
+        <v-touch class="weui-navbar__item border-bottom"
                  style="padding: 5px 0;"
                  :class="{'weui-bar__item_on text-danger border-bottom border-danger': templateTag.active}"
                  :data-id="templateTag.id"
