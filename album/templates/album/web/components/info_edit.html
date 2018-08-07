@@ -1,4 +1,7 @@
+{% load i18n %}
+{% load staticfiles %}
 
+<link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
 <style>
     #infoEdit {
         position: absolute;
@@ -64,7 +67,7 @@
                     this.desc = album.desc;
                 },
                 show: function () {
-                    docUtil.setTitle('修改相册信息');
+                    docUtil.setTitle('相册信息');
                     $(this.$el).animateCss('slideInRight').show();
                 },
                 hide: function () {

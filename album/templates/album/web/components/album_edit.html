@@ -1,13 +1,11 @@
 {% load i18n %}
 {% load staticfiles %}
 
-<link rel="stylesheet" href="{% static 'base/common/lib/dragula/dragula.css' %}"/>
-<link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
 <style type="text/css">
     ul, p, label{
         margin-bottom: auto;
     }
-    #album {
+    #albumEdit {
         position: absolute;
         left: 0;
         top: 0;
@@ -15,50 +13,23 @@
         width: 100%;
         height: 100%;
         background-color: #f8f8f8;
+        display: none;
     }
-    #album:before{
+    #albumExtra:before{
         content: ' ';
         display: table;
     }
-    #album .weui-uploader__file .el{
-        background: no-repeat center center;
-        background-size: cover;
-    }
-    .el.gu-mirror{
-        max-width: 79px!important;
-        max-height: 79px!important;
-        background: no-repeat center center;
-        background-size: cover;
+    #pictureEdit {
+        display: block!important;
+        height: auto!important;
+        position: initial!important;
     }
 </style>
 
-{% verbatim %}
-<v-touch id="album" v-on:panright="hide($event)" v-cloak>
-    <p class="weui-cells__title">照片上传(拖动照片更换顺序)</p>
-    <div class="weui-cells weui-cells_form" id="uploaderCustom">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <div class="weui-uploader">
-                    <div class="weui-uploader__hd d-none"><p class="weui-uploader__title">照片上传</p></div>
-                    <div class="weui-uploader__bd">
-                        <ul class="weui-uploader__files" id="uploaderCustomFiles">
-                            <li class="weui-uploader__file"
-                                :data-seq="picture.seq"
-                                @click="displayPicture(picture)"
-                                v-for="picture in album.picture_list">
-                                <div class="el w-100 h-100" :style="'background-image: url(' + picture.image + ');'" :data-id="picture.id"></div>
-                            </li>
-                        </ul>
-                        <div class="weui-uploader__input-box"><input id="uploaderCustomInput"
-                                                                     class="weui-uploader__input" type="file"
-                                                                     accept="image/*" multiple=""></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <template v-if="!simpleMode">
+<div id="albumEdit">
+    {% include './picture_edit.html' %}
+    {% verbatim %}
+    <v-touch id="albumExtra" v-on:panright="hide($event)" v-cloak>
         <p class="weui-cells__title">相册模板</p>
         <div class="weui-cells">
             <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap.prevent="enterSelectTemplate">
@@ -94,18 +65,18 @@
                 <span class="weui-cell__ft"></span>
             </v-touch>
         </div>
-    </template>
-</v-touch>
-{% endverbatim %}
+    </v-touch>
+    {% endverbatim %}
+</div>
 
 {% include './template_select.html' %}
 {% include './music_select.html' %}
 {% include './info_edit.html' %}
 
-<script src="{% static 'base/common/lib/dragula/dragula.js' %}"></script>
 <script type="text/javascript">
     $.extend(context, {
         canHideEditor: true,
+        canExitPictureEdit: false,
         albumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
         albumPictureApiUrl: '{% url "album:web:api:album-picture" 0 %}',
         albumPictureExchangeApiUrl: '{% url "album:web:api:album-exchange-pictures" 0 %}',
@@ -134,13 +105,15 @@
             aVue.album.desc = info.desc;
             http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), info, function () {});
         },
-        hideEdit: function () {}
+        exitPictureEdit: function (isChanged) {},
+
+        hideAlbumExit: function (isChanged) {},
     });
 </script>
 <script type="text/javascript">
     $(function () {
         window.aVue = new Vue({
-            el: '#album',
+            el: '#albumExtra',
             data: {
                 albumId: 0,
                 album: {
@@ -151,205 +124,75 @@
                     music_data: null,
                     template_data: null,
                 },
-                albumShowState: '',
 
-                pictureSeq: 0,
-                pictureDrake: null,
-
-                pictureUploaderOption: {},
-
-                simpleMode: false,
+                state: '',
             },
             methods: {
-                getAlbum: function () {
+                getAlbum: function (callback) {
                     var vue = this;
                     http.get(context.albumDetailApiUrl.replace('0', vue.albumId), {}, function (res) {
                         vue.album = res;
-                        vue.getPictureSeq();
-                        Vue.nextTick(function () {
-                            vue.bindDragPictures();
+                        if (callback) {
+                            callback();
+                        }
+                    });
+                },
+                init: function(album) {
+                    var vue = this;
+                    if (typeof(album) == 'object') {
+                        vue.albumId = album.id;
+                        vue.album = album;
+                        pVue.init(vue.albumId, vue.album.picture_list);
+                        tVue.init(vue.album.template_data ? vue.album.template_data.id : null);
+                        mVue.init(vue.album.music_data ? vue.album.music_data.id : null);
+                        iVue.init(vue.album);
+                    } else {
+                        vue.albumId = albumId;
+                        vue.getAlbum(function () {
+                            pVue.init(vue.albumId, vue.album.picture_list);
+                            tVue.init(vue.album.template_data ? vue.album.template_data.id : null);
+                            mVue.init(vue.album.music_data ? vue.album.music_data.id : null);
+                            iVue.init(vue.album);
                         });
-                    });
-                },
-                getPictureSeq: function () {
-                    var vue = this;
-                    vue.pictureSeq = 0;
-                    $.each(vue.album.picture_list, function (i, picture) {
-                        if (vue.pictureSeq < picture.seq) {
-                            vue.pictureSeq = picture.seq;
-                        }
-                    });
-                },
-                displayPicture: function (picture) {
-                    var vue = this;
-                    var gallery = weui.gallery(picture.image, {
-                        onDelete: function () {
-                            if (confirm('确定删除该图片？')) {
-                                var pictureList = vue.album.picture_list;
-                                pictureList.splice(pictureList.indexOf(picture), 1);
-                                http.delete(context.albumPictureApiUrl.replace('0', vue.albumId), {
-                                    picture__id: picture.id,
-                                }, function () {})
-                            }
-                            gallery.hide();
-                        }
-                    });
-                },
-                init: function(albumId, simpleMode) {
-                    this.albumId = albumId;
-                    this.simpleMode = !!simpleMode;
-                    this.getAlbum();
-                    this.pictureUploaderOption.url = context.albumPictureApiUrl.replace('0', this.albumId);
+                    }
                 },
                 show: function () {
-                    this.albumShowState = JSON.stringify(this.album);
+                    this.state = JSON.stringify(this.album);
                     docUtil.setTitle('编辑相册');
-                    $(this.$el).animateCss('slideInRight').show();
+                    $('#albumEdit').animateCss('slideInRight').show();
+                    this.fixAlbumExtraHeight();
                 },
                 hide: function (e) {
                 	if (!context.canHideEditor) {
                 	    return;
                     }
-                    if (arrayUtil.in(e.target, $('#uploaderCustomFiles *'))) {
+                    if (e && arrayUtil.in(e.target, $('#uploaderCustomFiles *'))) {
                 	    return;
                     }
 
                     var vue = this;
                     docUtil.revertTitle();
-                    $(vue.$el).animateCss('slideOutRight', function ($el) {
+                    $('#albumEdit').animateCss('slideOutRight', function ($el) {
                         $el.hide();
 
-                        var albumHideState = JSON.stringify(vue.album);
-                        var isChanged = albumHideState != vue.albumShowState;
-                        context.hideEdit(isChanged);
+                        var state = JSON.stringify(vue.album);
+                        var isChanged = state != vue.state;
+                        context.hideAlbumExit(isChanged);
                     });
                 },
                 enterSelectMusic: function () {
-                    mVue.init(this.album.music_data ? this.album.music_data.id : null);
                     mVue.show();
                 },
                 enterSelectTemplate: function () {
-                    tVue.init(this.album.template_data ? this.album.template_data.id : null);
                     tVue.show();
                 },
                 enterEditInfo: function () {
-                    iVue.init(this.album);
                     iVue.show();
                 },
-                bindDragPictures: function () {
-                    var vue = this;
-                    if (vue.pictureDrake) {
-                        vue.pictureDrake.destroy();
-                    }
-                    var containers = $(vue.$el).find('.weui-uploader__file').toArray();
-                    var lastTarget;
-                    var drake = dragula(containers, {
-                        accepts: function (el, target, source, sibling) {
-                            lastTarget = target;
-                            return false;
-                        },
-                    });
-                    drake.on('drag', function (el, source) {
-                        lastTarget = null;
-                    });
-                    drake.on('cancel', function (el, container, source) {
-                        var pictureId = $(el).attr('data-id');
-                        var lastPictureId = lastTarget ? $(lastTarget).find('.el').attr('data-id') : null;
-                        if (lastPictureId && pictureId != lastPictureId) {
-                            var pictureMap = {};
-                            $.each(vue.album.picture_list, function (i, picture) {
-                                pictureMap[picture.id] = picture;
-                            });
-                            var lPicture = pictureMap[pictureId];
-                            var rPicture = pictureMap[lastPictureId];
-                            var lSeq = lPicture.seq;
-                            var rSeq = rPicture.seq;
-                            lPicture.seq = rSeq;
-                            rPicture.seq = lSeq;
-                            vue.album.picture_list.sort(function (a, b) {
-                                if (a.seq < b.seq) {
-                                    return -1;
-                                } else {
-                                    return 1;
-                                }
-                            });
-                            http.post(context.albumPictureExchangeApiUrl.replace('0', vue.albumId), {
-                                l_picture_id: pictureId,
-                                r_picture_id: lastPictureId,
-                            }, function () {});
-                        }
-
-                    });
-                    vue.pictureDrake = drake;
+                fixAlbumExtraHeight: function () {
+                    var height = document.documentElement.clientHeight - $('#albumEdit').find('#pictureEdit').outerHeight();
+                    $(this.$el).height(height);
                 },
-            },
-            mounted: function () {
-                var vue = this;
-                $.extend(this.pictureUploaderOption, {
-                    url: '',
-                    auto: true,
-                    type: 'file',
-                    fileVal: 'picture__image',
-                    compress: {
-                        width: 1600,
-                        height: 1600,
-                        quality: .8
-                    },
-                    onBeforeQueued: function (files) {
-                        // `this` 是轮询到的文件, `files` 是所有文件
-
-                        if (["image/jpg", "image/jpeg", "image/png", "image/gif"].indexOf(this.type) < 0) {
-                            weui.alert('请上传图片');
-                            return false; // 阻止文件添加
-                        }
-                        if (this.size > 10 * 1024 * 1024) {
-                            weui.alert('请上传不超过10M的图片');
-                            return false;
-                        }
-                        if (files.length > 9) { // 防止一下子选择过多文件
-                            weui.alert('每次最多只能上传9张图片，请重新选择');
-                            return false;
-                        }
-
-                        // return true; // 阻止默认行为，不插入预览图的框架
-                    },
-                    onQueued: function () {
-                        // console.log(this.status); // 文件的状态：'ready', 'progress', 'success', 'fail'
-                        // console.log(this.base64); // 如果是base64上传，file.base64可以获得文件的base64
-
-                        // this.upload(); // 如果是手动上传，这里可以通过调用upload来实现；也可以用它来实现重传。
-                        // this.stop(); // 中断上传
-
-                        // return true; // 阻止默认行为，不显示预览图的图像
-                    },
-                    onBeforeSend: function (data, headers) {
-                        $.extend(data, {picture__seq: vue.pictureSeq + this.id}); // 可以扩展此对象来控制上传参数
-                        $.extend(headers, {'X-CSRFToken': csrftoken}); // 可以扩展此对象来控制上传头部
-                        // return false; // 阻止文件上传
-                    },
-                    onProgress: function (procent) {
-                        // return true; // 阻止默认行为，不使用默认的进度显示
-                    },
-                    onSuccess: function (ret) {
-                        $('#uploaderCustomFiles li[data-id=' + this.id + ']').remove();
-                        vue.album.picture_list.push(ret);
-                        vue.album.picture_list.sort(function (a, b) {
-                            if (a.seq < b.seq) {
-                                return -1;
-                            } else {
-                                return 1;
-                            }
-                        });
-                        Vue.nextTick(function () {
-                            vue.bindDragPictures();
-                        });
-                        // return true; // 阻止默认行为，不使用默认的成功态
-                    },
-                    onError: function (err) {
-                        // return true; // 阻止默认行为，不使用默认的失败态
-                    }
-                })
-                weui.uploader('#uploaderCustom', vue.pictureUploaderOption);
             },
         });
     });

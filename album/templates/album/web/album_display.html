@@ -530,10 +530,12 @@
         z-index: 200;
     }
     #vueMask .edit-action .edit-album{
-        border-radius: 6px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.4);
         background-color: rgba(0, 0, 0, 0.4);
         display: inline-block;
-        padding: 20px 40px;
+        padding: 10px 20px;
     }
     #vueMask .edit-action .edit-album-info{
         background-color: rgba(255, 128, 0, 0.4);
@@ -551,23 +553,22 @@
                  v-on:tap="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
-    <div class="edit-action position-absolute">
-        <div class="col-3">
-            <v-touch class="edit-album edit-album-template border border-primary" v-on:tap="editAlbumTemplate">模板</v-touch>
+    <div class="row mx-0 edit-action position-absolute w-100">
+        <div class="col-3 text-center">
+            <v-touch class="edit-album edit-album-template" v-on:tap="editAlbumTemplate">模板</v-touch>
         </div>
-        <div class="col-3">
-            <v-touch class="edit-album edit-album-music border border-primary" v-on:tap="editAlbumMusic">音乐</v-touch>
+        <div class="col-3 text-center">
+            <v-touch class="edit-album edit-album-music" v-on:tap="editAlbumMusic">音乐</v-touch>
         </div>
-        <div class="col-3">
-            <v-touch class="edit-album edit-album-picture border border-primary" v-on:tap="editAlbumPicture">相片</v-touch>
+        <div class="col-3 text-center">
+            <v-touch class="edit-album edit-album-picture" v-on:tap="editAlbumPicture">相片</v-touch>
         </div>
-        <div class="col-3">
-            <v-touch class="edit-album edit-album-info border border-primary" v-on:tap="editAlbumInfo">保存</v-touch>
+        <div class="col-3 text-center">
+            <v-touch class="edit-album edit-album-info" v-on:tap="editAlbumInfo">保存</v-touch>
         </div>
     </div>
 
     {% if user.is_authenticated %}
-    <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     {% endif %}
 </div>
 
@@ -724,7 +725,7 @@
         for (var i = 0; i < module_inits.length; i++) {
             module_inits[i]();
         }
-        adVue.toggleMusic();
+        aVue.toggleMusic();
     }
     function call_me(fun) {
         module_inits.push(fun);
@@ -767,30 +768,56 @@
     <script src="{% static_v 'base/common/js/utils.js' %}"></script>
     <script src="{% static_v 'base/common/js/constants.js' %}"></script>
 
-    {% include './components/album_edit.html' %}
+    {% include './components/picture_edit.html' %}
+    {% include './components/info_edit.html' %}
+    {% include './components/music_select.html' %}
+    {% include './components/template_select.html' %}
     <script type="text/javascript">
         $.extend(context, {
-            canHideEditor: true,
-            hideEdit: function (isChanged) {
+            exitPictureEdit: function (isChanged) {
                 if (isChanged) {
-                    if (urlparser.getQueryString('edit')) {
-                        window.location.href = window.location.pathname + window.location.search.replace('edit', '');
-                    } else {
-                        window.location.reload();
-                    }
+                    reloadSelf();
                 }
+            },
+            confirmInfo: function (info) {
+                if (aVue.album.name == info.name && aVue.album.desc == info.desc) {
+                    return;
+                }
+                aVue.album.name = info.name;
+                aVue.album.desc = info.desc;
+                http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), info, function () {
+                    reloadSelf();
+                });
+            },
+            selectMusic: function (music) {
+                if (aVue.album.music_data && music.id == aVue.album.music_data.id) {
+                    return;
+                }
+                aVue.album.music_data = music;
+                http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), {music: music.id}, function () {
+                    reloadSelf();
+                });
+            },
+            selectTemplate: function (template) {
+                if (aVue.album.template_data && template.id == aVue.album.template_data.id) {
+                    return;
+                }
+                aVue.album.template_data = template;
+                http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), {template: template.id}, function () {
+                    reloadSelf();
+                });
             }
         });
 
+        function reloadSelf(){
+            if (urlparser.getQueryString('edit')) {
+                window.location.href = window.location.pathname + window.location.search.replace('edit', '');
+            } else {
+                window.location.reload();
+            }
+        }
+
         $(function () {
-            aVue.init({{ pk }}, true);
-            tVue.init({% if album_data.template_data %}{{ album_data.template_data.id }}{% endif %});
-            mVue.init({% if album_data.music_data %}{{ album_data.music_data.id }}{% endif %});
-            iVue.init({
-                id: {{ pk }},
-                name: '{{ album_data.name }}',
-                desc: '{{ album_data.desc }}',
-            });
             if (urlparser.getQueryString('edit')) {
                 aVue.show();
             }
@@ -798,9 +825,11 @@
     </script>
 {% endif %}
 <script type="text/javascript">
-var adVue = new Vue({
+var aVue = new Vue({
     el: '#vueMask',
     data: {
+        albumId: '',
+        album: null,
         music: {
             active: false,
             url: '{% if album_data.music_data %}{{ album_data.music_data.url }}{% endif %}' || '{% if album_data.music_data %}{{ album_data.music_data.file }}{% endif %}',
@@ -816,9 +845,32 @@ var adVue = new Vue({
                 audio.pause();
             }
         },
+        getAlbum: function (callback) {
+            var vue = this;
+            http.get(context.albumDetailApiUrl.replace('0', vue.albumId), {}, function (res) {
+                vue.album = res;
+                if (callback) {
+                    callback();
+                }
+            });
+        },
+
+        init: function(albumId){
+            var vue = this;
+            vue.albumId = albumId;
+            vue.getAlbum(function () {
+                {% if user.is_authenticated %}
+                pVue.init(vue.albumId, vue.album.picture_list);
+                tVue.init(vue.album.template_data ? vue.album.template_data.id : null);
+                mVue.init(vue.album.music_data ? vue.album.music_data.id : null);
+                iVue.init(vue.album);
+                {% endif %}
+            });
+        },
+
         {% if user.is_authenticated %}
-        editAlbum: function () {
-            aVue.show();
+        editAlbumPicture: function () {
+            pVue.show();
         },
         editAlbumTemplate: function () {
             tVue.show();
@@ -831,6 +883,11 @@ var adVue = new Vue({
         },
         {% endif %}
     },
+    {% if user.is_authenticated %}
+        mounted: function () {
+            this.init({{ pk }});
+        }
+    {% endif %}
 });
 </script>
 <script>

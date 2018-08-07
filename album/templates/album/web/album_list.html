@@ -43,9 +43,6 @@
             font-size: 14px;
 
         }
-        #album{
-            display: none;
-        }
     </style>
 {% endblock %}
 
@@ -55,8 +52,8 @@
         <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span> <a class="float-right text-info" :href="createAlbumUrl">创建相册</a></p>
         <div class="album-list row mx-0">
             <v-touch class="album-item col-4 pr-0"
-                     v-on:press="actionTemplate(album)"
-                     v-on:tap="showTemplate(album)"
+                     v-on:press="actionAlbum(album)"
+                     v-on:tap="editAlbum(album)"
                      :key="album.id"
                      v-for="album, i in albums">
                 <div class="border p-1 position-relative">
@@ -85,7 +82,7 @@
     });
 </script>
 <script type="text/javascript">
-var aVue = new Vue({
+var alVue = new Vue({
     el: '#albumList',
     data: {
         createAlbumUrl: context.albumPageUrl,
@@ -107,16 +104,17 @@ var aVue = new Vue({
                 return '';
             }
         },
-        showTemplate: function (album) {
+        editAlbum: function (album) {
+
             window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
         },
-        actionTemplate: function (album) {
+        actionAlbum: function (album) {
             var vue = this;
             weui.actionSheet([
                 {
                     label: '编辑相册',
                     onClick: function () {
-                        aVue.init(album.id);
+                        aVue.init(album);
                         aVue.show();
                     }
                 },
@@ -143,7 +141,6 @@ var aVue = new Vue({
     },
     mounted: function () {
         var vue = this;
-
         vue.getAlbums();
     }
 
