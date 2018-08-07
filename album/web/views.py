@@ -88,7 +88,9 @@ def album_display_page(request, pk):
 
     context['album'] = album
     context['album_data'] = album_data
-    context['pictures'] = json.dumps([picture_data['image'] for picture_data in album_data['picture_list']])
+    picture_images = [picture_data['image'] for picture_data in album_data['picture_list']]
+    context['pictures'] = json.dumps(picture_images)
+    context['share_img'] = picture_images[0] if len(picture_images) > 0 else ''
 
     return render(request, 'album_display.html', context)
 

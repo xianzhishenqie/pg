@@ -1,11 +1,12 @@
 import logging
 import datetime
+from pyquery import PyQuery as pq
 
 from django.db import transaction
 from django.utils import timezone
 
 from base.utils.http import HttpClient
-from base.utils.text import md5
+from base.utils.text import md5, sha1
 
 from pg_auth.models import User
 
@@ -62,3 +63,34 @@ def sync_openid(openid):
                 openid=openid,
                 openid_key=md5(openid),
             )
+
+
+def is_we_access(signature, timestamp, nonce):
+    try:
+        signature_list = sorted([setting.TOKEN, timestamp, nonce])
+        calc_signature = sha1(''.join(signature_list))
+    except:
+        return False
+    else:
+        if calc_signature == signature:
+            return True
+
+    return False
+
+
+def p_wedata(xml):
+    doc = pq(xml)
+    data = {}
+    for child in doc.children():
+        data[child.tag] = child.text
+    return data
+
+
+# '< ![CDATA[text] ]>'
+def pcdata(text):
+    return text[10:-4]
+
+
+# '< ![CDATA[text] ]>'
+def fcdata(text):
+    return '< ![CDATA[{}] ]>'.format(text)

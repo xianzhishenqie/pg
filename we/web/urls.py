@@ -7,7 +7,6 @@ from . import views
 
 urlpatterns = [
     path('access/', views.we_access, name='access'),
-    path('code/', views.we_code, name='code'),
-    path('event/', views.we_event, name='event'),
+    # path('code/', views.we_code, name='code'),
 ]
 

@@ -10,9 +10,21 @@
 
 {% block top_css %}
     {{ block.super }}
-    <link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
 {% endblock %}
 
 {% block container %}
     {% include './components/album_edit.html' %}
+{% endblock %}
+
+
+{% block local_js %}
+    {{ block.super }}
+    <script type="text/javascript">
+    $.extend(context, {
+        canHideEditor: false,
+    });
+    $(function () {
+        aVue.init({{ pk }});
+    });
+    </script>
 {% endblock %}

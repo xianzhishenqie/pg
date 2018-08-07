@@ -46,7 +46,6 @@
 
 <script type="text/javascript">
     $.extend(context, {
-        fakeAlbumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
         confirmInfo: function (info) {},
     });
 
@@ -83,9 +82,6 @@
                     context.confirmInfo(info);
                 },
             },
-            mounted: function () {
-                var vue = this;
-            }
         });
     });
 </script>

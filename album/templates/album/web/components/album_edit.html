@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 <link rel="stylesheet" href="{% static 'base/common/lib/dragula/dragula.css' %}"/>
+<link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
 <style type="text/css">
     ul, p, label{
         margin-bottom: auto;
@@ -32,7 +33,7 @@
 </style>
 
 {% verbatim %}
-<v-touch id="album" v-on:panright="hide" v-cloak>
+<v-touch id="album" v-on:panright="hide($event)" v-cloak>
     <p class="weui-cells__title">照片上传(拖动照片更换顺序)</p>
     <div class="weui-cells weui-cells_form" id="uploaderCustom">
         <div class="weui-cell">
@@ -57,41 +58,43 @@
         </div>
     </div>
 
-    <p class="weui-cells__title">相册模板</p>
-    <div class="weui-cells">
-        <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap="enterSelectTemplate">
-            <div class="weui-cell__hd"><img :src="album.template_data ? (album.template_data.cover_url || album.template_data.cover) : ''"
-                                            class="d-block"
-                                            alt=""
-                                            style="width:20px;height:20px;margin-right:5px;"></div>
-            <div class="weui-cell__bd weui-cell_primary">
-                <p>{{ album.template_data ? album.template_data.name : '未选择' }}</p>
-            </div>
-            <span class="weui-cell__ft"></span>
-        </v-touch>
-    </div>
+    <template v-if="!simpleMode">
+        <p class="weui-cells__title">相册模板</p>
+        <div class="weui-cells">
+            <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap.prevent="enterSelectTemplate">
+                <div class="weui-cell__hd"><img :src="album.template_data ? (album.template_data.cover_url || album.template_data.cover) : ''"
+                                                class="d-block"
+                                                alt=""
+                                                style="width:20px;height:20px;margin-right:5px;"></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>{{ album.template_data ? album.template_data.name : '未选择' }}</p>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </v-touch>
+        </div>
 
-    <p class="weui-cells__title">相册音乐</p>
-    <div class="weui-cells">
-        <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap="enterSelectMusic">
-            <div class="weui-cell__hd"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></div>
-            <div class="weui-cell__bd weui-cell_primary">
-                <p>{{ album.music_data ? album.music_data.name : '未选择' }}</p>
-            </div>
-            <span class="weui-cell__ft"></span>
-        </v-touch>
-    </div>
+        <p class="weui-cells__title">相册音乐</p>
+        <div class="weui-cells">
+            <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap.prevent="enterSelectMusic">
+                <div class="weui-cell__hd"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>{{ album.music_data ? album.music_data.name : '未选择' }}</p>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </v-touch>
+        </div>
 
-    <p class="weui-cells__title">相册信息</p>
-    <div class="weui-cells">
-        <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap="enterEditInfo">
-            <div class="weui-cell__hd"><i class="fa fa-info text-success d-block" style="width:20px;margin-right:5px;"></i></div>
-            <div class="weui-cell__bd weui-cell_primary">
-                <p>{{ album.name }}</p>
-            </div>
-            <span class="weui-cell__ft"></span>
-        </v-touch>
-    </div>
+        <p class="weui-cells__title">相册信息</p>
+        <div class="weui-cells">
+            <v-touch tag="span" class="weui-cell weui-cell_access" v-on:tap.prevent="enterEditInfo">
+                <div class="weui-cell__hd"><i class="fa fa-info text-success d-block" style="width:20px;margin-right:5px;"></i></div>
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>{{ album.name || '未设置' }}</p>
+                </div>
+                <span class="weui-cell__ft"></span>
+            </v-touch>
+        </div>
+    </template>
 </v-touch>
 {% endverbatim %}
 
@@ -102,18 +105,17 @@
 <script src="{% static 'base/common/lib/dragula/dragula.js' %}"></script>
 <script type="text/javascript">
     $.extend(context, {
-        pk: {{ pk }},
-        canHideEditor: false,
-        albumDetailApiUrl: '{% url "album:web:api:album-detail" pk %}',
-        albumPictureApiUrl: '{% url "album:web:api:album-picture" pk %}',
-        albumPictureExchangeApiUrl: '{% url "album:web:api:album-exchange-pictures" pk %}',
+        canHideEditor: true,
+        albumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
+        albumPictureApiUrl: '{% url "album:web:api:album-picture" 0 %}',
+        albumPictureExchangeApiUrl: '{% url "album:web:api:album-exchange-pictures" 0 %}',
 
         selectTemplate: function (template) {
             if (aVue.album.template_data && template.id == aVue.album.template_data.id) {
                 return;
             }
             aVue.album.template_data = template;
-            http.patch(context.albumDetailApiUrl, {template: template.id}, function () {
+            http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), {template: template.id}, function () {
                 aVue.getAlbum();
             });
         },
@@ -122,7 +124,7 @@
                 return;
             }
             aVue.album.music_data = music;
-            http.patch(context.albumDetailApiUrl, {music: music.id}, function () {});
+            http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), {music: music.id}, function () {});
         },
         confirmInfo: function (info) {
             if (aVue.album.name == info.name && aVue.album.desc == info.desc) {
@@ -130,7 +132,7 @@
             }
             aVue.album.name = info.name;
             aVue.album.desc = info.desc;
-            http.patch(context.albumDetailApiUrl, info, function () {});
+            http.patch(context.albumDetailApiUrl.replace('0', aVue.albumId), info, function () {});
         },
         hideEdit: function () {}
     });
@@ -140,6 +142,7 @@
         window.aVue = new Vue({
             el: '#album',
             data: {
+                albumId: 0,
                 album: {
                     id: '',
                     name: '',
@@ -152,11 +155,15 @@
 
                 pictureSeq: 0,
                 pictureDrake: null,
+
+                pictureUploaderOption: {},
+
+                simpleMode: false,
             },
             methods: {
                 getAlbum: function () {
                     var vue = this;
-                    http.get(context.albumDetailApiUrl, {}, function (res) {
+                    http.get(context.albumDetailApiUrl.replace('0', vue.albumId), {}, function (res) {
                         vue.album = res;
                         vue.getPictureSeq();
                         Vue.nextTick(function () {
@@ -166,6 +173,7 @@
                 },
                 getPictureSeq: function () {
                     var vue = this;
+                    vue.pictureSeq = 0;
                     $.each(vue.album.picture_list, function (i, picture) {
                         if (vue.pictureSeq < picture.seq) {
                             vue.pictureSeq = picture.seq;
@@ -179,7 +187,7 @@
                             if (confirm('确定删除该图片？')) {
                                 var pictureList = vue.album.picture_list;
                                 pictureList.splice(pictureList.indexOf(picture), 1);
-                                http.delete(context.albumPictureApiUrl, {
+                                http.delete(context.albumPictureApiUrl.replace('0', vue.albumId), {
                                     picture__id: picture.id,
                                 }, function () {})
                             }
@@ -187,15 +195,25 @@
                         }
                     });
                 },
+                init: function(albumId, simpleMode) {
+                    this.albumId = albumId;
+                    this.simpleMode = !!simpleMode;
+                    this.getAlbum();
+                    this.pictureUploaderOption.url = context.albumPictureApiUrl.replace('0', this.albumId);
+                },
                 show: function () {
                     this.albumShowState = JSON.stringify(this.album);
                     docUtil.setTitle('编辑相册');
                     $(this.$el).animateCss('slideInRight').show();
                 },
-                hide: function () {
+                hide: function (e) {
                 	if (!context.canHideEditor) {
                 	    return;
                     }
+                    if (arrayUtil.in(e.target, $('#uploaderCustomFiles *'))) {
+                	    return;
+                    }
+
                     var vue = this;
                     docUtil.revertTitle();
                     $(vue.$el).animateCss('slideOutRight', function ($el) {
@@ -207,11 +225,11 @@
                     });
                 },
                 enterSelectMusic: function () {
-                    mVue.musicId = this.album.music_data ? this.album.music_data.id : null;
+                    mVue.init(this.album.music_data ? this.album.music_data.id : null);
                     mVue.show();
                 },
                 enterSelectTemplate: function () {
-                    tVue.templateId = this.album.template_data ? this.album.template_data.id : null;
+                    tVue.init(this.album.template_data ? this.album.template_data.id : null);
                     tVue.show();
                 },
                 enterEditInfo: function () {
@@ -255,7 +273,7 @@
                                     return 1;
                                 }
                             });
-                            http.post(context.albumPictureExchangeApiUrl, {
+                            http.post(context.albumPictureExchangeApiUrl.replace('0', vue.albumId), {
                                 l_picture_id: pictureId,
                                 r_picture_id: lastPictureId,
                             }, function () {});
@@ -267,11 +285,8 @@
             },
             mounted: function () {
                 var vue = this;
-
-                vue.getAlbum();
-
-                weui.uploader('#uploaderCustom', {
-                    url: context.albumPictureApiUrl,
+                $.extend(this.pictureUploaderOption, {
+                    url: '',
                     auto: true,
                     type: 'file',
                     fileVal: 'picture__image',
@@ -333,11 +348,9 @@
                     onError: function (err) {
                         // return true; // 阻止默认行为，不使用默认的失败态
                     }
-                });
+                })
+                weui.uploader('#uploaderCustom', vue.pictureUploaderOption);
             },
-
-
-
         });
     });
 </script>

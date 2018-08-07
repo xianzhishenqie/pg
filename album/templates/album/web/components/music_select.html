@@ -27,7 +27,7 @@
              :class="{'weui-bar__item_on text-danger border-bottom border-danger': tag.active}"
              :data-id="tag.id"
              :key="tag.id"
-             v-on:tap="tagMusicTag(tag)"
+             v-on:tap.prevent="tagMusicTag(tag)"
              v-for="tag in musicTags">
             {{ tag.name }}
         </v-touch>
@@ -39,14 +39,14 @@
                 <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
                        @input="getMusics"
                        v-model="search">
-                <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap="clearSearch"></v-touch>
+                <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap.prevent="clearSearch"></v-touch>
             </div>
             <label class="weui-search-bar__label">
                 <i class="weui-icon-search"></i>
                 <span>搜索</span>
             </label>
         </div>
-        <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap="clearSearch">取消</v-touch>
+        <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap.prevent="clearSearch">取消</v-touch>
     </div>
     <div class="weui-cells mt-0">
         <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
@@ -57,7 +57,7 @@
             </v-touch>
             <v-touch tag="span" class="fa fa-play-circle-o"
                      :class="{'fa-pause-circle-o': music.active}"
-                     v-on:tap="playMusic(i, music)"></v-touch>
+                     v-on:tap.prevent="playMusic(i, music)"></v-touch>
         </span>
     </div>
 </v-touch>
@@ -152,6 +152,9 @@
                 fixListPanelHeight: function () {
                     var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight() - $(this.$el).find('.weui-search-bar').outerHeight();
                     $(this.$el).find('.weui-cells').height(height);
+                },
+                init: function(musicId) {
+                    this.musicId = musicId;
                 },
                 show: function () {
                     docUtil.setTitle('选择音乐');

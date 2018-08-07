@@ -17,6 +17,7 @@
             position: absolute;
             left: 0;
             top: 0;
+            z-index: 10;
             width: 100%;
             height: 100%;
             background-color: #f8f8f8;
@@ -41,6 +42,9 @@
         #albumList .album-name{
             font-size: 14px;
 
+        }
+        #album{
+            display: none;
         }
     </style>
 {% endblock %}
@@ -68,16 +72,17 @@
         </div>
     </div>
     {% endverbatim %}
+    {% include './components/album_edit.html' %}
 {% endblock %}
 
 {% block local_js %}
 <script type="text/javascript">
-    var context = {
+    $.extend(context, {
         albumListApiUrl: '{% url "album:web:api:album-list" %}',
         albumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
         albumPageUrl: '{% url "album:web:album" 0 %}',
         albumDisplayPageUrl: '{% url "album:web:album_display" 0 %}',
-    }
+    });
 </script>
 <script type="text/javascript">
 var aVue = new Vue({
@@ -111,7 +116,8 @@ var aVue = new Vue({
                 {
                     label: '编辑相册',
                     onClick: function () {
-                        window.location.href = context.albumPageUrl.replace('0', album.id) + window.location.search;
+                        aVue.init(album.id);
+                        aVue.show();
                     }
                 },
                 {

@@ -498,7 +498,9 @@
 </script>
 </head>
 <body>
-
+{% if share_img %}
+<img style="display: none;" src="{{ share_img }}">
+{% endif %}
 <style>
     .position-absolute{
         position: absolute;
@@ -518,10 +520,24 @@
         top: 20px;
         z-index: 201;
     }
+    #vueMask .edit-action{
+        bottom: 20px;
+        z-index: 201;
+    }
     #vueMask .mask {
         left: 0;
         right: 0;
         z-index: 200;
+    }
+    #vueMask .edit-action .edit-album{
+        border-radius: 6px;
+        background-color: rgba(0, 0, 0, 0.4);
+        display: inline-block;
+        padding: 20px 40px;
+    }
+    #vueMask .edit-action .edit-album-info{
+        background-color: rgba(255, 128, 0, 0.4);
+
     }
     #album{
         display: none;
@@ -535,6 +551,21 @@
                  v-on:tap="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
+    <div class="edit-action position-absolute">
+        <div class="col-3">
+            <v-touch class="edit-album edit-album-template border border-primary" v-on:tap="editAlbumTemplate">模板</v-touch>
+        </div>
+        <div class="col-3">
+            <v-touch class="edit-album edit-album-music border border-primary" v-on:tap="editAlbumMusic">音乐</v-touch>
+        </div>
+        <div class="col-3">
+            <v-touch class="edit-album edit-album-picture border border-primary" v-on:tap="editAlbumPicture">相片</v-touch>
+        </div>
+        <div class="col-3">
+            <v-touch class="edit-album edit-album-info border border-primary" v-on:tap="editAlbumInfo">保存</v-touch>
+        </div>
+    </div>
+
     {% if user.is_authenticated %}
     <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     {% endif %}
@@ -617,9 +648,9 @@
 {% endif %}
 
 <script>
-var words = {"kawa_8482915447240":"\u6492\u6253\u7b97s","kawa_8487426126688":"\u6253\u626b\u6253\u626bs'd","kawa_8487426236236":"\u963f\u8428"};
-var editmode =true ;
- var mvCfg = {
+    var words = {"kawa_8482915447240":"\u6492\u6253\u7b97s","kawa_8487426126688":"\u6253\u626b\u6253\u626bs'd","kawa_8487426236236":"\u963f\u8428"};
+    var editmode =true ;
+    var mvCfg = {
         pics: {{ pictures | safe }},
         token: '56',
         tp: '{{ album.template.path_name }}',
@@ -628,6 +659,7 @@ var editmode =true ;
         picsRotate: [0,0,0,],
         texts: [],
     };
+
     // 文本转义
     (function () {
         for (var i = 0, len = mvCfg.texts.length; i < len; ++i) {
@@ -738,12 +770,29 @@ var editmode =true ;
     {% include './components/album_edit.html' %}
     <script type="text/javascript">
         $.extend(context, {
-            pk: {{ pk }},
             canHideEditor: true,
             hideEdit: function (isChanged) {
                 if (isChanged) {
-                    window.location.reload();
+                    if (urlparser.getQueryString('edit')) {
+                        window.location.href = window.location.pathname + window.location.search.replace('edit', '');
+                    } else {
+                        window.location.reload();
+                    }
                 }
+            }
+        });
+
+        $(function () {
+            aVue.init({{ pk }}, true);
+            tVue.init({% if album_data.template_data %}{{ album_data.template_data.id }}{% endif %});
+            mVue.init({% if album_data.music_data %}{{ album_data.music_data.id }}{% endif %});
+            iVue.init({
+                id: {{ pk }},
+                name: '{{ album_data.name }}',
+                desc: '{{ album_data.desc }}',
+            });
+            if (urlparser.getQueryString('edit')) {
+                aVue.show();
             }
         });
     </script>
@@ -770,6 +819,15 @@ var adVue = new Vue({
         {% if user.is_authenticated %}
         editAlbum: function () {
             aVue.show();
+        },
+        editAlbumTemplate: function () {
+            tVue.show();
+        },
+        editAlbumMusic: function () {
+            mVue.show();
+        },
+        editAlbumInfo: function () {
+            iVue.show();
         },
         {% endif %}
     },

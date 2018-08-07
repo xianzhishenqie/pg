@@ -47,7 +47,7 @@
                  :class="{'weui-bar__item_on text-danger border-bottom border-danger': tag.active}"
                  :data-id="tag.id"
                  :key="tag.id"
-                 v-on:tap="tagTemplateTag(tag)"
+                 v-on:tap.prevent="tagTemplateTag(tag)"
                  v-for="tag in templateTags">
             {{ tag.name }}
         </v-touch>
@@ -144,6 +144,9 @@
                 fixListPanelHeight: function () {
                     var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight();
                     $(this.$el).find('.template-list').height(height - 15);
+                },
+                init: function(templateId) {
+                    this.templateId = templateId;
                 },
                 show: function () {
                     docUtil.setTitle('选择模板');
