@@ -553,6 +553,7 @@
                  v-on:tap="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
+    <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     <div class="row mx-0 edit-action position-absolute w-100">
         <div class="col-3 text-center">
             <v-touch class="edit-album edit-album-template" v-on:tap="editAlbumTemplate">模板</v-touch>
@@ -567,7 +568,6 @@
             <v-touch class="edit-album edit-album-info" v-on:tap="editAlbumInfo">保存</v-touch>
         </div>
     </div>
-
     {% if user.is_authenticated %}
     {% endif %}
 </div>
@@ -774,6 +774,8 @@
     {% include './components/template_select.html' %}
     <script type="text/javascript">
         $.extend(context, {
+            publicAlbumDetailApiUrl: '{% url "album:web:api:public-album-detail" 0 %}',
+
             exitPictureEdit: function (isChanged) {
                 if (isChanged) {
                     reloadSelf();
@@ -834,6 +836,8 @@ var aVue = new Vue({
             active: false,
             url: '{% if album_data.music_data %}{{ album_data.music_data.url }}{% endif %}' || '{% if album_data.music_data %}{{ album_data.music_data.file }}{% endif %}',
         },
+
+        lastEditor: null,
     },
     methods: {
         toggleMusic: function(){
@@ -847,7 +851,7 @@ var aVue = new Vue({
         },
         getAlbum: function (callback) {
             var vue = this;
-            http.get(context.albumDetailApiUrl.replace('0', vue.albumId), {}, function (res) {
+            http.get(context.publicAlbumDetailApiUrl.replace('0', vue.albumId), {}, function (res) {
                 vue.album = res;
                 if (callback) {
                     callback();
@@ -869,17 +873,24 @@ var aVue = new Vue({
         },
 
         {% if user.is_authenticated %}
+        editAlbum: function () {
+            (this.lastEditor || tVue).show();
+        },
         editAlbumPicture: function () {
             pVue.show();
+            this.lastEditor = pVue;
         },
         editAlbumTemplate: function () {
             tVue.show();
+            this.lastEditor = tVue;
         },
         editAlbumMusic: function () {
             mVue.show();
+            this.lastEditor = mVue;
         },
         editAlbumInfo: function () {
             iVue.show();
+            this.lastEditor = iVue;
         },
         {% endif %}
     },

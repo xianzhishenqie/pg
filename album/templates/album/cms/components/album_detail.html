@@ -1,0 +1,185 @@
+{% load i18n %}
+{% load staticfiles %}
+
+<style type="text/css">
+    ul, p, label{
+        margin-bottom: auto;
+    }
+    #albumDetail {
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        background-color: #f8f8f8;
+        display: none;
+    }
+    #uploaderCustom .weui-uploader__file .el{
+        background: no-repeat center center;
+        background-size: cover;
+    }
+</style>
+
+<div id="albumDetail">
+    {% verbatim %}
+    <div class="weui-cells__title">相册名称</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <input class="weui-input" readonly type="text" :value="album.name || '未设置'">
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">相册描述</div>
+    <div class="weui-cells weui-cells_form">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <textarea class="weui-textarea" readonly rows="3">{{ album.desc || '未设置' }}</textarea>
+            </div>
+        </div>
+    </div>
+    <p class="weui-cells__title">照片</p>
+    <div class="weui-cells weui-cells_form" id="uploaderCustom">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <div class="weui-uploader">
+                    <div class="weui-uploader__hd d-none"><p class="weui-uploader__title">照片上传</p></div>
+                    <div class="weui-uploader__bd">
+                        <ul class="weui-uploader__files" id="uploaderCustomFiles">
+                            <v-touch tag="li" class="weui-uploader__file"
+                                :data-seq="picture.seq"
+                                v-on:tap.prevent="displayPicture(picture)"
+                                v-on:press.prevent="displayPicture(picture)"
+                                v-for="picture in album.picture_list">
+                                <div class="el w-100 h-100" :style="'background-image: url(' + picture.image + ');'" :data-id="picture.id"></div>
+                            </v-touch>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="weui-cells__title">相册模板</p>
+    <div class="weui-cells">
+        <v-touch tag="span" class="weui-cell weui-cell_access">
+            <div class="weui-cell__hd"><img :src="album.template_data ? (album.template_data.cover_url || album.template_data.cover) : ''"
+                                            class="d-block"
+                                            alt=""
+                                            style="width:20px;height:20px;margin-right:5px;"></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <p>{{ album.template_data ? album.template_data.name : '未选择' }}</p>
+            </div>
+        </v-touch>
+    </div>
+
+    <p class="weui-cells__title">相册音乐</p>
+    <div class="weui-cells">
+        <v-touch tag="span" class="weui-cell weui-cell_access">
+            <div class="weui-cell__hd"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></div>
+            <div class="weui-cell__bd weui-cell_primary">
+                <p>{{ album.music_data ? album.music_data.name : '未选择' }}</p>
+            </div>
+        </v-touch>
+    </div>
+    {% endverbatim %}
+</div>
+
+<script type="text/javascript">
+    $.extend(context, {
+        albumDetailApiUrl: '{% url "album:cms:api:album-detail" 0 %}',
+        albumPictureApiUrl: '{% url "album:cms:api:album-picture" 0 %}',
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        window.aVue = new Vue({
+            el: '#albumDetail',
+            data: {
+                albumId: 0,
+                album: {
+                    id: '',
+                    name: '',
+                    desc: '',
+                    picture_list: [],
+                    music_data: null,
+                    template_data: null,
+                },
+
+                state: '',
+            },
+            methods: {
+                getAlbum: function (callback) {
+                    var vue = this;
+                    http.get(context.albumDetailApiUrl.replace('0', vue.albumId), {}, function (res) {
+                        vue.album = res;
+                        if (callback) {
+                            callback();
+                        }
+                    });
+                },
+                init: function(album) {
+                    var vue = this;
+                    if (typeof(album) == 'object') {
+                        vue.albumId = album.id;
+                        vue.album = album;
+                    } else {
+                        vue.albumId = albumId;
+                        vue.getAlbum();
+                    }
+                },
+                show: function () {
+                    this.state = JSON.stringify(this.album);
+                    docUtil.setTitle('相册信息');
+                    $('#albumDetail').animateCss('slideInRight').show();
+                },
+                hide: function () {
+                    var vue = this;
+                    docUtil.revertTitle();
+                    $('#albumDetail').animateCss('slideOutRight', function ($el) {
+                        $el.hide();
+                    });
+                },
+                deletePicture: function(picture, silent) {
+                    var vue = this;
+                    if (silent || confirm('确定删除该图片？')) {
+                        var pictureList = vue.pictureList;
+                        pictureList.splice(pictureList.indexOf(picture), 1);
+                        http.delete(context.albumPictureApiUrl.replace('0', vue.albumId), {
+                            picture__id: picture.id,
+                        }, function () {})
+                    }
+                },
+                displayPicture: function (picture) {
+                    var vue = this;
+                    var gallery = weui.gallery(picture.image, {
+                        onDelete: function () {
+                            vue.deletePicture(picture);
+                            gallery.hide();
+                        }
+                    });
+                },
+                actionPicture: function (picture) {
+                    var vue = this;
+                    weui.actionSheet([
+                        {
+                            label: '删除图片',
+                            onClick: function () {
+                                vue.deletePicture(picture, true);
+                            }
+                        }
+                    ], [
+                        {
+                            label: '取消',
+                            onClick: function () {
+                            }
+                        }
+                    ], {
+                        onClose: function(){
+                        }
+                    });
+                },
+            },
+        });
+    });
+</script>

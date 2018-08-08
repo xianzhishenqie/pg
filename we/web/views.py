@@ -1,3 +1,5 @@
+import logging
+
 from django.utils.module_loading import import_string
 from django.views.decorators.csrf import csrf_exempt
 
@@ -12,8 +14,10 @@ from base.utils.rest.parsers import TextXMLParser
 
 from we import setting
 from we.utils import common
-from we.utils.handlers import UserMessageHandler
 from we.utils.rest.renderers import CDATATextXMLRenderer
+
+
+logger = logging.getLogger(__name__)
 
 
 @api_view(['GET', 'POST'])
@@ -40,8 +44,12 @@ def we_access(request):
         openid = request.query_data.get('openid')
         common.sync_openid(openid)
 
-        handler = import_string(setting.USER_MESSAGE_HANDLER)(request.shift_data)
-        echostr = handler.handle()
+        try:
+            handler = import_string(setting.USER_MESSAGE_HANDLER)(request.shift_data)
+            echostr = handler.handle()
+        except Exception as e:
+            logger.error('handle msg error: %s', e)
+            echostr = ''
 
         return Response(echostr)
 

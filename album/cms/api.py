@@ -1,6 +1,3 @@
-import json
-
-from django.db import transaction
 from django.db.models import Count
 from django.utils import timezone
 
@@ -123,13 +120,21 @@ class AlbumViewSet(common_mixins.PGMixin,
     ordering_fields = ('-create_time',)
     ordering = ('-create_time',)
 
-    def get_queryset(self):
-        queryset = self.queryset
-        queryset = queryset.filter(user=self.request.user)
-        return queryset
-
     def perform_destroy(self, instance):
         for picture in instance.pictures.all():
             picture.image.delete()
             picture.delete()
         instance.delete()
+
+    @action(['DELETE'], detail=True)
+    @api_request_data
+    def picture(self, request, pk=None):
+        instance = self.get_object()
+        picture_data = get_sub_model_data(request.data, ['picture'])
+        picture_id = picture_data.get('id')
+        if picture_id:
+            instance.pictures.filter(pk=picture_id).delete()
+        else:
+            raise exceptions.NotFound()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

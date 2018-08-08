@@ -107,7 +107,7 @@
         },
         exitPictureEdit: function (isChanged) {},
 
-        hideAlbumExit: function (isChanged) {},
+        exitAlbumEdit: function (isChanged) {},
     });
 </script>
 <script type="text/javascript">
@@ -177,7 +177,7 @@
 
                         var state = JSON.stringify(vue.album);
                         var isChanged = state != vue.state;
-                        context.hideAlbumExit(isChanged);
+                        context.exitAlbumEdit(isChanged);
                     });
                 },
                 enterSelectMusic: function () {

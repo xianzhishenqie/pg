@@ -77,7 +77,6 @@
     $.extend(context, {
         albumListApiUrl: '{% url "album:web:api:album-list" %}',
         albumDetailApiUrl: '{% url "album:web:api:album-detail" 0 %}',
-        albumPageUrl: '{% url "album:web:album" 0 %}',
         albumDisplayPageUrl: '{% url "album:web:album_display" 0 %}',
     });
 </script>
@@ -85,7 +84,7 @@
 var alVue = new Vue({
     el: '#albumList',
     data: {
-        createAlbumUrl: context.albumPageUrl,
+        createAlbumUrl: context.albumDisplayPageUrl + window.location.search + '&edit=1',
         albums: [],
     },
     methods: {
@@ -105,7 +104,6 @@ var alVue = new Vue({
             }
         },
         editAlbum: function (album) {
-
             window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
         },
         actionAlbum: function (album) {
@@ -133,7 +131,6 @@ var alVue = new Vue({
                     }
                 }
             ], {
-                className: 'custom-classname',
                 onClose: function(){
                 }
             });

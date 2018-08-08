@@ -17,6 +17,7 @@
             position: absolute;
             left: 0;
             top: 0;
+            z-index: 10;
             width: 100%;
             height: 100%;
             background-color: #f8f8f8;
@@ -48,11 +49,11 @@
 {% block container %}
     {% verbatim %}
     <div id="albumList" v-cloak>
-        <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span>
+        <p class="weui-cells__title"><span class="text-secondary">长按查看相册</span>
         <div class="album-list row mx-0">
             <v-touch class="album-item col-4 pr-0"
-                     v-on:press="actionTemplate(album)"
-                     v-on:tap="showTemplate(album)"
+                     v-on:press="actionAlbum(album)"
+                     v-on:tap="editAlbum(album)"
                      :key="album.id"
                      v-for="album, i in albums">
                 <div class="border p-1 position-relative">
@@ -68,19 +69,19 @@
         </div>
     </div>
     {% endverbatim %}
+    {% include './components/album_detail.html' %}
 {% endblock %}
 
 {% block local_js %}
 <script type="text/javascript">
-    var context = {
+    $.extend(context, {
         albumListApiUrl: '{% url "album:cms:api:album-list" %}',
         albumDetailApiUrl: '{% url "album:cms:api:album-detail" 0 %}',
-        albumPageUrl: '{% url "album:web:album" 0 %}',
         albumDisplayPageUrl: '{% url "album:web:album_display" 0 %}',
-    }
+    });
 </script>
 <script type="text/javascript">
-var aVue = new Vue({
+var alVue = new Vue({
     el: '#albumList',
     data: {
         albums: [],
@@ -101,16 +102,18 @@ var aVue = new Vue({
                 return '';
             }
         },
-        showTemplate: function (album) {
-            window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
+        editAlbum: function (album) {
+            aVue.init(album);
+            aVue.show();
+
         },
-        actionTemplate: function (album) {
+        actionAlbum: function (album) {
             var vue = this;
             weui.actionSheet([
                 {
-                    label: '编辑相册',
+                    label: '查看相册',
                     onClick: function () {
-                        window.location.href = context.albumPageUrl.replace('0', album.id) + window.location.search;
+                        window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
                     }
                 },
                 {
@@ -132,11 +135,10 @@ var aVue = new Vue({
                 onClose: function(){
                 }
             });
-        }
+        },
     },
     mounted: function () {
         var vue = this;
-
         vue.getAlbums();
     }
 

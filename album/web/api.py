@@ -1,9 +1,7 @@
-import json
-
 from django.db import transaction
 from django.db.models import Count
 
-from rest_framework import exceptions, filters, permissions, status, viewsets
+from rest_framework import exceptions, filters, mixins, permissions, status, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
@@ -12,6 +10,7 @@ from base.utils.rest import mixins as common_mixins
 from base.utils.rest.decorators import api_request_data
 
 from album import models as album_models
+from album import setting
 
 from . import serializers as mserializers
 
@@ -130,6 +129,9 @@ class AlbumViewSet(common_mixins.PGMixin,
         if request.method == 'POST':
             instance = self.get_object()
 
+            if instance.pictures.count() >= setting.ALBUM_PICTURE_LIMIT:
+                raise exceptions.PermissionDenied()
+
             picture_data = get_sub_model_data(request.data, ['picture'])
             picture_serializer = mserializers.PictureSerializers(data=picture_data)
             picture_serializer.is_valid(raise_exception=True)
@@ -174,3 +176,12 @@ class AlbumViewSet(common_mixins.PGMixin,
                 raise exceptions.APIException()
 
         return Response()
+
+
+class PublicAlbumViewSet(common_mixins.PGMixin,
+                         mixins.RetrieveModelMixin,
+                         viewsets.GenericViewSet):
+    queryset = album_models.Album.objects.all()
+    serializer_class = mserializers.AlbumSerializers
+    permission_classes = (permissions.AllowAny,)
+

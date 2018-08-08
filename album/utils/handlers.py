@@ -22,8 +22,6 @@ class UserMessageHandler(BaseUserMessageHandler):
         CREATE_ALBUM='创建相册',
         LIST_ALBUM='查看相册',
         MANAGE='管理',
-        MANAGE_ALBUM='管理相册',
-        MANAGE_MUSIC='管理音乐',
     )
 
     def handle_text(self):
@@ -45,12 +43,13 @@ class UserMessageHandler(BaseUserMessageHandler):
                     self._news_url(reverse('album:web:album_list'), we_user.openid_key)
                 )
             )
-        elif content == self.TextRes.MANAGE_MUSIC:
+        elif content == self.TextRes.MANAGE:
             we_user = we_models.WeUser.objects.get(openid=self.from_username)
             if we_user.user.is_staff:
                 res = self.result(
-                    self._manage_music_msg(
-                        self._news_url(reverse('album:cms:music_manage'), we_user.openid_key)
+                    self._manage_msg(
+                        self._news_url(reverse('album:cms:album_manage'), we_user.openid_key),
+                        self._news_url(reverse('album:cms:music_manage'), we_user.openid_key),
                     )
                 )
             else:
@@ -84,15 +83,25 @@ class UserMessageHandler(BaseUserMessageHandler):
                 }],
             }
 
-    def _manage_music_msg(self, url):
+    def _manage_msg(self, album_url, music_url):
         return {
                 'MsgType': 'news',
-                'ArticleCount': 1,
+                'ArticleCount': 3,
                 'Articles': [{
+                    'Title': ec('管理'),
+                    'Description': '',
+                    'PicUrl': '',
+                    'Url': ''
+                },{
+                    'Title': ec('相册管理'),
+                    'Description': '',
+                    'PicUrl': '',
+                    'Url': album_url
+                },{
                     'Title': ec('音乐管理'),
                     'Description': '',
                     'PicUrl': '',
-                    'Url': url
+                    'Url': music_url
                 }],
             }
 
