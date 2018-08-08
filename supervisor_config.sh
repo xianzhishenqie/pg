@@ -12,6 +12,7 @@ command=memcached -uroot -l127.0.0.1
 autostart=true
 autorestart=true
 user=root
+EOF
 
 
 # 配置pg supervisor
