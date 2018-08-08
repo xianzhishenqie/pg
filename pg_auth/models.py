@@ -1,9 +1,13 @@
 
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.db import models
 
 from base.utils.enum import Enum
 from base.utils.models.manager import MManager
+
+
+class MUserManager(MManager, UserManager):
+    pass
 
 
 class User(AbstractUser):
@@ -17,6 +21,6 @@ class User(AbstractUser):
     status = models.PositiveIntegerField(default=Status.NORMAL)
     extra = models.TextField(default='')
 
-    objects = MManager({'status': Status.DELETE})
+    objects = MUserManager({'status': Status.DELETE})
     original_objects = models.Manager()
 
