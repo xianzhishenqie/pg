@@ -83,7 +83,7 @@
 
                 pictureSeq: 0,
                 pictureDrake: null,
-                pictureUploaderOption: {},
+                pictureUploaderOptions: {},
 
                 state: null,
                 limit: 8,
@@ -145,7 +145,7 @@
                     Vue.nextTick(function () {
                         vue.bindDragPictures();
                     });
-                    vue.pictureUploaderOption.url = context.albumPictureApiUrl.replace('0', this.albumId);
+                    vue.pictureUploaderOptions.url = context.albumPictureApiUrl.replace('0', this.albumId);
                 },
                 show: function () {
                     this.state = JSON.stringify(this.pictureList);
@@ -220,7 +220,7 @@
             },
             mounted: function () {
                 var vue = this;
-                $.extend(this.pictureUploaderOption, {
+                vue.pictureUploaderOptions = weui.uploader('#uploaderCustom', {
                     url: '',
                     auto: true,
                     type: 'file',
@@ -241,8 +241,8 @@
                             weui.alert('请上传不超过10M的图片');
                             return false;
                         }
-                        if (files.length > 9) { // 防止一下子选择过多文件
-                            weui.alert('每次最多只能上传9张图片，请重新选择');
+                        if (files.length > 8) { // 防止一下子选择过多文件
+                            weui.alert('每次最多只能上传8张图片，请重新选择');
                             return false;
                         }
 
@@ -287,8 +287,7 @@
                         }, 1000)
                         // return true; // 阻止默认行为，不使用默认的失败态
                     }
-                })
-                weui.uploader('#uploaderCustom', vue.pictureUploaderOption);
+                });
             },
         });
     });

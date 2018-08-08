@@ -2345,6 +2345,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	        this.value = '';
 	    });
+
+	    return options;
 	}
 	exports.default = uploader;
 	module.exports = exports['default'];
