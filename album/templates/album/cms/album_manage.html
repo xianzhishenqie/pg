@@ -52,8 +52,8 @@
         <p class="weui-cells__title"><span class="text-secondary">长按查看相册</span>
         <div class="album-list row mx-0">
             <v-touch class="album-item col-4 pr-0"
-                     v-on:press="actionAlbum(album)"
-                     v-on:tap="editAlbum(album)"
+                     v-on:press.prevent="actionAlbum(album)"
+                     v-on:tap.prevent="editAlbum(album)"
                      :key="album.id"
                      v-for="album, i in albums">
                 <div class="border p-1 position-relative">

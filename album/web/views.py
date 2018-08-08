@@ -4,6 +4,7 @@ from django.conf import settings
 
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.reverse import reverse
 
 from base.utils import views as default_views
 from base.utils.render import get_app_render
@@ -58,6 +59,7 @@ def album_display_page(request, pk):
         'album': album,
         'album_data': album_data,
         'pictures': json.dumps(picture_images),
+        'share_url': reverse('album:web:album_display', (album.pk,)),
         'share_img': picture_images[0] if len(picture_images) > 0 else '',
     }
 

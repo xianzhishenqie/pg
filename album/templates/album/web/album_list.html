@@ -49,7 +49,7 @@
 {% block container %}
     {% verbatim %}
     <div id="albumList" v-cloak>
-        <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span><span class="text-danger">（请勿分享本页面）</span> <a class="float-right text-info" :href="createAlbumUrl">创建相册</a></p>
+        <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span><span class="text-danger">（这是你的私人页面, 请勿分享）</span> <a class="float-right text-info" :href="createAlbumUrl">创建相册</a></p>
         <div class="album-list row mx-0">
             <v-touch class="album-item col-4 pr-0"
                      v-on:press="actionAlbum(album)"

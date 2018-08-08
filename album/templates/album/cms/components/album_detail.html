@@ -1,6 +1,6 @@
 {% load i18n %}
 {% load staticfiles %}
-
+<link rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
 <style type="text/css">
     ul, p, label{
         margin-bottom: auto;
@@ -21,7 +21,7 @@
     }
 </style>
 
-<div id="albumDetail">
+<v-touch id="albumDetail" v-on:panright="hide">
     {% verbatim %}
     <div class="weui-cells__title">相册名称</div>
     <div class="weui-cells">
@@ -83,7 +83,7 @@
         </v-touch>
     </div>
     {% endverbatim %}
-</div>
+</v-touch>
 
 <script type="text/javascript">
     $.extend(context, {
