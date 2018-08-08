@@ -33,6 +33,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 source /usr/local/python3/bin/virtualenvwrapper.sh
 EOF
 source /etc/profile
+mkvirtualenv pg
 
 
 # 基础工具服务安装
@@ -68,8 +69,6 @@ mv supervisord.conf /etc/
 mkdir /etc/supervisord.d/
 # 启动supervisor
 supervisord -c /etc/supervisord.conf
-
-
 
 
 mysql -e "
