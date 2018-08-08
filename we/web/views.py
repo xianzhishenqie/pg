@@ -8,7 +8,6 @@ from rest_framework.permissions import AllowAny
 from rest_framework.renderers import StaticHTMLRenderer
 from rest_framework.response import Response
 
-from base.utils.http import HttpClient
 from base.utils.rest.decorators import request_data
 from base.utils.rest.parsers import TextXMLParser
 
@@ -52,16 +51,4 @@ def we_access(request):
             echostr = ''
 
         return Response(echostr)
-
-
-@api_view(['GET'])
-@request_data
-def we_code(request):
-    code = request.query_data.get('code')
-
-    http = HttpClient()
-    ret = http.jget(setting.ACCESS_TOKEN_URL.format(code=code))
-    access_token = ret['access_token']
-
-    return Response(ret)
 

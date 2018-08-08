@@ -20,19 +20,20 @@ from . import serializers as mserializers
 render = get_app_render(__package__)
 
 
+
+@auto_login()
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 @request_data
-@auto_login()
 def album_list_page(request):
     context = {}
     return render(request, 'album_list.html', context)
 
 
+@auto_login(ignore=True)
 @api_view(['GET'])
 @permission_classes((AllowAny,))
 @request_data
-@auto_login(ignore=True)
 def album_display_page(request, pk):
     has_key = False
     openid_key = request.query_params.get('key')

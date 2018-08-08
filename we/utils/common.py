@@ -1,6 +1,5 @@
 import logging
 import datetime
-from pyquery import PyQuery as pq
 
 from django.db import transaction
 from django.utils import timezone
@@ -76,21 +75,3 @@ def is_we_access(signature, timestamp, nonce):
             return True
 
     return False
-
-
-def p_wedata(xml):
-    doc = pq(xml)
-    data = {}
-    for child in doc.children():
-        data[child.tag] = child.text
-    return data
-
-
-# '< ![CDATA[text] ]>'
-def pcdata(text):
-    return text[10:-4]
-
-
-# '< ![CDATA[text] ]>'
-def fcdata(text):
-    return '< ![CDATA[{}] ]>'.format(text)

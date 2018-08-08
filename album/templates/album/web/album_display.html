@@ -18,7 +18,7 @@
     <meta name="x5-fullscreen" content="true" />
     <meta name="360-fullscreen" content="true" />
 
-    {% if user.is_authenticated %}
+    {% if is_owner %}
         {% if UC %}
             <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -473,7 +473,7 @@
     <script src="{% static_v 'album/web/js/xmlHttp.js' %}"></script>
 {% endif %}
 
-{% if user.is_authenticated %}
+{% if is_owner %}
     {% if UC %}
         <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     {% else %}
@@ -553,6 +553,7 @@
                  v-on:tap="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
+    {% if is_owner %}
     <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     <div class="row mx-0 edit-action position-absolute w-100">
         <div class="col-3 text-center">
@@ -568,7 +569,6 @@
             <v-touch class="edit-album edit-album-info" v-on:tap="editAlbumInfo">保存</v-touch>
         </div>
     </div>
-    {% if user.is_authenticated %}
     {% endif %}
 </div>
 
@@ -754,7 +754,7 @@
 {% endif %}
 <script src="{% static 'base/common/lib/vue-touch/vue-touch.js' %}"></script>
 
-{% if user.is_authenticated %}
+{% if is_owner %}
     {% if UC %}
         <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -863,7 +863,7 @@ var aVue = new Vue({
             var vue = this;
             vue.albumId = albumId;
             vue.getAlbum(function () {
-                {% if user.is_authenticated %}
+                {% if is_owner %}
                 pVue.init(vue.albumId, vue.album.picture_list);
                 tVue.init(vue.album.template_data ? vue.album.template_data.id : null);
                 mVue.init(vue.album.music_data ? vue.album.music_data.id : null);
@@ -872,7 +872,7 @@ var aVue = new Vue({
             });
         },
 
-        {% if user.is_authenticated %}
+        {% if is_owner %}
         editAlbum: function () {
             (this.lastEditor || tVue).show();
         },
@@ -894,7 +894,7 @@ var aVue = new Vue({
         },
         {% endif %}
     },
-    {% if user.is_authenticated %}
+    {% if is_owner %}
         mounted: function () {
             this.init({{ pk }});
         }

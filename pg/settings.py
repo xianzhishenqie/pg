@@ -23,9 +23,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'b=r1besx*5po3s*#-02de&csk=c82$^9dqtehp7^du@7gc=q77'
 
+ALLOWED_HOSTS = ['*']
+
+
 from .config import *
 
-ALLOWED_HOSTS = ['*']
+PG_APPS = []
+PG_APP_PATH = {}
+for app_path in PG_APP_PATHS:
+    if isinstance(app_path, tuple):
+        PG_APPS.append(app_path[0])
+        PG_APP_PATH[app_path[0]] = app_path[1]
+    else:
+        PG_APPS.append(app_path)
+        PG_APP_PATH[app_path] = app_path
 
 
 # Application definition
