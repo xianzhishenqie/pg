@@ -46,6 +46,7 @@
         #albumList .no-record{
             font-size: 16px;
             line-height: 80px;
+            width: 100%;
         }
     </style>
 {% endblock %}
@@ -70,7 +71,7 @@
                     <div class="pg-mask"></div>
                 </div>
             </v-touch>
-            <div class="no-record text-primary text-center text" v-if="albums.length == 0">
+            <div class="no-record text-secondary text-center" v-if="albums.length == 0">
                 您还没有相册
             </div>
         </div>
