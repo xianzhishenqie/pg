@@ -6,6 +6,6 @@ from . import views
 
 
 urlpatterns = [
-    path('access/', views.we_access, name='access'),
+    path('access/<slug:app_id>/', views.we_access, name='access'),
 ]
 

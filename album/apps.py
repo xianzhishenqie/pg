@@ -1,5 +1,5 @@
-from django.apps import AppConfig
+from base.utils.app import AppConfig
 
 
-class AlbumConfig(AppConfig):
+class PGAppConfig(AppConfig):
     name = 'album'

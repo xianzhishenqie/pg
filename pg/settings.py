@@ -28,15 +28,21 @@ ALLOWED_HOSTS = ['*']
 
 from .config import *
 
+
 PG_APPS = []
 PG_APP_PATH = {}
+PG_APP_NAMES = []
 for app_path in PG_APP_PATHS:
     if isinstance(app_path, tuple):
-        PG_APPS.append(app_path[0])
-        PG_APP_PATH[app_path[0]] = app_path[1]
+        app_name = app_path[0]
+        app_path = app_path[1]
     else:
-        PG_APPS.append(app_path)
-        PG_APP_PATH[app_path] = app_path
+        app_name = app_path
+        app_path = app_path
+
+    PG_APPS.append('{}.apps.PGAppConfig'.format(app_name))
+    PG_APP_PATH[app_name] = app_path
+    PG_APP_NAMES.append(app_name)
 
 
 # Application definition
@@ -123,7 +129,7 @@ USE_TZ = False
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-STATIC_V_DIRS = [os.path.join(BASE_DIR, app_name) for app_name in PG_APPS]
+STATIC_V_DIRS = [os.path.join(BASE_DIR, app_name) for app_name in PG_APP_NAMES]
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

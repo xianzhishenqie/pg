@@ -1,5 +1,5 @@
-from django.apps import AppConfig
+from base.utils.app import AppConfig
 
 
-class BaseConfig(AppConfig):
+class PGAppConfig(AppConfig):
     name = 'base'

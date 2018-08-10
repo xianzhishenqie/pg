@@ -1,5 +1,5 @@
-from django.apps import AppConfig
+from base.utils.app import AppConfig
 
 
-class AuthConfig(AppConfig):
+class PGAppConfig(AppConfig):
     name = 'pg_auth'

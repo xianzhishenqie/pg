@@ -16,15 +16,15 @@ from we.models import WeAppInfo, WeUser
 logger = logging.getLogger(__name__)
 
 
-def get_access_token():
-    app_info = WeAppInfo.objects.first()
+def get_access_token(app_id):
+    app_info = WeAppInfo.objects.filter(app_id=app_id).first()
     if not _valid_access_token(app_info):
-        ret = pull_access_token()
+        ret = pull_access_token(app_id)
         access_token = ret['access_token']
         expires_in = ret['expires_in']
         expire_time = timezone.now() + datetime.timedelta(seconds=expires_in)
         if not app_info:
-            app_info = WeAppInfo()
+            app_info = WeAppInfo(app_id=app_id)
         app_info.access_token = access_token
         app_info.access_token_expire_time = expire_time
         app_info.save()
@@ -43,9 +43,10 @@ def _valid_access_token(app_info):
     return True
 
 
-def pull_access_token():
+def pull_access_token(app_id):
     http = HttpClient()
-    ret = http.jget(setting.APP_ACCESS_TOKEN_URL)
+    app_access_token_url = setting.APPS[app_id]['APP_ACCESS_TOKEN_URL']
+    ret = http.jget(app_access_token_url)
     print(ret)
     return ret
 
@@ -64,9 +65,11 @@ def sync_openid(openid):
             )
 
 
-def is_we_access(signature, timestamp, nonce):
+def is_we_access(app_id, signature, timestamp, nonce):
+    token = setting.APPS[app_id]['TOKEN']
+
     try:
-        signature_list = sorted([setting.TOKEN, timestamp, nonce])
+        signature_list = sorted([token, timestamp, nonce])
         calc_signature = sha1(''.join(signature_list))
     except:
         return False

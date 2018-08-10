@@ -3,8 +3,9 @@ import os
 
 from importlib import import_module
 
+from django.apps import AppConfig as DjangoAppConfig
 from django.conf import settings
-from django.urls import include, path, re_path
+from django.urls import include, path
 
 from base.utils.rest.routers import api_path
 
@@ -48,7 +49,7 @@ def get_app_urls(app_name):
 
 def get_pg_urls(collect_app_urls=True):
     patterns = []
-    for app_name in settings.PG_APPS:
+    for app_name in settings.PG_APP_NAMES:
         urls_name = '{app_name}.urls'.format(
             app_name=app_name,
         )
@@ -70,3 +71,18 @@ def get_pg_urls(collect_app_urls=True):
                     )
 
     return patterns
+
+
+def load_app_setting(app_name):
+    setting_name = '{app_name}.setting'.format(
+        app_name=app_name,
+    )
+    setting_path = os.path.join(settings.BASE_DIR, setting_name.replace('.', '/') + '.py')
+    if os.path.exists(setting_path):
+        import_module(setting_name)
+
+
+class AppConfig(DjangoAppConfig):
+
+    def ready(self):
+        load_app_setting(self.name)

@@ -16,6 +16,9 @@ class CDATATextXMLRenderer(TextXMLRenderer):
         if not data:
             return ''
 
+        if not isinstance(data, (tuple, list, dict)):
+            return data
+
         tags = []
         self._to_xml(tags, data)
         xml = '<xml>{}</xml>'.format(''.join(tags))

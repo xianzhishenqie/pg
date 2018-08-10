@@ -4,6 +4,7 @@ from pg_auth.models import User
 
 
 class WeAppInfo(models.Model):
+    app_id = models.CharField(max_length=100, unique=True)
     access_token = models.CharField(max_length=1024)
     access_token_expire_time = models.DateTimeField()
 
