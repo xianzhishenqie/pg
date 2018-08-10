@@ -32,6 +32,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
     <link rel="stylesheet" href="{% static_v 'base/common/css/animation.css' %}">
     <link rel="stylesheet" href="{% static_v 'base/common/css/common.css' %}">
+    <link rel="stylesheet" href="{% static_v 'album/common/css/common.css' %}">
         <style type="text/css">
             [v-cloak] {
                 display: none;
@@ -562,23 +563,23 @@
         <v-touch tag="img" class="music-icon"
                  src="{% static 'album/web/img/music.png' %}"
                  :class="{'animated infinite spin': music.active}"
-                 v-on:tap="toggleMusic" />
+                 v-on:tap.prevent="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
     {% if is_owner %}
     <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     <div class="row mx-0 edit-action position-absolute w-100">
         <div class="col-3 text-center">
-            <v-touch class="edit-album edit-album-template" v-on:tap="editAlbumTemplate">模板</v-touch>
+            <v-touch class="edit-album edit-album-template" v-on:tap.prevent="editAlbumTemplate">模板</v-touch>
         </div>
         <div class="col-3 text-center">
-            <v-touch class="edit-album edit-album-music" v-on:tap="editAlbumMusic">音乐</v-touch>
+            <v-touch class="edit-album edit-album-music" v-on:tap.prevent="editAlbumMusic">音乐</v-touch>
         </div>
         <div class="col-3 text-center">
-            <v-touch class="edit-album edit-album-picture" v-on:tap="editAlbumPicture">相片</v-touch>
+            <v-touch class="edit-album edit-album-picture" v-on:tap.prevent="editAlbumPicture">相片</v-touch>
         </div>
         <div class="col-3 text-center">
-            <v-touch class="edit-album edit-album-info" v-on:tap="editAlbumInfo">保存</v-touch>
+            <v-touch class="edit-album edit-album-info" v-on:tap.prevent="editAlbumInfo">保存</v-touch>
         </div>
     </div>
     {% endif %}
@@ -836,7 +837,7 @@
 
         $(function () {
             if (urlparser.getQueryString('edit')) {
-                aVue.show();
+                aVue.editAlbumPicture();
             }
         });
     </script>
@@ -859,7 +860,11 @@ var aVue = new Vue({
             this.music.active = !this.music.active;
             var audio = $(this.$el).find('audio')[0];
             if (this.music.active) {
-                audio.play();
+                try {
+                    audio.play();
+                } catch (e) {
+                    this.music.active = !this.music.active;
+                }
             } else {
                 audio.pause();
             }

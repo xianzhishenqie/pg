@@ -24,6 +24,9 @@
         height: auto!important;
         position: initial!important;
     }
+     #pictureEdit .ab-bottom-btn{
+        display: none;
+    }
 </style>
 
 <div id="albumEdit">
@@ -65,6 +68,9 @@
                 <span class="weui-cell__ft"></span>
             </v-touch>
         </div>
+        <v-touch class="pg-center-x ab-bottom-btn" v-on:tap.prevent="hide">
+            <div class="ab-btn-del"></div>
+        </v-touch>
     </v-touch>
     {% endverbatim %}
 </div>

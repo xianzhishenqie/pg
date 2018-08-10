@@ -33,21 +33,6 @@
     #musicManage .weui-cells:before {
         border-top: none;
     }
-    #musicManage #addMusic {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 10px;
-        width: 30px;
-        height: 30px;
-    }
-    #musicManage #addMusic .x{
-        height: 2px;
-        width: 60%;
-    }
-    #musicManage #addMusic .y{
-        height: 60%;
-        width: 2px;
-    }
     #musicManage #music {
         position: absolute;
         z-index: 1000;
@@ -57,6 +42,9 @@
         height: 100%;
         background-color: #f8f8f8;
         display: none;
+    }
+    #musicManage .ab-bottom-btn{
+        z-index: 1000;
     }
 </style>
 
@@ -69,7 +57,7 @@
                  :class="{'weui-bar__item_on text-danger border-bottom border-danger': tag.active}"
                  :data-id="tag.id"
                  :key="tag.id"
-                 v-on:tap="tagMusicTag(tag)"
+                 v-on:tap.prevent="tagMusicTag(tag)"
                  v-for="tag in musicTags">
                 {{ tag.name }}
             </v-touch>
@@ -81,31 +69,29 @@
                     <input type="search" class="weui-search-bar__input" placeholder="搜索" required=""
                            @input="getMusics"
                            v-model="search">
-                    <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap="clearSearch"></v-touch>
+                    <v-touch tag="a" href="javascript:" class="weui-icon-clear" v-on:tap.prevent="clearSearch"></v-touch>
                 </div>
                 <label class="weui-search-bar__label">
                     <i class="weui-icon-search"></i>
                     <span>搜索</span>
                 </label>
             </div>
-            <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap="clearSearch">取消</v-touch>
+            <v-touch tag="a" href="javascript:" class="weui-search-bar__cancel-btn" v-on:tap.prevent="clearSearch">取消</v-touch>
         </div>
         <div class="weui-cells mt-0">
             <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
-            <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
+            <span class="weui-cell weui-cell_access pg-no-us" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
                 <v-touch class="weui-cell__hd" v-on:tap.prevent="selectMusic(music)" v-on:press.prevent="actionMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
                 <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap.prevent="selectMusic(music)" v-on:press.prevent="actionMusic(music)">
                     <p>{{ music.name }}</p>
                 </v-touch>
                 <v-touch tag="span" class="fa fa-play-circle-o"
                          :class="{'fa-pause-circle-o': music.active}"
-                         v-on:tap="playMusic(i, music)"></v-touch>
+                         v-on:tap.prevent="playMusic(i, music)"></v-touch>
             </span>
         </div>
     </div>
-    <v-touch id="addMusic" class="position-absolute rounded-circle text-success border border-success" v-on:tap="createMusic">
-        <div class="bg-success pg-center x"></div>
-        <div class="bg-success pg-center y"></div>
+    <v-touch id="addMusic" class="pg-center-x ab-bottom-btn ab-btn-add" v-on:tap.prevent="createMusic">
     </v-touch>
     <v-touch id="music" v-on:panright="hideMusic">
         <div class="weui-cells__title">音乐名称</div>
@@ -159,7 +145,7 @@
         </div>
         <div class="weui-cells__title">音乐标签</div>
         <div class="weui-cells">
-            <v-touch class="weui-cell weui-cell_access" v-on:tap="checkMusicTag(editingMusic.tags[0])">
+            <v-touch class="weui-cell weui-cell_access" v-on:tap.prevent="checkMusicTag(editingMusic.tags[0])">
                 <div class="weui-cell__bd">
                     <span>{{ musicTagMap[editingMusic.tags[0]] ? musicTagMap[editingMusic.tags[0]].name : '请选择音乐标签' }}</span>
                 </div>
@@ -170,6 +156,9 @@
         <div class="weui-btn-area">
             <v-touch tag="span" class="weui-btn weui-btn_primary" v-on:tap.prevent="submitMusic">确定</v-touch>
         </div>
+        <v-touch class="pg-center-x ab-bottom-btn" v-on:tap.prevent="hideMusic">
+            <div class="ab-btn-del"></div>
+        </v-touch>
     </v-touch>
 </div>
 {% endverbatim %}
@@ -209,7 +198,7 @@
                 search: '',
                 music: null,
 
-                editingMusic: emptyMusic,
+                editingMusic: $.extend(true, {}, emptyMusic),
 
                 musicId: null,
             },
@@ -290,7 +279,7 @@
                     this.showMusic();
                 },
                 createMusic: function () {
-                    this.editingMusic = $.extend(true, this.editingMusic, emptyMusic);;
+                    $.extend(true, this.editingMusic, emptyMusic);
                     this.showMusic();
                 },
 

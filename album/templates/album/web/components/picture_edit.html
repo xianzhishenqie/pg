@@ -43,7 +43,7 @@
                     <div class="weui-uploader__hd d-none"><p class="weui-uploader__title">照片上传</p></div>
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files" id="uploaderCustomFiles">
-                            <v-touch tag="li" class="weui-uploader__file"
+                            <v-touch tag="li" class="weui-uploader__file pg-no-us"
                                 :data-seq="picture.seq"
                                 v-on:tap.prevent="displayPicture(picture)"
                                 v-on:press.prevent="actionPicture(picture)"
@@ -59,6 +59,9 @@
             </div>
         </div>
     </div>
+    <v-touch class="pg-center-x ab-bottom-btn" v-on:tap.prevent="hide">
+        <div class="ab-btn-del"></div>
+    </v-touch>
 </v-touch>
 {% endverbatim %}
 

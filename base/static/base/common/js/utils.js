@@ -729,6 +729,13 @@ var animator = (function(baseModules){
         });
     };
 
+    // 封装禁用contextmenu
+    $.fn.banContextmenu = function () {
+        this.contextmenu(function (e) {
+            return false;
+        });
+    };
+
     $.fn.animateCss = function (animationName, callback) {
         $.each(this, function(i, el){
             animator.animateCss(el, animationName, callback)

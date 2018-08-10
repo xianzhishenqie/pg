@@ -6,6 +6,21 @@
     transform: translate(-50%, -50%);
 }
 
+.pg-center-x{
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.pg-center-y{
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+
 .pg-mask{
     position: absolute;
     left: 0;
@@ -13,6 +28,13 @@
     width: 100%;
     height: 100%;
     z-index: 1001;
+}
+
+.pg-no-us{
+    -webkit-touch-callout: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
 }
 
 .w-80{

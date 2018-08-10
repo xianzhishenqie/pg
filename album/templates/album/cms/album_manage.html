@@ -51,7 +51,7 @@
     <div id="albumList" v-cloak>
         <p class="weui-cells__title"><span class="text-secondary">长按查看相册</span>
         <div class="album-list row mx-0">
-            <v-touch class="album-item col-4 pr-0"
+            <v-touch class="album-item col-4 pr-0 pg-no-us"
                      v-on:press.prevent="actionAlbum(album)"
                      v-on:tap.prevent="editAlbum(album)"
                      :key="album.id"
@@ -113,7 +113,7 @@ var alVue = new Vue({
                 {
                     label: '查看相册',
                     onClick: function () {
-                        window.location.href = context.albumDisplayPageUrl.replace('0', album.id) + window.location.search;
+                        window.location.href = context.albumDisplayPageUrl.replace('0', album.id);
                     }
                 },
                 {
