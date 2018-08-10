@@ -557,6 +557,9 @@
     #album{
         display: none;
     }
+    #templateSelect .template-item{
+        margin: initial;
+    }
 </style>
 <div class="position-absolute w-100 h-100" id="vueMask">
     <div class="music position-absolute">
@@ -665,8 +668,7 @@
 {% endif %}
 
 <script>
-    var words = {"kawa_8482915447240":"\u6492\u6253\u7b97s","kawa_8487426126688":"\u6253\u626b\u6253\u626bs'd","kawa_8487426236236":"\u963f\u8428"};
-    var editmode =true ;
+    var words = {};
     var mvCfg = {
         pics: {{ pictures | safe }},
         token: '56',
@@ -923,6 +925,9 @@ var aVue = new Vue({
 </script>
 <script>
     $("#sec_content,#biyeji_container").css("marginTop",-$(window).height());
+    document.oncontextmenu = function () {
+        return false;
+    };
 </script>
 </body>
 </html>

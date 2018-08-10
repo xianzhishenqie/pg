@@ -51,7 +51,7 @@
     <div id="albumList" v-cloak>
         <p class="weui-cells__title"><span class="text-secondary">长按编辑相册</span><span class="text-danger">（这是你的私人页面, 请勿分享）</span> <a class="float-right text-info" :href="createAlbumUrl">创建相册</a></p>
         <div class="album-list row mx-0">
-            <v-touch class="album-item col-4 pr-0 pg-no-us"
+            <v-touch class="album-item col-4 pr-0"
                      v-on:press.prevent="actionAlbum(album)"
                      v-on:tap.prevent="editAlbum(album)"
                      :key="album.id"
@@ -73,6 +73,7 @@
 {% endblock %}
 
 {% block local_js %}
+    {{ block.super }}
 <script type="text/javascript">
     $.extend(context, {
         albumListApiUrl: '{% url "album:web:api:album-list" %}',
@@ -92,9 +93,6 @@ var alVue = new Vue({
             var vue = this;
             http.get(context.albumListApiUrl, {}, function(res){
                 vue.albums = res;
-                Vue.nextTick(function () {
-                    $(this.$el).find('.album-item').banContextmenu();
-                });
             });
         },
         albumCover: function (album) {

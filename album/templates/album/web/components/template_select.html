@@ -149,15 +149,17 @@
                 },
                 fixListPanelHeight: function () {
                     var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight();
-                    $(this.$el).find('.template-list').height(height - 15);
+                    $(this.$el).find('.template-list').css('max-height', height + 'px');
                 },
                 init: function(templateId) {
                     this.templateId = templateId;
                 },
                 show: function () {
+                    var vue = this;
                     docUtil.setTitle('选择模板');
-                    $(this.$el).animateCss('slideInRight').show();
-                    this.fixListPanelHeight();
+                    $(vue.$el).animateCss('slideInRight', function ($el) {
+                        vue.fixListPanelHeight();
+                    }).show();
                 },
                 hide: function () {
                     docUtil.revertTitle();

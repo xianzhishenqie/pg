@@ -51,7 +51,7 @@
     <div id="albumList" v-cloak>
         <p class="weui-cells__title"><span class="text-secondary">长按查看相册</span>
         <div class="album-list row mx-0">
-            <v-touch class="album-item col-4 pr-0 pg-no-us"
+            <v-touch class="album-item col-4 pr-0"
                      v-on:press.prevent="actionAlbum(album)"
                      v-on:tap.prevent="editAlbum(album)"
                      :key="album.id"
@@ -73,6 +73,7 @@
 {% endblock %}
 
 {% block local_js %}
+    {{ block.super }}
 <script type="text/javascript">
     $.extend(context, {
         albumListApiUrl: '{% url "album:cms:api:album-list" %}',

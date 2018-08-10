@@ -33,6 +33,9 @@
     #musicManage .weui-cells:before {
         border-top: none;
     }
+    #musicManage .weui-cells:after {
+        border-bottom: none;
+    }
     #musicManage #music {
         position: absolute;
         z-index: 1000;
@@ -80,7 +83,7 @@
         </div>
         <div class="weui-cells mt-0">
             <audio :src="music.url || music.file" autoplay="autoplay" loop="loop" v-if="music"></audio>
-            <span class="weui-cell weui-cell_access pg-no-us" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
+            <span class="weui-cell weui-cell_access" :class="{'text-primary': music.id == musicId}" v-for="music, i in musics">
                 <v-touch class="weui-cell__hd" v-on:tap.prevent="selectMusic(music)" v-on:press.prevent="actionMusic(music)"><i class="fa fa-music text-success d-block" style="width:20px;margin-right:5px;"></i></v-touch>
                 <v-touch class="weui-cell__bd weui-cell_primary" v-on:tap.prevent="selectMusic(music)" v-on:press.prevent="actionMusic(music)">
                     <p>{{ music.name }}</p>
@@ -118,11 +121,11 @@
                 </div>
             </div>
         </div>
-        <div class="weui-cells__title">音乐文件(优先使用音乐地址)</div>
+        <div class="weui-cells__title">音乐文件(<template v-if="editingMusic.file && typeof(editingMusic.file) == 'string'">已有<a :href="editingMusic.file" download>文件</a>，</template>优先使用音乐地址)
+        </div>
         <div class="weui-cells">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <span v-if="editingMusic.file && typeof(editingMusic.file) == 'string'">已有<a :href="editingMusic.file" download>文件</a>，重新</span>
                     <input type="file" @change="selectEditingMusicFile($event)">
                 </div>
             </div>
@@ -156,7 +159,7 @@
         <div class="weui-btn-area">
             <v-touch tag="span" class="weui-btn weui-btn_primary" v-on:tap.prevent="submitMusic">确定</v-touch>
         </div>
-        <v-touch class="pg-center-x ab-bottom-btn" v-on:tap.prevent="hideMusic">
+        <v-touch class="pg-center-x ab-bottom-btn position-fixed" v-on:tap.prevent="hideMusic">
             <div class="ab-btn-del"></div>
         </v-touch>
     </v-touch>
@@ -271,7 +274,7 @@
                 },
                 fixListPanelHeight: function () {
                     var height = document.documentElement.clientHeight - $(this.$el).find('#musicSelect .weui-navbar').outerHeight() - $(this.$el).find('#musicSelect .weui-search-bar').outerHeight();
-                    $(this.$el).find('#musicSelect .weui-cells').height(height);
+                    $(this.$el).find('#musicSelect .weui-cells').css('max-height', height + 'px');
                 },
                 selectMusic: function (music) {
                     $.extend(true, this.editingMusic, music);

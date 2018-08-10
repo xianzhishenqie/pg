@@ -20,6 +20,9 @@
     #musicSelect .weui-cells:before {
         border-top: none;
     }
+    #musicSelect .weui-cells:after {
+        border-bottom: none;
+    }
 </style>
 
 {% verbatim %}
@@ -158,15 +161,17 @@
                 },
                 fixListPanelHeight: function () {
                     var height = document.documentElement.clientHeight - $(this.$el).find('.weui-navbar').outerHeight() - $(this.$el).find('.weui-search-bar').outerHeight();
-                    $(this.$el).find('.weui-cells').height(height);
+                    $(this.$el).find('.weui-cells').css('max-height', height + 'px');
                 },
                 init: function(musicId) {
                     this.musicId = musicId;
                 },
                 show: function () {
+                    var vue = this;
                     docUtil.setTitle('选择音乐');
-                    $(this.$el).animateCss('slideInRight').show();
-                    this.fixListPanelHeight();
+                    $(vue.$el).animateCss('slideInRight', function ($el) {
+                        vue.fixListPanelHeight();
+                    }).show();
                 },
                 hide: function () {
                     docUtil.revertTitle();

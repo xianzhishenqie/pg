@@ -1,5 +1,7 @@
+import os
 from rest_framework import serializers
 
+from base.utils.text import rk_filename
 
 from album import models as album_models
 from album.utils import common
@@ -13,6 +15,13 @@ class TemplateTagSerializers(serializers.ModelSerializer):
 
 
 class TemplateSerializers(serializers.ModelSerializer):
+
+    def to_internal_value(self, data):
+        cover = data.get('cover')
+        if cover:
+            cover.name = rk_filename(cover.name)
+
+        return super(TemplateSerializers, self).to_internal_value(data)
 
     class Meta:
         model = album_models.Template
@@ -28,6 +37,17 @@ class MusicTagSerializers(serializers.ModelSerializer):
 
 class MusicSerializers(serializers.ModelSerializer):
 
+    def to_internal_value(self, data):
+        file = data.get('file')
+        if file:
+            file.name = rk_filename(file.name)
+
+        lyric_file = data.get('lyric_file')
+        if lyric_file:
+            lyric_file.name = rk_filename(lyric_file.name)
+
+        return super(MusicSerializers, self).to_internal_value(data)
+
     class Meta:
         model = album_models.Music
         fields = ('id', 'name', 'author', 'file', 'url')
@@ -35,6 +55,13 @@ class MusicSerializers(serializers.ModelSerializer):
 
 
 class PictureSerializers(serializers.ModelSerializer):
+
+    def to_internal_value(self, data):
+        image = data.get('image')
+        if image:
+            image.name = rk_filename(image.name)
+
+        return super(PictureSerializers, self).to_internal_value(data)
 
     class Meta:
         model = album_models.Picture

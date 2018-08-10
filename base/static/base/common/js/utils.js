@@ -304,6 +304,10 @@ var phttp = (function(obj, baseModules){
 var funcUtil = (function(baseModules){
     var mod = initFromBaseModules(baseModules);
 
+    mod.delay = function (func) {
+        setTimeout(func, 100);
+    };
+
     mod.combine = function (funcList){
         return function(){
             for (var i = 0; i < funcList.length; i++) {

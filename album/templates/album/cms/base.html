@@ -19,3 +19,13 @@
     {{ block.super }}
     <script src="{% static 'we/common/lib/weui/js/weui.js' %}"></script>
 {% endblock %}
+
+
+{% block local_js %}
+    {{ block.super }}
+    <script type="text/javascript">
+    document.oncontextmenu = function () {
+        return false;
+    };
+    </script>
+{% endblock %}
