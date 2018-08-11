@@ -144,6 +144,10 @@
                         }
                     });
                 },
+                fixPanelHeight: function () {
+                    var height = document.documentElement.clientHeight - $('#pictureEdit').outerHeight();
+                    $(this.$el).css('min-height', height + 'px');
+                },
                 init: function(album) {
                     var vue = this;
                     if (typeof(album) == 'object') {
@@ -164,9 +168,12 @@
                     }
                 },
                 show: function () {
-                    this.state = JSON.stringify(this.album);
+                    var vue = this;
+                    vue.state = JSON.stringify(vue.album);
                     docUtil.setTitle('编辑相册');
-                    $('#albumEdit').animateCss('slideInRight').show();
+                    $('#albumEdit').animateCss('slideInRight', function () {
+                        vue.fixPanelHeight();
+                    }).show();
                 },
                 hide: function (e) {
                 	if (!context.canHideEditor) {
