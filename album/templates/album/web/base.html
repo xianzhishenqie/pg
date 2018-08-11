@@ -4,6 +4,10 @@
 {% load staticfiles %}
 {% load pg_common %}
 
+{% block favicon %}
+    <link rel="shortcut icon" href="{% static 'album/common/img/favicon.ico' %}">
+{% endblock %}
+
 {% block top_css %}
     {{ block.super }}
     {% if UC %}

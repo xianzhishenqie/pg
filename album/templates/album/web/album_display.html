@@ -500,7 +500,9 @@
 </head>
 <body>
 {% if share_img %}
-<img style="display: none;" src="{{ share_img }}">
+<div style="display: none;">
+    <img src="{{ share_img }}" alt="">
+</div>
 {% endif %}
 <style>
     .position-absolute{
