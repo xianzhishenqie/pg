@@ -15,11 +15,51 @@
 {% block local_js %}
     {{ block.super }}
     <script type="text/javascript">
-    $(function () {
         var map = new AMap.Map('container', {
             center: [117.000923, 36.675807],
             zoom: 11
         });
-    });
+
+        AMapUI.loadUI(['overlay/SimpleMarker'], function(SimpleMarker) {
+            var marker = new SimpleMarker({
+
+                //前景文字
+                iconLabel: '',
+
+                //图标主题
+                iconTheme: 'default',
+
+                //背景图标样式
+                iconStyle: {
+                    src: '{% static "map/public/img/pig.jpg" %}',
+                    style: {
+                        width:'30px',
+                        borderRadius: '50%',
+                    }
+                },
+
+                //...其他Marker选项...，不包括content
+                map: map,
+                position: [117.000923, 36.675807],
+            });
+
+            map.on('complete', function () {
+                marker.moveTo(new AMap.LngLat(117.000923, 36.0), 10000);
+            });
+        });
+
+
+        {#var marker = new AMap.Marker({#}
+        {#    position: [117.000923, 36.675807],#}
+        {#    icon: new AMap.Icon({#}
+        {#        size: new AMap.Size(40, 40),#}
+        {#        image: '{% static "map/public/img/pig.jpg" %}',#}
+        {#        imageOffset: new AMap.Pixel(0, 0),#}
+        {#        imageSize: new AMap.Size(40, 40),#}
+        {#    }),#}
+        {#    zoom: 13,#}
+        {#});#}
+        {#map.add(marker);#}
+
     </script>
 {% endblock %}
