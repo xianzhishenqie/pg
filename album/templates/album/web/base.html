@@ -10,7 +10,7 @@
 
 {% block top_css %}
     {{ block.super }}
-    {% if UC %}
+    {% if settings.USE_CDN %}
         <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
     {% else %}
         <link rel="stylesheet" href="{% static 'we/common/lib/weui/css/weui.css' %}">

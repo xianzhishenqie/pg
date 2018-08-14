@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import hashlib
 
 from django import template
 from django.conf import settings
@@ -39,21 +38,19 @@ def get_url_with_version(url):
     return url
 
 
-
-class UseCdnNode(template.Node):
+class SettingsNode(template.Node):
     def __init__(self, variable):
         self.variable = variable
 
     def render(self, context):
-        context[self.variable] = settings.USE_CDN
+        context[self.variable] = settings
         return ''
 
 
-@register.tag("use_cdn")
-def do_use_cdn(parser, token):
+@register.tag("get_settings")
+def do_get_settings(parser, token):
     args = token.contents.split()
     if len(args) != 3 or args[1] != 'as':
-        raise TemplateSyntaxError("'use_cdn' requires 'as variable' (got %r)" % args)
+        raise template.TemplateSyntaxError("'get_settings' requires 'as variable' (got %r)" % args)
 
-    return UseCdnNode(args[2])
-
+    return SettingsNode(args[2])

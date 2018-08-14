@@ -1,0 +1,25 @@
+{% extends './base.html' %}
+
+{% load i18n %}
+{% load staticfiles %}
+{% load pg_common %}
+
+{% block title %}
+    我的地图
+{% endblock %}
+
+{% block container %}
+    <div class="w-100 h-100" id="container"></div>
+{% endblock %}
+
+{% block local_js %}
+    {{ block.super }}
+    <script type="text/javascript">
+    $(function () {
+        var map = new AMap.Map('container', {
+            center: [117.000923, 36.675807],
+            zoom: 11
+        });
+    });
+    </script>
+{% endblock %}

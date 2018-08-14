@@ -45,6 +45,7 @@
                         <ul class="weui-uploader__files" id="uploaderCustomFiles">
                             <v-touch tag="li" class="weui-uploader__file"
                                 :data-seq="picture.seq"
+                                :key="picture.id"
                                 v-on:tap.prevent="displayPicture(picture)"
                                 v-on:press.prevent="actionPicture(picture)"
                                 v-for="picture in pictureList">

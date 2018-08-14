@@ -8,8 +8,9 @@ SERVER = 'http://www.shixiaobo.com'
 PG_APP_PATHS = [
     ('base', ''),
     'pg_auth',
-    'we',
-    ('album', ''),
+    ('map', ''),
+    # 'we',
+    # ('album', ''),
 ]
 
 

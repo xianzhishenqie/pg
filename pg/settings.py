@@ -211,3 +211,5 @@ SUB_MODULES = [
 ]
 
 ENCODING = 'utf-8'
+
+MS = {}

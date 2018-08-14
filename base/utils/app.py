@@ -79,7 +79,12 @@ def load_app_setting(app_name):
     )
     setting_path = os.path.join(settings.BASE_DIR, setting_name.replace('.', '/') + '.py')
     if os.path.exists(setting_path):
-        import_module(setting_name)
+        setting = import_module(setting_name)
+        setting_dict = {}
+        for setting_name in dir(setting):
+            if setting_name.isupper():
+                setting_dict[setting_name] = getattr(setting, setting_name)
+        settings.MS[app_name] = setting_dict
 
 
 class AppConfig(DjangoAppConfig):

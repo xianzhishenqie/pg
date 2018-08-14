@@ -5,7 +5,7 @@
 <!DOCTYPE HTML>
 <html style="height: 100%;">
 <head>
-    {% use_cdn as UC %}
+    {% get_settings as settings %}
     <meta charset="utf-8">
     <title>{{ album.name }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
@@ -19,7 +19,7 @@
     <meta name="360-fullscreen" content="true" />
 
     {% if is_owner %}
-        {% if UC %}
+        {% if settings.USE_CDN %}
             <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
@@ -47,7 +47,7 @@
         </script>
 
 
-    {% if UC %}
+    {% if settings.USE_CDN %}
         <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/keditor.css?v=09ss081141">
         <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/text_animate.css?v=09081141">
         <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/merge.css?v=113sd3dd334">
@@ -464,7 +464,7 @@
     }
     </style>
 
-{% if UC %}
+{% if settings.USE_CDN %}
     <script src="http://wangjianxun1.test.upcdn.net/js/zepto.min.js?v=12101011"></script>
     <script src="http://wangjianxun1.test.upcdn.net/js/vector.js"></script>
     <script src='http://wangjianxun1.test.upcdn.net/js/xmlHttp.js'></script>
@@ -475,7 +475,7 @@
 {% endif %}
 
 {% if is_owner %}
-    {% if UC %}
+    {% if settings.USE_CDN %}
         <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     {% else %}
         <script src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
@@ -655,7 +655,7 @@
   <input type="hidden" value="" id="per"/>
 </div>
 
-{% if UC %}
+{% if settings.USE_CDN %}
     <script src="http://wangjianxun1.test.upcdn.net/js/common.js?v=12101011"></script>
     <script>
         var staticUrl = 'http://wangjianxun1.test.upcdn.net/';
@@ -690,7 +690,7 @@
 
 </script>
 
-{% if UC %}
+{% if settings.USE_CDN %}
     <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
     <script src="http://wangjianxun1.test.upcdn.net/js/md5.min.js"></script>
@@ -765,7 +765,7 @@
     {% include template_path %}
 {% endwith %}
 
-{% if UC %}
+{% if settings.USE_CDN %}
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
 {% else %}
@@ -775,7 +775,7 @@
 <script src="{% static 'base/common/lib/vue-touch/vue-touch.js' %}"></script>
 
 {% if is_owner %}
-    {% if UC %}
+    {% if settings.USE_CDN %}
         <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     {% else %}
