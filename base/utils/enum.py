@@ -1,4 +1,4 @@
-class Enum(object):
+class Enum:
     def __init__(self, **source):
         self.__dict__ = source
 

@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 from base.utils.list import listfilter, valuefilter
 
 
-class DataFilter(object):
+class DataFilter:
 
     def __init__(self, data):
         self.data = data
@@ -16,7 +15,7 @@ class DataFilter(object):
         return listfilter(data, filter_param)
 
 
-class RequestData(object):
+class RequestData:
 
     def __init__(self, request, is_query=False, data_filter_class=DataFilter):
         self.request = request

@@ -4,7 +4,7 @@ import time
 from django.utils import timezone
 
 
-class UserMessageHandler(object):
+class UserMessageHandler:
 
     def __init__(self, receive_data):
         msg_type = receive_data.get('MsgType')

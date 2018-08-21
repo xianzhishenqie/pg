@@ -1,12 +1,10 @@
-from __future__ import unicode_literals
-
 from django.utils import six
 from rest_framework.exceptions import ErrorDetail
 
 from base.utils.enum import Enum
 
 
-class Error(object):
+class Error:
     error = Enum()
 
     def __new__(cls, **errors):

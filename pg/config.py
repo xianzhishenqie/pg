@@ -1,16 +1,18 @@
-# -*- coding: utf-8 -*-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 SERVER = 'http://www.shixiaobo.com'
 
+# TODO
+RESOURCE_SERVERS = []
+
 
 PG_APP_PATHS = [
     ('base', ''),
     'pg_auth',
-    ('map', ''),
-    # 'we',
-    # ('album', ''),
+    # ('map', ''),
+    'we',
+    ('album', ''),
 ]
 
 

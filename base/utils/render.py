@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 from django.shortcuts import render
 
 from base.utils.app import get_app_service_name
 
 
-class AppRender(object):
+class AppRender:
 
     def __init__(self, module):
         app_name, service_name = get_app_service_name(module)

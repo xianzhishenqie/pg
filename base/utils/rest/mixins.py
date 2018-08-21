@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from django.conf import settings
 from django.db.models.sql.datastructures import EmptyResultSet
 from django.utils import six
@@ -10,7 +9,7 @@ from base.utils.rest.pagination import BootstrapPagination, CacheBootstrapPagina
 from base.utils.rest.request import RequestData
 
 
-class PGMixin(object):
+class PGMixin:
 
     pagination_class = BootstrapPagination
 
@@ -39,7 +38,7 @@ def _generate_cache_view_name(view_cls):
     return "%s-%s" % (view_cls.__module__, view_cls.__name__)
 
 
-class CacheModelMixin(object):
+class CacheModelMixin:
     pagination_class = CacheBootstrapPagination
     page_cache = True
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import uuid
 
 from django.core.cache import cache, _create_cache
@@ -6,7 +5,7 @@ from django.core.cache import cache, _create_cache
 from base.utils.text import md5
 
 
-class CacheProduct(object):
+class CacheProduct:
     def __new__(cls, name):
         # 创建一个新的缓存实例
         cache_instance = _create_cache('default')
