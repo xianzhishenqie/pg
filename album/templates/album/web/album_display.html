@@ -1,5 +1,4 @@
 {% load i18n %}
-{% load staticfiles %}
 {% load pg_common %}
 
 <!DOCTYPE HTML>
@@ -24,15 +23,15 @@
             <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
         {% else %}
-            <link rel="stylesheet" href="{% static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
-            <link rel="stylesheet" href="{% static 'base/common/lib/font-awesome/css/font-awesome.css' %}">
-            <link rel="stylesheet" href="{% static 'we/common/lib/weui/css/weui.css' %}">
+            <link rel="stylesheet" href="{% pg_static 'base/common/lib/bootstrap/css/bootstrap.css' %}">
+            <link rel="stylesheet" href="{% pg_static 'base/common/lib/font-awesome/css/font-awesome.css' %}">
+            <link rel="stylesheet" href="{% pg_static 'we/common/lib/weui/css/weui.css' %}">
         {% endif %}
     {% endif %}
-    <link type="text/css" rel="stylesheet" href="{% static 'base/common/lib/animate/animate.css' %}">
-    <link rel="stylesheet" href="{% static_v 'base/common/css/animation.css' %}">
-    <link rel="stylesheet" href="{% static_v 'base/common/css/common.css' %}">
-    <link rel="stylesheet" href="{% static_v 'album/common/css/common.css' %}">
+    <link rel="stylesheet" href="{% pg_static 'base/common/lib/animate/animate.css' %}">
+    <link rel="stylesheet" href="{% pg_static_v 'base/common/css/animation.css' %}">
+    <link rel="stylesheet" href="{% pg_static_v 'base/common/css/common.css' %}">
+    <link rel="stylesheet" href="{% pg_static_v 'album/common/css/common.css' %}">
         <style type="text/css">
             [v-cloak] {
                 display: none;
@@ -52,9 +51,9 @@
         <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/text_animate.css?v=09081141">
         <link rel="stylesheet" href="http://wangjianxun1.test.upcdn.net/css/merge.css?v=113sd3dd334">
     {% else %}
-        <link rel="stylesheet" href="{% static_v 'album/web/css/keditor.css' %}">
-        <link rel="stylesheet" href="{% static_v 'album/web/css/text_animate.css' %}1">
-        <link rel="stylesheet" href="{% static_v 'album/web/css/merge.css' %}">
+        <link rel="stylesheet" href="{% pg_static_v 'album/web/css/keditor.css' %}">
+        <link rel="stylesheet" href="{% pg_static_v 'album/web/css/text_animate.css' %}1">
+        <link rel="stylesheet" href="{% pg_static_v 'album/web/css/merge.css' %}">
     {% endif %}
 
     <style>
@@ -469,16 +468,16 @@
     <script src="http://wangjianxun1.test.upcdn.net/js/vector.js"></script>
     <script src='http://wangjianxun1.test.upcdn.net/js/xmlHttp.js'></script>
 {% else %}
-    <script src="{% static_v 'album/web/js/zepto.min.js' %}"></script>
-    <script src="{% static_v 'album/web/js/vector.js' %}"></script>
-    <script src="{% static_v 'album/web/js/xmlHttp.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/zepto.min.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/vector.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/xmlHttp.js' %}"></script>
 {% endif %}
 
 {% if is_owner %}
     {% if settings.USE_CDN %}
         <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     {% else %}
-        <script src="{% static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
+        <script src="{% pg_static 'base/common/lib/jquery/jquery-3.3.1.js' %}"></script>
     {% endif %}
 {% endif %}
 
@@ -566,7 +565,7 @@
 <div class="position-absolute w-100 h-100" id="vueMask">
     <div class="music position-absolute">
         <v-touch tag="img" class="music-icon"
-                 src="{% static 'album/web/img/music.png' %}"
+                 src="{% pg_static 'album/web/img/music.png' %}"
                  :class="{'animated infinite spin': music.active}"
                  v-on:tap.prevent="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
@@ -662,11 +661,11 @@
     </script>
     <script src="http://wangjianxun1.test.upcdn.net/js/text_config.js?v=12101011"></script>
 {% else %}
-    <script src="{% static_v 'album/web/js/common.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/common.js' %}"></script>
     <script>
         var staticUrl = '/static/album/web';
     </script>
-    <script src="{% static_v 'album/web/js/text_config.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/text_config.js' %}"></script>
 {% endif %}
 
 <script>
@@ -696,10 +695,10 @@
     <script src="http://wangjianxun1.test.upcdn.net/js/md5.min.js"></script>
     <script src="http://wangjianxun1.test.upcdn.net/js/base64.min.js"></script>
 {% else %}
-    <script src="{% static_v 'album/web/js/jweixin-1.0.0.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/jweixin-1.0.0.js' %}"></script>
 
-    <script src="{% static_v 'album/web/js/md5.min.js' %}"></script>
-    <script src="{% static_v 'album/web/js/base64.min.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/md5.min.js' %}"></script>
+    <script src="{% pg_static_v 'album/web/js/base64.min.js' %}"></script>
 {% endif %}
 
 <script>
@@ -769,24 +768,24 @@
     <script src="https://cdn.bootcss.com/vue/2.5.16/vue.min.js"></script>
     <script src="https://cdn.bootcss.com/hammer.js/2.0.8/hammer.min.js"></script>
 {% else %}
-    <script src="{% static 'base/common/lib/vue/vue.js' %}"></script>
-    <script src="{% static 'base/common/lib/hammer/hammer.js' %}"></script>
+    <script src="{% pg_static 'base/common/lib/vue/vue.js' %}"></script>
+    <script src="{% pg_static 'base/common/lib/hammer/hammer.js' %}"></script>
 {% endif %}
-<script src="{% static 'base/common/lib/vue-touch/vue-touch.js' %}"></script>
+<script src="{% pg_static 'base/common/lib/vue-touch/vue-touch.js' %}"></script>
 
 {% if is_owner %}
     {% if settings.USE_CDN %}
         <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
         <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     {% else %}
-        <script src="{% static 'base/common/lib/popper/umd/popper.js' %}"></script>
-        <script src="{% static 'base/common/lib/bootstrap/js/bootstrap.js' %}"></script>
+        <script src="{% pg_static 'base/common/lib/popper/umd/popper.js' %}"></script>
+        <script src="{% pg_static 'base/common/lib/bootstrap/js/bootstrap.js' %}"></script>
     {% endif %}
-    <script src="{% static 'we/common/lib/weui/js/weui.js' %}"></script>
+    <script src="{% pg_static 'we/common/lib/weui/js/weui.js' %}"></script>
 
-    <script src="{% static_v 'base/common/js/ajax.csrf.js' %}"></script>
-    <script src="{% static_v 'base/common/js/utils.js' %}"></script>
-    <script src="{% static_v 'base/common/js/constants.js' %}"></script>
+    <script src="{% pg_static_v 'base/common/js/ajax.csrf.js' %}"></script>
+    <script src="{% pg_static_v 'base/common/js/utils.js' %}"></script>
+    <script src="{% pg_static_v 'base/common/js/constants.js' %}"></script>
 
     {% include './components/picture_edit.html' %}
     {% include './components/info_edit.html' %}

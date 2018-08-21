@@ -3,37 +3,63 @@ import os
 from django import template
 from django.conf import settings
 from django.templatetags.static import StaticNode
+from django.utils.html import conditional_escape
 
 from base.utils.text import md5
 
 register = template.Library()
 
 
-class StaticVNode(StaticNode):
+class PGStaticNode(StaticNode):
 
     def render(self, context):
         url = self.url(context)
+        if context.autoescape:
+            url = conditional_escape(url)
+        url = get_resource_url(url)
         if self.varname is None:
-            return get_url_with_version(url)
+            return url
         context[self.varname] = url
         return ''
 
 
-@register.tag('static_v')
+class PGStaticVNode(StaticNode):
+
+    def render(self, context):
+        url = self.url(context)
+        if context.autoescape:
+            url = conditional_escape(url)
+        url = get_resource_url(get_url_with_version(url))
+        if self.varname is None:
+            return url
+        context[self.varname] = url
+        return ''
+
+
+@register.tag('pg_static')
 def do_static_v(parser, token):
-    return StaticVNode.handle_token(parser, token)
+    return PGStaticNode.handle_token(parser, token)
 
 
-def static_v(path):
-    return StaticVNode.handle_simple(path)
+@register.tag('pg_static_v')
+def do_static_v(parser, token):
+    return PGStaticVNode.handle_token(parser, token)
+
 
 def get_url_with_version(url):
-    for vdir in settings.STATIC_V_DIRS:
-        file_path = os.path.join(vdir, url.lstrip('/'))
-        if os.path.exists(file_path):
-            modified_time = os.path.getmtime(file_path)
-            modified_time = md5(str(modified_time))
-            return '%s?%s' % (url, modified_time)
+    app_name = url.split('/')[2]
+    v_dir = settings.STATIC_V_DIRS[app_name]
+    file_path = os.path.join(v_dir, url.lstrip('/'))
+    if os.path.exists(file_path):
+        modified_time = os.path.getmtime(file_path)
+        modified_time = md5(str(modified_time))
+        return '%s?%s' % (url, modified_time)
+    return url
+
+
+def get_resource_url(url):
+    if settings.RESOURCE_SERVER:
+        return '{}{}'.format(settings.RESOURCE_SERVER, url)
     return url
 
 

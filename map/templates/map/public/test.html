@@ -1,7 +1,6 @@
 {% extends './base.html' %}
 
 {% load i18n %}
-{% load staticfiles %}
 {% load pg_common %}
 
 {% block title %}
@@ -31,7 +30,7 @@
 
                 //背景图标样式
                 iconStyle: {
-                    src: '{% static "map/public/img/pig.jpg" %}',
+                    src: '{% pg_static "map/public/img/pig.jpg" %}',
                     style: {
                         width:'30px',
                         borderRadius: '50%',
@@ -53,7 +52,7 @@
         {#    position: [117.000923, 36.675807],#}
         {#    icon: new AMap.Icon({#}
         {#        size: new AMap.Size(40, 40),#}
-        {#        image: '{% static "map/public/img/pig.jpg" %}',#}
+        {#        image: '{% pg_static "map/public/img/pig.jpg" %}',#}
         {#        imageOffset: new AMap.Pixel(0, 0),#}
         {#        imageSize: new AMap.Size(40, 40),#}
         {#    }),#}

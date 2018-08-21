@@ -128,7 +128,7 @@ USE_TZ = False
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-STATIC_V_DIRS = [os.path.join(BASE_DIR, app_name) for app_name in PG_APP_NAMES]
+STATIC_V_DIRS = {app_name: os.path.join(BASE_DIR, app_name) for app_name in PG_APP_NAMES}
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

@@ -16,6 +16,6 @@ class Command(BaseCommand):
         path_name = options.get('p')[0]
         base_dir = os.path.join(settings.BASE_DIR, 'album/static/album/web/img/album_template', path_name)
         for filename in os.listdir(base_dir):
-            print('''<img class="animated bounce" src="{{% static 'album/web/img/album_template/{}/{}' %}}">'''.format(path_name, filename))
+            print('''<img class="animated bounce" src="{{% pg_static 'album/web/img/album_template/{}/{}' %}}">'''.format(path_name, filename))
 
 

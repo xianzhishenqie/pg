@@ -3,8 +3,7 @@ DEBUG = True
 
 SERVER = 'http://www.shixiaobo.com'
 
-# TODO
-RESOURCE_SERVERS = []
+RESOURCE_SERVER = ''
 
 
 PG_APP_PATHS = [

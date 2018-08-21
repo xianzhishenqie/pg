@@ -1,11 +1,10 @@
 {% extends 'base/web/base.html' %}
 
 {% load i18n %}
-{% load staticfiles %}
 {% load pg_common %}
 
 {% block favicon %}
-    <link rel="shortcut icon" href="{% static 'album/common/img/favicon.ico' %}">
+    <link rel="shortcut icon" href="{% pg_static 'album/common/img/favicon.ico' %}">
 {% endblock %}
 
 {% block top_css %}
@@ -13,15 +12,15 @@
     {% if settings.USE_CDN %}
         <link rel="stylesheet" href="https://cdn.bootcss.com/weui/1.1.2/style/weui.min.css">
     {% else %}
-        <link rel="stylesheet" href="{% static 'we/common/lib/weui/css/weui.css' %}">
+        <link rel="stylesheet" href="{% pg_static 'we/common/lib/weui/css/weui.css' %}">
     {% endif %}
-    <link rel="stylesheet" href="{% static 'album/common/css/common.css' %}">
+    <link rel="stylesheet" href="{% pg_static 'album/common/css/common.css' %}">
 {% endblock %}
 
 
 {% block bottom_js %}
     {{ block.super }}
-    <script src="{% static 'we/common/lib/weui/js/weui.js' %}"></script>
+    <script src="{% pg_static 'we/common/lib/weui/js/weui.js' %}"></script>
 {% endblock %}
 
 
