@@ -3,7 +3,7 @@ import logging
 from django.core.management import BaseCommand
 from we.utils.menu import create_menus
 
-from album import setting
+from album import app_settings
 
 
 logger = logging.getLogger(__name__)
@@ -15,6 +15,6 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         app_id = options.get('app_id')[0]
-        ret = create_menus(app_id, setting.APP_MENUS)
+        ret = create_menus(app_id, app_settings.APP_MENUS)
         logger.info(ret)
 

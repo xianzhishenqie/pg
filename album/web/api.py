@@ -10,7 +10,7 @@ from base.utils.rest import mixins as common_mixins
 from base.utils.rest.decorators import api_request_data
 
 from album import models as album_models
-from album import setting
+from album import app_settings
 
 from . import serializers as mserializers
 
@@ -129,7 +129,7 @@ class AlbumViewSet(common_mixins.PGMixin,
         if request.method == 'POST':
             instance = self.get_object()
 
-            if instance.pictures.count() >= setting.ALBUM_PICTURE_LIMIT:
+            if instance.pictures.count() >= app_settings.ALBUM_PICTURE_LIMIT:
                 raise exceptions.PermissionDenied()
 
             picture_data = get_sub_model_data(request.data, ['picture'])

@@ -3,7 +3,7 @@ import os
 from importlib import import_module
 
 from django.apps import AppConfig as DjangoAppConfig
-from django.conf import settings
+from django.conf import settings, LazySettings, Settings
 from django.urls import include, path
 
 from base.utils.rest.routers import api_path
@@ -72,21 +72,67 @@ def get_pg_urls(collect_app_urls=True):
     return patterns
 
 
-def load_app_setting(app_name):
-    setting_name = '{app_name}.setting'.format(
-        app_name=app_name,
-    )
-    setting_path = os.path.join(settings.BASE_DIR, setting_name.replace('.', '/') + '.py')
-    if os.path.exists(setting_path):
-        setting = import_module(setting_name)
-        setting_dict = {}
-        for setting_name in dir(setting):
-            if setting_name.isupper():
-                setting_dict[setting_name] = getattr(setting, setting_name)
-        settings.MS[app_name] = setting_dict
+def load_app_settings(package):
+    app_name = get_app_name(package)
+    app_settings = LazyAppSettings(app_name)
+    settings.MS[app_name] = app_settings
+    return app_settings
+
+
+def sync_app_settings(app_name):
+    app_module = import_module(app_name)
+    if hasattr(app_module, 'sync_app_settings'):
+        app_module.sync_app_settings()
 
 
 class AppConfig(DjangoAppConfig):
 
     def ready(self):
-        load_app_setting(self.name)
+        sync_app_settings(self.name)
+
+
+class LazyAppSettings(LazySettings):
+
+    _app_name = None
+
+    def __init__(self, app_name):
+        self._app_name = app_name
+        super(LazyAppSettings, self).__init__()
+
+    def _setup(self, name=None):
+        self._wrapped = AppSettings(self._app_name)
+
+    def __setattr__(self, name, value):
+        if name == '_app_name':
+            self.__dict__['_app_name'] = value
+        else:
+            if name == '_wrapped':
+                _app_name = self.__dict__.pop('_app_name', None)
+                self.__dict__.clear()
+                self.__dict__['_app_name'] = _app_name
+            else:
+                self.__dict__.pop(name, None)
+            super(LazySettings, self).__setattr__(name, value)
+
+
+class AppSettings(Settings):
+
+    def __init__(self, app_name):
+        app_settings_module = '{app_name}.setting'.format(
+            app_name=app_name,
+        )
+        default_app_settings = import_module(app_settings_module)
+        for setting in dir(default_app_settings):
+            if setting.isupper():
+                setattr(self, setting, getattr(default_app_settings, setting))
+
+        # store the settings module in case someone later cares
+        self.SETTINGS_MODULE = app_settings_module
+
+        self._explicit_settings = set()
+        config_settings = settings.APP_SETTINGS.get(app_name)
+        if config_settings:
+            for setting, setting_value in config_settings.items():
+                setattr(self, setting, setting_value)
+                self._explicit_settings.add(setting)
+

@@ -1,6 +1,3 @@
-from we.setting import add_app as add_we_app
-
-
 APPS = {
     'wxa1a56bc0b9597354': {
         'APP_SECRET': '',
@@ -13,10 +10,6 @@ APPS = {
         'USER_MESSAGE_HANDLER': 'album.utils.handlers.UserMessageHandler',
     }
 }
-for app_id, app_config in APPS.items():
-    add_we_app(app_id, app_config)
-
-
 
 ALBUM_PICTURE_LIMIT = 8
 
@@ -28,5 +21,3 @@ APP_MENUS = {
         "url": "",
     }]
 }
-
-

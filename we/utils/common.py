@@ -9,7 +9,7 @@ from base.utils.text import md5, sha1
 
 from pg_auth.models import User
 
-from we import setting
+from we import app_settings
 from we.models import WeAppInfo, WeUser
 
 
@@ -45,7 +45,7 @@ def _valid_access_token(app_info):
 
 def pull_access_token(app_id):
     http = HttpClient()
-    app_access_token_url = setting.APPS[app_id]['APP_ACCESS_TOKEN_URL']
+    app_access_token_url = app_settings.APPS[app_id]['APP_ACCESS_TOKEN_URL']
     ret = http.jget(app_access_token_url)
     print(ret)
     return ret
@@ -66,7 +66,7 @@ def sync_openid(openid):
 
 
 def is_we_access(app_id, signature, timestamp, nonce):
-    token = setting.APPS[app_id]['TOKEN']
+    token = app_settings.APPS[app_id]['TOKEN']
 
     try:
         signature_list = sorted([token, timestamp, nonce])

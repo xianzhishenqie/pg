@@ -28,4 +28,10 @@ DATABASES = {
     }
 }
 
+
+APP_SETTINGS = {
+
+}
+
+
 USE_CDN = True
