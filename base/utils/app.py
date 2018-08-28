@@ -81,11 +81,6 @@ def load_app_settings(package):
     return app_settings
 
 
-def sync_app_settings(app_name):
-    app_module = import_module(app_name)
-    if hasattr(app_module, 'sync_app_settings'):
-        app_module.sync_app_settings()
-
 def sync_init(app_name):
     app_module = import_module(app_name)
     if hasattr(app_module, 'sync_init'):
