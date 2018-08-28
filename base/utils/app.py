@@ -139,6 +139,8 @@ class AppSettings(Settings):
         config_settings = settings.APP_SETTINGS.get(app_name)
         if config_settings:
             for setting, setting_value in config_settings.items():
-                setattr(self, setting, setting_value)
+                if isinstance(setting_value, dict) and hasattr(self, setting):
+                    getattr(self, setting).update(setting_value)
+                else:
+                    setattr(self, setting, setting_value)
                 self._explicit_settings.add(setting)
-
