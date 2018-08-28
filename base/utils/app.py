@@ -7,6 +7,7 @@ from django.conf import settings, LazySettings, Settings
 from django.urls import include, path
 
 from base.utils.rest.routers import api_path
+from base.utils.thread import async_exe, async_exe_once
 
 
 def get_app_name(module_name):
@@ -37,9 +38,9 @@ def get_app_urls(app_name):
         )
         urls_path = os.path.join(settings.BASE_DIR, urls_name.replace('.', '/') + '.py')
         if os.path.exists(urls_path):
-            url_module = import_module(urls_name)
-            if hasattr(url_module, 'viewsets'):
-                url_module.urlpatterns += api_path(url_module.viewsets, app_name)
+            urls_module = import_module(urls_name)
+            if hasattr(urls_module, 'viewsets'):
+                urls_module.urlpatterns += api_path(urls_module.viewsets, app_name)
             patterns.append(
                 path(_get_sub_path(path_name), include((urls_name, app_name), namespace=sub_module_name))
             )
@@ -57,8 +58,9 @@ def get_pg_urls(collect_app_urls=True):
             urls_module = import_module(urls_name)
             if collect_app_urls:
                 urls_module.urlpatterns += get_app_urls(app_name)
+            path_name = settings.PG_APP_PATH[app_name]
             patterns.append(
-                path(_get_sub_path(app_name), include((urls_name, app_name), namespace=app_name))
+                path(_get_sub_path(path_name), include((urls_name, app_name), namespace=app_name))
             )
         else:
             if collect_app_urls:
@@ -84,11 +86,20 @@ def sync_app_settings(app_name):
     if hasattr(app_module, 'sync_app_settings'):
         app_module.sync_app_settings()
 
+def sync_init(app_name):
+    app_module = import_module(app_name)
+    if hasattr(app_module, 'sync_init'):
+        app_module.sync_init()
+    if hasattr(app_module, 'async_init'):
+        async_exe(app_module.async_init)
+    if hasattr(app_module, 'async_global_init'):
+        async_exe_once(app_module.async_global_init)
+
 
 class AppConfig(DjangoAppConfig):
 
     def ready(self):
-        sync_app_settings(self.name)
+        sync_init(self.name)
 
 
 class LazyAppSettings(LazySettings):
