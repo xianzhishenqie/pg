@@ -586,7 +586,7 @@
                  v-on:tap.prevent="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
-    {% if not is_owner %}
+    {% if is_owner %}
     <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     <div class="row mx-0 edit-action position-absolute w-100">
         <div class="col-3 text-center">
@@ -603,9 +603,9 @@
         </div>
     </div>
     {% endif %}
-{#    {% if not user.is_authenticated %}#}
+    {% if not user.is_authenticated %}
         <a class="make-album" href="{{ propaganda_url }}">免费制作相册</a>
-{#    {% endif %}#}
+    {% endif %}
     {% if has_key %}
         <div class="private-hint">这是你的私人页面, 请勿分享，<a href="{{ share_url }}">点此进入公开页面</a></div>
     {% endif %}
