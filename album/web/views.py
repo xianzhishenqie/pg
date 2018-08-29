@@ -1,4 +1,5 @@
 import json
+import random
 
 from django.conf import settings
 
@@ -12,6 +13,7 @@ from base.utils.rest.decorators import request_data
 
 from we.utils.decorators import auto_login
 
+from album import app_settings
 from album import models as album_models
 from album.utils import common
 
@@ -61,6 +63,7 @@ def album_display_page(request, pk):
         'pictures': json.dumps(picture_images),
         'share_url': reverse('album:web:album_display', (album.pk,)),
         'share_img': picture_images[0] if len(picture_images) > 0 else '',
+        'propaganda_url': random.choice(app_settings.PROPAGANDA_URLS),
     }
 
     return render(request, 'album_display.html', context)

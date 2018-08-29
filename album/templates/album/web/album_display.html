@@ -543,6 +543,22 @@
         background-color: rgba(255, 128, 0, 0.4);
 
     }
+    #vueMask .make-album{
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: rgba(255, 255, 255, 0.4);
+        background-color: rgba(0, 0, 0, 0.4);
+        display: inline-block;
+        padding: 10px 20px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 10px;
+        width: 60%;
+        text-align: center;
+        z-index: 201;
+        text-decoration: none;
+    }
     #vueMask .private-hint {
         top: 2px;
         z-index: 201;
@@ -570,7 +586,7 @@
                  v-on:tap.prevent="toggleMusic" />
         <audio :src="music.url" loop="loop"></audio>
     </div>
-    {% if is_owner %}
+    {% if not is_owner %}
     <v-touch class="mask w-100 h-100 position-absolute" v-on:panleft="editAlbum"></v-touch>
     <div class="row mx-0 edit-action position-absolute w-100">
         <div class="col-3 text-center">
@@ -587,6 +603,9 @@
         </div>
     </div>
     {% endif %}
+{#    {% if not user.is_authenticated %}#}
+        <a class="make-album" href="{{ propaganda_url }}">免费制作相册</a>
+{#    {% endif %}#}
     {% if has_key %}
         <div class="private-hint">这是你的私人页面, 请勿分享，<a href="{{ share_url }}">点此进入公开页面</a></div>
     {% endif %}
@@ -607,6 +626,7 @@
     </div>
     <div id='title_line'></div>
     <div id='reshowbtn' ontouchstart='reload_scene()'>再看一遍</div>
+    <div id="guanzhubtn"><a href="{{ propaganda_url }}" style="color: #fff;text-underline: none;display: block;width: 100%;height: 100%;">我要制作</a></div>
 </div>
 
 <script>
@@ -860,13 +880,16 @@ var aVue = new Vue({
     },
     methods: {
         toggleMusic: function(){
-            this.music.active = !this.music.active;
-            var audio = $(this.$el).find('audio')[0];
-            if (this.music.active) {
-                try {
-                    audio.play();
-                } catch (e) {
-                    this.music.active = !this.music.active;
+            var vue = this;
+            vue.music.active = !vue.music.active;
+            var audio = $(vue.$el).find('audio')[0];
+            if (vue.music.active) {
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(function() {
+                    }).catch(function(error) {
+                        vue.music.active = !vue.music.active;
+                    });
                 }
             } else {
                 audio.pause();
