@@ -602,8 +602,7 @@
             <v-touch class="edit-album edit-album-info" v-on:tap.prevent="editAlbumInfo">保存</v-touch>
         </div>
     </div>
-    {% endif %}
-    {% if not user.is_authenticated %}
+    {% else %}
         <a class="make-album" href="{{ propaganda_url }}">免费制作相册</a>
     {% endif %}
     {% if has_key %}
