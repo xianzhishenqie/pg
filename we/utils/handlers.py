@@ -8,7 +8,7 @@ class UserMessageHandler:
 
     def __init__(self, receive_data):
         msg_type = receive_data.get('MsgType')
-        handle = getattr(self, 'handle_{}'.format(msg_type))
+        handle = getattr(self, 'handle_{}'.format(msg_type), None)
         if not handle:
             raise Exception('no message handler')
 

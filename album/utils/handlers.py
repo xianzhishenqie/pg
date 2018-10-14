@@ -18,14 +18,44 @@ from album.utils import common
 class UserMessageHandler(BaseUserMessageHandler):
 
     TextRes = Enum(
+        ALBUM='相册',
         CREATE_ALBUM='创建相册',
         LIST_ALBUM='查看相册',
-        MANAGE='管理',
+        MANAGE_ALBUM='管理相册',
+        MANAGE_MUSIC='管理音乐',
     )
 
     def handle_text(self):
         content = self.content.strip()
-        if content == self.TextRes.CREATE_ALBUM:
+        if content == self.TextRes.LIST_ALBUM:
+            we_user = we_models.WeUser.objects.get(openid=self.from_username)
+            res = self.result(
+                self._list_album_msg(
+                    self._pic_url(we_user),
+                    self._news_url(reverse('album:web:album_list'), we_user.openid_key)
+                )
+            )
+        elif content == self.TextRes.MANAGE_ALBUM:
+            we_user = we_models.WeUser.objects.get(openid=self.from_username)
+            if we_user.user.is_staff:
+                res = self.result(
+                    self._manage_album_msg(
+                        self._news_url(reverse('album:cms:album_manage'), we_user.openid_key),
+                    )
+                )
+            else:
+                res = ''
+        elif content == self.TextRes.MANAGE_MUSIC:
+            we_user = we_models.WeUser.objects.get(openid=self.from_username)
+            if we_user.user.is_staff:
+                res = self.result(
+                    self._manage_music_msg(
+                        self._news_url(reverse('album:cms:music_manage'), we_user.openid_key),
+                    )
+                )
+            else:
+                res = ''
+        elif content.find(self.TextRes.ALBUM) >= 0:
             we_user = we_models.WeUser.objects.get(openid=self.from_username)
             album = common.get_or_create_default_album(we_user.user)
             res = self.result(
@@ -34,25 +64,6 @@ class UserMessageHandler(BaseUserMessageHandler):
                     self._news_url(reverse('album:web:album_display', (album.pk,)), we_user.openid_key, query={'edit': 1}),
                 )
             )
-        elif content == self.TextRes.LIST_ALBUM:
-            we_user = we_models.WeUser.objects.get(openid=self.from_username)
-            res = self.result(
-                self._list_album_msg(
-                    self._pic_url(we_user),
-                    self._news_url(reverse('album:web:album_list'), we_user.openid_key)
-                )
-            )
-        elif content == self.TextRes.MANAGE:
-            we_user = we_models.WeUser.objects.get(openid=self.from_username)
-            if we_user.user.is_staff:
-                res = self.result(
-                    self._manage_msg(
-                        self._news_url(reverse('album:cms:album_manage'), we_user.openid_key),
-                        self._news_url(reverse('album:cms:music_manage'), we_user.openid_key),
-                    )
-                )
-            else:
-                res = ''
         else:
             res = ''
 
@@ -82,25 +93,27 @@ class UserMessageHandler(BaseUserMessageHandler):
                 }],
             }
 
-    def _manage_msg(self, album_url, music_url):
+    def _manage_album_msg(self, news_url):
         return {
                 'MsgType': 'news',
-                'ArticleCount': 3,
+                'ArticleCount': 1,
                 'Articles': [{
-                    'Title': ec('管理'),
+                    'Title': ec('管理相册'),
                     'Description': '',
                     'PicUrl': '',
-                    'Url': ''
-                },{
-                    'Title': ec('相册管理'),
+                    'Url': news_url
+                }],
+            }
+
+    def _manage_music_msg(self, news_url):
+        return {
+                'MsgType': 'news',
+                'ArticleCount': 1,
+                'Articles': [{
+                    'Title': ec('管理音乐'),
                     'Description': '',
                     'PicUrl': '',
-                    'Url': album_url
-                },{
-                    'Title': ec('音乐管理'),
-                    'Description': '',
-                    'PicUrl': '',
-                    'Url': music_url
+                    'Url': news_url
                 }],
             }
 
