@@ -35,7 +35,7 @@
 
 {% verbatim %}
 <v-touch id="pictureEdit" v-on:panright="hide($event)" v-cloak>
-    <p class="weui-cells__title">照片上传(最多8张，拖动照片更换顺序)</p>
+    <p class="weui-cells__title">照片上传(最多{{ this.limit }}张，拖动照片更换顺序)</p>
     <div class="weui-cells weui-cells_form" id="uploaderCustom">
         <div class="weui-cell">
             <div class="weui-cell__bd">
@@ -245,8 +245,8 @@
                             weui.alert('请上传不超过10M的图片');
                             return false;
                         }
-                        if (files.length > 8) { // 防止一下子选择过多文件
-                            weui.alert('每次最多只能上传8张图片，请重新选择');
+                        if (files.length > this.limit) { // 防止一下子选择过多文件
+                            weui.alert('每次最多只能上传' + this.limit + '张图片，请重新选择');
                             return false;
                         }
 
