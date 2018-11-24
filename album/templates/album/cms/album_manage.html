@@ -98,6 +98,7 @@ var alVue = new Vue({
             var vue = this;
             http.get(context.albumListApiUrl, {}, function(res){
                 vue.albums = res;
+                vue.albums = [].concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res).concat(res);
             });
         },
         albumCover: function (album) {

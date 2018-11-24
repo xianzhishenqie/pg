@@ -11,7 +11,7 @@ APPS = {
     }
 }
 
-ALBUM_PICTURE_LIMIT = 8
+ALBUM_PICTURE_LIMIT = 30
 
 APP_MENUS = {
     "button": [{
